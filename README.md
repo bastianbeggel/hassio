@@ -1,0 +1,2 @@
+# hassio
+Hass io configuration
