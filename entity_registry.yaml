@@ -1,0 +1,12 @@
+media_player.living_room_speaker:
+  name:
+  platform: cast
+  unique_id: 5b430519-648d-0d61-ccbc-9a04e08d5b58
+media_player.wohnzimmer_boxen:
+  name:
+  platform: cast
+  unique_id: f5ae049e-7228-65b2-b72b-bf003578dd39
+media_player.bastitv:
+  name:
+  platform: panasonic_viera
+  unique_id: 4D454930-0200-1000-8001-A813747955F7

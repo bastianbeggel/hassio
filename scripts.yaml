@@ -1,0 +1,132 @@
+'kueche_on':
+  alias: kueche_on
+  sequence:
+  - data:
+      event: kueche_on
+    service: ifttt.trigger
+
+'kueche_off':
+  alias: kueche_off
+  sequence:
+  - data:
+      event: kueche_off
+    service: ifttt.trigger
+
+'boxen_off':
+  alias: boxen_off
+  sequence:
+  - data:
+      event: boxen_off
+    service: ifttt.trigger
+
+'boxen_on':
+  alias: boxen_on
+  sequence:
+  - data:
+      event: boxen_on
+    service: ifttt.trigger
+
+'start_radio_sr1':
+  alias: start_radio_sr1
+  sequence:
+    - service: ifttt.trigger  
+      data:
+         event: boxen_on
+    - service: media_player.play_media
+      entity_id: media_player.wohnzimmer_boxen
+      data:
+        media_content_id: http://sr1m.akacast.akamaistream.net/7/725/142685/v1/gnl.akacast.akamaistream.net/sr1m
+        media_content_type: audio/mp4        
+
+'start_nele_radio':
+  alias: start_nele_sr1
+  sequence:
+    - service: switch.turn_on
+      entity_id:  switch.boxen
+      data:
+         entity_id: switch.boxen
+    - service: media_player.play_media
+      entity_id: media_player.wohnzimmer_boxen
+      data:
+        media_content_id: http://sr1m.akacast.akamaistream.net/7/725/142685/v1/gnl.akacast.akamaistream.net/sr1m
+        media_content_type: audio/mp4    
+    - delay: '00:00:02'        
+    - service: shell_command.heco2_power
+
+'vorbereitung_musik':
+  alias: Berteite Musik vor
+  sequence:
+    - service: switch.turn_on
+      entity_id:  switch.boxen
+    - delay: '00:00:02'        
+    - service: shell_command.heco2_power
+
+
+'kuechen_licht_10_minuten':
+  alias: Küchenlicht für 10 Minuten
+  sequence:
+    - service: script.kueche_on
+    - delay: '00:10:00'        
+    - service: script.kueche_off
+
+'kuechen_licht_60_minuten':
+  alias: Küchenlicht für 60 Minuten
+  sequence:
+    - service: script.kueche_on
+    - delay: '01:00:00'        
+    - service: script.kueche_off
+
+
+
+'sende_ir_power':
+  alias: sende_ir_power
+  sequence:
+    - service: shell_command.heco2_power
+#
+'zeit_fuer_fernsehen':
+  alias: Zeit für Fernsehen
+  sequence:
+    - service: switch.turn_on
+      entity_id: switch.couch
+    - service: script.kueche_off
+    - service: media_player.turn_on
+      entity_id: media_player.bastitv
+#
+
+#'1528139837612':
+#  alias: run_radio
+#  sequence:
+#    - service: media_player.play_media
+#      entity_id: media_player.wohnzimmer_boxen
+#      data:
+#        media_content_id: http://icepe5.infomaniak.ch/jazzblues-high.mp3
+#        media_content_type: audio/mp4  
+
+#'1528139837613':
+#  alias: run_radio_sr1
+#  sequence:
+#    - service: media_player.play_media
+#      entity_id: media_player.wohnzimmer_boxen
+#      data:
+#        media_content_id: http://streaming01.sr-online.de/sr1_2.m3u
+#        media_content_type: audio/mp3  
+        
+
+#'1528139837614':
+#  alias: run_radio_sr1_mp4
+#  sequence:
+#    - service: media_player.play_media
+#      entity_id: media_player.wohnzimmer_boxen
+#      data:
+#        media_content_id: http://streaming01.sr-online.de/sr1_2.m3u
+#        media_content_type: audio/mp4
+        
+        
+#'1528139837616':
+#  alias: run_radio_sr1_2_mp3
+#  sequence:
+#    - service: media_player.play_media
+#      entity_id: media_player.wohnzimmer_boxen
+#      data:
+#        media_content_id: http://sr1m.akacast.akamaistream.net/7/725/142685/v1/gnl.akacast.akamaistream.net/sr1m
+#        media_content_type: audio/mp3
