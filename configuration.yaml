@@ -107,7 +107,7 @@ switch:
     name: Boxen
 
 ifttt:
-  key: !secret 
+  key: !secret ifttt_key 
       
     
 shell_command:
