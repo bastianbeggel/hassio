@@ -14,7 +14,7 @@ homeassistant:
   customize: !include customize.yaml
 
 # Show links to resources in log and frontend
-introduction:
+#introduction:
 
 # Enables the frontend
 frontend:
@@ -51,7 +51,7 @@ logbook:
 
 
 logger:
-  default: info
+  default: critical
 
 # Enables a map showing the location of tracked devices
 map:
@@ -69,6 +69,12 @@ tts:
 
 # Cloud
 cloud:
+  google_actions:
+    filter:
+      exclude_entities:
+        - script.tv_power
+        - script.sende_tv_power
+        
 #  google_actions:
 #  entity_config:
 #      script.start_nele_radio:
@@ -112,4 +118,8 @@ ifttt:
     
 shell_command:
   heco2_power: irsend SEND_ONCE heco_e POWER
+  tv_power: nodejs /home/pi/viera.js/tv_power.js
+  tv_power_on: /home/pi/scripts/tv_on.sh
+  tv_power_off: /home/pi/scripts/tv_off.sh
+  
   
