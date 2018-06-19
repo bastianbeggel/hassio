@@ -1,15 +1,15 @@
 homeassistant:
-  # Name of the location where Home Assistant is runnin g 
+  # Name of the location where Home Assistant is runnin 
   name: Home
   # Location required to calculate the time the sun rises and sets
-  latitude: 51.2993
-  longitude: 9.491
+  latitude: 49.276429
+  longitude: 6.970180
   # Impacts weather/sunrise data (altitude above sea level in meters)
   elevation: 138
   # metric for Metric, imperial for Imperial
   unit_system: metric
   # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-  time_zone: UTC
+  time_zone: Europe/Berlin
   # Customization file
   customize: !include customize.yaml
 
@@ -23,8 +23,7 @@ frontend:
 config:
 
 http:
-  # Secrets are defined in the file secrets.yaml
-   api_password: !secret http_password
+  api_password: !secret http_password
   # Uncomment this if you are using SSL/TLS, running in Docker container, etc.
   # base_url: example.duckdns.org:8123
 
@@ -51,7 +50,7 @@ logbook:
 
 
 logger:
-  default: critical
+  default: error
 
 # Enables a map showing the location of tracked devices
 map:
@@ -67,6 +66,12 @@ sensor:
 tts:
   - platform: google
 
+
+mqtt:
+    broker: 192.168.178.22
+    port: 1883
+
+
 # Cloud
 cloud:
   google_actions:
@@ -74,17 +79,7 @@ cloud:
       exclude_entities:
         - script.tv_power
         - script.sende_tv_power
-#        - script.sende_tv_power_on
         
-#  google_actions:
-#  entity_config:
-#      script.start_nele_radio:
-#        name: SR1 hoehren
-#        aliases:
-#         - Nele Radio
-#         - Nele Musik
-#        room: living room
-  
 
 group: !include groups.yaml
 automation: !include automations.yaml
@@ -98,12 +93,6 @@ panel_iframe:
     icon: mdi:wrench
     url: http://192.168.178.22:3218
     
-
-
-#media_player:
-#  - platform: panasonic_viera
-#    host: 192.168.1.20
-#    name: Basti-TV2
     
 switch:
   - platform: tplink
@@ -112,6 +101,31 @@ switch:
   - platform: tplink
     host: 192.168.178.24
     name: Boxen
+  - platform: mqtt
+    name: kitchen1
+    state_topic: "stat/kitchen1/POWER1"
+    command_topic: "cmnd/kitchen1/POWER1"
+    availability_topic: "tele/kitchen1/LWT"
+    payload_on: "ON"
+    payload_off: "OFF"
+    payload_available: "online"
+    payload_not_available: "offline"    
+    optimistic: false
+    qos: 0
+    retain: true
+  - platform: mqtt
+    name: kitchen2
+    state_topic: "stat/kitchen1/POWER2"
+    command_topic: "cmnd/kitchen1/POWER2"
+    availability_topic: "tele/kitchen1/LWT"
+    payload_on: "ON"
+    payload_off: "OFF"
+    payload_available: "online"
+    payload_not_available: "offline"    
+    optimistic: false
+    qos: 0
+    retain: true
+
 
 ifttt:
   key: !secret ifttt_key 
@@ -120,7 +134,18 @@ ifttt:
 shell_command:
   heco2_power: irsend SEND_ONCE heco_e POWER
   tv_power: nodejs /home/pi/viera.js/tv_power.js
+  tv_netflix: nodejs /home/homeassistant/.homeassistant/scripts/tv_netflix.js
   tv_power_on: /home/homeassistant/.homeassistant/scripts/tv_on.sh
   tv_power_off: /home/homeassistant/.homeassistant/scripts/tv_off.sh
   
-  
+xiaomi_aqara:
+  discovery_retry: 5
+  gateways:
+    - key: !secret xiaomi_gateway_key
+      mac: 78:11:DC:DE:D1:14
+      host: 192.168.178.31
+
+duckdns:
+  domain: !secret duck_dns_domain 
+  access_token: !secret duck_dns_token
+

@@ -1,0 +1,36 @@
+'switches_view':
+  view: yes  
+  name: Schalter
+  entities:
+    - switch.boxen
+    - switch.couch
+    - switch.kitchen1
+    - switch.kitchen2
+    
+'Media_Room':
+  view: yes  
+  name: Media-Room
+  entities:       
+    - group.media
+    
+'automations-view':
+  view: yes  
+  name: Automations
+  entities:       
+    - group.all_automations 
+
+'scripts-view':
+  view: yes  
+  name: Skripte
+  entities:       
+    - group.all_scripts     
+    
+'media':
+  name: Media
+  entities:
+    - media_player.bastitv
+    - media_player.living_room_speaker
+    - media_player.tv_wohnzimmer
+    - media_player.wohnzimmer_
+    - media_player.wohnzimmer_boxen
+    

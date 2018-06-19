@@ -1,1 +1,112 @@
-[]
+############Kueche
+
+- alias : Küche an um 06:45
+  trigger:
+    platform: time
+    at: '06:30:00'
+  action:
+    service: script.kueche_on
+
+
+- alias : Küche aus um 07:15
+  trigger:
+    platform: time
+    at: '07:15:00'
+  action:
+    service: script.kueche_off
+
+
+- alias: Turn on kitchen light when there is movement
+  initial_state: false
+  hide_entity: True
+  trigger:
+    platform: state
+    entity_id: binary_sensor.motion_sensor_158d0002239b1a
+    to: 'on'
+  action:
+    service: script.kueche_on
+
+
+- alias: Turn off kitchen light 2 minutes after last movement
+  initial_state: false
+  hide_entity: True
+  trigger:
+    platform: state
+    entity_id: binary_sensor.motion_sensor_158d0002239b1a
+    to: 'off'
+    for:
+      minutes: 1
+  action:
+    service: script.kueche_off
+
+      
+- alias: Single Press - Kitchen toggle 
+  trigger:
+    platform: event
+    event_type: click
+    event_data:
+      entity_id: binary_sensor.switch_158d000223e5a8
+      click_type: single
+  action:
+    - service: script.neu_kuechen_licht_toggle
+    - service: homeassistant.turn_off
+      entity_id: script.kuechen_licht_stop_all_timer_scripts    
+    
+
+- alias: Double Press - Küchenlicht für 5 Minuten 
+  trigger:
+    platform: event
+    event_type: click
+    event_data:
+      entity_id: binary_sensor.switch_158d000223e5a8
+      click_type: double
+  action:
+    - service: homeassistant.turn_off
+      entity_id: script.kuechen_licht_stop_all_timer_scripts    
+    - service: script.kuechen_licht_05_minuten
+    
+
+- alias: Long press - küche aus 
+  trigger:
+    platform: event
+    event_type: click
+    event_data:
+      entity_id: binary_sensor.switch_158d000223e5a8
+      click_type: long_click_press
+  action:
+    service: script.kueche_off
+
+
+#- alias: Cube to flip90
+#  trigger:
+#    platform: event
+#    event_type: cube_action
+#    event_data:
+#      entity_id: binary_sensor.cube_158d00024a48bd
+#      action_type: flip90
+#  action:
+#    service: xiaomi_aqara.play_ringtone
+#    data:
+#      gw_mac: 78:11:DC:DE:D1:14
+#      ringtone_id: 2
+#      ringtone_vol: 8
+
+#- alias: Cube to flip180
+#  trigger:
+#    platform: event
+#    event_type: cube_action
+#    event_data:
+#      entity_id: binary_sensor.cube_158d00024a48bd
+#      action_type: flip180
+#  action:
+#    service: xiaomi_aqara.play_ringtone
+#    data:
+#      gw_mac: 78:11:DC:DE:D1:14
+#      ringtone_id: 2
+#      ringtone_vol: 8
+
+#    service: xiaomi_aqara.play_ringtone
+#    data:
+#      gw_mac: 78:11:DC:DE:D1:14
+#      ringtone_id: 8
+#      ringtone_vol: 8
