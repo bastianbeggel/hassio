@@ -4,6 +4,14 @@
   trigger:
     platform: time
     at: '06:30:00'
+  condition:
+     - condition: time
+       weekday:
+         - mon
+         - tue
+         - wed
+         - thu
+         - fri    
   action:
     service: script.kueche_on
 
@@ -48,7 +56,7 @@
       entity_id: binary_sensor.switch_158d000223e5a8
       click_type: single
   action:
-    - service: script.neu_kuechen_licht_toggle
+    - service: script.kueche_toggle
     - service: homeassistant.turn_off
       entity_id: script.kuechen_licht_stop_all_timer_scripts    
     

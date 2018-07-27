@@ -125,7 +125,30 @@ switch:
     optimistic: false
     qos: 0
     retain: true
-
+  - platform: mqtt
+    name: basti_zimmer1
+    state_topic: "stat/basti_zimmer/POWER1"
+    command_topic: "cmnd/basti_zimmer/POWER1"
+    availability_topic: "tele/basti_zimmer/LWT"
+    payload_on: "ON"
+    payload_off: "OFF"
+    payload_available: "online"
+    payload_not_available: "offline"    
+    optimistic: false
+    qos: 0
+    retain: true
+  - platform: mqtt
+    name: basti_zimmer2
+    state_topic: "stat/basti_zimmer/POWER2"
+    command_topic: "cmnd/basti_zimmer/POWER2"
+    availability_topic: "tele/basti_zimmer/LWT"
+    payload_on: "ON"
+    payload_off: "OFF"
+    payload_available: "online"
+    payload_not_available: "offline"    
+    optimistic: false
+    qos: 0
+    retain: true
 
 ifttt:
   key: !secret ifttt_key 
@@ -137,6 +160,11 @@ shell_command:
   tv_netflix: nodejs /home/homeassistant/.homeassistant/scripts/tv_netflix.js
   tv_power_on: /home/homeassistant/.homeassistant/scripts/tv_on.sh
   tv_power_off: /home/homeassistant/.homeassistant/scripts/tv_off.sh
+  tv_tagesschau: nodejs /home/homeassistant/.homeassistant/scripts/tv_tagesschau.js
+  tv_lauter: nodejs /home/homeassistant/.homeassistant/scripts/tv_lauter.js
+  tv_leiser: nodejs /home/homeassistant/.homeassistant/scripts/tv_leiser.js
+  tv_mute: nodejs /home/homeassistant/.homeassistant/scripts/tv_mute.js
+
   
 xiaomi_aqara:
   discovery_retry: 5

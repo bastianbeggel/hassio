@@ -207,7 +207,39 @@
     - delay: '00:00:05'
     - service: shell_command.tv_netflix
     
+#'zeit_fuer_tagesschau':
+#  alias: Zeit für Tagesschau
+#  sequence:
+#    - service: switch.turn_on
+#      entity_id: switch.couch
+#    - service: script.kueche_off
+#    - service: script.tisch_off    
+#    - service: shell_command.tv_power_on
+#    - delay: '00:00:10'
+#    - service: shell_command.tv_tagesschau
 
+'tagesschau':
+  alias: Tagesschau
+  sequence: 
+    - service: shell_command.tv_power_on
+    - delay: '00:00:01'
+    - service: shell_command.tv_tagesschau    
+    
+'tv_lauter':
+  alias: TV lauter
+  sequence: 
+    - service: shell_command.tv_lauter    
+
+'tv_leiser':
+  alias: TV leiser
+  sequence: 
+    - service: shell_command.tv_leiser
+
+'tv_mute':
+  alias: TV mute
+  sequence: 
+    - service: shell_command.tv_mute
+   
 ############Verschiedenes  
 
 'gute_nacht':
