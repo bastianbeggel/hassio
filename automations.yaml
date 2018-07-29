@@ -1,3 +1,29 @@
+############Basti Lampe
+- alias: Wandschalter zu Lampe An
+  trigger:
+     platform: state
+     entity_id: switch.basti_lampe  
+     from: 'off'
+     to: 'on'
+  action:
+    - service: switch.turn_on
+      data:
+        entity_id: switch.basti_lampe_internal
+           
+############Basti Lampe
+- alias: Wandschalter zu Lampe Aus
+  trigger:
+     platform: state
+     entity_id: switch.basti_lampe  
+     from: 'on'
+     to: 'off'
+  action:
+    - service: switch.turn_off
+      data:
+        entity_id: switch.basti_lampe_internal      
+
+
+
 ############Kueche
 
 - alias : Küche an um 06:45

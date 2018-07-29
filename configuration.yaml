@@ -102,7 +102,7 @@ switch:
     host: 192.168.178.24
     name: Boxen
   - platform: mqtt
-    name: kitchen1
+    name: kueche_decke
     state_topic: "stat/kitchen1/POWER1"
     command_topic: "cmnd/kitchen1/POWER1"
     availability_topic: "tele/kitchen1/LWT"
@@ -114,7 +114,7 @@ switch:
     qos: 0
     retain: true
   - platform: mqtt
-    name: kitchen2
+    name: kueche_theke
     state_topic: "stat/kitchen1/POWER2"
     command_topic: "cmnd/kitchen1/POWER2"
     availability_topic: "tele/kitchen1/LWT"
@@ -126,7 +126,7 @@ switch:
     qos: 0
     retain: true
   - platform: mqtt
-    name: basti_zimmer1
+    name: basti_lampe
     state_topic: "stat/basti_zimmer/POWER1"
     command_topic: "cmnd/basti_zimmer/POWER1"
     availability_topic: "tele/basti_zimmer/LWT"
@@ -138,7 +138,7 @@ switch:
     qos: 0
     retain: true
   - platform: mqtt
-    name: basti_zimmer2
+    name: basti_decke
     state_topic: "stat/basti_zimmer/POWER2"
     command_topic: "cmnd/basti_zimmer/POWER2"
     availability_topic: "tele/basti_zimmer/LWT"
@@ -149,6 +149,20 @@ switch:
     optimistic: false
     qos: 0
     retain: true
+  - platform: mqtt
+    name: basti_lampe_internal
+    friendly_name: Basti Lampe
+    state_topic: "stat/basti_lampe/POWER"
+    command_topic: "cmnd/basti_lampe/POWER"
+    availability_topic: "tele/basti_lampe/LWT"
+    payload_on: "ON"
+    payload_off: "OFF"
+    payload_available: "online"
+    payload_not_available: "offline"    
+    optimistic: false
+    qos: 0
+    retain: true
+
 
 ifttt:
   key: !secret ifttt_key 

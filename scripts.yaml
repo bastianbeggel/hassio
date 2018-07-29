@@ -5,30 +5,30 @@
   sequence:
     - service: switch.turn_on
       data:
-        entity_id: switch.kitchen1
+        entity_id: switch.kueche_decke
     - service: switch.turn_on
       data:
-        entity_id: switch.kitchen2
+        entity_id: switch.kueche_theke
 
 'kueche_off':
   alias: Küchenlicht aus
   sequence:
     - service: switch.turn_off
       data:
-        entity_id: switch.kitchen1
+        entity_id: switch.kueche_decke
     - service: switch.turn_off
       data:
-        entity_id: switch.kitchen2
+        entity_id: switch.kueche_theke
 
 'kueche_toggle':
   alias: Küchenlicht toggle
   sequence:
     - service: switch.toggle
       data:
-        entity_id: switch.kitchen1
+        entity_id: switch.kueche_decke
     - service: switch.toggle
       data:
-        entity_id: switch.kitchen2
+        entity_id: switch.kueche_theke
 
 ############Kueche  - timer
 
@@ -69,12 +69,12 @@
     - service: script.kueche_off
 
 
-'kuechen_licht_05_minuten_motion':
-  alias: Küchenlicht für 5 Minuten for motion
-  sequence:
-    - service: script.kueche_on
-    - delay: '00:05:00'        
-    - service: script.kueche_off
+#'kuechen_licht_05_minuten_motion':
+#  alias: Küchenlicht für 5 Minuten for motion
+#  sequence:
+#    - service: script.kueche_on
+#    - delay: '00:05:00'        
+#    - service: script.kueche_off
 
 'kuechen_licht_stop_all_timer_scripts':
   alias: Reset Kuechenlicht timers 
@@ -111,19 +111,19 @@
 
 ############Boxen - basic
 
-'boxen_off':
-  alias: boxen_off
-  sequence:
-  - data:
-      event: boxen_off
-    service: ifttt.trigger
+#'boxen_off':
+#  alias: boxen_off
+#  sequence:
+#  - data:
+#      event: boxen_off
+#    service: ifttt.trigger
 
-'boxen_on':
-  alias: boxen_on
-  sequence:
-  - data:
-      event: boxen_on
-    service: ifttt.trigger
+#'boxen_on':
+#  alias: boxen_on
+#  sequence:
+#  - data:
+#      event: boxen_on
+#    service: ifttt.trigger
 
 
 ############Musik
@@ -142,9 +142,13 @@
         media_content_type: audio/mp4    
     - delay: '00:00:01'        
     - service: shell_command.heco2_power
+    - service: media_player.volume_set
+      data:
+        entity_id: media_player.wohnzimmer_
+        volume_level: 0.3
 
-'test_nele_radio':
-  alias: Spiele SR1
+'spiele_sr1':
+  alias: Spiele SR1 (ohne Boxen)
   sequence:
     - service: media_player.play_media
       entity_id: media_player.wohnzimmer_

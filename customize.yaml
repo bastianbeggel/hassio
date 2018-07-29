@@ -2,3 +2,12 @@ group.all_automations:
   hidden: false
 group.all_scripts:
   hidden: false
+switch.basti_lampe:
+  friendly_name: Basti Lampe  
+switch.basti_decke:
+  friendly_name: Basti Decke
+switch.kueche_decke:
+  friendly_name: Kueche Decke
+switch.kueche_theke:
+  friendly_name: Kueche Theke
+     
