@@ -126,51 +126,42 @@
 #    service: ifttt.trigger
 
 
-############Musik
+############Musik Wohnzimmer
 
-'start_nele_radio':
-  alias: Nele Radio inkl. Boxen
-  sequence:
-    - service: switch.turn_on
-      entity_id:  switch.boxen
-      data:
-         entity_id: switch.boxen
-    - service: media_player.play_media
-      entity_id: media_player.wohnzimmer_
-      data:
-        media_content_id: http://sr1m.akacast.akamaistream.net/7/725/142685/v1/gnl.akacast.akamaistream.net/sr1m
-        media_content_type: audio/mp4    
-    - delay: '00:00:01'        
-    - service: shell_command.heco2_power
-    - service: media_player.volume_set
-      data:
-        entity_id: media_player.wohnzimmer_
-        volume_level: 0.3
+#'start_nele_radio':
+#  alias: Nele Radio inkl. Boxen
+#  sequence:
+#    - service: switch.turn_on
+#      entity_id:  switch.boxen
+#      data:
+#         entity_id: switch.boxen
+#    - service: media_player.play_media
+#      entity_id: media_player.wohnzimmer_
+#      data:
+#        media_content_id: http://sr1m.akacast.akamaistream.net/7/725/142685/v1/gnl.akacast.akamaistream.net/sr1m
+#        media_content_type: audio/mp4    
+#    - delay: '00:00:01'        
+#    - service: shell_command.heco2_power
+#    - service: media_player.volume_set
+#      data:
+#        entity_id: media_player.wohnzimmer_
+#        volume_level: 0.3
 
-'spiele_sr1':
-  alias: Spiele SR1 (ohne Boxen)
-  sequence:
-    - service: media_player.play_media
-      entity_id: media_player.wohnzimmer_
-      data:
-        media_content_id: http://sr1m.akacast.akamaistream.net/7/725/142685/v1/gnl.akacast.akamaistream.net/sr1m
-        media_content_type: audio/mp4    
-
-
-
-'vorbereitung_musik':
-  alias: Berteite Musik vor
-  sequence:
-    - service: switch.turn_on
-      entity_id:  switch.boxen
-    - delay: '00:00:01'        
-    - service: shell_command.heco2_power
+#'spiele_sr1':
+#  alias: Spiele SR1 (ohne Boxen)
+#  sequence:
+#    - service: media_player.play_media
+#      entity_id: media_player.wohnzimmer_
+#      data:
+#        media_content_id: http://sr1m.akacast.akamaistream.net/7/725/142685/v1/gnl.akacast.akamaistream.net/sr1m
+#        media_content_type: audio/mp4    
 
 
-'sende_ir_power':
-  alias: sende_ir_power
-  sequence:
-    - service: shell_command.heco2_power
+
+#'sende_ir_power':
+#  alias: sende_ir_power
+#  sequence:
+#    - service: shell_command.heco2_power
 
 ############Fernseher 
 
@@ -251,8 +242,48 @@
   sequence:
     - service: switch.turn_off
       entity_id: switch.couch
-    - service: switch.turn_off
-      entity_id: switch.boxen
     - service: script.kueche_off
     - service: script.tisch_off    
     - service: shell_command.tv_power_off
+#    - service: switch.turn_off
+#      entity_id: switch.boxen
+
+
+############Zimmer Bastian
+
+'bastian_lichtwechsel':
+  alias: Lichtwechsel
+  sequence:
+    - service: switch.toggle
+      entity_id: switch.basti_lampe
+    - service: switch.toggle
+      entity_id: switch.basti_decke
+
+
+'musik_station_aus':
+  alias: musik_station_aus
+  sequence:
+    - service: shell_command.volumio_shutdown_h
+    - delay: '00:00:30'
+    - service: switch.turn_off
+      entity_id: switch.boxen
+
+'volumio_runterfahren':
+  alias: volumio_runterfahren
+  sequence:
+    - service: shell_command.volumio_shutdown_h
+
+'volumio_neustarten':
+  alias: volumio_neustarten
+  sequence:
+    - service: shell_command.volumio_shutdown_r
+    
+
+'vorbereitung_musik':
+  alias: Berteite Musik vor
+  sequence:
+    - service: switch.turn_on
+      entity_id:  switch.boxen
+    - delay: '00:00:01'        
+#    - service: shell_command.heco2_power
+    

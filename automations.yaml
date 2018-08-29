@@ -10,7 +10,7 @@
       data:
         entity_id: switch.basti_lampe_internal
            
-############Basti Lampe
+
 - alias: Wandschalter zu Lampe Aus
   trigger:
      platform: state
@@ -22,6 +22,45 @@
       data:
         entity_id: switch.basti_lampe_internal      
 
+############Basti Switch
+- alias: Single Press - Basti Switch
+  trigger:
+    platform: event
+    event_type: click
+    event_data:
+      entity_id: binary_sensor.switch_158d0001f3793a
+      click_type: single
+  action:
+    - service: switch.toggle
+      data:
+        entity_id: switch.basti_decke
+
+- alias: Double Press - Basti Switch
+  trigger:
+    platform: event
+    event_type: click
+    event_data:
+      entity_id: binary_sensor.switch_158d0001f3793a
+      click_type: double
+  action:
+    - service: switch.toggle
+      data:
+        entity_id: switch.basti_lampe
+
+- alias: Long Press - Basti Switch
+  trigger:
+    platform: event
+    event_type: click
+    event_data:
+      entity_id: binary_sensor.switch_158d0001f3793a
+      click_type: long_click_press
+  action:
+    - service: switch.turn_off
+      data:
+        entity_id: switch.basti_lampe
+    - service: switch.turn_off
+      data:
+        entity_id: switch.basti_decke
 
 
 ############Kueche

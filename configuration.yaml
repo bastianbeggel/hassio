@@ -50,7 +50,7 @@ logbook:
 
 
 logger:
-  default: error
+  default: info
 
 # Enables a map showing the location of tracked devices
 map:
@@ -178,6 +178,8 @@ shell_command:
   tv_lauter: nodejs /home/homeassistant/.homeassistant/scripts/tv_lauter.js
   tv_leiser: nodejs /home/homeassistant/.homeassistant/scripts/tv_leiser.js
   tv_mute: nodejs /home/homeassistant/.homeassistant/scripts/tv_mute.js
+  volumio_shutdown_h: /home/homeassistant/.homeassistant/scripts/vol_shutdown_h.sh
+  volumio_shutdown_r: /home/homeassistant/.homeassistant/scripts/vol_shutdown_r.sh
 
   
 xiaomi_aqara:
