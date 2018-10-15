@@ -157,6 +157,16 @@
 #        media_content_type: audio/mp4    
 
 
+'spiele_sr1_marshall':
+  alias: Spiele SR1 Marshall
+  sequence:
+    - service: media_player.play_media
+      entity_id: media_player.stanmoreblackb269
+      data:
+        media_content_id: http://sr1m.akacast.akamaistream.net/7/725/142685/v1/gnl.akacast.akamaistream.net/sr1m
+        media_content_type: audio/mp4    
+
+
 
 #'sende_ir_power':
 #  alias: sende_ir_power
@@ -164,6 +174,19 @@
 #    - service: shell_command.heco2_power
 
 ############Fernseher 
+
+'couch_an_wenn_dunkel':
+   sequence:
+     - condition: or  # 'when dark' condition: either after sunset or before sunrise
+       conditions:
+         - condition: sun
+           after: sunset
+         - condition: sun
+           before: sunrise
+     - service: switch.turn_on
+       entity_id: switch.couch
+
+
 
 'sende_tv_power':
   alias: tv_power
@@ -185,8 +208,9 @@
 'zeit_fuer_fernsehen':
   alias: Zeit für Fernsehen
   sequence:
-    - service: switch.turn_on
-      entity_id: switch.couch
+    - service: script.couch_an_wenn_dunkel
+#    - service: switch.turn_on
+#      entity_id: switch.couch
     - service: script.kueche_off
     - service: script.tisch_off    
     - service: shell_command.tv_power_on
@@ -194,8 +218,9 @@
 'zeit_fuer_netflix':
   alias: Zeit für Netflix
   sequence:
-    - service: switch.turn_on
-      entity_id: switch.couch
+    - service: script.couch_an_wenn_dunkel
+#    - service: switch.turn_on
+#      entity_id: switch.couch
     - service: script.kueche_off
     - service: script.tisch_off    
     - service: shell_command.tv_power_on
@@ -245,6 +270,9 @@
     - service: script.kueche_off
     - service: script.tisch_off    
     - service: shell_command.tv_power_off
+    - service: script.musik_station_aus     
+    - service: light.turn_off
+      entity_id: light.gateway_light_7811dcded114
 #    - service: switch.turn_off
 #      entity_id: switch.boxen
 
@@ -286,4 +314,54 @@
       entity_id:  switch.boxen
     - delay: '00:00:01'        
 #    - service: shell_command.heco2_power
+
+
+'music_box_volumne_up4':
+  alias: Musik Box Vol up 4
+  sequence:
+    - service: rest_command.music_box_volumne_up
+    - service: rest_command.music_box_volumne_up
+    - service: rest_command.music_box_volumne_up    
+    - service: rest_command.music_box_volumne_up        
+
+
+'music_box_volumne_up3':
+  alias: Musik Box Vol up 3
+  sequence:
+    - service: rest_command.music_box_volumne_up
+    - service: rest_command.music_box_volumne_up
+    - service: rest_command.music_box_volumne_up    
+
+'music_box_volumne_up2':
+  alias: Musik Box Vol up 2
+  sequence:
+    - service: rest_command.music_box_volumne_up
+    - service: rest_command.music_box_volumne_up    
+
+'music_box_volumne_down4':
+  alias: Musik Box Vol Down 4
+  sequence:
+    - service: rest_command.music_box_volumne_down
+    - service: rest_command.music_box_volumne_down  
+    - service: rest_command.music_box_volumne_down
+    - service: rest_command.music_box_volumne_down  
+
+
+'music_box_volumne_down3':
+  alias: Musik Box Vol Down 3
+  sequence:
+    - service: rest_command.music_box_volumne_down
+    - service: rest_command.music_box_volumne_down
+    - service: rest_command.music_box_volumne_down  
+
+
+'music_box_volumne_down2':
+  alias: Musik Box Vol Down 2
+  sequence:
+    - service: rest_command.music_box_volumne_down
+    - service: rest_command.music_box_volumne_down  
     
+
+
+
+#Cube_158d000276eb1c  BASTI CUBE

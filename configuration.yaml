@@ -96,10 +96,10 @@ panel_iframe:
     
 switch:
   - platform: tplink
-    host: 192.168.178.25
+    host: 192.168.178.29
     name: Couch
   - platform: tplink
-    host: 192.168.178.24
+    host: 192.168.178.28
     name: Boxen
   - platform: mqtt
     name: kueche_decke
@@ -187,9 +187,29 @@ xiaomi_aqara:
   gateways:
     - key: !secret xiaomi_gateway_key
       mac: 78:11:DC:DE:D1:14
-      host: 192.168.178.31
+      host: 192.168.178.23
 
 duckdns:
   domain: !secret duck_dns_domain 
   access_token: !secret duck_dns_token
 
+tuya:
+  username: !secret tuya_login
+  password: !secret tuya_password
+  country_code: 49
+  platform: smart_life
+  
+rest_command:
+  music_box_next:
+    url: 'http://192.168.178.67/api/v1/commands/?cmd=next'  
+  music_box_prev:
+    url: 'http://192.168.178.67/api/v1/commands/?cmd=prev'      
+  music_box_toggle_play_pause:
+    url: 'http://192.168.178.67/api/v1/commands/?cmd=toggle'      
+  music_box_play:
+    url: 'http://192.168.178.67/api/v1/commands/?cmd=play'      
+  music_box_volumne_up:
+    url: 'http://192.168.178.67/api/v1/commands/?cmd=volume&volume=plus'
+  music_box_volumne_down:
+    url: 'http://192.168.178.67/api/v1/commands/?cmd=volume&volume=minus' 
+    

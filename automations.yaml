@@ -22,6 +22,8 @@
       data:
         entity_id: switch.basti_lampe_internal      
 
+
+
 ############Basti Switch
 - alias: Single Press - Basti Switch
   trigger:
@@ -66,6 +68,7 @@
 ############Kueche
 
 - alias : Küche an um 06:45
+  initial_state: false
   trigger:
     platform: time
     at: '06:30:00'
@@ -82,6 +85,7 @@
 
 
 - alias : Küche aus um 07:15
+  initial_state: false
   trigger:
     platform: time
     at: '07:15:00'
@@ -89,30 +93,34 @@
     service: script.kueche_off
 
 
-- alias: Turn on kitchen light when there is movement
-  initial_state: false
-  hide_entity: True
-  trigger:
-    platform: state
-    entity_id: binary_sensor.motion_sensor_158d0002239b1a
-    to: 'on'
-  action:
-    service: script.kueche_on
 
 
-- alias: Turn off kitchen light 2 minutes after last movement
-  initial_state: false
-  hide_entity: True
-  trigger:
-    platform: state
-    entity_id: binary_sensor.motion_sensor_158d0002239b1a
-    to: 'off'
-    for:
-      minutes: 1
-  action:
-    service: script.kueche_off
+#- alias: Turn on kitchen light when there is movement
+#  initial_state: false
+#  hide_entity: True
+#  trigger:
+#    platform: state
+#    entity_id: binary_sensor.motion_sensor_158d0002239b1a
+#    to: 'on'
+#  action:
+#    service: script.kueche_on
+
+
+#- alias: Turn off kitchen light 2 minutes after last movement
+#  initial_state: false
+#  hide_entity: True
+#  trigger:
+#    platform: state
+#    entity_id: binary_sensor.motion_sensor_158d0002239b1a
+#    to: 'off'
+#    for:
+#      minutes: 1
+#  action:
+#    service: script.kueche_off
 
       
+     
+     
 - alias: Single Press - Kitchen toggle 
   trigger:
     platform: event
@@ -150,36 +158,144 @@
     service: script.kueche_off
 
 
-#- alias: Cube to flip90
-#  trigger:
-#    platform: event
-#    event_type: cube_action
-#    event_data:
-#      entity_id: binary_sensor.cube_158d00024a48bd
-#      action_type: flip90
-#  action:
-#    service: xiaomi_aqara.play_ringtone
-#    data:
-#      gw_mac: 78:11:DC:DE:D1:14
-#      ringtone_id: 2
-#      ringtone_vol: 8
+- alias: Cube to flip90
+  trigger:
+    platform: event
+    event_type: cube_action
+    event_data:
+      entity_id: binary_sensor.cube_158d00024a48bd_2
+      action_type: flip90
+  action:
+    - service: switch.toggle
+      entity_id: switch.04200102dc4f222a335a
 
-#- alias: Cube to flip180
-#  trigger:
-#    platform: event
-#    event_type: cube_action
-#    event_data:
-#      entity_id: binary_sensor.cube_158d00024a48bd
-#      action_type: flip180
-#  action:
-#    service: xiaomi_aqara.play_ringtone
-#    data:
-#      gw_mac: 78:11:DC:DE:D1:14
-#      ringtone_id: 2
-#      ringtone_vol: 8
+- alias: Cube to tab-twice
+  trigger:
+    platform: event
+    event_type: cube_action
+    event_data:
+      entity_id: binary_sensor.cube_158d00024a48bd_2
+      action_type: tap_twice
+  action:
+    - service: switch.toggle
+      entity_id: switch.couch
 
-#    service: xiaomi_aqara.play_ringtone
-#    data:
-#      gw_mac: 78:11:DC:DE:D1:14
-#      ringtone_id: 8
-#      ringtone_vol: 8
+
+- alias: Cube to rotate
+  trigger:
+    platform: event
+    event_type: cube_action
+    event_data:
+      entity_id: binary_sensor.cube_158d00024a48bd_2
+      action_type: rotate
+  action:
+    - service: script.kueche_toggle      
+
+- alias: Cube to shake_air
+  trigger:
+    platform: event
+    event_type: cube_action
+    event_data:
+      entity_id: binary_sensor.cube_158d00024a48bd_2
+      action_type: shake_air
+  action:
+    service: script.spiele_sr1_marshall
+
+- alias: Cube to free_fall
+  trigger:
+    platform: event
+    event_type: cube_action
+    event_data:
+      entity_id: binary_sensor.cube_158d00024a48bd_2
+      action_type: free_fall
+  action:
+    - service: media_player.media_stop
+      entity_id: media_player.stanmoreblackb269
+
+
+
+- alias: Cube to flip180
+  trigger:
+    platform: event
+    event_type: cube_action
+    event_data:
+      entity_id: binary_sensor.cube_158d00024a48bd_2
+      action_type: flip180
+  action:
+    service: script.gute_nacht
+    #- service: xiaomi_aqara.play_ringtone
+    #  data:
+    #    gw_mac: 78:11:DC:DE:D1:14
+    #    ringtone_id: 2
+    #    ringtone_vol: 1
+
+#flip90, flip180, move, tap_twice, shake_air, swing, alert, free_fall and rotate
+
+
+
+################################################################################################
+############ BASTI CUBE 
+################################################################################################
+
+- alias: B-Cube to move
+  trigger:
+    platform: event
+    event_type: cube_action
+    event_data:
+      entity_id: binary_sensor.cube_158d000276eb1c
+      action_type: move
+  action:
+    - service: rest_command.music_box_next
+    - service: rest_command.music_box_play
+
+
+- alias: B-Cube to tab twice
+  trigger:
+    platform: event
+    event_type: cube_action
+    event_data:
+      entity_id: binary_sensor.cube_158d000276eb1c
+      action_type: tap_twice
+  action:
+    - service: rest_command.music_box_toggle_play_pause
+    - service: switch.turn_on
+      entity_id: switch.boxen
+
+
+
+- alias: B-Cube to flip180
+  trigger:
+    platform: event
+    event_type: cube_action
+    event_data:
+      entity_id: binary_sensor.cube_158d000276eb1c
+      action_type: flip180
+  action:
+    service: script.musik_station_aus
+
+- alias: B-Cube to rotate
+  trigger:
+    platform: event
+    event_type: cube_action
+    event_data:
+      entity_id: binary_sensor.cube_158d000276eb1c
+      action_type: rotate
+  action:
+      service_template: >
+         {% if trigger.event.data.action_value | float > 20 %}
+           script.music_box_volumne_up4
+         {% elif trigger.event.data.action_value | float > 15 %}
+           script.music_box_volumne_up3
+         {% elif trigger.event.data.action_value | float > 10 %}
+           script.music_box_volumne_up2
+         {% elif trigger.event.data.action_value | float > 0 %}
+           rest_command.music_box_volumne_up
+         {% elif trigger.event.data.action_value | float < -20 %}
+           script.music_box_volumne_down4
+         {% elif trigger.event.data.action_value | float < -15 %}
+           script.music_box_volumne_down3
+         {% elif trigger.event.data.action_value | float < -10 %}
+           script.music_box_volumne_down2
+         {% elif trigger.event.data.action_value | float < 0 %}
+           rest_command.music_box_volumne_down
+         {% endif %}

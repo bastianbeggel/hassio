@@ -2,12 +2,13 @@
   view: yes  
   name: Schalter
   entities:
-    - switch.boxen
+#    - switch.boxen
     - switch.couch
     - switch.kueche_decke
     - switch.kueche_theke
     - switch.basti_decke  
     - switch.basti_lampe      
+    - switch.04200102dc4f222a335a
     
     
 'Media_Room':
@@ -24,6 +25,8 @@
     - media_player.wohnzimmer_boxen
     - media_player.living_room_speaker
     - media_player.zimmer_bastian
+    - media_player.heco_boxen
+    - media_player.boxen_heco
 
 
 'scripts-view':
@@ -31,13 +34,13 @@
   name: Skripte
   entities:       
      - script.gute_nacht
+     - script.musik_station_aus     
      - script.start_nele_radio     
-     - script.spiele_sr1 
-     - script.vorbereitung_musik     
-     - script.sende_ir_power     
      - script.zeit_fuer_netflix
      - script.tagesschau     
      - script.sende_tv_power
+     - script.spiele_sr1_marshall     
+
 
 'automations-view':
   view: yes  
