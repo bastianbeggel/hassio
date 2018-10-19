@@ -2,7 +2,7 @@
 #scipt to turn panasonic off.
 #only execute toggle command if tv is on
 
-VAR=`curl -s -X GET --user-agent "Panasonic Android VR-CP UPnP/2.0" http://192.168.178.26:55000/pac/ddd.xml -i`
+VAR=`curl -s -X GET --user-agent "Panasonic Android VR-CP UPnP/2.0" http://192.168.178.50:55000/pac/ddd.xml -i`
 size=${#VAR}
 
 exit_status=$?

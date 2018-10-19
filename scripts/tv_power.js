@@ -1,7 +1,7 @@
 var Viera = require('./viera');
 
 // create instance of module
-var tv = new Viera('192.168.178.26');
+var tv = new Viera('192.168.178.50');
 
 // get volume value
 //tv.getVolume(function(data) {

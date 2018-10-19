@@ -315,6 +315,57 @@
     - delay: '00:00:01'        
 #    - service: shell_command.heco2_power
 
+'marshall_volumne_up3':
+  alias: Musik Box Vol up 3
+  sequence:
+    - service: media_player.volume_up
+      entity_id: media_player.stanmoreblackb269
+    - service: media_player.volume_up
+      entity_id: media_player.stanmoreblackb269
+    - service: media_player.volume_up
+      entity_id: media_player.stanmoreblackb269
+
+'marshall_volumne_up2':
+  alias: Musik Box Vol up 2
+  sequence:
+    - service: media_player.volume_up
+      entity_id: media_player.stanmoreblackb269
+    - service: media_player.volume_up
+      entity_id: media_player.stanmoreblackb269
+
+'marshall_volumne_up1':
+  alias: Musik Box Vol up 1
+  sequence:
+    - service: media_player.volume_up
+      entity_id: media_player.stanmoreblackb269
+
+
+'marshall_volumne_down3':
+  alias: Musik Box Vol down 3
+  sequence:
+    - service: media_player.volume_down
+      entity_id: media_player.stanmoreblackb269
+    - service: media_player.volume_down
+      entity_id: media_player.stanmoreblackb269
+    - service: media_player.volume_down
+      entity_id: media_player.stanmoreblackb269
+
+'marshall_volumne_down2':
+  alias: Musik Box Vol down 2
+  sequence:
+    - service: media_player.volume_down
+      entity_id: media_player.stanmoreblackb269
+    - service: media_player.volume_down
+      entity_id: media_player.stanmoreblackb269
+
+'marshall_volumne_down1':
+  alias: Musik Box Vol down 1
+  sequence:
+    - service: media_player.volume_down
+      entity_id: media_player.stanmoreblackb269
+
+
+
 
 'music_box_volumne_up4':
   alias: Musik Box Vol up 4

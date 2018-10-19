@@ -23,7 +23,6 @@
         entity_id: switch.basti_lampe_internal      
 
 
-
 ############Basti Switch
 - alias: Single Press - Basti Switch
   trigger:
@@ -71,7 +70,7 @@
   initial_state: false
   trigger:
     platform: time
-    at: '06:30:00'
+    at : '06:30:00'
   condition:
      - condition: time
        weekday:
@@ -181,13 +180,13 @@
       entity_id: switch.couch
 
 
-- alias: Cube to rotate
+- alias: Cube to move
   trigger:
     platform: event
     event_type: cube_action
     event_data:
       entity_id: binary_sensor.cube_158d00024a48bd_2
-      action_type: rotate
+      action_type: move
   action:
     - service: script.kueche_toggle      
 
@@ -229,6 +228,34 @@
     #    ringtone_id: 2
     #    ringtone_vol: 1
 
+- alias: Cube to rotate
+  trigger:
+    platform: event
+    event_type: cube_action
+    event_data:
+      entity_id: binary_sensor.cube_158d00024a48bd_2
+      action_type: rotate
+  action:
+      service_template: >
+         {% if trigger.event.data.action_value | float > 20 %}
+           script.marshall_volumne_up3
+         {% elif trigger.event.data.action_value | float > 15 %}
+           script.marshall_volumne_up3
+         {% elif trigger.event.data.action_value | float > 10 %}
+           script.marshall_volumne_up2
+         {% elif trigger.event.data.action_value | float > 0 %}
+           script.marshall_volumne_up1
+         {% elif trigger.event.data.action_value | float < -20 %}
+           script.marshall_volumne_down3
+         {% elif trigger.event.data.action_value | float < -15 %}
+           script.marshall_volumne_down3
+         {% elif trigger.event.data.action_value | float < -10 %}
+           script.marshall_volumne_down2
+         {% elif trigger.event.data.action_value | float < 0 %}
+           script.marshall_volumne_down1
+         {% endif %}
+
+
 #flip90, flip180, move, tap_twice, shake_air, swing, alert, free_fall and rotate
 
 
@@ -260,6 +287,18 @@
     - service: rest_command.music_box_toggle_play_pause
     - service: switch.turn_on
       entity_id: switch.boxen
+
+- alias: B-Cube to flip90
+  trigger:
+    platform: event
+    event_type: cube_action
+    event_data:
+      entity_id: binary_sensor.cube_158d000276eb1c
+      action_type: flip90
+  action:
+    - service: switch.toggle
+      data:
+        entity_id: switch.basti_decke
 
 
 
