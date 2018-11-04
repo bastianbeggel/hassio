@@ -3,11 +3,119 @@ group.all_automations:
 group.all_scripts:
   hidden: false
 switch.basti_lampe:
-  friendly_name: Basti Lampe  
+  friendly_name: Basti Lampe
 switch.basti_decke:
   friendly_name: Basti Decke
 switch.kueche_decke:
   friendly_name: Kueche Decke
 switch.kueche_theke:
   friendly_name: Kueche Theke
-     
+sensor.fritzbox_7490_bytes_received:
+  hidden: true
+sensor.fritzbox_7490_bytes_sent:
+  hidden: true
+sensor.fritzbox_7490_packets_received:
+  hidden: true
+sensor.fritzbox_7490_packets_sent:
+  hidden: true
+sensor.fritzbox_7490_packetssec_received:
+  hidden: true
+sensor.fritzbox_7490_packetssec_sent:
+  hidden: true
+binary_sensor.motion_sensor_158d0002239b1a:
+  hidden: true
+binary_sensor.switch_158d0001f3793a:
+  hidden: true
+binary_sensor.cube_158d000276eb1c:
+  hidden: true
+binary_sensor.cube_158d00024a48bd_2:
+  hidden: true
+binary_sensor.switch_158d000223e5a8:
+  hidden: true
+script.music_box_volumne_up4:
+  hidden: true
+script.music_box_volumne_up3:
+  hidden: true
+script.music_box_volumne_up2:
+  hidden: true
+script.music_box_volumne_up1:
+  hidden: true      
+script.music_box_volumne_down4:
+  hidden: true      
+script.music_box_volumne_down3:
+  hidden: true      
+script.music_box_volumne_down2:
+  hidden: true      
+script.music_box_volumne_down1:
+  hidden: true      
+script.couch_an_wenn_dunkel:
+  hidden: true  
+script.marshall_volumne_up3:
+  hidden: true  
+script.marshall_volumne_up2:
+  hidden: true  
+script.marshall_volumne_up1:
+  hidden: true  
+script.marshall_volumne_down3:  
+  hidden: true
+script.marshall_volumne_down2:  
+  hidden: true
+script.marshall_volumne_down1:  
+  hidden: true    
+script.roon_digione_volumne_down:
+  hidden: true  
+script.roon_digione_volumne_up:
+  hidden: true    
+script.tisch_off:
+  hidden: true      
+script.tisch_on:
+  hidden: true 
+script.sende_tv_power:
+  hidden: true      
+script.sende_tv_power_on:
+  hidden: true 
+script.sende_tv_power_off:
+  hidden: true 
+script.volumio_play:
+  hidden: true 
+script.volumio_next:
+  hidden: true 
+script.volumio_prev:
+  hidden: true 
+script.volumio_pause:
+  hidden: true 
+
+
+script.tv_lauter:
+  hidden: true 
+script.tv_leiser:
+  hidden: true 
+script.tv_mute:
+  hidden: true 
+script.kuechen_licht_stop_all_timer_scripts:
+  hidden: true 
+script.kuechen_licht_01_minute:
+  hidden: true 
+script.kuechen_licht_02_minute:
+  hidden: true 
+script.kuechen_licht_05_minuten:
+  hidden: true 
+script.kuechen_licht_10_minuten:
+  hidden: true 
+script.kuechen_licht_60_minuten:
+  hidden: true 
+script.kueche_toggle:
+  hidden: true 
+script.kueche_off:
+  hidden: true 
+script.kueche_on:
+  hidden: true 
+
+
+
+
+
+
+
+  
+         

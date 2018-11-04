@@ -208,8 +208,34 @@ rest_command:
     url: 'http://192.168.178.67/api/v1/commands/?cmd=toggle'      
   music_box_play:
     url: 'http://192.168.178.67/api/v1/commands/?cmd=play'      
+  music_box_pause:
+    url: 'http://192.168.178.67/api/v1/commands/?cmd=pause'      
   music_box_volumne_up:
     url: 'http://192.168.178.67/api/v1/commands/?cmd=volume&volume=plus'
   music_box_volumne_down:
     url: 'http://192.168.178.67/api/v1/commands/?cmd=volume&volume=minus' 
-    
+
+media_player:
+   - platform: roon
+     host: 192.168.178.21    
+     
+input_number:
+  roon_volume:
+    name: Player volume
+    icon: mdi:volume-high
+    min: 0
+    max: 1
+    step: 0.01
+input_select:
+  roon_playlists:
+    name: 'Playlist:'
+    options:
+      - Select playlist
+    initial: Select playlist
+    icon: mdi:spotify
+  roon_players:
+    name: 'Room:'
+    options:
+      - Select room
+    initial: Select room
+    icon: mdi:speaker-wireless     

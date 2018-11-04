@@ -1,3 +1,13 @@
+roon_actions:
+#    view: yes  
+    name: Roon players
+    entities:
+      - input_select.roon_players
+      - input_select.roon_playlists
+      - input_number.roon_volume
+      #- group.roon_actions
+      #- group.roon_players
+
 'switches_view':
   view: yes  
   name: Schalter
@@ -16,17 +26,15 @@
   name: Media-Room
   entities:       
     - group.media
+    #- group.roon_actions
 
 'media':
   name: Media
   entities:
-    - media_player.wohnzimmer_
+    - media_player.digionevolumio
+    - media_player.stanmoreblackb269_3
     - media_player.tv_wohnzimmer
-    - media_player.wohnzimmer_boxen
-    - media_player.living_room_speaker
-    - media_player.zimmer_bastian
-    - media_player.heco_boxen
-    - media_player.boxen_heco
+    - media_player.chromecastaudio5861
 
 
 'scripts-view':

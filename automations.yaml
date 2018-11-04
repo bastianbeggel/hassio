@@ -157,6 +157,11 @@
     service: script.kueche_off
 
 
+################################################################################################
+############ KUECHE CUBE 
+################################################################################################
+
+
 - alias: Cube to flip90
   trigger:
     platform: event
@@ -209,7 +214,7 @@
       action_type: free_fall
   action:
     - service: media_player.media_stop
-      entity_id: media_player.stanmoreblackb269
+      entity_id: media_player.stanmoreblackb269_3
 
 
 
@@ -272,8 +277,7 @@
       entity_id: binary_sensor.cube_158d000276eb1c
       action_type: move
   action:
-    - service: rest_command.music_box_next
-    - service: rest_command.music_box_play
+    - service: script.music_box_next
 
 
 - alias: B-Cube to tab twice
@@ -284,7 +288,7 @@
       entity_id: binary_sensor.cube_158d000276eb1c
       action_type: tap_twice
   action:
-    - service: rest_command.music_box_toggle_play_pause
+    - service: script.music_box_play_pause
     - service: switch.turn_on
       entity_id: switch.boxen
 
@@ -328,7 +332,7 @@
          {% elif trigger.event.data.action_value | float > 10 %}
            script.music_box_volumne_up2
          {% elif trigger.event.data.action_value | float > 0 %}
-           rest_command.music_box_volumne_up
+           script.music_box_volumne_up1
          {% elif trigger.event.data.action_value | float < -20 %}
            script.music_box_volumne_down4
          {% elif trigger.event.data.action_value | float < -15 %}
@@ -336,5 +340,5 @@
          {% elif trigger.event.data.action_value | float < -10 %}
            script.music_box_volumne_down2
          {% elif trigger.event.data.action_value | float < 0 %}
-           rest_command.music_box_volumne_down
+           script.music_box_volumne_down1
          {% endif %}
