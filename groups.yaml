@@ -19,6 +19,7 @@ roon_actions:
     - switch.basti_decke  
     - switch.basti_lampe      
     - switch.04200102dc4f222a335a
+#    - switch.RoonServer
     
     
 'Media_Room':
@@ -43,11 +44,14 @@ roon_actions:
   entities:       
      - script.gute_nacht
      - script.musik_station_aus     
+     - script.musik_server_aus          
      - script.start_nele_radio     
      - script.zeit_fuer_netflix
      - script.tagesschau     
      - script.sende_tv_power
-     - script.spiele_sr1_marshall     
+     - script.spiele_sr1_marshall
+     - script.thinkcentre_runterfahren     
+          
 
 
 'automations-view':
