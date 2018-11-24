@@ -243,21 +243,21 @@
   action:
       service_template: >
          {% if trigger.event.data.action_value | float > 20 %}
-           script.marshall_volumne_up3
+           script.marshall_volume_up3
          {% elif trigger.event.data.action_value | float > 15 %}
-           script.marshall_volumne_up3
+           script.marshall_volume_up3
          {% elif trigger.event.data.action_value | float > 10 %}
-           script.marshall_volumne_up2
+           script.marshall_volume_up2
          {% elif trigger.event.data.action_value | float > 0 %}
-           script.marshall_volumne_up1
+           script.marshall_volume_up1
          {% elif trigger.event.data.action_value | float < -20 %}
-           script.marshall_volumne_down3
+           script.marshall_volume_down3
          {% elif trigger.event.data.action_value | float < -15 %}
-           script.marshall_volumne_down3
+           script.marshall_volume_down3
          {% elif trigger.event.data.action_value | float < -10 %}
-           script.marshall_volumne_down2
+           script.marshall_volume_down2
          {% elif trigger.event.data.action_value | float < 0 %}
-           script.marshall_volumne_down1
+           script.marshall_volume_down1
          {% endif %}
 
 
@@ -326,19 +326,19 @@
   action:
       service_template: >
          {% if trigger.event.data.action_value | float > 20 %}
-           script.music_box_volumne_up4
+           script.music_box_volume_up4
          {% elif trigger.event.data.action_value | float > 15 %}
-           script.music_box_volumne_up3
+           script.music_box_volume_up3
          {% elif trigger.event.data.action_value | float > 10 %}
-           script.music_box_volumne_up2
+           script.music_box_volume_up2
          {% elif trigger.event.data.action_value | float > 0 %}
-           script.music_box_volumne_up1
+           script.music_box_volume_up1
          {% elif trigger.event.data.action_value | float < -20 %}
-           script.music_box_volumne_down4
+           script.music_box_volume_down4
          {% elif trigger.event.data.action_value | float < -15 %}
-           script.music_box_volumne_down3
+           script.music_box_volume_down3
          {% elif trigger.event.data.action_value | float < -10 %}
-           script.music_box_volumne_down2
+           script.music_box_volume_down2
          {% elif trigger.event.data.action_value | float < 0 %}
-           script.music_box_volumne_down1
+           script.music_box_volume_down1
          {% endif %}

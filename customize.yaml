@@ -110,7 +110,10 @@ script.kueche_off:
   hidden: true 
 script.kueche_on:
   hidden: true 
-
+switch.roon_server_internal:
+  hidden: true 
+switch.boxen_internal:
+  hidden: true
 
 
 

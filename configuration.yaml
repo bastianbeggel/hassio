@@ -76,10 +76,66 @@ mqtt:
 cloud:
   google_actions:
     filter:
-      exclude_entities:
-        - script.tv_power
-        - script.sende_tv_power
+      include_entities:
+#        - light.gateway_light_7811dcded114
+        - switch.couch    
+        - switch.kueche_decke
+        - switch.kueche_theke
+        - switch.wohnzimmer_decke
+        - switch.basti_decke  
+        - switch.basti_lampe      
+        - switch.04200102dc4f222a335a # Tisch
+        - switch.roonserver
+        - switch.boxen
+        - script.sende_tv_power_on
+        - script.sende_tv_power_off        
+        - script.kueche_on
+        - script.kueche_off
+        - script.kuechen_licht_01_minute
+        - script.kuechen_licht_02_minuten
+        - script.kuechen_licht_05_minuten
+        - script.kuechen_licht_10_minuten
+        - script.kuechen_licht_60_minuten
+        - script.zeit_fuer_fernsehen
+        - script.zeit_fuer_netflix
+        - script.zeit_fuer_tagesschau
+        - script.tv_lauter
+        - script.tv_leiser
+        - script.tv_mute
+        - script.bastian_lichtwechsel
+        - climate.bastian__comet_dect
+        - script.bastian_heizung_aus
+        - script.bastian_heizung_hoch
+        - script.bastian_heizung_mittel
         
+
+#      exclude_entities:
+#        - script.tv_power
+#        - script.sende_tv_power
+#        - light.gateway_light_7811dcded114
+#      include_entities:
+#        - script.sende_tv_power_on
+#      include_domains:        
+#        - script
+
+
+#      include_entities:
+#       - switch.couch    
+#       - switch.kueche_decke
+##       - switch.kueche_theke
+#       - switch.basti_decke  
+#       - switch.basti_lampe      
+#       - switch.04200102dc4f222a335a # Tisch
+#      - switch.roonserver
+#       - switch.boxen
+#       - script.kueche_on
+#       - script.kueche_off       
+#       - script.kuechen_licht_01_minute    
+#       - script.kuechen_licht_05_minuten  
+
+
+#      include_entities:
+#        - script      
 
 group: !include groups.yaml
 automation: !include automations.yaml
@@ -95,15 +151,42 @@ panel_iframe:
     
     
 switch:
+  - platform: template
+    switches:
+      wohnzimmer_decke:
+        friendly_name: "Wohnzimmer Decke"
+        value_template: "off"
+        turn_on:
+          service: script.wohnzimmer_decke_an_aus
+        turn_off:
+          service: script.wohnzimmer_decke_an_aus    
+      roonserver:
+        friendly_name: "RoonServer"
+        value_template: "{{ is_state('switch.roon_server_internal', 'on') }}"
+        turn_on:
+          service: switch.turn_on
+          data:
+            entity_id: switch.roon_server_internal
+        turn_off:
+          service: script.musik_server_aus
+      boxen:
+        friendly_name: "Boxen"
+        value_template: "{{ is_state('switch.boxen_internal', 'on') }}"
+        turn_on:
+          service: switch.turn_on
+          data:
+            entity_id: switch.boxen_internal
+        turn_off:
+          service: script.musik_station_aus
   - platform: tplink
     host: 192.168.178.29
     name: Couch
   - platform: tplink
     host: 192.168.178.28
-    name: Boxen
+    name: boxen_internal
   - platform: tplink
     host: 192.168.178.58
-    name: RoonServer
+    name: roon_server_internal
   - platform: mqtt
     name: kueche_decke
     state_topic: "stat/kitchen1/POWER1"
@@ -222,8 +305,12 @@ rest_command:
 
 media_player:
    - platform: roon
-     host: 192.168.178.21    
-     
+     host: 192.168.178.53   
+   - platform: kefwireless
+     host: 192.168.178.52
+     name: MyLS50W
+       
+       
 #input_number:
 #  roon_volume:
 #    name: Player volume
@@ -244,3 +331,21 @@ media_player:
 #      - Select room
 #    initial: Select room
 #    icon: mdi:speaker-wireless     
+
+# configuration.yaml entry
+#hello_service:
+
+fritzbox:
+  devices:
+    - host: fritz.box
+      username: !secret fritz_login
+      password: !secret fritz_password
+      
+#climate:
+#  platform: fritzbox      
+
+
+remote:
+  - platform: harmony
+    name: Harmony Hub
+    host: 192.168.178.61

@@ -40,7 +40,7 @@
     - delay: '00:01:00'        
     - service: script.kueche_off
 
-'kuechen_licht_02_minute':
+'kuechen_licht_02_minuten':
   alias: Küchenlicht für 2 Minuten
   sequence:
     - service: script.kueche_on
@@ -109,52 +109,8 @@
       event: tisch_off
     service: ifttt.trigger
 
-############Boxen - basic
-
-#'boxen_off':
-#  alias: boxen_off
-#  sequence:
-#  - data:
-#      event: boxen_off
-#    service: ifttt.trigger
-
-#'boxen_on':
-#  alias: boxen_on
-#  sequence:
-#  - data:
-#      event: boxen_on
-#    service: ifttt.trigger
-
 
 ############Musik Wohnzimmer
-
-#'start_nele_radio':
-#  alias: Nele Radio inkl. Boxen
-#  sequence:
-#    - service: switch.turn_on
-#      entity_id:  switch.boxen
-#      data:
-#         entity_id: switch.boxen
-#    - service: media_player.play_media
-#      entity_id: media_player.wohnzimmer_
-#      data:
-#        media_content_id: http://sr1m.akacast.akamaistream.net/7/725/142685/v1/gnl.akacast.akamaistream.net/sr1m
-#        media_content_type: audio/mp4    
-#    - delay: '00:00:01'        
-#    - service: shell_command.heco2_power
-#    - service: media_player.volume_set
-#      data:
-#        entity_id: media_player.wohnzimmer_
-#        volume_level: 0.3
-
-#'spiele_sr1':
-#  alias: Spiele SR1 (ohne Boxen)
-#  sequence:
-#    - service: media_player.play_media
-#      entity_id: media_player.wohnzimmer_
-#      data:
-#        media_content_id: http://sr1m.akacast.akamaistream.net/7/725/142685/v1/gnl.akacast.akamaistream.net/sr1m
-#        media_content_type: audio/mp4    
 
 
 'spiele_sr1_marshall':
@@ -242,7 +198,7 @@
   alias: Tagesschau
   sequence: 
     - service: shell_command.tv_power_on
-    - delay: '00:00:01'
+    - delay: '00:00:04'
     - service: shell_command.tv_tagesschau    
     
 'tv_lauter':
@@ -275,8 +231,7 @@
       entity_id: light.gateway_light_7811dcded114
     - service: script.musik_server_aus
     
-#    - service: switch.turn_off
-#      entity_id: switch.boxen
+
 
 
 
@@ -299,15 +254,15 @@
     - service: shell_command.volumio_shutdown_h
     - delay: '00:00:30'
     - service: switch.turn_off
-      entity_id: switch.boxen
+      entity_id: switch.boxen_internal
 
 'musik_server_aus':
-  alias: Musik Station Aus
+  alias: Musik Server Aus
   sequence:
     - service: shell_command.thinkcentre_shutdown_h
     - delay: '00:00:30'
     - service: switch.turn_off
-      entity_id: switch.RoonServer
+      entity_id: switch.roon_server_internal
 
 
 'volumio_runterfahren':
@@ -330,15 +285,6 @@
   sequence:
     - service: shell_command.thinkcentre_shutdown_r
 
-    
-
-#'vorbereitung_musik':
-# alias: Berteite Musik vor
-#  sequence:
-#    - service: switch.turn_on
-#      entity_id:  switch.boxen
-#    - delay: '00:00:01'        
-#    - service: shell_command.heco2_power
 
 
 ################################################################################################
@@ -346,7 +292,7 @@
 ################################################################################################
 
 
-'marshall_volumne_up3':
+'marshall_volume_up3':
   alias: Marshall Vol up 3
   sequence:
     - service: media_player.volume_up
@@ -356,7 +302,7 @@
     - service: media_player.volume_up
       entity_id: media_player.stanmoreblackb269_3
 
-'marshall_volumne_up2':
+'marshall_volume_up2':
   alias: Marshall Vol up 2
   sequence:
     - service: media_player.volume_up
@@ -364,14 +310,14 @@
     - service: media_player.volume_up
       entity_id: media_player.stanmoreblackb269_3
 
-'marshall_volumne_up1':
+'marshall_volume_up1':
   alias: Marshall Vol up 1
   sequence:
     - service: media_player.volume_up
       entity_id: media_player.stanmoreblackb269_3
 
 
-'marshall_volumne_down3':
+'marshall_volume_down3':
   alias: Marshall Vol down 3
   sequence:
     - service: media_player.volume_down
@@ -381,7 +327,7 @@
     - service: media_player.volume_down
       entity_id: media_player.stanmoreblackb269_3
 
-'marshall_volumne_down2':
+'marshall_volume_down2':
   alias: Marshall Vol down 2
   sequence:
     - service: media_player.volume_down
@@ -389,7 +335,7 @@
     - service: media_player.volume_down
       entity_id: media_player.stanmoreblackb269_3
 
-'marshall_volumne_down1':
+'marshall_volume_down1':
   alias: Marshall Vol down 1
   sequence:
     - service: media_player.volume_down
@@ -401,17 +347,23 @@
 ################################################################################################
 
 
-'roon_digione_volumne_down': 
-  alias: roon_digione_volumne_down
+'roon_digione_volume_down': 
+  alias: roon_digione_volume_down
   sequence:
     - service: media_player.volume_down
       entity_id: media_player.digionevolumio
 
-'roon_digione_volumne_up': 
-  alias: roon_digione_volumne_up
+'roon_digione_volume_up': 
+  alias: roon_digione_volume_up
   sequence:
     - service: media_player.volume_up
       entity_id: media_player.digionevolumio
+
+'roon_server_an': 
+  alias: Musik Server An
+  sequence:
+    - service: switch.turn_on
+      entity_id: switch.roon_server_internal
 
 
 ################################################################################################
@@ -419,14 +371,14 @@
 ################################################################################################
 
 
-'ca_bastian_boxen_volumne_down': 
-  alias: ca_bastian_boxen_volumne_down
+'ca_bastian_boxen_volume_down': 
+  alias: ca_bastian_boxen_volume_down
   sequence:
     - service: media_player.volume_down
       entity_id: media_player.chromecastaudio5861
 
-'ca_bastian_boxen_volumne_up': 
-  alias: ca_bastian_boxen_volumne_up
+'ca_bastian_boxen_volume_up': 
+  alias: ca_bastian_boxen_volume_up
   sequence:
     - service: media_player.volume_up
       entity_id: media_player.chromecastaudio5861
@@ -437,70 +389,93 @@
 ################################################################################################
 
 
-'music_box_volumne_up4':
+'music_box_volume_up4':
   alias: Musik Box Vol up 4
   #hide_entity: true
   sequence:
-    - service: script.music_box_volumne_up1
-    - service: script.music_box_volumne_up1    
-    - service: script.music_box_volumne_up1    
-    - service: script.music_box_volumne_up1
+#    - service: script.music_box_volume_up1
+#    - service: script.music_box_volume_up1    
+#    - service: script.music_box_volume_up1    
+#    - service: script.music_box_volume_up1
+    - service: media_player.volume_up
+      entity_id: media_player.digionevolumio
+    - service: media_player.volume_up
+      entity_id: media_player.digionevolumio
+    - service: media_player.volume_up
+      entity_id: media_player.digionevolumio
+    - service: media_player.volume_up
+      entity_id: media_player.digionevolumio
+
     
     
-'music_box_volumne_up3':
+'music_box_volume_up3':
   alias: Musik Box Vol up 3
   sequence:
-    - service: script.music_box_volumne_up1
-    - service: script.music_box_volumne_up1
-    - service: script.music_box_volumne_up1    
+#    - service: script.music_box_volume_up1
+#    - service: script.music_box_volume_up1
+#    - service: script.music_box_volume_up1    
+    - service: media_player.volume_up
+      entity_id: media_player.digionevolumio
+    - service: media_player.volume_up
+      entity_id: media_player.digionevolumio
+    - service: media_player.volume_up
+      entity_id: media_player.digionevolumio
 
 
-'music_box_volumne_up2':
+'music_box_volume_up2':
   alias: Musik Box Vol up 2
   sequence:
-    - service: script.music_box_volumne_up1
-    - service: script.music_box_volumne_up1
+#    - service: script.music_box_volume_up1
+#    - service: script.music_box_volume_up1
+    - service: media_player.volume_up
+      entity_id: media_player.digionevolumio
+    - service: media_player.volume_up
+      entity_id: media_player.digionevolumio
 
 
-'music_box_volumne_up1':
+
+'music_box_volume_up1':
   alias: Musik Box Vol up 1
   sequence:
-#    - service: rest_command.music_box_volumne_up
-    - service: script.roon_digione_volumne_up
-    - service: sript.ca_bastian_boxen_volumne_up        
+#    - service: rest_command.music_box_volume_up
+#    - service: script.roon_digione_volume_up
+#    - service: sript.ca_bastian_boxen_volume_up        
+    - service: media_player.volume_up
+      entity_id: media_player.digionevolumio
 
 
-'music_box_volumne_down4':
+
+'music_box_volume_down4':
   alias: Musik Box Vol Down 4
   sequence:
-    - service: script.music_box_volumne_down1
-    - service: script.music_box_volumne_down1
-    - service: script.music_box_volumne_down1    
-    - service: script.music_box_volumne_down1
+    - service: script.music_box_volume_down1
+    - service: script.music_box_volume_down1
+    - service: script.music_box_volume_down1    
+    - service: script.music_box_volume_down1
     
 
-'music_box_volumne_down3':
+'music_box_volume_down3':
   alias: Musik Box Vol Down 3
   sequence:
-    - service: script.music_box_volumne_down1
-    - service: script.music_box_volumne_down1
-    - service: script.music_box_volumne_down1
+    - service: script.music_box_volume_down1
+    - service: script.music_box_volume_down1
+    - service: script.music_box_volume_down1
 
 
 
-'music_box_volumne_down2':
+'music_box_volume_down2':
   alias: Musik Box Vol Down 2
   sequence:
-    - service: script.music_box_volumne_down1
-    - service: script.music_box_volumne_down1
+    - service: script.music_box_volume_down1
+    - service: script.music_box_volume_down1
 
     
-'music_box_volumne_down1':
+'music_box_volume_down1':
   alias: Musik Box Vol Down 1
   sequence:
-#    - service: rest_command.music_box_volumne_down
-    - service: script.roon_digione_volumne_down
-    - service: script.ca_bastian_boxen_volumne_down        
+#    - service: rest_command.music_box_volume_down
+    - service: script.roon_digione_volume_down
+#    - service: script.ca_bastian_boxen_volume_down        
 
 
 
@@ -552,3 +527,54 @@
 
 
 #Cube_158d000276eb1c  BASTI CUBE
+
+
+
+################################################################################################
+############ Harmony 
+################################################################################################
+
+
+'wohnzimmer_decke_an_aus':
+  alias: Wohnzimmer Decke An Aus      
+  sequence:
+    - service: remote.send_command
+      data:
+        entity_id: remote.harmony_hub
+        command:
+          - PowerToggle
+        device: 58830068
+        delay_secs: 0.1
+        
+################################################################################################
+############ Climate 
+################################################################################################
+
+
+'bastian_heizung_aus':
+  alias: Bastian Heizung Aus
+  sequence:
+    - service: climate.set_temperature
+      data:
+        entity_id: climate.bastian__comet_dect
+        temperature: 5
+        operation_mode: "off"
+
+'bastian_heizung_hoch':
+  alias: Bastian Heizung Hoch
+  sequence:
+    - service: climate.set_temperature
+      data:
+        entity_id: climate.bastian__comet_dect
+        temperature: 25
+        operation_mode: "heat"
+
+'bastian_heizung_mittel':
+  alias: Bastian Heizung Mittel
+  sequence:
+    - service: climate.set_temperature
+      data:
+        entity_id: climate.bastian__comet_dect
+        temperature: 22
+        operation_mode: "heat"        
+

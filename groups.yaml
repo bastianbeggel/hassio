@@ -12,14 +12,16 @@ roon_actions:
   view: yes  
   name: Schalter
   entities:
-#    - switch.boxen
     - switch.couch
     - switch.kueche_decke
     - switch.kueche_theke
+    - switch.wohnzimmer_decke
     - switch.basti_decke  
     - switch.basti_lampe      
-    - switch.04200102dc4f222a335a
-#    - switch.RoonServer
+    - switch.04200102dc4f222a335a # Tisch
+    - switch.roonserver
+    - switch.boxen
+    - climate.bastian__comet_dect
     
     
 'Media_Room':
@@ -32,10 +34,13 @@ roon_actions:
 'media':
   name: Media
   entities:
+    - media_player.myls50w
     - media_player.digionevolumio
     - media_player.stanmoreblackb269_3
+    - media_player.chromecastaudio5861    
     - media_player.tv_wohnzimmer
-    - media_player.chromecastaudio5861
+    
+
 
 
 'scripts-view':
@@ -52,6 +57,11 @@ roon_actions:
      - script.spiele_sr1_marshall
      - script.thinkcentre_runterfahren     
           
+'scripts-view-all':
+  view: yes  
+  name: Alle Skripte
+  entities:       
+     - group.all_scripts     
 
 
 'automations-view':
@@ -60,9 +70,4 @@ roon_actions:
   entities:       
     - group.all_automations 
          
-'scripts-view-all':
-  view: yes  
-  name: Alle Skripte
-  entities:       
-     - group.all_scripts     
     
