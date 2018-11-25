@@ -18,6 +18,7 @@ roon_actions:
     - switch.wohnzimmer_decke
     - switch.basti_decke  
     - switch.basti_lampe      
+#    - switch.basti_stehlampe    
     - switch.04200102dc4f222a335a # Tisch
     - switch.roonserver
     - switch.boxen

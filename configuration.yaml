@@ -50,7 +50,9 @@ logbook:
 
 
 logger:
-  default: info
+  default: error
+  logs: 
+    roonapi: critical 
 
 # Enables a map showing the location of tracked devices
 map:
@@ -60,7 +62,25 @@ sun:
 
 # Weather prediction
 sensor:
-  - platform: yr
+   - platform: yr
+   - platform: systemmonitor
+     resources:
+       - type: disk_use
+         arg: /
+       - type: memory_use_percent
+       - type: processor_use
+       - type: last_boot
+     
+   - platform: command_line
+     name: CPU Temperature
+     command: "cat /sys/class/thermal/thermal_zone0/temp"
+     unit_of_measurement: "C"
+     value_template: '{{ (value | multiply(0.001)) | round(1) }}'
+    
+#   - platform: filesize
+#     file_paths:
+#     - home-assistant_v2.db    
+
 
 # Text to speech
 tts:
@@ -161,7 +181,7 @@ switch:
         turn_off:
           service: script.wohnzimmer_decke_an_aus    
       roonserver:
-        friendly_name: "RoonServer"
+        friendly_name: "Media Center"
         value_template: "{{ is_state('switch.roon_server_internal', 'on') }}"
         turn_on:
           service: switch.turn_on
@@ -241,6 +261,19 @@ switch:
     state_topic: "stat/basti_lampe/POWER"
     command_topic: "cmnd/basti_lampe/POWER"
     availability_topic: "tele/basti_lampe/LWT"
+    payload_on: "ON"
+    payload_off: "OFF"
+    payload_available: "online"
+    payload_not_available: "offline"    
+    optimistic: false
+    qos: 0
+    retain: true
+  - platform: mqtt
+    name: basti_stehlampe
+    friendly_name: Basti Stehlampe
+    state_topic: "stat/basti_stehlampe/POWER1"
+    command_topic: "cmnd/basti_stehlampe/POWER1"
+    availability_topic: "tele/basti_stehlampe/LWT"
     payload_on: "ON"
     payload_off: "OFF"
     payload_available: "online"
@@ -349,3 +382,15 @@ remote:
   - platform: harmony
     name: Harmony Hub
     host: 192.168.178.61
+    
+device_tracker:
+  - platform: life360
+    username: !secret life360_username
+    password: !secret life360_password
+    prefix: life360
+    show_as_state: driving, moving, places
+    driving_speed: 18
+    max_gps_accuracy: 200
+    max_update_wait:
+      minutes: 45
+   
