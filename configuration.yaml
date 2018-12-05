@@ -42,6 +42,21 @@ discovery:
 # Allows you to issue voice commands from the frontend in enabled browsers
 conversation:
 
+recorder:
+  purge_keep_days: 14
+  purge_interval: 1 
+  exclude:
+    entities:
+      - sun.sun # Don't record sun data
+      - sensor.fritzbox_7490_bytes_received
+      - sensor.fritzbox_7490_bytes_sent
+      - sensor.fritzbox_7490_packets_received
+      - sensor.fritzbox_7490_packets_sent
+      - sensor.fritzbox_7490_packetssec_sent
+      - sensor.fritzbox_7490_packetssec_received
+#      - sensor.fritzbox_7490_kbytesec_received
+#      - sensor.fritzbox_7490_kbytesec_sent
+
 # Enables support for tracking state changes over time
 history:
 
@@ -52,7 +67,14 @@ logbook:
 logger:
   default: error
   logs: 
+    custom_components.media_player.kefwireless: info
+    custom_components.media_player.general_media_player: info
     roonapi: critical 
+    pyfritzhome.fritzhome: critical
+    pychromecast.socket_client: critical
+    homeassistant.components.automation: error
+    custom_components.media_player.roon: error
+    homeassistant.helpers.script: error
 
 # Enables a map showing the location of tracked devices
 map:
@@ -98,13 +120,20 @@ cloud:
     filter:
       include_entities:
 #        - light.gateway_light_7811dcded114
-        - switch.couch    
-        - switch.kueche_decke
-        - switch.kueche_theke
-        - switch.wohnzimmer_decke
-        - switch.basti_decke  
-        - switch.basti_lampe      
-        - switch.04200102dc4f222a335a # Tisch
+        - light.bastian_decke
+        - light.bastian_lampe
+        - light.couchlicht
+        - light.tischlicht
+        - light.wohnzimmerlicht        
+        - light.kuechenlicht
+        - light.thekenlicht        
+#        - switch.couch            
+#        - switch.kueche_decke
+#        - switch.kueche_theke
+#        - switch.wohnzimmer_decke
+#        - switch.basti_decke  
+#        - switch.basti_lampe      
+#        - switch.04200102dc4f222a335a # Tisch
         - switch.roonserver
         - switch.boxen
         - script.sende_tv_power_on
@@ -127,6 +156,7 @@ cloud:
         - script.bastian_heizung_aus
         - script.bastian_heizung_hoch
         - script.bastian_heizung_mittel
+        - media_player.sprout100
         
 
 #      exclude_entities:
@@ -169,6 +199,31 @@ panel_iframe:
     icon: mdi:wrench
     url: http://192.168.178.22:3218
     
+
+light:
+  - platform: switch
+    name: Bastian Decke
+    entity_id: switch.basti_decke
+  - platform: switch
+    name: Bastian Lampe
+    entity_id: switch.basti_lampe
+  - platform: switch
+    name: Kuechenlicht
+    entity_id: switch.kueche_decke
+  - platform: switch
+    name: Thekenlicht
+    entity_id: switch.kueche_theke
+  - platform: switch
+    name: Couchlicht
+    entity_id: switch.couch
+  - platform: switch
+    name: Tischlicht
+    entity_id: switch.04200102dc4f222a335a
+  - platform: switch
+    name: Wohnzimmerlicht
+    entity_id: switch.wohnzimmer_decke
+
+   
     
 switch:
   - platform: template
@@ -192,10 +247,8 @@ switch:
       boxen:
         friendly_name: "Boxen"
         value_template: "{{ is_state('switch.boxen_internal', 'on') }}"
-        turn_on:
-          service: switch.turn_on
-          data:
-            entity_id: switch.boxen_internal
+        turn_on:               
+          service: script.musik_station_an
         turn_off:
           service: script.musik_station_aus
   - platform: tplink
@@ -337,12 +390,25 @@ rest_command:
     url: 'http://192.168.178.67/api/v1/commands/?cmd=volume&volume=minus' 
 
 media_player:
-   - platform: roon
-     host: 192.168.178.53   
-   - platform: kefwireless
-     host: 192.168.178.52
-     name: MyLS50W
-       
+  - platform: roon
+    host: 192.168.178.53   
+  - platform: kefwireless
+    host: 192.168.178.52
+    name: MyLS50W
+    turn_on_service: remote.send_command
+    turn_on_data: '{ "entity_id": "remote.harmony_hub","command" : "PowerToggle","device": "58830425","delay_secs": "0.1"}'
+  - platform: general_media_player
+    name: Sprout100
+    toggle_service: remote.send_command
+    toggle_data: '{ "entity_id": "remote.officehub","command" : "PowerToggle","device": "59192507","delay_secs": "0.1"}'
+    mute_service: remote.send_command
+    mute_data: '{ "entity_id": "remote.officehub","command" : "Mute","device": "59192507","delay_secs": "0.1"}'
+    volume_up_service: remote.send_command
+    volume_up_data: '{ "entity_id": "remote.officehub","command" : "VolumeUp","device": "59192507","delay_secs": "0.1"}'
+    volume_down_service: remote.send_command
+    volume_down_data: '{ "entity_id": "remote.officehub","command" : "VolumeDown","device": "59192507","delay_secs": "0.1"}'
+
+   
        
 #input_number:
 #  roon_volume:
@@ -382,6 +448,10 @@ remote:
   - platform: harmony
     name: Harmony Hub
     host: 192.168.178.61
+  - platform: harmony
+    name: Office-Hub
+    host: 192.168.178.63
+
     
 device_tracker:
   - platform: life360
@@ -393,4 +463,18 @@ device_tracker:
     max_gps_accuracy: 200
     max_update_wait:
       minutes: 45
-   
+
+emulated_hue:
+  host_ip: 192.168.178.22
+  listen_port: 8300
+  off_maps_to_on_domains:
+    - script
+    - scene
+  expose_by_default: true
+  exposed_domains:
+    - light
+    - switch
+  entities:
+    light.bastian_decke:
+      name: hue_bastian_decke
+

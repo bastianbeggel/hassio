@@ -256,6 +256,15 @@
     - service: switch.turn_off
       entity_id: switch.boxen_internal
 
+'musik_station_an':
+  alias: Musik Station An
+  sequence:
+    - service: switch.turn_on
+      entity_id: switch.boxen_internal
+    - delay: '00:00:30'
+    - service: script.office_hub_sprout_power_toggle
+    
+
 'musik_server_aus':
   alias: Musik Server Aus
   sequence:
@@ -393,88 +402,111 @@
   alias: Musik Box Vol up 4
   #hide_entity: true
   sequence:
+    - service: script.office_hub_sprout_volume_up
+    - service: script.office_hub_sprout_volume_up
+    - service: script.office_hub_sprout_volume_up
+    - service: script.office_hub_sprout_volume_up            
 #    - service: script.music_box_volume_up1
 #    - service: script.music_box_volume_up1    
 #    - service: script.music_box_volume_up1    
 #    - service: script.music_box_volume_up1
-    - service: media_player.volume_up
-      entity_id: media_player.digionevolumio
-    - service: media_player.volume_up
-      entity_id: media_player.digionevolumio
-    - service: media_player.volume_up
-      entity_id: media_player.digionevolumio
-    - service: media_player.volume_up
-      entity_id: media_player.digionevolumio
+#    - service: media_player.volume_up
+#      entity_id: media_player.digionevolumio
+#    - service: media_player.volume_up
+#      entity_id: media_player.digionevolumio
+#    - service: media_player.volume_up
+#      entity_id: media_player.digionevolumio
+#    - service: media_player.volume_up
+#      entity_id: media_player.digionevolumio
 
     
     
 'music_box_volume_up3':
   alias: Musik Box Vol up 3
   sequence:
+    - service: script.office_hub_sprout_volume_up
+    - service: script.office_hub_sprout_volume_up
+    - service: script.office_hub_sprout_volume_up
+
 #    - service: script.music_box_volume_up1
 #    - service: script.music_box_volume_up1
 #    - service: script.music_box_volume_up1    
-    - service: media_player.volume_up
-      entity_id: media_player.digionevolumio
-    - service: media_player.volume_up
-      entity_id: media_player.digionevolumio
-    - service: media_player.volume_up
-      entity_id: media_player.digionevolumio
+#    - service: media_player.volume_up
+#      entity_id: media_player.digionevolumio
+#    - service: media_player.volume_up
+#      entity_id: media_player.digionevolumio
+#    - service: media_player.volume_up
+#      entity_id: media_player.digionevolumio
 
 
 'music_box_volume_up2':
   alias: Musik Box Vol up 2
   sequence:
+    - service: script.office_hub_sprout_volume_up
+    - service: script.office_hub_sprout_volume_up
+  
 #    - service: script.music_box_volume_up1
 #    - service: script.music_box_volume_up1
-    - service: media_player.volume_up
-      entity_id: media_player.digionevolumio
-    - service: media_player.volume_up
-      entity_id: media_player.digionevolumio
+#    - service: media_player.volume_up
+#      entity_id: media_player.digionevolumio
+#    - service: media_player.volume_up
+#      entity_id: media_player.digionevolumio
 
 
 
 'music_box_volume_up1':
   alias: Musik Box Vol up 1
   sequence:
+    - service: script.office_hub_sprout_volume_up
+  
 #    - service: rest_command.music_box_volume_up
 #    - service: script.roon_digione_volume_up
 #    - service: sript.ca_bastian_boxen_volume_up        
-    - service: media_player.volume_up
-      entity_id: media_player.digionevolumio
+#    - service: media_player.volume_up
+#      entity_id: media_player.digionevolumio
 
 
 
 'music_box_volume_down4':
   alias: Musik Box Vol Down 4
   sequence:
-    - service: script.music_box_volume_down1
-    - service: script.music_box_volume_down1
-    - service: script.music_box_volume_down1    
-    - service: script.music_box_volume_down1
+#    - service: script.music_box_volume_down1
+#    - service: script.music_box_volume_down1
+#    - service: script.music_box_volume_down1    
+#    - service: script.music_box_volume_down1
+     - service: script.office_hub_sprout_volume_down
+     - service: script.office_hub_sprout_volume_down
+     - service: script.office_hub_sprout_volume_down
+     - service: script.office_hub_sprout_volume_down               
     
 
 'music_box_volume_down3':
   alias: Musik Box Vol Down 3
   sequence:
-    - service: script.music_box_volume_down1
-    - service: script.music_box_volume_down1
-    - service: script.music_box_volume_down1
+     - service: script.office_hub_sprout_volume_down
+     - service: script.office_hub_sprout_volume_down
+     - service: script.office_hub_sprout_volume_down            
+#    - service: script.music_box_volume_down1
+#    - service: script.music_box_volume_down1
+#    - service: script.music_box_volume_down1
 
 
 
 'music_box_volume_down2':
   alias: Musik Box Vol Down 2
   sequence:
-    - service: script.music_box_volume_down1
-    - service: script.music_box_volume_down1
+     - service: script.office_hub_sprout_volume_down
+     - service: script.office_hub_sprout_volume_down     
+#    - service: script.music_box_volume_down1
+#    - service: script.music_box_volume_down1
 
     
 'music_box_volume_down1':
   alias: Musik Box Vol Down 1
   sequence:
+    - service: script.office_hub_sprout_volume_down
 #    - service: rest_command.music_box_volume_down
-    - service: script.roon_digione_volume_down
+#    - service: script.roon_digione_volume_down
 #    - service: script.ca_bastian_boxen_volume_down        
 
 
@@ -499,7 +531,7 @@
 #    - service: rest_command.music_box_next
 #    - service: rest_command.music_box_play
     - service: media_player.media_next_track
-      entity_id: media_player.digionevolumio
+      entity_id: media_player.digione
     - service: media_player.media_next_track
       entity_id: media_player.chromecastaudio5861
 
@@ -509,7 +541,7 @@
   sequence:
 #    - service: rest_command.music_box_prev
     - service: media_player.media_previous_track
-      entity_id: media_player.digionevolumio
+      entity_id: media_player.digione
     - service: media_player.media_previous_track
       entity_id: media_player.chromecastaudio5861
 
@@ -519,7 +551,7 @@
   sequence:
 #    - service: rest_command.music_box_toggle_play_pause
     - service: media_player.media_play_pause
-      entity_id: media_player.digionevolumio
+      entity_id: media_player.digione
     - service: media_player.media_play_pause
       entity_id: media_player.chromecastaudio5861
 
@@ -545,6 +577,64 @@
           - PowerToggle
         device: 58830068
         delay_secs: 0.1
+
+'kef_ls50w_an':
+  alias: KEF LS50 An
+  sequence:
+    - service: remote.send_command
+      data:
+        entity_id: remote.harmony_hub
+        command:
+          - PowerOn
+        device: 58830425
+        delay_secs: 0.1
+
+'office_hub_sprout_power_toggle':
+  alias: Sprout On /Off
+  sequence:
+    - service: remote.send_command
+      data:
+        entity_id: remote.officehub
+        command:
+          - PowerToggle
+        device: 59192507
+        delay_secs: 0.1
+
+'office_hub_sprout_mute':
+  alias: Sprout Mute
+  sequence:
+    - service: remote.send_command
+      data:
+        entity_id: remote.officehub
+        command:
+          - Mute
+        device: 59192507
+        delay_secs: 0.1
+        
+'office_hub_sprout_volume_up':
+  alias: Sprout Volume Up
+  sequence:
+    - service: remote.send_command
+      data:
+        entity_id: remote.officehub
+        command:
+          - VolumeUp
+        device: 59192507
+        delay_secs: 0.1
+
+'office_hub_sprout_volume_down':
+  alias: Sprout Volume Down
+  sequence:
+    - service: remote.send_command
+      data:
+        entity_id: remote.officehub
+        command:
+          - VolumeDown
+        device: 59192507
+        delay_secs: 0.1
+        
+
+
         
 ################################################################################################
 ############ Climate 

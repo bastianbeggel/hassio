@@ -13,10 +13,13 @@ roon_actions:
   name: Schalter
   entities:
     - switch.couch
-    - switch.kueche_decke
-    - switch.kueche_theke
+    - light.kuechenlicht
+    - light.thekenlicht
+#    - switch.kueche_decke
+#    - switch.kueche_theke
     - switch.wohnzimmer_decke
-    - switch.basti_decke  
+#    - switch.basti_decke  
+    - light.bastian_decke
     - switch.basti_lampe      
 #    - switch.basti_stehlampe    
     - switch.04200102dc4f222a335a # Tisch
@@ -36,7 +39,8 @@ roon_actions:
   name: Media
   entities:
     - media_player.myls50w
-    - media_player.digionevolumio
+    - media_player.digione
+    - media_player.sprout100
     - media_player.stanmoreblackb269_3
     - media_player.chromecastaudio5861    
     - media_player.tv_wohnzimmer

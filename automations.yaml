@@ -27,7 +27,7 @@
 - alias: Single Press - Basti Switch
   trigger:
     platform: event
-    event_type: click
+    event_type: xiaomi_aqara.click
     event_data:
       entity_id: binary_sensor.switch_158d0001f3793a
       click_type: single
@@ -39,7 +39,7 @@
 - alias: Double Press - Basti Switch
   trigger:
     platform: event
-    event_type: click
+    event_type: xiaomi_aqara.click
     event_data:
       entity_id: binary_sensor.switch_158d0001f3793a
       click_type: double
@@ -51,7 +51,7 @@
 - alias: Long Press - Basti Switch
   trigger:
     platform: event
-    event_type: click
+    event_type: xiaomi_aqara.click
     event_data:
       entity_id: binary_sensor.switch_158d0001f3793a
       click_type: long_click_press
@@ -134,7 +134,7 @@
 - alias: Single Press - Kitchen toggle 
   trigger:
     platform: event
-    event_type: click
+    event_type: xiaomi_aqara.click
     event_data:
       entity_id: binary_sensor.switch_158d000223e5a8
       click_type: single
@@ -147,7 +147,7 @@
 - alias: Double Press - Küchenlicht für 5 Minuten 
   trigger:
     platform: event
-    event_type: click
+    event_type: xiaomi_aqara.click
     event_data:
       entity_id: binary_sensor.switch_158d000223e5a8
       click_type: double
@@ -160,7 +160,7 @@
 - alias: Long press - küche aus 
   trigger:
     platform: event
-    event_type: click
+    event_type: xiaomi_aqara.click
     event_data:
       entity_id: binary_sensor.switch_158d000223e5a8
       click_type: long_click_press
@@ -176,7 +176,7 @@
 - alias: Cube to flip90
   trigger:
     platform: event
-    event_type: cube_action
+    event_type: xiaomi_aqara.cube_action
     event_data:
       entity_id: binary_sensor.cube_158d00024a48bd_2
       action_type: flip90
@@ -187,7 +187,7 @@
 - alias: Cube to tab-twice
   trigger:
     platform: event
-    event_type: cube_action
+    event_type: xiaomi_aqara.cube_action
     event_data:
       entity_id: binary_sensor.cube_158d00024a48bd_2
       action_type: tap_twice
@@ -199,7 +199,7 @@
 - alias: Cube to move
   trigger:
     platform: event
-    event_type: cube_action
+    event_type: xiaomi_aqara.cube_action
     event_data:
       entity_id: binary_sensor.cube_158d00024a48bd_2
       action_type: move
@@ -209,7 +209,7 @@
 - alias: Cube to shake_air
   trigger:
     platform: event
-    event_type: cube_action
+    event_type: xiaomi_aqara.cube_action
     event_data:
       entity_id: binary_sensor.cube_158d00024a48bd_2
       action_type: shake_air
@@ -219,7 +219,7 @@
 - alias: Cube to free_fall
   trigger:
     platform: event
-    event_type: cube_action
+    event_type: xiaomi_aqara.cube_action
     event_data:
       entity_id: binary_sensor.cube_158d00024a48bd_2
       action_type: free_fall
@@ -232,7 +232,7 @@
 - alias: Cube to flip180
   trigger:
     platform: event
-    event_type: cube_action
+    event_type: xiaomi_aqara.cube_action
     event_data:
       entity_id: binary_sensor.cube_158d00024a48bd_2
       action_type: flip180
@@ -247,7 +247,7 @@
 - alias: Cube to rotate
   trigger:
     platform: event
-    event_type: cube_action
+    event_type: xiaomi_aqara.cube_action
     event_data:
       entity_id: binary_sensor.cube_158d00024a48bd_2
       action_type: rotate
@@ -283,7 +283,7 @@
 - alias: B-Cube to move
   trigger:
     platform: event
-    event_type: cube_action
+    event_type: xiaomi_aqara.cube_action
     event_data:
       entity_id: binary_sensor.cube_158d000276eb1c
       action_type: move
@@ -294,19 +294,22 @@
 - alias: B-Cube to tab twice
   trigger:
     platform: event
-    event_type: cube_action
+    event_type: xiaomi_aqara.cube_action
     event_data:
       entity_id: binary_sensor.cube_158d000276eb1c
       action_type: tap_twice
   action:
-    - service: script.music_box_play_pause
-    - service: switch.turn_on
+    - service: script.music_box_play_pause 
+    - service: switch.turn_on 
       entity_id: switch.boxen
+    - service: switch.turn_on
+      entity_id: switch.roonserver
+
 
 - alias: B-Cube to flip90
   trigger:
     platform: event
-    event_type: cube_action
+    event_type: xiaomi_aqara.cube_action
     event_data:
       entity_id: binary_sensor.cube_158d000276eb1c
       action_type: flip90
@@ -320,17 +323,18 @@
 - alias: B-Cube to flip180
   trigger:
     platform: event
-    event_type: cube_action
+    event_type: xiaomi_aqara.cube_action
     event_data:
       entity_id: binary_sensor.cube_158d000276eb1c
       action_type: flip180
   action:
-    service: script.musik_station_aus
+    - service: script.musik_station_aus
+    - service: script.musik_server_aus
 
 - alias: B-Cube to rotate
   trigger:
     platform: event
-    event_type: cube_action
+    event_type: xiaomi_aqara.cube_action
     event_data:
       entity_id: binary_sensor.cube_158d000276eb1c
       action_type: rotate
