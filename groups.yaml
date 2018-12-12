@@ -13,7 +13,7 @@ roon_actions:
   name: Schalter
   entities:
 #    - switch.couch
-    - ligth.couchlicht
+    - light.couchlicht
     - light.kuechenlicht
     - light.thekenlicht
 #    - switch.kueche_decke

@@ -269,9 +269,9 @@
   alias: Musik Server Aus
   sequence:
     - service: shell_command.thinkcentre_shutdown_h
-    - delay: '00:00:30'
-    - service: switch.turn_off
-      entity_id: switch.roon_server_internal
+#    - delay: '00:00:30'
+#    - service: switch.turn_off
+#      entity_id: switch.roon_server_internal
 
 
 'volumio_runterfahren':
@@ -293,6 +293,11 @@
   alias: ThinkCentre Neustarten
   sequence:
     - service: shell_command.thinkcentre_shutdown_r
+
+'thinkcentre_wakeup':
+  alias: ThinkCentre Wakeup WOL
+  sequence:
+    - service: shell_command.thinkcentre_wakeup_wol
 
 
 

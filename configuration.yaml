@@ -332,6 +332,12 @@ switch:
     payload_on: "on"
     payload_off: "off"
     retain: false
+  - platform: wake_on_lan
+    name: "Media PC"
+    mac_address: "00:23:24:f9:d3:79"
+    host: "192.168.178.53"
+    turn_off:
+      service: shell_command.thinkcentre_shutdown_h
 
 
 ifttt:
@@ -350,8 +356,10 @@ shell_command:
   tv_mute: nodejs /home/homeassistant/.homeassistant/scripts/tv_mute.js
   volumio_shutdown_h: /home/homeassistant/.homeassistant/scripts/vol_shutdown_h.sh
   volumio_shutdown_r: /home/homeassistant/.homeassistant/scripts/vol_shutdown_r.sh
-  thinkcentre_shutdown_h: /home/homeassistant/.homeassistant/scripts/tc_shutdown_h.sh
+#  thinkcentre_shutdown_h: /home/homeassistant/.homeassistant/scripts/tc_shutdown_h.sh
   thinkcentre_shutdown_r: /home/homeassistant/.homeassistant/scripts/tc_shutdown_r.sh
+  thinkcentre_shutdown_h: /home/homeassistant/.homeassistant/scripts/tc_shutdown_s.sh
+  thinkcentre_wakeup_wol: /home/homeassistant/.homeassistant/scripts/tc_wakeup.sh
 
   
 xiaomi_aqara:
