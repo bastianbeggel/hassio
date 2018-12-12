@@ -304,6 +304,7 @@
       entity_id: switch.boxen
     - service: switch.turn_on
       entity_id: switch.roonserver
+      
 
 
 - alias: B-Cube to flip90
@@ -314,9 +315,9 @@
       entity_id: binary_sensor.cube_158d000276eb1c
       action_type: flip90
   action:
-    - service: switch.toggle
+    - service: switch.turn_on
       data:
-        entity_id: switch.basti_decke
+        entity_id: switch.media_pc
 
 
 
@@ -328,8 +329,13 @@
       entity_id: binary_sensor.cube_158d000276eb1c
       action_type: flip180
   action:
-    - service: script.musik_station_aus
-    - service: script.musik_server_aus
+    - service: switch.turn_off
+      entity_id: switch.boxen
+    - service: switch.turn_off 
+      entity_id: switch.roonserver
+    - service: switch.turn_off
+      entity_id: switch.media_pc
+    
 
 - alias: B-Cube to rotate
   trigger:

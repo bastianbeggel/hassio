@@ -226,10 +226,15 @@
     - service: script.kueche_off
     - service: script.tisch_off    
     - service: shell_command.tv_power_off
-    - service: script.musik_station_aus     
     - service: light.turn_off
       entity_id: light.gateway_light_7811dcded114
-    - service: script.musik_server_aus
+    - service: switch.turn_off
+      entity_id: switch.boxen
+    - service: switch.turn_off 
+      entity_id: switch.roonserver
+    - service: switch.turn_off
+      entity_id: switch.media_pc
+
     
 
 
@@ -264,15 +269,6 @@
     - delay: '00:00:30'
     - service: script.office_hub_sprout_power_toggle
     
-
-'musik_server_aus':
-  alias: Musik Server Aus
-  sequence:
-    - service: shell_command.thinkcentre_shutdown_h
-#    - delay: '00:00:30'
-#    - service: switch.turn_off
-#      entity_id: switch.roon_server_internal
-
 
 'volumio_runterfahren':
   alias: Volumio Pi Runterfahren

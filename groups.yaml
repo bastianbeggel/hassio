@@ -12,24 +12,17 @@ roon_actions:
   view: yes  
   name: Schalter
   entities:
-#    - switch.couch
     - light.couchlicht
     - light.kuechenlicht
     - light.thekenlicht
-#    - switch.kueche_decke
-#    - switch.kueche_theke
-#    - switch.wohnzimmer_decke
     - light.wohnzimmerlicht
-#    - switch.basti_decke  
     - light.bastian_decke
     - light.bastian_lampe
-#    - switch.basti_lampe      
-#    - switch.basti_stehlampe    
-#    - switch.04200102dc4f222a335a # Tisch
     - light.tischlicht
     - light.kammerlicht
     - switch.roonserver
     - switch.boxen
+    - switch.media_pc
     - climate.bastian__comet_dect
     
     
@@ -58,8 +51,6 @@ roon_actions:
   name: Skripte
   entities:       
      - script.gute_nacht
-#     - script.musik_station_aus     
-#     - script.musik_server_aus          
      - script.start_nele_radio     
      - script.zeit_fuer_netflix
      - script.tagesschau     

@@ -136,6 +136,7 @@ cloud:
 #        - switch.basti_lampe      
 #        - switch.04200102dc4f222a335a # Tisch
         - switch.roonserver
+        - switch.media_pc
         - switch.boxen
         - script.sende_tv_power_on
         - script.sende_tv_power_off        
@@ -247,7 +248,9 @@ switch:
           data:
             entity_id: switch.roon_server_internal
         turn_off:
-          service: script.musik_server_aus
+          service: switch.turn_off
+          data:
+            entity_id: switch.roon_server_internal
       boxen:
         friendly_name: "Boxen"
         value_template: "{{ is_state('switch.boxen_internal', 'on') }}"
@@ -338,6 +341,11 @@ switch:
     host: "192.168.178.53"
     turn_off:
       service: shell_command.thinkcentre_shutdown_h
+  - platform: wake_on_lan
+    name: "Carbon X1"
+    mac_address: "54-E1-AD-D9-3F-52"
+    host: "192.168.178.21"
+
 
 
 ifttt:
