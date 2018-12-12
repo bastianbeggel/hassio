@@ -126,7 +126,8 @@ cloud:
         - light.tischlicht
         - light.wohnzimmerlicht        
         - light.kuechenlicht
-        - light.thekenlicht        
+        - light.thekenlicht   
+        - light.kammerlicht     
 #        - switch.couch            
 #        - switch.kueche_decke
 #        - switch.kueche_theke
@@ -147,7 +148,7 @@ cloud:
         - script.kuechen_licht_60_minuten
         - script.zeit_fuer_fernsehen
         - script.zeit_fuer_netflix
-        - script.zeit_fuer_tagesschau
+        - script.zeit_fuer_tagesschau 
         - script.tv_lauter
         - script.tv_leiser
         - script.tv_mute
@@ -222,6 +223,9 @@ light:
   - platform: switch
     name: Wohnzimmerlicht
     entity_id: switch.wohnzimmer_decke
+  - platform: switch
+    name: Kammerlicht
+    entity_id: switch.kammer
 
    
     
@@ -322,18 +326,12 @@ switch:
     qos: 0
     retain: true
   - platform: mqtt
-    name: basti_stehlampe
-    friendly_name: Basti Stehlampe
-    state_topic: "stat/basti_stehlampe/POWER1"
-    command_topic: "cmnd/basti_stehlampe/POWER1"
-    availability_topic: "tele/basti_stehlampe/LWT"
-    payload_on: "ON"
-    payload_off: "OFF"
-    payload_available: "online"
-    payload_not_available: "offline"    
-    optimistic: false
-    qos: 0
-    retain: true
+    name: "Kammer"
+    state_topic: "shellies/shelly1-500936/relay/0"
+    command_topic: "shellies/shelly1-500936/relay/0/command"
+    payload_on: "on"
+    payload_off: "off"
+    retain: false
 
 
 ifttt:

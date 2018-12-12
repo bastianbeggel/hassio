@@ -23,7 +23,7 @@ sensor.fritzbox_7490_packetssec_received:
 sensor.fritzbox_7490_packetssec_sent:
   hidden: true
 binary_sensor.motion_sensor_158d0002239b1a:
-  hidden: true
+  hidden: false
 binary_sensor.switch_158d0001f3793a:
   hidden: true
 binary_sensor.cube_158d000276eb1c:
@@ -71,7 +71,7 @@ script.tisch_off:
 script.tisch_on:
   hidden: true 
 script.sende_tv_power:
-  hidden: true      
+  hidden: false      
 script.sende_tv_power_on:
   hidden: true 
 script.sende_tv_power_off:
