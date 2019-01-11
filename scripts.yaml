@@ -129,6 +129,56 @@
 #  sequence:
 #    - service: shell_command.heco2_power
 
+
+############Fernseher fuer Nele 
+
+'nele_fernsehen':
+  alias: Nele will fernsehen
+  sequence:
+    - service: script.couch_an_wenn_dunkel
+#    - service: switch.turn_on
+#      entity_id: switch.couch
+    - service: script.kueche_off
+    - service: script.tisch_off    
+    - service: switch.turn_on
+      entity_id: switch.roonserver
+    - delay: '00:00:05'      
+    - service: remote.turn_on
+      entity_id: remote.harmony_hub
+      data:
+         activity: "Fernsehen"
+
+'nele_serien_streamen':
+  alias: Nele will Serien Streamen 
+  sequence:
+    - service: script.couch_an_wenn_dunkel
+    - service: script.kueche_off
+    - service: script.tisch_off    
+    - service: switch.turn_on
+      entity_id: switch.roonserver
+    - delay: '00:00:35'            
+    - service: switch.turn_on
+      entity_id: switch.media_pc
+    - service: remote.turn_on
+      entity_id: remote.harmony_hub
+      data:
+         activity: "Media PC"
+
+
+'bastian_playstation':
+  alias: Bastian Playstation 
+  sequence:
+    - service: script.couch_an_wenn_dunkel
+    - service: script.kueche_off
+    - service: script.tisch_off    
+    - service: switch.turn_on
+      entity_id: switch.roonserver
+    - delay: '00:00:05'            
+    - service: remote.turn_on
+      entity_id: remote.harmony_hub
+      data:
+         activity: "Playstation"
+
 ############Fernseher 
 
 'couch_an_wenn_dunkel':
@@ -230,11 +280,13 @@
       entity_id: light.gateway_light_7811dcded114
     - service: switch.turn_off
       entity_id: switch.boxen
-    - service: switch.turn_off 
-      entity_id: switch.roonserver
     - service: switch.turn_off
       entity_id: switch.media_pc
+    - delay: '00:00:10'
+    - service: switch.turn_off 
+      entity_id: switch.roonserver
 
+    
     
 
 
@@ -243,6 +295,30 @@
 ################################################################################################
 ############ Zimmer Bastian
 ################################################################################################
+
+'bastian_arbeitsplatz_an':
+  alias: Arbeitsplatz Einschalten
+  sequence:
+    - service: switch.turn_on 
+      entity_id: switch.boxen
+    - service: switch.turn_on
+      entity_id: switch.roonserver # note that roonserver is media_center
+#    - service: switch.turn_on
+#      entity_id: switch.media_pc
+    - service: switch.turn_on
+      entity_id: switch.carbon_x1      
+    - delay: '00:00:05'            
+    - service: switch.turn_on
+      entity_id: switch.carbon_x1
+    - delay: '00:00:30'      
+    - service: switch.turn_on
+      entity_id: switch.media_pc
+    - service: switch.turn_on
+      entity_id: switch.carbon_x1
+      
+
+
+
 
 'bastian_lichtwechsel':
   alias: Lichtwechsel

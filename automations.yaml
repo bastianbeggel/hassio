@@ -64,6 +64,49 @@
         entity_id: switch.basti_decke
 
 
+############Basti Bed Switch
+- alias: Single Press - Basti Bed Switch
+  trigger:
+    platform: event
+    event_type: xiaomi_aqara.click
+    event_data:
+      entity_id: binary_sensor.switch_158d0001f3def4
+      click_type: single
+  action:
+    - service: switch.toggle
+      data:
+        entity_id: switch.basti_decke
+
+- alias: Double Press - Basti Bed Switch
+  trigger:
+    platform: event
+    event_type: xiaomi_aqara.click
+    event_data:
+      entity_id: binary_sensor.switch_158d0001f3def4
+      click_type: double
+  action:
+    - service: switch.toggle
+      data:
+        entity_id: switch.basti_lampe
+
+- alias: Long Press - Basti Bed Switch
+  trigger:
+    platform: event
+    event_type: xiaomi_aqara.click
+    event_data:
+      entity_id: binary_sensor.switch_158d0001f3def4
+      click_type: long_click_press
+  action:
+    - service: switch.toggle
+      data:
+        entity_id: switch.basti_lampe
+    - service: switch.toggle
+      data:
+        entity_id: switch.basti_decke
+
+
+
+
 ############Kueche
 
 - alias : Küche an um 06:45
@@ -144,7 +187,7 @@
       entity_id: script.kuechen_licht_stop_all_timer_scripts    
     
 
-- alias: Double Press - Küchenlicht für 5 Minuten 
+- alias: Double Press - Wohnzimmer Decke
   trigger:
     platform: event
     event_type: xiaomi_aqara.click
@@ -152,12 +195,12 @@
       entity_id: binary_sensor.switch_158d000223e5a8
       click_type: double
   action:
-    - service: homeassistant.turn_off
-      entity_id: script.kuechen_licht_stop_all_timer_scripts    
-    - service: script.kuechen_licht_05_minuten
+    - service: switch.toggle
+      entity_id: switch.wohnzimmer_decke
+
     
 
-- alias: Long press - küche aus 
+- alias: Long press - Licher im Wohnzimmer und Küche aus
   trigger:
     platform: event
     event_type: xiaomi_aqara.click
@@ -165,7 +208,13 @@
       entity_id: binary_sensor.switch_158d000223e5a8
       click_type: long_click_press
   action:
-    service: script.kueche_off
+    - service: script.kueche_off
+    - service: switch.turn_off
+      entity_id: switch.couch    
+    - service: script.tisch_off    
+    - service: light.turn_off
+      entity_id: light.gateway_light_7811dcded114
+    
 
 
 ################################################################################################
@@ -300,12 +349,25 @@
       action_type: tap_twice
   action:
     - service: script.music_box_play_pause 
-    - service: switch.turn_on 
-      entity_id: switch.boxen
-    - service: switch.turn_on
-      entity_id: switch.roonserver
+    - service: script.bastian_arbeitsplatz_an
+#    - service: switch.turn_on 
+#      entity_id: switch.boxen
+#    - service: switch.turn_on
+#      entity_id: switch.roonserver
       
 
+
+- alias: B-Cube to air-shake
+  trigger:
+    platform: event
+    event_type: xiaomi_aqara.cube_action
+    event_data:
+      entity_id: binary_sensor.cube_158d000276eb1c
+      action_type: shake_air
+  action:
+    - service: switch.turn_on
+      data:
+        entity_id: switch.media_pc
 
 - alias: B-Cube to flip90
   trigger:
@@ -315,9 +377,11 @@
       entity_id: binary_sensor.cube_158d000276eb1c
       action_type: flip90
   action:
-    - service: switch.turn_on
-      data:
-        entity_id: switch.media_pc
+    - service: script.bastian_arbeitsplatz_an
+#    - service: switch.turn_on
+#      data:
+#        entity_id: switch.carbon_x1
+
 
 
 
@@ -332,7 +396,7 @@
     - service: switch.turn_off
       entity_id: switch.boxen
     - service: switch.turn_off 
-      entity_id: switch.roonserver
+      entity_id: switch.roonserver # media_center
     - service: switch.turn_off
       entity_id: switch.media_pc
     
@@ -378,13 +442,13 @@
     service: homeassistant.turn_on
     entity_id: switch.kammer
 
-- alias: Lammerlicht Aus nach 4 Minuten 
+- alias: Lammerlicht Aus nach 2 Minuten 
   trigger:
     platform: state
     entity_id: binary_sensor.motion_sensor_158d0002239b1a
     to: 'off'
     for:
-      minutes: 4
+      minutes: 2
   action:
     service: homeassistant.turn_off
     entity_id: switch.kammer

@@ -24,8 +24,50 @@ roon_actions:
     - switch.boxen
     - switch.media_pc
     - climate.bastian__comet_dect
+    - switch.carbon_x1
+
+'nele_view':
+  view: yes  
+  name: Nele 
+  entities:
+    - light.couchlicht
+    - light.kuechenlicht
+    - light.thekenlicht
+    - light.wohnzimmerlicht
+    - light.tischlicht
+    - light.kammerlicht
+    - switch.roonserver
+    - switch.media_pc
+    - script.gute_nacht
+#    - script.zeit_fuer_netflix
+    - script.tagesschau     
+    - script.sende_tv_power
+    - script.spiele_sr1_marshall
+    - script.nele_fernsehen
+    - script.nele_serien_streamen    
+
     
-    
+
+
+
+
+'bastian_playstation-view':
+  view: yes  
+  name: Bastian
+  entities:       
+     - script.gute_nacht
+#     - script.start_nele_radio     
+#     - script.zeit_fuer_netflix
+#     - script.tagesschau     
+#     - script.sende_tv_power
+#     - script.spiele_sr1_marshall
+     - script.thinkcentre_runterfahren    
+     - script.bastian_arbeitsplatz_an 
+     - script.bastian_playstation
+     - script.nele_fernsehen
+     - script.nele_serien_streamen    
+     
+
 'Media_Room':
   view: yes  
   name: Media-Room
@@ -43,20 +85,6 @@ roon_actions:
     - media_player.chromecastaudio5861    
     - media_player.tv_wohnzimmer
     
-
-
-
-'scripts-view':
-  view: yes  
-  name: Skripte
-  entities:       
-     - script.gute_nacht
-     - script.start_nele_radio     
-     - script.zeit_fuer_netflix
-     - script.tagesschau     
-     - script.sende_tv_power
-     - script.spiele_sr1_marshall
-     - script.thinkcentre_runterfahren     
           
 'scripts-view-all':
   view: yes  

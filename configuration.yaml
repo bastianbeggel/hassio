@@ -119,7 +119,6 @@ cloud:
   google_actions:
     filter:
       include_entities:
-#        - light.gateway_light_7811dcded114
         - light.bastian_decke
         - light.bastian_lampe
         - light.couchlicht
@@ -128,15 +127,9 @@ cloud:
         - light.kuechenlicht
         - light.thekenlicht   
         - light.kammerlicht     
-#        - switch.couch            
-#        - switch.kueche_decke
-#        - switch.kueche_theke
-#        - switch.wohnzimmer_decke
-#        - switch.basti_decke  
-#        - switch.basti_lampe      
-#        - switch.04200102dc4f222a335a # Tisch
         - switch.roonserver
         - switch.media_pc
+        - switch.carbon_x1
         - switch.boxen
         - script.sende_tv_power_on
         - script.sende_tv_power_off        
@@ -147,19 +140,22 @@ cloud:
         - script.kuechen_licht_05_minuten
         - script.kuechen_licht_10_minuten
         - script.kuechen_licht_60_minuten
-        - script.zeit_fuer_fernsehen
-        - script.zeit_fuer_netflix
-        - script.zeit_fuer_tagesschau 
+#        - script.zeit_fuer_fernsehen
+#        - script.zeit_fuer_netflix
+#        - script.zeit_fuer_tagesschau 
+        - script.gute_nacht
         - script.tv_lauter
         - script.tv_leiser
         - script.tv_mute
         - script.bastian_lichtwechsel
-        - climate.bastian__comet_dect
+        - script.bastian_playstation
+        - script.nele_fernsehen
+        - script.nele_serien_streamen    
         - script.bastian_heizung_aus
         - script.bastian_heizung_hoch
         - script.bastian_heizung_mittel
-        - media_player.sprout100
-        
+        - media_player.sprout100        
+        - climate.bastian__comet_dect
 
 #      exclude_entities:
 #        - script.tv_power
@@ -343,7 +339,7 @@ switch:
       service: shell_command.thinkcentre_shutdown_h
   - platform: wake_on_lan
     name: "Carbon X1"
-    mac_address: "54-E1-AD-D9-3F-52"
+    mac_address: "54:e1:ad:d9:3f:52"
     host: "192.168.178.21"
 
 
@@ -407,7 +403,7 @@ media_player:
   - platform: roon
     host: 192.168.178.53   
   - platform: kefwireless
-    host: 192.168.178.52
+    host: 192.168.178.152
     name: MyLS50W
     turn_on_service: remote.send_command
     turn_on_data: '{ "entity_id": "remote.harmony_hub","command" : "PowerToggle","device": "58830425","delay_secs": "0.1"}'
