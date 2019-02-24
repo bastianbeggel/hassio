@@ -16,6 +16,8 @@ homeassistant:
 # Show links to resources in log and frontend
 #introduction:
 
+system_health:
+
 # Enables the frontend
 frontend:
 
@@ -65,10 +67,10 @@ logbook:
 
 
 logger:
-  default: error
+  default: warning
   logs: 
 #    custom_components.media_player.kefwireless: info
-    custom_components.media_player.general_media_player: info
+#    custom_components.media_player.general_media_player: info
     roonapi: critical 
     pyfritzhome.fritzhome: critical
     pychromecast.socket_client: critical
@@ -155,7 +157,7 @@ cloud:
         - script.bastian_heizung_hoch
         - script.bastian_heizung_mittel
         - media_player.sprout100        
-        - climate.bastian__comet_dect
+        - climate.bastian_comet_dect
 
 #      exclude_entities:
 #        - script.tv_power
@@ -313,7 +315,7 @@ switch:
     retain: true
   - platform: mqtt
     name: basti_lampe_internal
-    friendly_name: Basti Lampe
+    #friendly_name: Basti Lampe
     state_topic: "stat/basti_lampe/POWER"
     command_topic: "cmnd/basti_lampe/POWER"
     availability_topic: "tele/basti_lampe/LWT"
@@ -400,8 +402,8 @@ rest_command:
     url: 'http://192.168.178.67/api/v1/commands/?cmd=volume&volume=minus' 
 
 media_player:
-  - platform: roon
-    host: 192.168.178.53   
+#  - platform: roon
+#    host: 192.168.178.53   
 #  - platform: kefwireless
 #    host: 192.168.178.152
 #    name: MyLS50W
@@ -410,13 +412,13 @@ media_player:
   - platform: general_media_player
     name: Sprout100
     toggle_service: remote.send_command
-    toggle_data: '{ "entity_id": "remote.officehub","command" : "PowerToggle","device": "59192507","delay_secs": "0.1"}'
+    toggle_data: '{ "entity_id": "remote.office_hub","command" : "PowerToggle","device": "59192507","delay_secs": "0.1"}'
     mute_service: remote.send_command
-    mute_data: '{ "entity_id": "remote.officehub","command" : "Mute","device": "59192507","delay_secs": "0.1"}'
+    mute_data: '{ "entity_id": "remote.office_hub","command" : "Mute","device": "59192507","delay_secs": "0.1"}'
     volume_up_service: remote.send_command
-    volume_up_data: '{ "entity_id": "remote.officehub","command" : "VolumeUp","device": "59192507","delay_secs": "0.1"}'
+    volume_up_data: '{ "entity_id": "remote.office_hub","command" : "VolumeUp","device": "59192507","delay_secs": "0.1"}'
     volume_down_service: remote.send_command
-    volume_down_data: '{ "entity_id": "remote.officehub","command" : "VolumeDown","device": "59192507","delay_secs": "0.1"}'
+    volume_down_data: '{ "entity_id": "remote.office_hub","command" : "VolumeDown","device": "59192507","delay_secs": "0.1"}'
 
    
        
@@ -463,16 +465,16 @@ remote:
     host: 192.168.178.63
 
     
-device_tracker:
-  - platform: life360
-    username: !secret life360_username
-    password: !secret life360_password
-    prefix: life360
-    show_as_state: driving, moving, places
-    driving_speed: 18
-    max_gps_accuracy: 200
-    max_update_wait:
-      minutes: 45
+#device_tracker:
+#  - platform: life360
+#    username: !secret life360_username
+#    password: !secret life360_password
+#    prefix: life360
+#    show_as_state: driving, moving, places
+#    driving_speed: 18
+#    max_gps_accuracy: 200
+#    max_update_wait:
+#      minutes: 45
 
 emulated_hue:
   host_ip: 192.168.178.22

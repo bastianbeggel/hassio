@@ -723,7 +723,7 @@
   sequence:
     - service: climate.set_temperature
       data:
-        entity_id: climate.bastian__comet_dect
+        entity_id: climate.bastian_comet_dect
         temperature: 5
         operation_mode: "off"
 
@@ -732,7 +732,7 @@
   sequence:
     - service: climate.set_temperature
       data:
-        entity_id: climate.bastian__comet_dect
+        entity_id: climate.bastian_comet_dect
         temperature: 25
         operation_mode: "heat"
 
@@ -741,7 +741,7 @@
   sequence:
     - service: climate.set_temperature
       data:
-        entity_id: climate.bastian__comet_dect
+        entity_id: climate.bastian_comet_dect
         temperature: 22
         operation_mode: "heat"        
 

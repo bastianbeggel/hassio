@@ -23,7 +23,7 @@ roon_actions:
     - switch.roonserver
     - switch.boxen
     - switch.media_pc
-    - climate.bastian__comet_dect
+    - climate.bastian_comet_dect
     - switch.carbon_x1
 
 'nele_view':

@@ -354,7 +354,7 @@
     platform: event
     event_type: xiaomi_aqara.cube_action
     event_data:
-      entity_id: binary_sensor.cube_158d000276eb1c
+      entity_id: binary_sensor.bcube
       action_type: move
   action:
     - service: script.music_box_next
@@ -365,7 +365,7 @@
     platform: event
     event_type: xiaomi_aqara.cube_action
     event_data:
-      entity_id: binary_sensor.cube_158d000276eb1c
+      entity_id: binary_sensor.bcube
       action_type: tap_twice
   action:
     - service: script.music_box_play_pause 
@@ -382,7 +382,7 @@
     platform: event
     event_type: xiaomi_aqara.cube_action
     event_data:
-      entity_id: binary_sensor.cube_158d000276eb1c
+      entity_id: binary_sensor.bcube
       action_type: shake_air
   action:
     - service: switch.turn_on
@@ -394,7 +394,7 @@
     platform: event
     event_type: xiaomi_aqara.cube_action
     event_data:
-      entity_id: binary_sensor.cube_158d000276eb1c
+      entity_id: binary_sensor.bcube
       action_type: flip90
   action:
     - service: script.bastian_arbeitsplatz_an
@@ -410,7 +410,7 @@
     platform: event
     event_type: xiaomi_aqara.cube_action
     event_data:
-      entity_id: binary_sensor.cube_158d000276eb1c
+      entity_id: binary_sensor.bcube
       action_type: flip180
   action:
     - service: switch.turn_off
@@ -426,7 +426,7 @@
     platform: event
     event_type: xiaomi_aqara.cube_action
     event_data:
-      entity_id: binary_sensor.cube_158d000276eb1c
+      entity_id: binary_sensor.bcube
       action_type: rotate
   action:
       service_template: >
