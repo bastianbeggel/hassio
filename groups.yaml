@@ -45,6 +45,9 @@ roon_actions:
     - script.spiele_sr1_marshall
     - script.nele_fernsehen
     - script.nele_serien_streamen    
+    - sensor.humidity_158d0002c8cfcb
+    - sensor.pressure_158d0002c8cfcb
+    - sensor.temperature_158d0002c8cfcb
 
     
 
@@ -66,6 +69,12 @@ roon_actions:
      - script.bastian_playstation
      - script.nele_fernsehen
      - script.nele_serien_streamen    
+     - sensor.temperature_158d0002b5393a    
+     - sensor.humidity_158d0002b5393a 
+     #- type: sensor
+     #  entity: sensor.temperature_158d0002b5393a
+     #  sensor.humidity_158d0002b5393a
+     #  name: Temeratur - Bastian 
      
 
 'Media_Room':
@@ -78,12 +87,12 @@ roon_actions:
 'media':
   name: Media
   entities:
-    - media_player.myls50w
+#    - media_player.myls50w
     - media_player.digione
     - media_player.sprout100
     - media_player.stanmoreblackb269_3
     - media_player.chromecastaudio5861    
-    - media_player.tv_wohnzimmer
+    #- media_player.tv_wohnzimmer
     
           
 'scripts-view-all':

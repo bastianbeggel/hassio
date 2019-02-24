@@ -67,7 +67,7 @@ logbook:
 logger:
   default: error
   logs: 
-    custom_components.media_player.kefwireless: info
+#    custom_components.media_player.kefwireless: info
     custom_components.media_player.general_media_player: info
     roonapi: critical 
     pyfritzhome.fritzhome: critical
@@ -402,11 +402,11 @@ rest_command:
 media_player:
   - platform: roon
     host: 192.168.178.53   
-  - platform: kefwireless
-    host: 192.168.178.152
-    name: MyLS50W
-    turn_on_service: remote.send_command
-    turn_on_data: '{ "entity_id": "remote.harmony_hub","command" : "PowerToggle","device": "58830425","delay_secs": "0.1"}'
+#  - platform: kefwireless
+#    host: 192.168.178.152
+#    name: MyLS50W
+#    turn_on_service: remote.send_command
+#    turn_on_data: '{ "entity_id": "remote.harmony_hub","command" : "PowerToggle","device": "58830425","delay_secs": "0.1"}'
   - platform: general_media_player
     name: Sprout100
     toggle_service: remote.send_command
