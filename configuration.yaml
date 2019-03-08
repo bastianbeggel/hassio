@@ -133,8 +133,8 @@ cloud:
         - switch.media_pc
         - switch.carbon_x1
         - switch.boxen
-        - script.sende_tv_power_on
-        - script.sende_tv_power_off        
+#        - script.sende_tv_power_on
+#        - script.sende_tv_power_off        
         - script.kueche_on
         - script.kueche_off
         - script.kuechen_licht_01_minute
@@ -146,9 +146,9 @@ cloud:
 #        - script.zeit_fuer_netflix
 #        - script.zeit_fuer_tagesschau 
         - script.gute_nacht
-        - script.tv_lauter
-        - script.tv_leiser
-        - script.tv_mute
+#        - script.tv_lauter
+#        - script.tv_leiser
+#        - script.tv_mute
         - script.bastian_lichtwechsel
         - script.bastian_playstation
         - script.nele_fernsehen
@@ -156,17 +156,41 @@ cloud:
         - script.bastian_heizung_aus
         - script.bastian_heizung_hoch
         - script.bastian_heizung_mittel
-        - media_player.sprout100        
+#        - media_player.sprout100        
         - climate.bastian_comet_dect
-
-#      exclude_entities:
-#        - script.tv_power
-#        - script.sende_tv_power
-#        - light.gateway_light_7811dcded114
-#      include_entities:
-#        - script.sende_tv_power_on
-#      include_domains:        
-#        - script
+        - script.office_hub_nuprime_toggle_display
+        - script.office_hub_nuprime_volume_up5
+        - script.office_hub_nuprime_volume_down5
+        - script.office_hub_nuprime_power_toggle
+        - script.office_hub_nuprime_input_optical
+        - script.office_hub_nuprime_input_usb
+        - script.office_hub_nuprime_input_coaxial
+    entity_config:
+      script.office_hub_nuprime_toggle_display:
+        name: Nuprime Display
+        room: Zimmer Bastian
+      script.office_hub_nuprime_volume_up5:
+        name: Nuprime Lauter
+        room: Zimmer Bastian
+      script.office_hub_nuprime_volume_down5:
+        name: Nuprime Leiser
+        room: Zimmer Bastian
+      script.office_hub_nuprime_power_toggle:
+        name: Nuprime Power
+        room: Zimmer Bastian
+      script.office_hub_nuprime_input_optical:
+        name: Nuprime Optical
+        room: Zimmer Bastian
+      script.office_hub_nuprime_input_usb:
+        name: Nuprime USB
+        room: Zimmer Bastian
+      script.office_hub_nuprime_input_coaxial:
+        name: Nuprime Coaxial
+        room: Zimmer Bastian
+        
+        
+        
+        
 
 
 #      include_entities:
@@ -409,16 +433,17 @@ media_player:
 #    name: MyLS50W
 #    turn_on_service: remote.send_command
 #    turn_on_data: '{ "entity_id": "remote.harmony_hub","command" : "PowerToggle","device": "58830425","delay_secs": "0.1"}'
-  - platform: general_media_player
-    name: Sprout100
-    toggle_service: remote.send_command
-    toggle_data: '{ "entity_id": "remote.office_hub","command" : "PowerToggle","device": "59192507","delay_secs": "0.1"}'
-    mute_service: remote.send_command
-    mute_data: '{ "entity_id": "remote.office_hub","command" : "Mute","device": "59192507","delay_secs": "0.1"}'
-    volume_up_service: remote.send_command
-    volume_up_data: '{ "entity_id": "remote.office_hub","command" : "VolumeUp","device": "59192507","delay_secs": "0.1"}'
-    volume_down_service: remote.send_command
-    volume_down_data: '{ "entity_id": "remote.office_hub","command" : "VolumeDown","device": "59192507","delay_secs": "0.1"}'
+
+#  - platform: general_media_player
+#    name: Sprout100
+#    toggle_service: remote.send_command
+#    toggle_data: '{ "entity_id": "remote.office_hub","command" : "PowerToggle","device": "59192507","delay_secs": "0.1"}'
+#    mute_service: remote.send_command
+#    mute_data: '{ "entity_id": "remote.office_hub","command" : "Mute","device": "59192507","delay_secs": "0.1"}'
+#    volume_up_service: remote.send_command
+#    volume_up_data: '{ "entity_id": "remote.office_hub","command" : "VolumeUp","device": "59192507","delay_secs": "0.1"}'
+#    volume_down_service: remote.send_command
+#    volume_down_data: '{ "entity_id": "remote.office_hub","command" : "VolumeDown","device": "59192507","delay_secs": "0.1"}'
 
    
        
@@ -490,3 +515,4 @@ emulated_hue:
     light.bastian_decke:
       name: hue_bastian_decke
 
+roon:
