@@ -275,11 +275,11 @@
       entity_id: switch.couch
     - service: script.kueche_off
     - service: script.tisch_off    
-    - service: shell_command.tv_power_off
+#    - service: shell_command.tv_power_off
     - service: light.turn_off
       entity_id: light.gateway_light_7811dcded114
-    - service: switch.turn_off
-      entity_id: switch.boxen
+#    - service: switch.turn_off
+#      entity_id: switch.boxen
     - service: switch.turn_off
       entity_id: switch.media_pc
     - delay: '00:00:10'
@@ -562,7 +562,7 @@
     - service: media_player.media_next_track
       entity_id: media_player.digione_3
     - service: media_player.media_next_track
-      entity_id: media_player.chromecastaudio5861
+      entity_id: media_player.boxen_bastian
 
 
 'music_box_prev':
