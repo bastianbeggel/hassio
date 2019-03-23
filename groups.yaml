@@ -2,7 +2,7 @@ roon_actions:
 #    view: yes  
     name: Roon players
     entities:
-      - input_select.roon_players
+      - input_select.roon_players 
       - input_select.roon_playlists
       - input_number.roon_volume
       #- group.roon_actions
