@@ -301,21 +301,21 @@
   sequence:
     - service: switch.turn_on 
       entity_id: switch.boxen
+#    - service: script.office_hub_nuprime_power_toggle # schalte nuprime an über harmony         
     - service: switch.turn_on
       entity_id: switch.roonserver # note that roonserver is media_center
 #    - service: switch.turn_on
 #      entity_id: switch.media_pc
     - service: switch.turn_on
       entity_id: switch.carbon_x1      
-    - delay: '00:00:05'            
+#    - delay: '00:00:05'            
     - service: switch.turn_on
       entity_id: switch.carbon_x1
-    #- service: script.office_hub_nuprime_power_toggle # schalte nuprime an über harmony   
-    - delay: '00:00:30'      
-    - service: switch.turn_on
-      entity_id: switch.media_pc
-    - service: switch.turn_on
-      entity_id: switch.carbon_x1
+#    - delay: '00:00:30'      
+#    - service: switch.turn_on
+#      entity_id: switch.media_pc
+#    - service: switch.turn_on
+#      entity_id: switch.carbon_x1
       
 
 
@@ -341,17 +341,39 @@
 'musik_station_an':
   alias: Musik Station An
   sequence:
+    - service: script.turn_on
+      data_template:
+        entity_id: >-
+          {% if is_state('switch.boxen', 'off') %}
+            script.musik_station_an_normal
+          {% else %}
+            script.musik_station_an_wenn_an
+          {% endif %}    
+    
+'musik_station_an_normal':    
+  alias: Musik Station An Normal
+  sequence:
     - service: script.office_hub_nuprime_volume_up1 # inceasing the volume is not nessesary. The idea is to activate the harmony hub, as it might sleep. 
     - service: switch.turn_on
       entity_id: switch.boxen_internal
-    - delay: '00:00:06'
+    - service: switch.turn_on
+      entity_id: switch.roonserver      
+    - delay: '00:00:05'
     - service: script.office_hub_nuprime_power_toggle
     - delay: '00:00:03'
-    - service: script.office_hub_nuprime_input_optical
+    - service: script.office_hub_nuprime_input_coaxial
     - delay: '00:00:03'
     - service: script.office_hub_nuprime_toggle_display
+    - delay: '00:00:15'
+    - service: switch.turn_on
+      entity_id: switch.media_pc      
     
-    
+
+'musik_station_an_wenn_an':    
+  alias: Musik Station An Wenn an
+  sequence:
+    - service: script.office_hub_nuprime_power_toggle
+
     
     
     
@@ -733,6 +755,29 @@
     - service: script.office_hub_nuprime_volume_up1
     - service: script.office_hub_nuprime_volume_up1
     - service: script.office_hub_nuprime_volume_up1                
+
+
+'office_hub_nuprime_input_next':
+  alias: Nuprime Input Next
+  sequence:
+    - service: remote.send_command
+      data:
+        entity_id: remote.office_hub
+        command:
+          - InputNext
+        device: 61744639
+        delay_secs: 0.1
+
+'office_hub_nuprime_input_prev':
+  alias: Nuprime Input Prev
+  sequence:
+    - service: remote.send_command
+      data:
+        entity_id: remote.office_hub
+        command:
+          - InputPrev
+        device: 61744639
+        delay_secs: 0.1
 
 
 

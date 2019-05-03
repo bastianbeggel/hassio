@@ -483,4 +483,130 @@
     service_template: '{{ trigger.event.data.service }}'
     data_template:
       entity_id: '{{ trigger.event.data.entity_id }}'    
+
+
+
+################################################################################################
+############ RF Remote
+################################################################################################
+
+- alias: RF Home-> Decke Basti
+  trigger:
+    platform: event
+    event_type: keyboard_remote_command_received
+    event_data:
+      device_descriptor: "/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd"
+      key_code: 28 # ok
+  action:
+    service: light.toggle
+    entity_id: light.bastian_decke
+
+- alias: RF Home-> Nuprime Display
+  trigger:
+    platform: event
+    event_type: keyboard_remote_command_received
+    event_data:
+      device_descriptor: "/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd"
+      key_code: 23 # info
+  action:
+    service: script.office_hub_nuprime_toggle_display
+    
+
+- alias: RF Right-> Boxen an/ Nuprime an 
+  trigger:
+    platform: event
+    event_type: keyboard_remote_command_received
+    event_data:
+      device_descriptor: "/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd"
+      key_code: 102 # home
+  action:
+    service: switch.turn_on
+    entity_id: switch.boxen
+
+- alias: RF Right-> Media PC an
+  trigger:
+    platform: event
+    event_type: keyboard_remote_command_received
+    event_data:
+      device_descriptor: "/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd"
+      key_code: 46 # menu 
+  action:
+    service: switch.turn_on
+    entity_id: switch.media_pc
+
+
+
+#    service: media_player.media_play_pause
+#    entity_id: media_player.digione_3
+
+- alias: RF Right-> Next song
+  trigger:
+    platform: event
+    event_type: keyboard_remote_command_received
+    event_data:
+      device_descriptor: "/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd"
+      key_code: 106 # rigth
+  action:
+    service: media_player.media_next_track
+    entity_id: media_player.digione_3
+
+
+- alias: RF Right-> Prev Song
+  trigger:
+    platform: event
+    event_type: keyboard_remote_command_received
+    event_data:
+      device_descriptor: "/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd"
+      key_code: 105 # left
+  action:
+    service: media_player.media_previous_track
+    entity_id: media_player.digione_3
+
+
+- alias: RF Right-> Nuprime Input next 
+  trigger:
+    platform: event
+    event_type: keyboard_remote_command_received
+    event_data:
+      device_descriptor: "/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd"
+      key_code: 103 # up 
+  action:
+    service: script.office_hub_nuprime_input_next
+
+- alias: RF Right-> Nuprime Input prev
+  trigger:
+    platform: event
+    event_type: keyboard_remote_command_received
+    event_data:
+      device_descriptor: "/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd"
+      key_code: 108 # down
+  action:
+    service: script.office_hub_nuprime_input_prev
+
+
+- alias: RF Right-> Vol down
+  trigger:
+    platform: event
+    event_type: keyboard_remote_command_received
+    event_data:
+      device_descriptor: "/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd"
+      key_code: 12 # vol down
+  action:
+    service: script.office_hub_nuprime_volume_down3
+    
+
+- alias: RF Right-> Vol up
+  trigger:
+    platform: event
+    event_type: keyboard_remote_command_received
+    event_data:
+      device_descriptor: "/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd"
+      key_code: 13 # vol up
+  action:
+    service: script.office_hub_nuprime_volume_up3
+    
+
+
+
+
 #webhook payload: { "action": "call_service", "service": "light.turn_on", "entity_id": "light.living_room" }      

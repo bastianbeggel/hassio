@@ -67,16 +67,16 @@ logbook:
 
 
 logger:
-  default: warning
+  default: error
   logs: 
 #    custom_components.media_player.kefwireless: info
 #    custom_components.media_player.general_media_player: info
     roonapi: critical 
     pyfritzhome.fritzhome: critical
     pychromecast.socket_client: critical
-    homeassistant.components.automation: error
+#    homeassistant.components.automation: info
     custom_components.media_player.roon: error
-    homeassistant.helpers.script: error
+#    homeassistant.helpers.script: info
 
 # Enables a map showing the location of tracked devices
 map:
@@ -516,3 +516,8 @@ emulated_hue:
       name: hue_bastian_decke
 
 roon:
+
+
+keyboard_remote:
+  - device_descriptor: '/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd'
+    type: 'key_up'
