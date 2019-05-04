@@ -490,7 +490,7 @@
 ############ RF Remote
 ################################################################################################
 
-- alias: RF Home-> Decke Basti
+- alias: RF Ok-> Decke Basti
   trigger:
     platform: event
     event_type: keyboard_remote_command_received
@@ -501,7 +501,7 @@
     service: light.toggle
     entity_id: light.bastian_decke
 
-- alias: RF Home-> Nuprime Display
+- alias: RF Info-> Nuprime Display
   trigger:
     platform: event
     event_type: keyboard_remote_command_received
@@ -512,7 +512,7 @@
     service: script.office_hub_nuprime_toggle_display
     
 
-- alias: RF Right-> Boxen an/ Nuprime an 
+- alias: RF Home-> Boxen an/ Nuprime an / Media PC an
   trigger:
     platform: event
     event_type: keyboard_remote_command_received
@@ -520,10 +520,13 @@
       device_descriptor: "/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd"
       key_code: 102 # home
   action:
-    service: switch.turn_on
-    entity_id: switch.boxen
+    - service: switch.turn_on
+      entity_id: switch.boxen
+    - service: script.media_pc_an
+      
 
-- alias: RF Right-> Media PC an
+
+- alias: RF Menu-> Nuprime Input next 
   trigger:
     platform: event
     event_type: keyboard_remote_command_received
@@ -531,8 +534,8 @@
       device_descriptor: "/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd"
       key_code: 46 # menu 
   action:
-    service: switch.turn_on
-    entity_id: switch.media_pc
+    service: script.office_hub_nuprime_input_next
+    
 
 
 
@@ -545,13 +548,13 @@
     event_type: keyboard_remote_command_received
     event_data:
       device_descriptor: "/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd"
-      key_code: 106 # rigth
+      key_code: 106 # Right
   action:
     service: media_player.media_next_track
     entity_id: media_player.digione_3
 
 
-- alias: RF Right-> Prev Song
+- alias: RF Left-> Prev Song
   trigger:
     platform: event
     event_type: keyboard_remote_command_received
@@ -563,7 +566,7 @@
     entity_id: media_player.digione_3
 
 
-- alias: RF Right-> Nuprime Input next 
+- alias: RF Up-> Seek +30sec
   trigger:
     platform: event
     event_type: keyboard_remote_command_received
@@ -571,9 +574,12 @@
       device_descriptor: "/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd"
       key_code: 103 # up 
   action:
-    service: script.office_hub_nuprime_input_next
+    service: media_player.media_seek
+    entity_id: media_player.digione_3
+    data:
+      seek_position: 30
 
-- alias: RF Right-> Nuprime Input prev
+- alias: RF Down-> Seek -10sec
   trigger:
     platform: event
     event_type: keyboard_remote_command_received
@@ -581,10 +587,14 @@
       device_descriptor: "/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd"
       key_code: 108 # down
   action:
-    service: script.office_hub_nuprime_input_prev
+    service: media_player.media_seek
+    entity_id: media_player.digione_3
+    data:
+      seek_position: -10
 
 
-- alias: RF Right-> Vol down
+
+- alias: RF Vol-Down-> Vol down
   trigger:
     platform: event
     event_type: keyboard_remote_command_received
@@ -595,7 +605,7 @@
     service: script.office_hub_nuprime_volume_down3
     
 
-- alias: RF Right-> Vol up
+- alias: RF Vol-Up-> Vol up
   trigger:
     platform: event
     event_type: keyboard_remote_command_received

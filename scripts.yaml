@@ -350,6 +350,35 @@
             script.musik_station_an_wenn_an
           {% endif %}    
     
+'media_pc_an':
+  alias: Media PC an
+  sequence:
+    - service: script.turn_on
+      data_template:
+        entity_id: >-
+          {% if is_state('switch.roonserver', 'on') %}
+            script.media_pc_an_normal
+          {% else %}
+            script.musik_station_an_wenn_an
+          {% endif %}    
+
+'media_pc_an_normal':    
+  alias: Musik Station An Normal
+  sequence:
+    - service: switch.turn_on
+      entity_id: switch.roonserver      
+    - delay: '00:00:30'
+    - service: switch.turn_on
+      entity_id: switch.media_pc      
+
+'media_pc_an_normal_wenn_an':    
+  alias: Musik Station An Normal
+  sequence:
+    - service: switch.turn_on
+      entity_id: switch.media_pc      
+
+
+
 'musik_station_an_normal':    
   alias: Musik Station An Normal
   sequence:

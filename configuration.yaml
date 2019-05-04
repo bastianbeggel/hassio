@@ -69,13 +69,18 @@ logbook:
 logger:
   default: error
   logs: 
-#    custom_components.media_player.kefwireless: info
-#    custom_components.media_player.general_media_player: info
-    roonapi: critical 
     pyfritzhome.fritzhome: critical
     pychromecast.socket_client: critical
+#    custom_components.media_player.kefwireless: info
+#    custom_components.media_player.general_media_player: info
+#    roonapi: error 
+#    homeassistant.core: debug ## shows all fired events
+#    custom_components.roon.media_player: info
+#    homeassistant.components.websocket_api: error
+#    async_upnp_client.client.traffic: error
+#    media_player: debug
 #    homeassistant.components.automation: info
-    custom_components.media_player.roon: error
+#    custom_components.media_player.roon: error
 #    homeassistant.helpers.script: info
 
 # Enables a map showing the location of tracked devices
