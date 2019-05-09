@@ -5,3 +5,4 @@
 secrets.yaml
 known_devices.yaml
 entity_registry.yaml
+!custom_components/keyboard_remote2/__init__.py
