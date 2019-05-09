@@ -493,7 +493,7 @@
 - alias: RF Ok-> Decke Basti
   trigger:
     platform: event
-    event_type: keyboard_remote_command_received
+    event_type: keyboard_remote2_command_received
     event_data:
       device_descriptor: "/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd"
       key_code: 28 # ok
@@ -501,10 +501,23 @@
     service: light.toggle
     entity_id: light.bastian_decke
 
+- alias: RF OK long press-> Lampe Basti
+  trigger:
+    platform: event
+    event_type: keyboard_remote2_command_received
+    event_data:
+      device_descriptor: "/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd"
+      key_code: 1028 # ok
+  action:
+    service: light.toggle
+    entity_id: light.bastian_lampe
+
+
+
 - alias: RF Info-> Nuprime Display
   trigger:
     platform: event
-    event_type: keyboard_remote_command_received
+    event_type: keyboard_remote2_command_received
     event_data:
       device_descriptor: "/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd"
       key_code: 23 # info
@@ -515,7 +528,7 @@
 - alias: RF Home-> Boxen an/ Nuprime an / Media PC an
   trigger:
     platform: event
-    event_type: keyboard_remote_command_received
+    event_type: keyboard_remote2_command_received
     event_data:
       device_descriptor: "/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd"
       key_code: 102 # home
@@ -525,11 +538,24 @@
     - service: script.media_pc_an
       
 
+- alias: RF Home long press-> Boxen aus 
+  trigger:
+    platform: event
+    event_type: keyboard_remote2_command_received
+    event_data:
+      device_descriptor: "/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd"
+      key_code: 1102 # home
+  action:
+    - service: switch.turn_off
+      entity_id: switch.boxen
+    
+
+
 
 - alias: RF Menu-> Nuprime Input next 
   trigger:
     platform: event
-    event_type: keyboard_remote_command_received
+    event_type: keyboard_remote2_command_received
     event_data:
       device_descriptor: "/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd"
       key_code: 46 # menu 
@@ -545,7 +571,7 @@
 - alias: RF Right-> Next song
   trigger:
     platform: event
-    event_type: keyboard_remote_command_received
+    event_type: keyboard_remote2_command_received
     event_data:
       device_descriptor: "/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd"
       key_code: 106 # Right
@@ -554,10 +580,23 @@
     entity_id: media_player.digione_3
 
 
+- alias: RF Right long press -> Play pause 
+  trigger:
+    platform: event
+    event_type: keyboard_remote2_command_received
+    event_data:
+      device_descriptor: "/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd"
+      key_code: 1106 # Right
+  action:
+    service: media_player.media_play_pause
+    entity_id: media_player.digione_3
+
+
+
 - alias: RF Left-> Prev Song
   trigger:
     platform: event
-    event_type: keyboard_remote_command_received
+    event_type: keyboard_remote2_command_received
     event_data:
       device_descriptor: "/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd"
       key_code: 105 # left
@@ -569,7 +608,7 @@
 - alias: RF Up-> Seek +30sec
   trigger:
     platform: event
-    event_type: keyboard_remote_command_received
+    event_type: keyboard_remote2_command_received
     event_data:
       device_descriptor: "/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd"
       key_code: 103 # up 
@@ -582,7 +621,7 @@
 - alias: RF Down-> Seek -10sec
   trigger:
     platform: event
-    event_type: keyboard_remote_command_received
+    event_type: keyboard_remote2_command_received
     event_data:
       device_descriptor: "/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd"
       key_code: 108 # down
@@ -597,7 +636,7 @@
 - alias: RF Vol-Down-> Vol down
   trigger:
     platform: event
-    event_type: keyboard_remote_command_received
+    event_type: keyboard_remote2_command_received
     event_data:
       device_descriptor: "/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd"
       key_code: 12 # vol down
@@ -605,17 +644,35 @@
     service: script.office_hub_nuprime_volume_down3
     
 
+- alias: RF Vol-Down long press-> Vol down 10
+  trigger:
+    platform: event
+    event_type: keyboard_remote2_command_received
+    event_data:
+      device_descriptor: "/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd"
+      key_code: 1012 # vol down
+  action:
+    service: script.office_hub_nuprime_volume_down10
+
 - alias: RF Vol-Up-> Vol up
   trigger:
     platform: event
-    event_type: keyboard_remote_command_received
+    event_type: keyboard_remote2_command_received
     event_data:
       device_descriptor: "/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd"
       key_code: 13 # vol up
   action:
     service: script.office_hub_nuprime_volume_up3
     
-
+- alias: RF Vol-Up long press-> Vol up 10
+  trigger:
+    platform: event
+    event_type: keyboard_remote2_command_received
+    event_data:
+      device_descriptor: "/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd"
+      key_code: 1013 # vol up
+  action:
+    service: script.office_hub_nuprime_volume_up10
 
 
 

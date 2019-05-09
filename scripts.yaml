@@ -740,7 +740,7 @@
         command:
           - Mute
         device: 61744639
-        delay_secs: 0.1        
+        #delay_secs: 0.01        
         
 'office_hub_nuprime_volume_up1':
   alias: Nuprime Volume Up1
@@ -751,39 +751,49 @@
         command:
           - VolumeUp
         device: 61744639
-        delay_secs: 0.1
+        #delay_secs: 0.01
 
 'office_hub_nuprime_volume_up3':
   alias: Nuprime Volume Up3
   sequence:
-    - service: script.office_hub_nuprime_volume_up1
-    - service: script.office_hub_nuprime_volume_up1
-    - service: script.office_hub_nuprime_volume_up1
+    - service: remote.send_command
+      data:
+        entity_id: remote.office_hub
+        command:
+          - VolumeUp
+        device: 61744639
+        num_repeats: 3
+        #delay_secs: 0.01
+
+#    - service: script.office_hub_nuprime_volume_up1
+#    - service: script.office_hub_nuprime_volume_up1
+#    - service: script.office_hub_nuprime_volume_up1
 
         
 'office_hub_nuprime_volume_up5':
   alias: Nuprime Volume Up5
   sequence:
-    - service: script.office_hub_nuprime_volume_up1
-    - service: script.office_hub_nuprime_volume_up1
-    - service: script.office_hub_nuprime_volume_up1
-    - service: script.office_hub_nuprime_volume_up1
-    - service: script.office_hub_nuprime_volume_up1                
+    - service: remote.send_command
+      data:
+        entity_id: remote.office_hub
+        command:
+          - VolumeUp
+        device: 61744639
+        num_repeats: 5
+        #delay_secs: 0.01              
 
 
 'office_hub_nuprime_volume_up10':
   alias: Nuprime Volume Up10
   sequence:
-    - service: script.office_hub_nuprime_volume_up1
-    - service: script.office_hub_nuprime_volume_up1
-    - service: script.office_hub_nuprime_volume_up1
-    - service: script.office_hub_nuprime_volume_up1
-    - service: script.office_hub_nuprime_volume_up1                
-    - service: script.office_hub_nuprime_volume_up1
-    - service: script.office_hub_nuprime_volume_up1
-    - service: script.office_hub_nuprime_volume_up1
-    - service: script.office_hub_nuprime_volume_up1
-    - service: script.office_hub_nuprime_volume_up1                
+    - service: remote.send_command
+      data:
+        entity_id: remote.office_hub
+        command:
+          - VolumeUp
+        device: 61744639
+        num_repeats: 10
+        #delay_secs: 0.01
 
 
 'office_hub_nuprime_input_next':
@@ -828,33 +838,45 @@
 'office_hub_nuprime_volume_down3':
   alias: Nuprime Volume Down3
   sequence:
-    - service: script.office_hub_nuprime_volume_down1
-    - service: script.office_hub_nuprime_volume_down1
-    - service: script.office_hub_nuprime_volume_down1
+    - service: remote.send_command
+      data:
+        entity_id: remote.office_hub
+        command:
+          - VolumeDown
+        device: 61744639
+        num_repeats: 3
+        #delay_secs: 0.01
+
+
+#    - service: script.office_hub_nuprime_volume_down1
+#    - service: script.office_hub_nuprime_volume_down1
+#    - service: script.office_hub_nuprime_volume_down1
 
 
 'office_hub_nuprime_volume_down5':
   alias: Nuprime Volume Down5
   sequence:
-    - service: script.office_hub_nuprime_volume_down1
-    - service: script.office_hub_nuprime_volume_down1
-    - service: script.office_hub_nuprime_volume_down1
-    - service: script.office_hub_nuprime_volume_down1            
-    - service: script.office_hub_nuprime_volume_down1
+    - service: remote.send_command
+      data:
+        entity_id: remote.office_hub
+        command:
+          - VolumeDown
+        device: 61744639
+        num_repeats: 5
+        #delay_secs: 0.01
+
 
 'office_hub_nuprime_volume_down10':
   alias: Nuprime Volume Down10
   sequence:
-    - service: script.office_hub_nuprime_volume_down1
-    - service: script.office_hub_nuprime_volume_down1
-    - service: script.office_hub_nuprime_volume_down1
-    - service: script.office_hub_nuprime_volume_down1            
-    - service: script.office_hub_nuprime_volume_down1
-    - service: script.office_hub_nuprime_volume_down1
-    - service: script.office_hub_nuprime_volume_down1
-    - service: script.office_hub_nuprime_volume_down1
-    - service: script.office_hub_nuprime_volume_down1            
-    - service: script.office_hub_nuprime_volume_down1
+    - service: remote.send_command
+      data:
+        entity_id: remote.office_hub
+        command:
+          - VolumeDown
+        device: 61744639
+        num_repeats: 10
+        #delay_secs: 0.01
 
 
         

@@ -523,6 +523,6 @@ emulated_hue:
 roon:
 
 
-keyboard_remote:
+keyboard_remote2:
   - device_descriptor: '/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd'
     type: 'key_up'
