@@ -134,7 +134,7 @@ cloud:
         - light.kuechenlicht
         - light.thekenlicht   
         - light.kammerlicht     
-        - switch.roonserver
+        - switch.media_center
         - switch.media_pc
         - switch.carbon_x1
         - switch.boxen
@@ -195,26 +195,6 @@ cloud:
         
         
         
-        
-
-
-#      include_entities:
-#       - switch.couch    
-#       - switch.kueche_decke
-##       - switch.kueche_theke
-#       - switch.basti_decke  
-#       - switch.basti_lampe      
-#       - switch.04200102dc4f222a335a # Tisch
-#      - switch.roonserver
-#       - switch.boxen
-#       - script.kueche_on
-#       - script.kueche_off       
-#       - script.kuechen_licht_01_minute    
-#       - script.kuechen_licht_05_minuten  
-
-
-#      include_entities:
-#        - script      
 
 group: !include groups.yaml
 automation: !include automations.yaml
@@ -267,17 +247,17 @@ switch:
           service: script.wohnzimmer_decke_an_aus
         turn_off:
           service: script.wohnzimmer_decke_an_aus    
-      roonserver:
+      media_center:
         friendly_name: "Media Center"
-        value_template: "{{ is_state('switch.roon_server_internal', 'on') }}"
+        value_template: "{{ is_state('switch.media_center_internal', 'on') }}"
         turn_on:
           service: switch.turn_on
           data:
-            entity_id: switch.roon_server_internal
+            entity_id: switch.media_center_internal
         turn_off:
           service: switch.turn_off
           data:
-            entity_id: switch.roon_server_internal
+            entity_id: switch.media_center_internal
       boxen:
         friendly_name: "Boxen"
         value_template: "{{ is_state('switch.boxen_internal', 'on') }}"
@@ -285,15 +265,6 @@ switch:
           service: script.musik_station_an
         turn_off:
           service: script.musik_station_aus
-  - platform: tplink
-    host: 192.168.178.29
-    name: Couch
-  - platform: tplink
-    host: 192.168.178.28
-    name: boxen_internal
-  - platform: tplink
-    host: 192.168.178.58
-    name: roon_server_internal
   - platform: mqtt
     name: kueche_decke
     state_topic: "stat/kitchen1/POWER1"
@@ -451,31 +422,6 @@ media_player:
 #    volume_down_data: '{ "entity_id": "remote.office_hub","command" : "VolumeDown","device": "59192507","delay_secs": "0.1"}'
 
    
-       
-#input_number:
-#  roon_volume:
-#    name: Player volume
-#    icon: mdi:volume-high
-#    min: 0
-#    max: 1
-#    step: 0.01
-#input_select:
-#  roon_playlists:
-#    name: 'Playlist:'
-#    options:
-#      - Select playlist
-#    initial: Select playlist
-#    icon: mdi:spotify
-#  roon_players:
-#    name: 'Room:'
-#    options:
-#      - Select room
-#    initial: Select room
-#    icon: mdi:speaker-wireless     
-
-# configuration.yaml entry
-#hello_service:
-
 fritzbox:
   devices:
     - host: fritz.box
@@ -526,3 +472,9 @@ roon:
 keyboard_remote2:
   - device_descriptor: '/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd'
     type: 'key_up'
+
+tplink:
+  switch:
+    - host: 192.168.178.29 #name: Couch
+    - host: 192.168.178.28 #name: boxen_internal
+    - host: 192.168.178.58 # name: media_center_internal

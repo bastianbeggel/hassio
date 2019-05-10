@@ -141,7 +141,7 @@
     - service: script.kueche_off
     - service: script.tisch_off    
     - service: switch.turn_on
-      entity_id: switch.roonserver
+      entity_id: switch.media_center
     - delay: '00:00:05'      
     - service: remote.turn_on
       entity_id: remote.harmony_hub
@@ -155,7 +155,7 @@
     - service: script.kueche_off
     - service: script.tisch_off    
     - service: switch.turn_on
-      entity_id: switch.roonserver
+      entity_id: switch.media_center
     - delay: '00:00:35'            
     - service: switch.turn_on
       entity_id: switch.media_pc
@@ -172,7 +172,7 @@
     - service: script.kueche_off
     - service: script.tisch_off    
     - service: switch.turn_on
-      entity_id: switch.roonserver
+      entity_id: switch.media_center
     - delay: '00:00:05'            
     - service: remote.turn_on
       entity_id: remote.harmony_hub
@@ -284,7 +284,7 @@
       entity_id: switch.media_pc
     - delay: '00:00:10'
     - service: switch.turn_off 
-      entity_id: switch.roonserver
+      entity_id: switch.media_center
 
     
     
@@ -303,7 +303,7 @@
       entity_id: switch.boxen
 #    - service: script.office_hub_nuprime_power_toggle # schalte nuprime an über harmony         
     - service: switch.turn_on
-      entity_id: switch.roonserver # note that roonserver is media_center
+      entity_id: switch.media_center # note that roonserver is media_center
 #    - service: switch.turn_on
 #      entity_id: switch.media_pc
     - service: switch.turn_on
@@ -329,10 +329,17 @@
     - service: switch.toggle
       entity_id: switch.basti_decke
 
+  
+
 
 'musik_station_aus':
   alias: Musik Station Aus
   sequence:
+#    - service: tts.google_translate_say
+#      entity_id: media_player.zimmer_bastian
+#      data:
+#        message: 'Musik aus'  
+#        language: 'de'    
     - service: shell_command.volumio_shutdown_h
     - delay: '00:00:15'
     - service: switch.turn_off
@@ -353,10 +360,15 @@
 'media_pc_an':
   alias: Media PC an
   sequence:
+#    - service: tts.google_translate_say
+#      entity_id: media_player.zimmer_bastian
+#      data:
+#        message: 'Media PC an'  
+#        language: 'de'      
     - service: script.turn_on
       data_template:
         entity_id: >-
-          {% if is_state('switch.roonserver', 'on') %}
+          {% if is_state('switch.media_center', 'on') %}
             script.media_pc_an_normal
           {% else %}
             script.musik_station_an_wenn_an
@@ -366,10 +378,10 @@
   alias: Musik Station An Normal
   sequence:
     - service: switch.turn_on
-      entity_id: switch.roonserver      
+      entity_id: switch.media_center      
     - delay: '00:00:30'
-    - service: switch.turn_on
-      entity_id: switch.media_pc      
+    - service: script.media_pc_an   
+      
 
 'media_pc_an_normal_wenn_an':    
   alias: Musik Station An Normal
@@ -386,7 +398,7 @@
     - service: switch.turn_on
       entity_id: switch.boxen_internal
     - service: switch.turn_on
-      entity_id: switch.roonserver      
+      entity_id: switch.media_center      
     - delay: '00:00:05'
     - service: script.office_hub_nuprime_power_toggle
     - delay: '00:00:03'
@@ -394,8 +406,7 @@
     - delay: '00:00:03'
     - service: script.office_hub_nuprime_toggle_display
     - delay: '00:00:15'
-    - service: switch.turn_on
-      entity_id: switch.media_pc      
+    - service: script.media_pc_an   
     
 
 'musik_station_an_wenn_an':    
@@ -403,7 +414,7 @@
   sequence:
     - service: script.office_hub_nuprime_power_toggle
 
-    
+     
     
     
 
@@ -605,37 +616,66 @@
 #    - service: rest_command.music_box_pause
 
 
-'music_box_next':
+'music_box_next_track':
   alias: Musik Box Next
   sequence:
-#    - service: rest_command.music_box_next
-#    - service: rest_command.music_box_play
     - service: media_player.media_next_track
-      entity_id: media_player.digione_3
-    - service: media_player.media_next_track
-      entity_id: media_player.boxen_bastian
+      data_template:
+        entity_id: >-       
+          {% if (is_state('switch.media_pc', 'on') and is_state('media_player.digione_3', 'playing')) %}
+          media_player.digione_3
+          {% else %}
+          media_player.boxen_bastian
+          {% endif %}
 
 
-'music_box_prev':
+'music_box_prev_track':
   alias: Musik Box Prev
   sequence:
-#    - service: rest_command.music_box_prev
     - service: media_player.media_previous_track
-      entity_id: media_player.digione_3
-    - service: media_player.media_previous_track
-      entity_id: media_player.chromecastaudio5861
+      data_template:
+        entity_id: >-       
+          {% if (is_state('switch.media_pc', 'on') and is_state('media_player.digione_3', 'playing')) %}
+          media_player.digione_3
+          {% else %}
+          media_player.boxen_bastian
+          {% endif %}
+  
+
 
 
 'music_box_play_pause':
   alias: Musik Box Play Pause
   sequence:
-#    - service: rest_command.music_box_toggle_play_pause
     - service: media_player.media_play_pause
-      entity_id: media_player.digione_3
-    - service: media_player.media_play_pause
-      entity_id: media_player.chromecastaudio5861
+      data_template:
+        entity_id: >-       
+          {% if (is_state('switch.media_pc', 'on') and is_state('media_player.digione_3', 'playing')) %}
+          media_player.digione_3
+          {% else %}
+          media_player.boxen_bastian
+          {% endif %}
+
+'music_box_seek_forward':
+  alias: Musik Box Play Pause
+  sequence:
+    - service: media_player.media_seek
+      data_template:
+        entity_id: >-       
+          {% if (is_state('switch.media_pc', 'on') and is_state('media_player.digione_3', 'playing')) %}
+          media_player.digione_3
+          {% else %}
+          media_player.boxen_bastian
+          {% endif %}
+      data:
+        seek_position: 30
 
 
+
+#    service: media_player.media_seek
+#    entity_id: media_player.digione_3
+#    data:
+#      seek_position: 30
 
 
 #Cube_158d000276eb1c  BASTI CUBE

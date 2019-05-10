@@ -373,7 +373,7 @@
 #    - service: switch.turn_on 
 #      entity_id: switch.boxen
 #    - service: switch.turn_on
-#      entity_id: switch.roonserver
+#      entity_id: switch.media_center
       
 
 
@@ -416,7 +416,7 @@
     - service: switch.turn_off
       entity_id: switch.boxen
 #    - service: switch.turn_off 
-#      entity_id: switch.roonserver # media_center
+#      entity_id: switch.media_center # media_center
 #    - service: switch.turn_off
 #      entity_id: switch.media_pc
     
@@ -525,7 +525,7 @@
     service: script.office_hub_nuprime_toggle_display
     
 
-- alias: RF Home-> Boxen an/ Nuprime an / Media PC an
+- alias: RF Home -> Boxen an/ Nuprime an / Media PC an
   trigger:
     platform: event
     event_type: keyboard_remote2_command_received
@@ -546,10 +546,8 @@
       device_descriptor: "/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd"
       key_code: 1102 # home
   action:
-    - service: switch.turn_off
-      entity_id: switch.boxen
-    
-
+    - service: script.musik_station_aus
+      
 
 
 - alias: RF Menu-> Nuprime Input next 
@@ -561,12 +559,8 @@
       key_code: 46 # menu 
   action:
     service: script.office_hub_nuprime_input_next
-    
 
 
-
-#    service: media_player.media_play_pause
-#    entity_id: media_player.digione_3
 
 - alias: RF Right-> Next song
   trigger:
@@ -576,8 +570,7 @@
       device_descriptor: "/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd"
       key_code: 106 # Right
   action:
-    service: media_player.media_next_track
-    entity_id: media_player.digione_3
+    service: script.music_box_next_track
 
 
 - alias: RF Right long press -> Play pause 
@@ -588,8 +581,7 @@
       device_descriptor: "/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd"
       key_code: 1106 # Right
   action:
-    service: media_player.media_play_pause
-    entity_id: media_player.digione_3
+    service: script.music_box_play_pause
 
 
 
@@ -601,8 +593,7 @@
       device_descriptor: "/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd"
       key_code: 105 # left
   action:
-    service: media_player.media_previous_track
-    entity_id: media_player.digione_3
+    service: script.music_box_prev_track
 
 
 - alias: RF Up-> Seek +30sec
@@ -613,10 +604,11 @@
       device_descriptor: "/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd"
       key_code: 103 # up 
   action:
-    service: media_player.media_seek
-    entity_id: media_player.digione_3
-    data:
-      seek_position: 30
+    service: script.music_box_seek_forward
+#    service: media_player.media_seek
+#    entity_id: media_player.digione_3
+#    data:
+#      seek_position: 30
 
 - alias: RF Down-> Seek -10sec
   trigger:
