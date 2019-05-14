@@ -50,14 +50,14 @@ recorder:
   exclude:
     entities:
       - sun.sun # Don't record sun data
-      - sensor.fritzbox_7490_bytes_received
-      - sensor.fritzbox_7490_bytes_sent
-      - sensor.fritzbox_7490_packets_received
-      - sensor.fritzbox_7490_packets_sent
-      - sensor.fritzbox_7490_packetssec_sent
-      - sensor.fritzbox_7490_packetssec_received
-#      - sensor.fritzbox_7490_kbytesec_received
-#      - sensor.fritzbox_7490_kbytesec_sent
+      - sensor.internetgatewaydevicev2_fritz_box_7490_bytes_received
+      - sensor.internetgatewaydevicev2_fritz_box_7490_bytes_sent
+#      - sensor.internetgatewaydevicev2_fritz_box_7490_kbyte_sec_received
+#      - sensor.internetgatewaydevicev2_fritz_box_7490_kbyte_sec_sent
+      - sensor.internetgatewaydevicev2_fritz_box_7490_packets_received
+      - sensor.internetgatewaydevicev2_fritz_box_7490_packets_sec_received
+      - sensor.internetgatewaydevicev2_fritz_box_7490_packets_sec_sent
+      - sensor.internetgatewaydevicev2_fritz_box_7490_packets_sent
 
 # Enables support for tracking state changes over time
 history:

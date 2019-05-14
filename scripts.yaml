@@ -572,7 +572,20 @@
 'music_box_volume_up1':
   alias: Musik Box Vol up 1
   sequence:
-    - service: script.office_hub_nuprime_volume_up1
+     - service: script.office_hub_rega_volume_up1
+    #- service: script.office_hub_nuprime_volume_up1
+
+'music_box_preamp_volume_up1':
+  alias: Musik Box Preamp Vol up 1
+  sequence:
+     - service: script.office_hub_project_volume_up1
+    #- service: script.office_hub_nuprime_volume_up1
+
+'music_box_preamp_volume_down1':
+  alias: Musik Box Preamp Vol down 1
+  sequence:
+     - service: script.office_hub_project_volume_down1
+    #- service: script.office_hub_nuprime_volume_down1
 
 
 
@@ -598,7 +611,8 @@
 'music_box_volume_down1':
   alias: Musik Box Vol Down 1
   sequence:
-    - service: script.office_hub_nuprime_volume_down1
+    - service: script.office_hub_rega_volume_down1
+    #- service: script.office_hub_nuprime_volume_down1
 
 
 
@@ -652,6 +666,8 @@
         entity_id: >-       
           {% if (is_state('switch.media_pc', 'on') and is_state('media_player.digione_3', 'playing')) %}
           media_player.digione_3
+          {% elif (is_state('switch.media_pc', 'on') and is_state('media_player.digione_3', 'paused')) %}
+          media_player.digione_3          
           {% else %}
           media_player.boxen_bastian
           {% endif %}
@@ -782,16 +798,42 @@
         device: 61744639
         #delay_secs: 0.01        
         
-'office_hub_nuprime_volume_up1':
-  alias: Nuprime Volume Up1
+'office_hub_project_volume_up1':
+  alias: Project S2 Volume Up1
   sequence:
     - service: remote.send_command
       data:
         entity_id: remote.office_hub
         command:
           - VolumeUp
-        device: 61744639
+        device: 63030098
         #delay_secs: 0.01
+
+'office_hub_project_volume_down1':
+  alias: Project S2 Volume Down1
+  sequence:
+    - service: remote.send_command
+      data:
+        entity_id: remote.office_hub
+        command:
+          - VolumeDown
+        device: 63030098
+        #delay_secs: 0.01
+
+
+        
+'office_hub_rega_volume_up1':
+  alias: Rega Volume Up1
+  sequence:
+    - service: remote.send_command
+      data:
+        entity_id: remote.office_hub
+        command:
+          - VolumeUp
+        device: 62948968
+        #delay_secs: 0.01
+
+        
 
 'office_hub_nuprime_volume_up3':
   alias: Nuprime Volume Up3
@@ -835,6 +877,30 @@
         num_repeats: 10
         #delay_secs: 0.01
 
+'office_hub_nuprime_volume_up1':
+  alias: Nuprime Volume Up1
+  sequence:
+    - service: remote.send_command
+      data:
+        entity_id: remote.office_hub
+        command:
+          - VolumeUp
+        device: 61744639
+        num_repeats: 1
+        #delay_secs: 0.01
+
+
+'office_hub_nuprime_volume_down1':
+  alias: Nuprime Volume Down1
+  sequence:
+    - service: remote.send_command
+      data:
+        entity_id: remote.office_hub
+        command:
+          - VolumeDown
+        device: 61744639
+        num_repeats: 1
+        #delay_secs: 0.01
 
 'office_hub_nuprime_input_next':
   alias: Nuprime Input Next
@@ -846,6 +912,30 @@
           - InputNext
         device: 61744639
         delay_secs: 0.1
+
+'office_hub_music_box_input_next':
+  alias: Music Box Input Next
+  sequence:
+    - service: remote.send_command
+      data:
+        entity_id: remote.office_hub
+        command:
+          - InputNext
+        device: 63030098
+        #delay_secs: 0.1
+
+'office_hub_music_box_input_prev':
+  alias: Music Box Input Prev
+  sequence:
+    - service: remote.send_command
+      data:
+        entity_id: remote.office_hub
+        command:
+          - InputPrev
+        device: 63030098
+        #delay_secs: 0.1
+
+
 
 'office_hub_nuprime_input_prev':
   alias: Nuprime Input Prev
@@ -861,18 +951,17 @@
 
 
 
-'office_hub_nuprime_volume_down1':
-  alias: Nuprime Volume Down1
+
+'office_hub_rega_volume_down1':
+  alias: Rega Volume Down1
   sequence:
     - service: remote.send_command
       data:
         entity_id: remote.office_hub
         command:
           - VolumeDown
-        device: 61744639
-        delay_secs: 0.1
-
-
+        device: 62948968
+        #delay_secs: 0.1
 
 
 'office_hub_nuprime_volume_down3':
