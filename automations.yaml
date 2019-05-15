@@ -540,7 +540,7 @@
     service: script.office_hub_nuprime_toggle_display
     
 
-- alias: RF Home -> Boxen an/ Nuprime an / Media PC an
+- alias: RF Home -> Boxen an/ Media PC an / Rega Mute
   trigger:
     platform: event
     event_type: keyboard_remote2_command_received

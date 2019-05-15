@@ -380,7 +380,7 @@
     - service: switch.turn_on
       entity_id: switch.media_center      
     - delay: '00:00:30'
-    - service: script.media_pc_an   
+    - service: script.media_pc_an_normal_wenn_an   
       
 
 'media_pc_an_normal_wenn_an':    
@@ -399,20 +399,20 @@
       entity_id: switch.boxen_internal
     - service: switch.turn_on
       entity_id: switch.media_center      
-    - delay: '00:00:05'
-    - service: script.office_hub_nuprime_power_toggle
-    - delay: '00:00:03'
-    - service: script.office_hub_nuprime_input_coaxial
-    - delay: '00:00:03'
-    - service: script.office_hub_nuprime_toggle_display
-    - delay: '00:00:15'
+#    - delay: '00:00:05'
+#    - service: script.office_hub_nuprime_power_toggle
+#    - delay: '00:00:03'
+#    - service: script.office_hub_nuprime_input_coaxial
+#    - delay: '00:00:03'
+#    - service: script.office_hub_nuprime_toggle_display
+    - delay: '00:00:20'
     - service: script.media_pc_an   
     
 
 'musik_station_an_wenn_an':    
-  alias: Musik Station An Wenn an
+  alias: Musik Station An Wenn an/ Rega mute
   sequence:
-    - service: script.office_hub_nuprime_power_toggle
+    - service: script.office_hub_rega_mute
 
      
     
@@ -821,6 +821,17 @@
         #delay_secs: 0.01
 
 
+
+'office_hub_rega_mute':
+  alias: Rega Mute
+  sequence:
+    - service: remote.send_command
+      data:
+        entity_id: remote.office_hub
+        command:
+          - Mute
+        device: 62948968
+        #delay_secs: 0.01
         
 'office_hub_rega_volume_up1':
   alias: Rega Volume Up1
