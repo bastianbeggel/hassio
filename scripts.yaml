@@ -578,13 +578,15 @@
 'music_box_preamp_volume_up1':
   alias: Musik Box Preamp Vol up 1
   sequence:
-     - service: script.office_hub_project_volume_up1
+    - service: script.office_hub_adi_volume_up1
+    # - service: script.office_hub_project_volume_up1
     #- service: script.office_hub_nuprime_volume_up1
 
 'music_box_preamp_volume_down1':
   alias: Musik Box Preamp Vol down 1
   sequence:
-     - service: script.office_hub_project_volume_down1
+    - service: script.office_hub_adi_volume_down1
+#     - service: script.office_hub_project_volume_down1
     #- service: script.office_hub_nuprime_volume_down1
 
 
@@ -809,6 +811,17 @@
         device: 63030098
         #delay_secs: 0.01
 
+'office_hub_adi_volume_up1':
+  alias: RME Adi Volume Up1
+  sequence:
+    - service: remote.send_command
+      data:
+        entity_id: remote.office_hub
+        command:
+          - VolumeUp
+        device: 62948951
+        #delay_secs: 0.01
+
 'office_hub_project_volume_down1':
   alias: Project S2 Volume Down1
   sequence:
@@ -820,6 +833,16 @@
         device: 63030098
         #delay_secs: 0.01
 
+'office_hub_adi_volume_down1':
+  alias: RME Adi Volume Down1
+  sequence:
+    - service: remote.send_command
+      data:
+        entity_id: remote.office_hub
+        command:
+          - VolumeDown
+        device: 62948951
+        #delay_secs: 0.01
 
 
 'office_hub_rega_mute':
@@ -927,13 +950,77 @@
 'office_hub_music_box_input_next':
   alias: Music Box Input Next
   sequence:
+    - service: input_number.increment
+      data:
+        entity_id: input_number.rme_adi_input_select
+    - service: input_number.set_value
+      data_template:
+        entity_id: input_number.rme_adi_input_select
+        value: '{{ states.input_number.rme_adi_input_select.state | int % 3}}'        
+    - service: script.turn_on 
+      data_template:
+        entity_id: >-       
+          {% if (is_state('input_number.rme_adi_input_select', '1.0') ) %}
+          script.office_hub_adi_input_usb
+          {% elif (is_state('input_number.rme_adi_input_select', '2.0') ) %}
+          script.office_hub_adi_input_optical          
+          {% else %}
+          script.office_hub_adi_input_coaxial
+          {% endif %}
+    
+
+'office_hub_adi_input_usb':
+  alias: RME adi input USB
+  sequence:
     - service: remote.send_command
       data:
         entity_id: remote.office_hub
         command:
-          - InputNext
-        device: 63030098
-        #delay_secs: 0.1
+          - InputUsb
+        device: 62948951
+        
+'office_hub_adi_input_optical':
+  alias: RME adi input Optical
+  sequence:
+    - service: remote.send_command
+      data:
+        entity_id: remote.office_hub
+        command:
+          - InputOptical
+        device: 62948951
+
+'office_hub_adi_input_coaxial':
+  alias: RME adi input Coaxial
+  sequence:
+    - service: remote.send_command
+      data:
+        entity_id: remote.office_hub
+        command:
+          - InputCoaxial
+        device: 62948951
+
+
+'office_hub_music_box_dark_mode':
+  alias: Music Box - Dark Mode 
+  sequence:
+    - service: remote.send_command
+      data:
+        entity_id: remote.office_hub
+        command:
+          - 3 # 3 is dark mode 
+        device: 62948951
+
+    
+    #irme_adi_input_select
+    #- service: remote.send_command
+    #  data:
+    #    entity_id: remote.office_hub
+    #    command:
+    #      - InputNext
+    #    device: 63030098
+    #    #delay_secs: 0.1
+
+
 
 'office_hub_music_box_input_prev':
   alias: Music Box Input Prev

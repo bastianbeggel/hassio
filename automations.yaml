@@ -565,7 +565,7 @@
       
 
 
-- alias: RF Menu-> Nuprime Input next 
+- alias: RF Menu-> Preamp Input next 
   trigger:
     platform: event
     event_type: keyboard_remote2_command_received
@@ -575,6 +575,8 @@
   action:
     service: script.office_hub_music_box_input_next
 
+
+
 - alias: RF Menu long press-> Nuprime Input prev
   trigger:
     platform: event
@@ -583,7 +585,7 @@
       device_descriptor: "/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd"
       key_code: 1046 # menu 
   action:
-    service: script.office_hub_music_box_input_prev
+    service: script.office_hub_music_box_dark_mode
 
 
 - alias: RF Right-> Next song

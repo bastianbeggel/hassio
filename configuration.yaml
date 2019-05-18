@@ -481,3 +481,12 @@ tplink:
     - host: 192.168.178.29 #name: Couch
     - host: 192.168.178.28 #name: boxen_internal
     - host: 192.168.178.58 # name: media_center_internal
+
+
+input_number:
+  rme_adi_input_select:
+    name: RME ADI Input
+    initial: 0
+    min: 0
+    max: 320000
+    step: 1
