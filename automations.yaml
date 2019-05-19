@@ -529,7 +529,7 @@
 
 
 
-- alias: RF Info-> Nuprime Display
+- alias: RF Info-> ADI Toggle View 
   trigger:
     platform: event
     event_type: keyboard_remote2_command_received
@@ -537,9 +537,21 @@
       device_descriptor: "/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd"
       key_code: 23 # info
   action:
-    service: script.office_hub_nuprime_toggle_display
+    #service: script.office_hub_nuprime_toggle_display
+    service: script.office_hub_adi_toggle_view
     
-
+    
+- alias: RF Info Long Press-> Auto Dark Mode 
+  trigger:
+    platform: event
+    event_type: keyboard_remote2_command_received
+    event_data:
+      device_descriptor: "/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd"
+      key_code: 1023 # info
+  action:
+    #service: script.office_hub_nuprime_toggle_display
+    service: script.office_hub_adi_toggle_dark_mode    
+    
 - alias: RF Home -> Boxen an/ Media PC an / Rega Mute
   trigger:
     platform: event
@@ -659,7 +671,9 @@
       device_descriptor: "/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd"
       key_code: 12 # vol down
   action:
-    service: script.music_box_volume_down1
+    service: script.music_box_preamp_volume_down1
+    #service: script.music_box_volume_down1
+    
     #service: script.office_hub_nuprime_volume_down3
     
 
@@ -671,7 +685,8 @@
       device_descriptor: "/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd"
       key_code: 1012 # vol down
   action:
-    service: script.music_box_preamp_volume_down1
+    #service: script.music_box_preamp_volume_down1
+    service: script.music_box_volume_down1
 
 - alias: RF Vol-Up-> Vol up
   trigger:
@@ -681,7 +696,8 @@
       device_descriptor: "/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd"
       key_code: 13 # vol up
   action:
-    service: script.music_box_volume_up1
+    service: script.music_box_preamp_volume_up1
+    #service: script.music_box_volume_up1
     
 - alias: RF Vol-Up long press-> Vol up 10
   trigger:
@@ -691,7 +707,8 @@
       device_descriptor: "/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd"
       key_code: 1013 # vol up
   action:
-    service: script.music_box_preamp_volume_up1
+    #service: script.music_box_preamp_volume_up1
+    service: script.music_box_volume_up1
 
 
 

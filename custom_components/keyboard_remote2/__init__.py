@@ -171,7 +171,7 @@ class KeyboardRemoteThread(threading.Thread):
                     now = time.time()                
                     ts = self.state[event.code]
                     if (now - ts) >= hold_time_sec:
-                        
+                        _LOGGER.debug("Fireing longpress event:" +str(  event.code ))
                         self.hass.bus.fire(
                             KEYBOARD_REMOTE_COMMAND_RECEIVED,
                             {
@@ -186,8 +186,7 @@ class KeyboardRemoteThread(threading.Thread):
                     del self.state[event.code]
         
             if  event.type is ecodes.EV_KEY and event.value is self.key_value:
-                _LOGGER.debug(categorize(event))
-                
+                _LOGGER.debug("Fireing normal event:" + str(event.code) )                
                 self.hass.bus.fire(
                     KEYBOARD_REMOTE_COMMAND_RECEIVED,
                     {

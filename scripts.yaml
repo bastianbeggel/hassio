@@ -811,6 +811,29 @@
         device: 63030098
         #delay_secs: 0.01
 
+'office_hub_adi_toggle_view':
+  alias: RME Adi Toggle View - 1
+  sequence:
+    - service: remote.send_command
+      data:
+        entity_id: remote.office_hub
+        command:
+          - 1
+        device: 62948951
+        #delay_secs: 0.01
+        
+'office_hub_adi_toggle_dark_mode':
+  alias: RME Adi Dark Mode - 3
+  sequence:
+    - service: remote.send_command
+      data:
+        entity_id: remote.office_hub
+        command:
+          - 3
+        device: 62948951
+        #delay_secs: 0.01
+
+
 'office_hub_adi_volume_up1':
   alias: RME Adi Volume Up1
   sequence:
@@ -820,18 +843,9 @@
         command:
           - VolumeUp
         device: 62948951
-        #delay_secs: 0.01
+        delay_secs: 0.01
+        num_repeats: 3
 
-'office_hub_project_volume_down1':
-  alias: Project S2 Volume Down1
-  sequence:
-    - service: remote.send_command
-      data:
-        entity_id: remote.office_hub
-        command:
-          - VolumeDown
-        device: 63030098
-        #delay_secs: 0.01
 
 'office_hub_adi_volume_down1':
   alias: RME Adi Volume Down1
@@ -842,7 +856,23 @@
         command:
           - VolumeDown
         device: 62948951
+        num_repeats: 3
         #delay_secs: 0.01
+        
+        
+'office_hub_project_volume_down1':
+  alias: Project S2 Volume Down1
+  sequence:
+    - service: remote.send_command
+      data:
+        entity_id: remote.office_hub
+        command:
+          - VolumeDown
+        device: 63030098
+        #delay_secs: 0.01
+        #num_repeats: 3
+
+
 
 
 'office_hub_rega_mute':
