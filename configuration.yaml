@@ -140,6 +140,7 @@ cloud:
         - switch.media_center
         - switch.media_pc
         - switch.carbon_x1
+        - switch.lenovo_t480
         - switch.boxen
 #        - script.sende_tv_power_on
 #        - script.sende_tv_power_off        
@@ -346,6 +347,10 @@ switch:
     name: "Carbon X1"
     mac_address: "54:e1:ad:d9:3f:52"
     host: "192.168.178.21"
+  - platform: wake_on_lan
+    name: "Lenovo T480"
+    mac_address: "8c:16:45:d0:1c:36"
+    host: "192.168.178.80"
 
 
 

@@ -64,7 +64,7 @@
     platform: event
     event_type: xiaomi_aqara.click
     event_data:
-      entity_id: binary_sensor.switch_158d0001f3793a
+      entity_id: binary_sensor.basti_eingang_switch
       click_type: single
   action:
     - service: switch.toggle
@@ -76,7 +76,7 @@
     platform: event
     event_type: xiaomi_aqara.click
     event_data:
-      entity_id: binary_sensor.switch_158d0001f3793a
+      entity_id: binary_sensor.basti_eingang_switch
       click_type: double
   action:
     - service: switch.toggle
@@ -88,7 +88,7 @@
     platform: event
     event_type: xiaomi_aqara.click
     event_data:
-      entity_id: binary_sensor.switch_158d0001f3793a
+      entity_id: binary_sensor.basti_eingang_switch
       click_type: long_click_press
   action:
     - service: switch.turn_off
@@ -105,7 +105,7 @@
     platform: event
     event_type: xiaomi_aqara.click
     event_data:
-      entity_id: binary_sensor.switch_158d0001f3def4
+      entity_id: binary_sensor.basti_bett_switch
       click_type: single
   action:
     - service: switch.toggle
@@ -117,7 +117,7 @@
     platform: event
     event_type: xiaomi_aqara.click
     event_data:
-      entity_id: binary_sensor.switch_158d0001f3def4
+      entity_id: binary_sensor.basti_bett_switch
       click_type: double
   action:
     - service: switch.toggle
@@ -129,7 +129,7 @@
     platform: event
     event_type: xiaomi_aqara.click
     event_data:
-      entity_id: binary_sensor.switch_158d0001f3def4
+      entity_id: binary_sensor.basti_bett_switch
       click_type: long_click_press
   action:
     - service: switch.toggle
@@ -183,51 +183,12 @@
       language: 'de'
 
 
-#- alias: Turn on kitchen light when there is movement
-#  initial_state: false
-#  hide_entity: True
-#  trigger:
-#    platform: state
-#    entity_id: binary_sensor.motion_sensor_158d0002239b1a
-#    to: 'on'
-#  action:
-#    service: script.kueche_on
-
-
-#- alias: Turn off kitchen light 2 minutes after last movement
-#  initial_state: false
-#  hide_entity: True
-#  trigger:
-#    platform: state
-#    entity_id: binary_sensor.motion_sensor_158d0002239b1a
-#    to: 'off'
-#    for:
-#      minutes: 1
-#  action:
-#    service: script.kueche_off
-
-      
-     
-     
-- alias: Single Press - Kitchen toggle 
-  trigger:
-    platform: event
-    event_type: xiaomi_aqara.click
-    event_data:
-      entity_id: binary_sensor.switch_158d000223e5a8
-      click_type: single
-  action:
-    - service: script.kueche_toggle
-    - service: homeassistant.turn_off
-      entity_id: script.kuechen_licht_stop_all_timer_scripts    
-    
-
 - alias: Double Press - Wohnzimmer Decke
   trigger:
     platform: event
     event_type: xiaomi_aqara.click
     event_data:
-      entity_id: binary_sensor.switch_158d000223e5a8
+      entity_id: binary_sensor.kitchen_switch
       click_type: double
   action:
     - service: switch.toggle
@@ -240,7 +201,7 @@
     platform: event
     event_type: xiaomi_aqara.click
     event_data:
-      entity_id: binary_sensor.switch_158d000223e5a8
+      entity_id: binary_sensor.kitchen_switch
       click_type: long_click_press
   action:
     - service: script.kueche_off
@@ -250,6 +211,16 @@
     - service: light.turn_off
       entity_id: light.gateway_light_7811dcded114
     
+
+- alias: Küchenlicht - Thekenschalter 
+  trigger:
+    platform: event
+    event_type: xiaomi_aqara.click
+    event_data:
+      entity_id: binary_sensor.kitchen_switch
+      click_type: single
+  action:
+    - service: script.kueche_toggle
 
 
 ################################################################################################
@@ -418,7 +389,16 @@
 #        entity_id: switch.carbon_x1
 
 
-
+- alias: B-Cube to free_fall
+  trigger:
+    platform: event
+    event_type: xiaomi_aqara.cube_action
+    event_data:
+      entity_id: binary_sensor.bcube
+      action_type: free_fall
+  action:
+    - service: switch.turn_on
+      entity_id: switch.lenovo_t480     
 
 - alias: B-Cube to flip180
   trigger:
