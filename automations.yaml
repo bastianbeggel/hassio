@@ -343,7 +343,7 @@
       entity_id: binary_sensor.bcube
       action_type: move
   action:
-    - service: script.music_box_next
+    - service: script.music_box_next_track
 
 
 - alias: B-Cube to tab twice
@@ -532,7 +532,7 @@
     #service: script.office_hub_nuprime_toggle_display
     service: script.office_hub_adi_toggle_dark_mode    
     
-- alias: RF Home -> Boxen an/ Media PC an / Rega Mute
+- alias: RF Home -> Boxen an/ Media PC an 
   trigger:
     platform: event
     event_type: keyboard_remote2_command_received
