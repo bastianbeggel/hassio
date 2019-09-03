@@ -426,21 +426,21 @@
   action:
       service_template: >
          {% if trigger.event.data.action_value | float > 20 %}
-           script.music_box_volume_up4
+           script.office_hub_adi_volume_up3
          {% elif trigger.event.data.action_value | float > 15 %}
-           script.music_box_volume_up3
+           script.office_hub_adi_volume_up3
          {% elif trigger.event.data.action_value | float > 10 %}
-           script.music_box_volume_up2
+           script.office_hub_adi_volume_up2
          {% elif trigger.event.data.action_value | float > 0 %}
-           script.music_box_volume_up1
+           script.office_hub_adi_volume_up1
          {% elif trigger.event.data.action_value | float < -20 %}
-           script.music_box_volume_down4
+           script.office_hub_adi_volume_down3
          {% elif trigger.event.data.action_value | float < -15 %}
-           script.music_box_volume_down3
+           script.office_hub_adi_volume_down3
          {% elif trigger.event.data.action_value | float < -10 %}
-           script.music_box_volume_down2
+           script.office_hub_adi_volume_down2
          {% elif trigger.event.data.action_value | float < 0 %}
-           script.music_box_volume_down1
+           script.office_hub_adi_volume_down1
          {% endif %}
 
 
@@ -577,7 +577,7 @@
       device_descriptor: "/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd"
       key_code: 1046 # menu 
   action:
-    service: script.office_hub_music_box_dark_mode
+    service: script.office_hub_music_box_input_prev
 
 
 - alias: RF Right-> Next song
@@ -657,7 +657,7 @@
     #service: script.office_hub_nuprime_volume_down3
     
 
-- alias: RF Vol-Down long press-> Vol down 10
+- alias: RF Vol-Down long press-> Amp Vol down
   trigger:
     platform: event
     event_type: keyboard_remote2_command_received
@@ -666,7 +666,7 @@
       key_code: 1012 # vol down
   action:
     #service: script.music_box_preamp_volume_down1
-    service: script.music_box_volume_down1
+    service: script.office_hub_amp_vol_down
 
 - alias: RF Vol-Up-> Vol up
   trigger:
@@ -679,7 +679,7 @@
     service: script.music_box_preamp_volume_up1
     #service: script.music_box_volume_up1
     
-- alias: RF Vol-Up long press-> Vol up 10
+- alias: RF Vol-Up long press-> Amp Vol up
   trigger:
     platform: event
     event_type: keyboard_remote2_command_received
@@ -688,7 +688,49 @@
       key_code: 1013 # vol up
   action:
     #service: script.music_box_preamp_volume_up1
-    service: script.music_box_volume_up1
+    service: script.office_hub_amp_vol_up
+
+
+#################################################################
+#### DESK Switch 
+#################################################################
+
+- alias: Single Press - Desk
+  trigger:
+    platform: event
+    event_type: xiaomi_aqara.click
+    event_data:
+      entity_id: binary_sensor.desk_switch
+      click_type: single
+  action:
+    - service: script.office_hub_adi_input_coaxial
+
+
+- alias: Double Press - Desk
+  trigger:
+    platform: event
+    event_type: xiaomi_aqara.click
+    event_data:
+      entity_id: binary_sensor.desk_switch
+      click_type: double
+  action:
+    - service: script.office_hub_adi_input_optical
+      
+
+    
+
+- alias: Long press - Desk
+  trigger:
+    platform: event
+    event_type: xiaomi_aqara.click
+    event_data:
+      entity_id: binary_sensor.desk_switch
+      click_type: long_click_press
+  action:
+    - service: script.office_hub_adi_input_usb
+    
+
+
 
 
 
