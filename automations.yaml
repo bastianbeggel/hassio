@@ -565,7 +565,7 @@
       device_descriptor: "/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd"
       key_code: 46 # menu 
   action:
-    service: script.office_hub_music_box_input_next
+    service: script.office_hub_adi_input_coaxial
 
 
 
@@ -577,7 +577,7 @@
       device_descriptor: "/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd"
       key_code: 1046 # menu 
   action:
-    service: script.office_hub_music_box_input_prev
+    service: script.office_hub_adi_input_optical
 
 
 - alias: RF Right-> Next song
@@ -703,7 +703,7 @@
       entity_id: binary_sensor.desk_switch
       click_type: single
   action:
-    - service: script.office_hub_adi_input_coaxial
+    - service: script.desk_switch_to_coaxial_or_workstation_on
 
 
 - alias: Double Press - Desk

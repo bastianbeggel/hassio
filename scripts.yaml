@@ -300,7 +300,18 @@
 'bastian_arbeitsplatz_an':
   alias: Arbeitsplatz Einschalten
   sequence:
-    - service: script.musik_station_an_normal
+    - service: script.office_hub_nuprime_volume_up1 # inceasing the volume is not nessesary. The idea is to activate the harmony hub, as it might sleep. 
+    - service: switch.turn_on 
+      entity_id: switch.boxen_internal
+    - service: switch.turn_on
+      entity_id: switch.media_center 
+    - delay: '00:00:04'            
+    - service: script.office_hub_amp_an  
+    - service: script.office_hub_adi_input_coaxial    
+    - delay: '00:00:25'      
+    - service: switch.turn_on
+      entity_id: switch.media_pc 
+#    - service: script.musik_station_an_normal
     - service: switch.turn_on
       entity_id: switch.lenovo_t480
     - delay: '00:00:10'      
@@ -308,6 +319,9 @@
       entity_id: switch.media_pc
     - service: switch.turn_on
       entity_id: switch.lenovo_t480
+    - delay: '00:00:10'      
+    - service: switch.turn_on
+      entity_id: switch.media_pc
       
 
 
@@ -333,6 +347,7 @@
 #        message: 'Musik aus'  
 #        language: 'de'    
     - service: shell_command.volumio_shutdown_h
+    - service: script.office_hub_amp_aus
     - delay: '00:00:15'
     - service: switch.turn_off
       entity_id: switch.boxen_internal
@@ -393,7 +408,11 @@
       entity_id: switch.media_center 
     - delay: '00:00:04'            
     - service: script.office_hub_amp_an  
-    - delay: '00:00:20'      
+    - service: script.office_hub_adi_input_coaxial
+    - delay: '00:00:25'      
+    - service: switch.turn_on
+      entity_id: switch.media_pc
+    - delay: '00:00:10'      
     - service: switch.turn_on
       entity_id: switch.media_pc
     
@@ -680,6 +699,20 @@
 
 
 
+'desk_switch_to_coaxial_or_workstation_on':
+  alias: Coaxial oder Arbeitsplatz an
+  sequence:
+    - service: script.turn_on
+      data_template:
+        entity_id: >-
+          {% if is_state('switch.boxen', 'off') %}
+            script.bastian_arbeitsplatz_an
+          {% else %}
+            script.office_hub_adi_input_coaxial
+          {% endif %}    
+
+
+
 #    service: media_player.media_seek
 #    entity_id: media_player.digione_3
 #    data:
@@ -729,6 +762,17 @@
         entity_id: remote.office_hub
         command:
           - PowerOn
+        device: 64838876
+        delay_secs: 0.1
+
+'office_hub_amp_aus':
+  alias: KEF aus
+  sequence:
+    - service: remote.send_command
+      data:
+        entity_id: remote.office_hub
+        command:
+          - PowerOff
         device: 64838876
         delay_secs: 0.1
 
