@@ -238,19 +238,37 @@ light:
   - platform: switch
     name: Kammerlicht
     entity_id: switch.kammer
+  - platform: switch
+    name: Wohnzimmer_Virt1
+    entity_id: switch.wohnzimmer_virt_couch_tisch
 
    
     
 switch:
   - platform: template
     switches:
+      wohnzimmer_virt_couch_tisch:
+        friendly_name: "Wohnzimmer Virtuell Couch Tisch"
+        value_template: "off"
+        turn_on:
+          service: switch.toggle
+          data:
+            entity_id: switch.couch 
+        turn_off:
+          service: switch.toggle
+          data:
+            entity_id: switch.04200102dc4f222a335a ## tisch          
+    
       wohnzimmer_decke:
         friendly_name: "Wohnzimmer Decke"
         value_template: "off"
         turn_on:
           service: script.wohnzimmer_decke_an_aus
         turn_off:
-          service: script.wohnzimmer_decke_an_aus    
+          #service: script.wohnzimmer_decke_an_aus    
+          service: script.kueche_toggle
+#          data:
+#            entity_id: switch.kueche_toggle
       media_center:
         friendly_name: "Media Center"
         value_template: "{{ is_state('switch.media_center_internal', 'on') }}"
