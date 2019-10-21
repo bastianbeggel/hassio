@@ -224,6 +224,52 @@
 
 
 ################################################################################################
+############ Wohnzimmer Switch 
+################################################################################################
+
+- alias: Wohnzimmer Switch - Single Press 
+  trigger:
+    platform: event
+    event_type: xiaomi_aqara.click
+    event_data:
+      entity_id: binary_sensor.wohnzimmer_switch
+      click_type: single
+  action:
+    - service: script.kueche_toggle
+
+
+- alias: Wohnzimmer Switch - Double Press
+  trigger:
+    platform: event
+    event_type: xiaomi_aqara.click
+    event_data:
+      entity_id: binary_sensor.wohnzimmer_switch
+      click_type: double
+  action:
+    - service: switch.toggle
+      entity_id: switch.wohnzimmer_decke
+    
+
+- alias: Wohnzimmer Switch - Long press
+  trigger:
+    platform: event
+    event_type: xiaomi_aqara.click
+    event_data:
+      entity_id: binary_sensor.wohnzimmer_switch
+      click_type: long_click_press
+  action:
+    - service: script.kueche_off
+    - service: switch.turn_off
+      entity_id: switch.couch    
+    - service: script.tisch_off    
+    - service: light.turn_off
+      entity_id: light.gateway_light_7811dcded114
+    
+
+
+
+
+################################################################################################
 ############ KUECHE CUBE 
 ################################################################################################
 
@@ -233,7 +279,7 @@
     platform: event
     event_type: xiaomi_aqara.cube_action
     event_data:
-      entity_id: binary_sensor.cube_158d00024a48bd_2
+      entity_id: binary_sensor.kitchen_cube
       action_type: flip90
   action:
     - service: switch.toggle
@@ -244,7 +290,7 @@
     platform: event
     event_type: xiaomi_aqara.cube_action
     event_data:
-      entity_id: binary_sensor.cube_158d00024a48bd_2
+      entity_id: binary_sensor.kitchen_cube
       action_type: tap_twice
   action:
     - service: switch.toggle
@@ -256,7 +302,7 @@
     platform: event
     event_type: xiaomi_aqara.cube_action
     event_data:
-      entity_id: binary_sensor.cube_158d00024a48bd_2
+      entity_id: binary_sensor.kitchen_cube
       action_type: move
   action:
     - service: script.kueche_toggle      
@@ -266,7 +312,7 @@
     platform: event
     event_type: xiaomi_aqara.cube_action
     event_data:
-      entity_id: binary_sensor.cube_158d00024a48bd_2
+      entity_id: binary_sensor.kitchen_cube
       action_type: shake_air
   action:
     service: script.spiele_sr1_marshall
@@ -276,7 +322,7 @@
     platform: event
     event_type: xiaomi_aqara.cube_action
     event_data:
-      entity_id: binary_sensor.cube_158d00024a48bd_2
+      entity_id: binary_sensor.kitchen_cube
       action_type: free_fall
   action:
     - service: media_player.media_stop
@@ -289,7 +335,7 @@
     platform: event
     event_type: xiaomi_aqara.cube_action
     event_data:
-      entity_id: binary_sensor.cube_158d00024a48bd_2
+      entity_id: binary_sensor.kitchen_cube
       action_type: flip180
   action:
     service: script.gute_nacht
@@ -304,7 +350,7 @@
     platform: event
     event_type: xiaomi_aqara.cube_action
     event_data:
-      entity_id: binary_sensor.cube_158d00024a48bd_2
+      entity_id: binary_sensor.kitchen_cube
       action_type: rotate
   action:
       service_template: >
