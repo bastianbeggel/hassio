@@ -369,6 +369,10 @@ switch:
     name: "Lenovo T480"
     mac_address: "8c:16:45:d0:1c:36"
     host: "192.168.178.80"
+  - platform: wake_on_lan
+    name: "Thinkpad Dock"
+    mac_address: "3c:e1:a1:c0:30:c2"
+    host: "192.168.178.98"
 
 
 

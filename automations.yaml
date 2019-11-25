@@ -401,11 +401,6 @@
       action_type: tap_twice
   action:
     - service: script.music_box_play_pause 
-#    - service: script.bastian_arbeitsplatz_an
-#    - service: switch.turn_on 
-#      entity_id: switch.boxen
-#    - service: switch.turn_on
-#      entity_id: switch.media_center
       
 
 
@@ -444,7 +439,7 @@
       action_type: free_fall
   action:
     - service: switch.turn_on
-      entity_id: switch.lenovo_t480     
+      entity_id: switch.thinkpad_dock     
 
 - alias: B-Cube to flip180
   trigger:

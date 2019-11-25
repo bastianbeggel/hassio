@@ -313,12 +313,12 @@
       entity_id: switch.media_pc 
 #    - service: script.musik_station_an_normal
     - service: switch.turn_on
-      entity_id: switch.lenovo_t480
+      entity_id: switch.thinkpad_dock
     - delay: '00:00:10'      
     - service: switch.turn_on
       entity_id: switch.media_pc
     - service: switch.turn_on
-      entity_id: switch.lenovo_t480
+      entity_id: switch.thinkpad_dock
     - delay: '00:00:10'      
     - service: switch.turn_on
       entity_id: switch.media_pc
@@ -347,8 +347,9 @@
 #        message: 'Musik aus'  
 #        language: 'de'    
     - service: shell_command.volumio_shutdown_h
+    - service: shell_command.thinkcentre_shutdown_h
     - service: script.office_hub_amp_aus
-    - delay: '00:00:15'
+    - delay: '00:00:20'
     - service: switch.turn_off
       entity_id: switch.boxen_internal
 
