@@ -1,3 +1,5 @@
+#HA 1
+
 homeassistant:
   # Name of the location where Home Assistant is runnin 
   name: Home
@@ -13,6 +15,7 @@ homeassistant:
   # Customization file
   customize: !include customize.yaml
 
+python_script:
 
 logger:
   default: error
@@ -138,7 +141,6 @@ cloud:
         - light.thekenlicht   
         - light.kammerlicht     
         - switch.media_center
-        - switch.media_pc
         - switch.carbon_x1
         - switch.lenovo_t480
         - switch.boxen
@@ -159,44 +161,33 @@ cloud:
 #        - script.tv_leiser
 #        - script.tv_mute
         - script.bastian_lichtwechsel
-        - script.bastian_playstation
-        - script.nele_fernsehen
-        - script.nele_serien_streamen    
-        - script.bastian_heizung_aus
-        - script.bastian_heizung_hoch
-        - script.bastian_heizung_mittel
+#        - script.bastian_heizung_aus
+#        - script.bastian_heizung_hoch
+#        - script.bastian_heizung_mittel
 #        - media_player.sprout100        
-        - climate.bastian_comet_dect
-        - script.office_hub_nuprime_toggle_display
-        - script.office_hub_nuprime_volume_up5
-        - script.office_hub_nuprime_volume_down5
-        - script.office_hub_nuprime_power_toggle
-        - script.office_hub_nuprime_input_optical
-        - script.office_hub_nuprime_input_usb
-        - script.office_hub_nuprime_input_coaxial
+        - climate.bastian_heizung
+        - climate.wohnzimmer_heizung
+#        - script.office_hub_nuprime_toggle_display
+#        - script.office_hub_nuprime_volume_up5
+#        - script.office_hub_nuprime_volume_down5
+#        - script.office_hub_nuprime_power_toggle
+#        - script.office_hub_nuprime_input_optical
+#        - script.office_hub_nuprime_input_usb
+#        - script.office_hub_nuprime_input_coaxial
     entity_config:
-      script.office_hub_nuprime_toggle_display:
-        name: Nuprime Display
+      climate.bastian_heizung:
+        name: Bastian Heizung 
         room: Zimmer Bastian
-      script.office_hub_nuprime_volume_up5:
-        name: Nuprime Lauter
-        room: Zimmer Bastian
-      script.office_hub_nuprime_volume_down5:
-        name: Nuprime Leiser
-        room: Zimmer Bastian
-      script.office_hub_nuprime_power_toggle:
-        name: Nuprime Power
-        room: Zimmer Bastian
-      script.office_hub_nuprime_input_optical:
-        name: Nuprime Optical
-        room: Zimmer Bastian
-      script.office_hub_nuprime_input_usb:
-        name: Nuprime USB
-        room: Zimmer Bastian
-      script.office_hub_nuprime_input_coaxial:
-        name: Nuprime Coaxial
-        room: Zimmer Bastian
-        
+      climate.wohnzimmer_heizung:
+        name: Wohnzimmer Heizung 
+        room: Wohnzimmer
+
+#      script.office_hub_nuprime_toggle_display:
+#        name: Nuprime Display
+#        room: Zimmer Bastian
+#      script.office_hub_nuprime_volume_up5:
+#        name: Nuprime Lauter
+#        room: Zimmer Bastian
         
         
 
@@ -245,6 +236,35 @@ light:
    
     
 switch:
+  - platform: template
+    switches:
+      basti_virt_decke_decke:
+        friendly_name: "Basti Virtuell Decke Decke"
+        value_template: "off"
+        turn_on:
+          service: switch.toggle
+          data:
+            entity_id: switch.basti_decke 
+        turn_off:
+          service: switch.toggle
+          data:
+            entity_id: switch.basti_decke 
+
+  - platform: template
+    switches:
+      basti_virt_lampe_lampe:
+        friendly_name: "Basti Virtuell Lampe Lampe"
+        value_template: "off"
+        turn_on:
+          service: switch.toggle
+          data:
+            entity_id: switch.basti_lampe 
+        turn_off:
+          service: switch.toggle
+          data:
+            entity_id: switch.basti_lampe 
+
+            
   - platform: template
     switches:
       wohnzimmer_virt_couch_tisch:
@@ -381,6 +401,8 @@ ifttt:
       
     
 shell_command:
+  volumio_seek_plus_30: python3 /home/homeassistant/.homeassistant/scripts/volumio_seek.py 30
+  volumio_seek_minus_10: python3 /home/homeassistant/.homeassistant/scripts/volumio_seek.py -10
   heco2_power: irsend SEND_ONCE heco_e POWER
   tv_power: nodejs /home/pi/viera.js/tv_power.js
   tv_netflix: nodejs /home/homeassistant/.homeassistant/scripts/tv_netflix.js
@@ -517,3 +539,15 @@ input_number:
     min: 0
     max: 320000
     step: 1
+    
+input_select:
+  preamp_select:
+    name: Input of the preamp 
+    options:
+      - LAN
+      - TOSLINK
+      - SPDIF
+      - USB
+    initial: LAN
+    icon: mdi:panda
+    

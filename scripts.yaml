@@ -1,4 +1,7 @@
-############Kueche  - basic
+################################################################################################
+############ Küchenlichter 
+################################################################################################
+
 
 'kueche_on':
   alias: Küchenlicht an
@@ -30,7 +33,9 @@
       data:
         entity_id: switch.kueche_theke
 
-############Kueche  - timer
+################################################################################################
+############ Küchenlichter - Timer 
+################################################################################################
 
 
 'kuechen_licht_01_minute':
@@ -69,12 +74,6 @@
     - service: script.kueche_off
 
 
-#'kuechen_licht_05_minuten_motion':
-#  alias: Küchenlicht für 5 Minuten for motion
-#  sequence:
-#    - service: script.kueche_on
-#    - delay: '00:05:00'        
-#    - service: script.kueche_off
 
 'kuechen_licht_stop_all_timer_scripts':
   alias: Reset Kuechenlicht timers 
@@ -93,7 +92,10 @@
       entity_id: script.kuechen_licht_05_minuten_motion
 
 
-############Tisch - basic
+################################################################################################
+############ Tisch
+################################################################################################
+
 
 'tisch_on':
   alias: tisch_on
@@ -110,7 +112,10 @@
     service: ifttt.trigger
 
 
-############Musik Wohnzimmer
+################################################################################################
+############ Marshall 
+################################################################################################
+
 
 
 'spiele_sr1_marshall':
@@ -124,62 +129,14 @@
 
 
 
-#'sende_ir_power':
-#  alias: sende_ir_power
-#  sequence:
-#    - service: shell_command.heco2_power
 
 
-############Fernseher fuer Nele 
-
-'nele_fernsehen':
-  alias: Nele will fernsehen
-  sequence:
-    - service: script.couch_an_wenn_dunkel
-#    - service: switch.turn_on
-#      entity_id: switch.couch
-    - service: script.kueche_off
-    - service: script.tisch_off    
-    - service: switch.turn_on
-      entity_id: switch.media_center
-    - delay: '00:00:05'      
-    - service: remote.turn_on
-      entity_id: remote.harmony_hub
-      data:
-         activity: "Fernsehen"
-
-'nele_serien_streamen':
-  alias: Nele will Serien Streamen 
-  sequence:
-    - service: script.couch_an_wenn_dunkel
-    - service: script.kueche_off
-    - service: script.tisch_off    
-    - service: switch.turn_on
-      entity_id: switch.media_center
-    - delay: '00:00:35'            
-    - service: switch.turn_on
-      entity_id: switch.media_pc
-    - service: remote.turn_on
-      entity_id: remote.harmony_hub
-      data:
-         activity: "Media PC"
 
 
-'bastian_playstation':
-  alias: Bastian Playstation 
-  sequence:
-    - service: script.couch_an_wenn_dunkel
-    - service: script.kueche_off
-    - service: script.tisch_off    
-    - service: switch.turn_on
-      entity_id: switch.media_center
-    - delay: '00:00:05'            
-    - service: remote.turn_on
-      entity_id: remote.harmony_hub
-      data:
-         activity: "Playstation"
+################################################################################################
+############ Wohnzimmer 
+################################################################################################
 
-############Fernseher 
 
 'couch_an_wenn_dunkel':
    sequence:
@@ -194,79 +151,13 @@
 
 
 
-'sende_tv_power':
-  alias: tv_power
-  sequence:
-    - service: shell_command.tv_power
-
-'sende_tv_power_on':
-  alias: tv_power_on
-  sequence:
-    - service: shell_command.tv_power_on
-
-'sende_tv_power_off':
-  alias: tv_power_off
-  sequence:
-    - service: shell_command.tv_power_off
 
 
 
-'zeit_fuer_fernsehen':
-  alias: Zeit für Fernsehen
-  sequence:
-    - service: script.couch_an_wenn_dunkel
-#    - service: switch.turn_on
-#      entity_id: switch.couch
-    - service: script.kueche_off
-    - service: script.tisch_off    
-    - service: shell_command.tv_power_on
+################################################################################################
+############ Gute Nacht 
+################################################################################################
 
-'zeit_fuer_netflix':
-  alias: Zeit für Netflix
-  sequence:
-    - service: script.couch_an_wenn_dunkel
-#    - service: switch.turn_on
-#      entity_id: switch.couch
-    - service: script.kueche_off
-    - service: script.tisch_off    
-    - service: shell_command.tv_power_on
-    - delay: '00:00:05'
-    - service: shell_command.tv_netflix
-    
-'zeit_fuer_tagesschau':
-  alias: Zeit für Tagesschau
-  sequence:
-    - service: switch.turn_on
-      entity_id: switch.couch
-    - service: script.kueche_off
-    - service: script.tisch_off    
-    - service: shell_command.tv_power_on
-    - delay: '00:00:04'
-    - service: shell_command.tv_tagesschau
-
-'tagesschau':
-  alias: Tagesschau
-  sequence: 
-    - service: shell_command.tv_power_on
-    - delay: '00:00:04'
-    - service: shell_command.tv_tagesschau    
-    
-'tv_lauter':
-  alias: TV lauter
-  sequence: 
-    - service: shell_command.tv_lauter    
-
-'tv_leiser':
-  alias: TV leiser
-  sequence: 
-    - service: shell_command.tv_leiser
-
-'tv_mute':
-  alias: TV mute
-  sequence: 
-    - service: shell_command.tv_mute
-   
-############Verschiedenes  
 
 'gute_nacht':
   alias: Gute Nacht
@@ -292,36 +183,10 @@
 
 
 
-
 ################################################################################################
 ############ Zimmer Bastian
 ################################################################################################
 
-'bastian_arbeitsplatz_an':
-  alias: Arbeitsplatz Einschalten
-  sequence:
-    - service: script.office_hub_nuprime_volume_up1 # inceasing the volume is not nessesary. The idea is to activate the harmony hub, as it might sleep. 
-    - service: switch.turn_on 
-      entity_id: switch.boxen_internal
-    - service: switch.turn_on
-      entity_id: switch.media_center 
-    - delay: '00:00:04'            
-    - service: script.office_hub_amp_an  
-    - service: script.office_hub_adi_input_coaxial    
-    - delay: '00:00:25'      
-    - service: switch.turn_on
-      entity_id: switch.media_pc 
-#    - service: script.musik_station_an_normal
-    - service: switch.turn_on
-      entity_id: switch.thinkpad_dock
-    - delay: '00:00:10'      
-    - service: switch.turn_on
-      entity_id: switch.media_pc
-    - service: switch.turn_on
-      entity_id: switch.thinkpad_dock
-    - delay: '00:00:10'      
-    - service: switch.turn_on
-      entity_id: switch.media_pc
       
 
 
@@ -338,18 +203,40 @@
   
 
 
+################################################################################################
+############ Arbeitsplatz/ Musikstation an aus 
+################################################################################################
+
+
+'bastian_arbeitsplatz_an':
+  alias: Arbeitsplatz Einschalten
+  sequence:   
+    - service: script.music_box_set_input_lan    
+    - service: switch.turn_on 
+      entity_id: switch.boxen_internal
+    - service: switch.turn_on
+      entity_id: switch.media_center 
+    - delay: '00:00:04'            
+    - service: script.office_hub_amp_an  
+    - service: script.music_box_set_input_lan
+    - service: script.office_hub_adi_input_coaxial    
+    - delay: '00:00:25'      
+#    - service: script.musik_station_an_normal
+    - service: switch.turn_on
+      entity_id: switch.thinkpad_dock
+    - delay: '00:00:10'      
+    - service: switch.turn_on
+      entity_id: switch.thinkpad_dock
+
+
+
 'musik_station_aus':
   alias: Musik Station Aus
   sequence:
-#    - service: tts.google_translate_say
-#      entity_id: media_player.zimmer_bastian
-#      data:
-#        message: 'Musik aus'  
-#        language: 'de'    
     - service: shell_command.volumio_shutdown_h
     - service: shell_command.thinkcentre_shutdown_h
     - service: script.office_hub_amp_aus
-    - delay: '00:00:20'
+    - delay: '00:00:15'
     - service: switch.turn_off
       entity_id: switch.boxen_internal
 
@@ -362,47 +249,14 @@
           {% if is_state('switch.boxen', 'off') %}
             script.musik_station_an_normal
           {% else %}
-            script.musik_station_an_wenn_an
+            script.office_hub_amp_an
           {% endif %}    
-    
-'media_pc_an':
-  alias: Media PC an
-  sequence:
-#    - service: tts.google_translate_say
-#      entity_id: media_player.zimmer_bastian
-#      data:
-#        message: 'Media PC an'  
-#        language: 'de'      
-    - service: script.turn_on
-      data_template:
-        entity_id: >-
-          {% if is_state('switch.media_center', 'on') %}
-            script.media_pc_an_normal
-          {% else %}
-            script.musik_station_an_wenn_an
-          {% endif %}    
-
-'media_pc_an_normal':    
-  alias: Musik Station An Normal
-  sequence:
-    - service: switch.turn_on
-      entity_id: switch.media_center      
-    - delay: '00:00:30'
-    - service: script.media_pc_an_normal_wenn_an   
       
-
-'media_pc_an_normal_wenn_an':    
-  alias: Musik Station An Normal
-  sequence:
-    - service: switch.turn_on
-      entity_id: switch.media_pc      
-
-
 
 'musik_station_an_normal':
   alias: Musik Station An Normal
   sequence:
-    - service: script.office_hub_nuprime_volume_up1 # inceasing the volume is not nessesary. The idea is to activate the harmony hub, as it might sleep. 
+    - service: script.office_hub_amp_an   # inceasing the volume is not nessesary. The idea is to activate the harmony hub, as it might sleep. 
     - service: switch.turn_on 
       entity_id: switch.boxen_internal
     - service: switch.turn_on
@@ -410,23 +264,13 @@
     - delay: '00:00:04'            
     - service: script.office_hub_amp_an  
     - service: script.office_hub_adi_input_coaxial
-    - delay: '00:00:25'      
-    - service: switch.turn_on
-      entity_id: switch.media_pc
-    - delay: '00:00:10'      
-    - service: switch.turn_on
-      entity_id: switch.media_pc
     
-        
+    
 
-'musik_station_an_wenn_an':    
-  alias: Musik Station An Wenn an/ Amp Toggle
-  sequence:
-#    - service: script.office_hub_rega_mute
-    - service: script.office_hub_amp_power_toggle
-     
-    
-    
+################################################################################################
+############ Rechner hoch und runterfahren
+################################################################################################
+
 
 'volumio_runterfahren':
   alias: Volumio Pi Runterfahren
@@ -515,23 +359,6 @@
 ################################################################################################
 
 
-'roon_digione_volume_down': 
-  alias: roon_digione_volume_down
-  sequence:
-    - service: media_player.volume_down
-      entity_id: media_player.digione_3
-
-'roon_digione_volume_up': 
-  alias: roon_digione_volume_up
-  sequence:
-    - service: media_player.volume_up
-      entity_id: media_player.digione_3
-
-'roon_server_an': 
-  alias: Musik Server An
-  sequence:
-    - service: switch.turn_on
-      entity_id: switch.roon_server_internal
 
 
 ################################################################################################
@@ -553,7 +380,7 @@
 
 
 ################################################################################################
-############ Cube 
+############ Music Box Volumne  
 ################################################################################################
 
 
@@ -561,95 +388,84 @@
   alias: Musik Box Vol up 4
   #hide_entity: true
   sequence:
-    - service: script.office_hub_nuprime_volume_up10
+    - service: script.office_hub_shd_volume_up
 
     
     
 'music_box_volume_up3':
   alias: Musik Box Vol up 3
   sequence:
-    - service: script.office_hub_nuprime_volume_up5
+    - service: script.office_hub_shd_volume_up
 
 
 
 'music_box_volume_up2':
   alias: Musik Box Vol up 2
   sequence:
-    - service: script.office_hub_nuprime_volume_up3
+    - service: script.office_hub_shd_volume_up
 
 
 
 'music_box_volume_up1':
   alias: Musik Box Vol up 1
   sequence:
-     - service: script.office_hub_rega_volume_up1
+     - service: script.office_hub_shd_volume_up
     #- service: script.office_hub_nuprime_volume_up1
-
-'music_box_preamp_volume_up1':
-  alias: Musik Box Preamp Vol up 1
-  sequence:
-    - service: script.office_hub_adi_volume_up1
-    # - service: script.office_hub_project_volume_up1
-    #- service: script.office_hub_nuprime_volume_up1
-
-'music_box_preamp_volume_down1':
-  alias: Musik Box Preamp Vol down 1
-  sequence:
-    - service: script.office_hub_adi_volume_down1
-#     - service: script.office_hub_project_volume_down1
-    #- service: script.office_hub_nuprime_volume_down1
 
 
 
 'music_box_volume_down4':
   alias: Musik Box Vol Down 4
   sequence:
-     - service: script.office_hub_nuprime_volume_down10
+     - service: script.office_hub_shd_volume_down
     
 
 'music_box_volume_down3':
   alias: Musik Box Vol Down 3
   sequence:
-     - service: script.office_hub_nuprime_volume_down5            
+     - service: script.office_hub_shd_volume_down            
 
 
 
 'music_box_volume_down2':
   alias: Musik Box Vol Down 2
   sequence:
-     - service: script.office_hub_nuprime_volume_down3     
+     - service: script.office_hub_shd_volume_down     
 
     
 'music_box_volume_down1':
   alias: Musik Box Vol Down 1
   sequence:
-    - service: script.office_hub_rega_volume_down1
+    - service: script.office_hub_shd_volume_down
     #- service: script.office_hub_nuprime_volume_down1
 
 
+################################################################################################
+############ Music Box Play Pause / Next / ...
+################################################################################################
 
-#'volumio_play':
-#  alias: Volumio Play
-#  sequence:
-#    - service: rest_command.music_box_play
-#    - service: switch.turn_on
-#      entity_id: switch.boxen
-    
 
-#'volumio_pause':
-#  alias: Volumio Pause
-#  sequence:
-#    - service: rest_command.music_box_pause
+'music_box_stop':
+  alias: Musik Box Next Track
+  sequence:
+    - service: media_player.media_stop
+      data_template:
+        entity_id: >-       
+          {% if (is_state('input_select.preamp_select', 'LAN')) %}
+          media_player.shd_studio_roon
+          {% else %}
+          media_player.boxen_bastian
+          {% endif %}
 
 
 'music_box_next_track':
-  alias: Musik Box Next
+  alias: Musik Box Next Track
   sequence:
     - service: media_player.media_next_track
       data_template:
         entity_id: >-       
-          {% if (is_state('switch.media_pc', 'on') and is_state('media_player.digione_3', 'playing')) %}
-          media_player.digione_3
+          {% if (is_state('input_select.preamp_select', 'LAN')) %}
+          media_player.shd_studio_roon
           {% else %}
           media_player.boxen_bastian
           {% endif %}
@@ -661,8 +477,8 @@
     - service: media_player.media_previous_track
       data_template:
         entity_id: >-       
-          {% if (is_state('switch.media_pc', 'on') and is_state('media_player.digione_3', 'playing')) %}
-          media_player.digione_3
+          {% if (is_state('input_select.preamp_select', 'LAN')) %}
+          media_player.shd_studio_roon
           {% else %}
           media_player.boxen_bastian
           {% endif %}
@@ -676,27 +492,93 @@
     - service: media_player.media_play_pause
       data_template:
         entity_id: >-       
-          {% if (is_state('switch.media_pc', 'on') and is_state('media_player.digione_3', 'playing')) %}
-          media_player.digione_3
-          {% elif (is_state('switch.media_pc', 'on') and is_state('media_player.digione_3', 'paused')) %}
-          media_player.digione_3          
+          {% if (is_state('input_select.preamp_select', 'LAN')) %}
+          media_player.shd_studio_roon
           {% else %}
           media_player.boxen_bastian
           {% endif %}
 
-'music_box_seek_forward':
-  alias: Musik Box Play Pause
+
+'music_box_seek_backward':
+  alias: Musik Box Seek Backward
   sequence:
+#     - service: shell_command.volumio_seek_minus_10
     - service: media_player.media_seek
       data_template:
         entity_id: >-       
-          {% if (is_state('switch.media_pc', 'on') and is_state('media_player.digione_3', 'playing')) %}
-          media_player.digione_3
+          {% if (is_state('input_select.preamp_select', 'LAN')) %}
+          media_player.shd_studio_roon
+          {% else %}
+          media_player.boxen_bastian
+          {% endif %}
+      data:
+        seek_position: -10
+
+
+
+'music_box_seek_forward':
+  alias: Musik Box seek Forward
+  sequence:
+#     - service: shell_command.volumio_seek_plus_30
+    - service: media_player.media_seek
+      data_template:
+        entity_id: >-       
+          {% if (is_state('input_select.preamp_select', 'LAN')) %}
+          media_player.shd_studio_roon
           {% else %}
           media_player.boxen_bastian
           {% endif %}
       data:
         seek_position: 30
+
+
+################################################################################################
+############ Music Box Input 
+################################################################################################
+
+
+'music_box_set_input_lan':
+  alias: Musik Box Set Input LAN
+  sequence:
+    - service: script.office_hub_shd_input_lan
+    - service: script.office_hub_shd_volume_down ## nessesary to leave the switch inpute menu on the shd
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.preamp_select
+        option: LAN
+
+
+'music_box_set_input_toslink':
+  alias: Musik Box Set Input TOSLINK
+  sequence:
+    - service: script.office_hub_shd_input_optical
+    - service: script.office_hub_shd_volume_up ## nessesary to leave the switch inpute menu on the shd
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.preamp_select
+        option: TOSLINK
+
+'music_box_set_input_usb':
+  alias: Musik Box Set Input USB
+  sequence:
+    - service: script.office_hub_shd_input_usb
+    - service: script.office_hub_shd_volume_up ## nessesary to leave the switch inpute menu on the shd
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.preamp_select
+        option: USB
+
+
+'music_box_set_input_spdif':
+  alias: Musik Box Set Input SPDIF
+  sequence:
+    - service: script.office_hub_shd_input_coaxial
+    - service: script.office_hub_shd_volume_up ## nessesary to leave the switch inpute menu on the shd
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.preamp_select
+        option: SPDIF
+
 
 
 
@@ -709,23 +591,13 @@
           {% if is_state('switch.boxen', 'off') %}
             script.bastian_arbeitsplatz_an
           {% else %}
-            script.office_hub_adi_input_coaxial
+            script.music_box_set_input_lan
           {% endif %}    
 
 
 
-#    service: media_player.media_seek
-#    entity_id: media_player.digione_3
-#    data:
-#      seek_position: 30
-
-
-#Cube_158d000276eb1c  BASTI CUBE
-
-
-
 ################################################################################################
-############ Harmony 
+############ Harmony - Wohnzimmer
 ################################################################################################
 
 
@@ -740,20 +612,13 @@
         device: 58830068
         delay_secs: 0.1
 
-'kef_ls50w_an':
-  alias: KEF LS50 An
-  sequence:
-    - service: remote.send_command
-      data:
-        entity_id: remote.harmony_hub
-        command:
-          - PowerOn
-        device: 58830425
-        delay_secs: 0.1
+
 
 ################################################################################################
-############ Office - Harmony 
+############ KEF - LS50w
 ################################################################################################
+
+
 
 'office_hub_amp_an':
   alias: KEF an
@@ -763,7 +628,7 @@
         entity_id: remote.office_hub
         command:
           - PowerOn
-        device: 64838876
+        device: 66346870
         delay_secs: 0.1
 
 'office_hub_amp_aus':
@@ -774,7 +639,7 @@
         entity_id: remote.office_hub
         command:
           - PowerOff
-        device: 64838876
+        device: 66346870
         delay_secs: 0.1
 
 'office_hub_amp_power_toggle':
@@ -785,7 +650,7 @@
         entity_id: remote.office_hub
         command:
           - PowerToggle
-        device: 64838876
+        device: 66346870
         delay_secs: 0.1
 
         
@@ -797,7 +662,7 @@
         entity_id: remote.office_hub
         command:
           - VolumeUp
-        device: 64838876
+        device: 66346870
         delay_secs: 0.1     
         num_repeats: 10
         
@@ -809,93 +674,90 @@
         entity_id: remote.office_hub
         command:
           - VolumeDown
-        device: 64838876
+        device: 66346870
         delay_secs: 0.1     
         num_repeats: 10         
-        
 
 
-'office_hub_nuprime_power_toggle':
-  alias: Nuprime Power
+
+
+#################################################################
+############ MiniDSP SHD Studio
+#################################################################
+
+
+'office_hub_shd_input_lan':
+  alias: SHD input Lan
   sequence:
     - service: remote.send_command
       data:
         entity_id: remote.office_hub
         command:
-          - PowerToggle
-        device: 61744639
-        delay_secs: 0.1
-
-'office_hub_nuprime_input_optical':
-  alias: Nuprime Optical
-  sequence:
-     - service: script.office_hub_adi_input_optical
-    #- service: remote.send_command
-    #  data:
-    #    entity_id: remote.office_hub
-    #    command:
-    #      - InputO2
-    #    device: 61744639
-    #    delay_secs: 0.1
+          - InputLan
+        device: 66182154
 
 
-'office_hub_nuprime_input_coaxial':
-  alias: Nuprime Coaxial
-  sequence:
-    service: script.office_hub_adi_input_coaxial
-    #- service: remote.send_command
-    #  data:
-    #    entity_id: remote.office_hub
-    #    command:
-    #      - InputC1
-    #    device: 61744639
-    #    delay_secs: 0.1
 
-
-'office_hub_nuprime_input_usb':
-  alias: Nuprime USB
-  sequence:
-    - service: script.office_hub_adi_input_usb
-    #- service: remote.send_command
-    #  data:
-    #    entity_id: remote.office_hub
-    #    command:
-    #      - InputU3
-    #   device: 61744639
-    #   delay_secs: 0.1
-
-'office_hub_nuprime_toggle_display':
-  alias: Nuprime Display
+'office_hub_shd_input_coaxial':
+  alias: SHD input Coaxial
   sequence:
     - service: remote.send_command
       data:
         entity_id: remote.office_hub
         command:
-          - Display
-        device: 61744639
-        delay_secs: 0.1
-        
-'office_hub_nuprime_toggle_mute':
-  alias: Mute On /Off
+          - InputSpdif
+        device: 66182154
+
+
+
+'office_hub_shd_input_optical':
+  alias: SHD input optical
   sequence:
     - service: remote.send_command
       data:
         entity_id: remote.office_hub
         command:
-          - Mute
-        device: 61744639
-        #delay_secs: 0.01        
-        
-'office_hub_project_volume_up1':
-  alias: Project S2 Volume Up1
+          - InputToslink
+        device: 66182154
+
+
+'office_hub_shd_input_usb':
+  alias: SHD input USB
+  sequence:
+    - service: remote.send_command
+      data:
+        entity_id: remote.office_hub
+        command:
+          - InputUsb
+        device: 66182154
+
+
+'office_hub_shd_volume_up':
+  alias: SHD Volume Up
   sequence:
     - service: remote.send_command
       data:
         entity_id: remote.office_hub
         command:
           - VolumeUp
-        device: 63030098
-        #delay_secs: 0.01
+        device: 66182154
+
+
+'office_hub_shd_volume_down':
+  alias: SHD Volume Down
+  sequence:
+    - service: remote.send_command
+      data:
+        entity_id: remote.office_hub
+        command:
+          - VolumeDown
+        device: 66182154
+
+
+
+#################################################################
+############ RMI ADI
+#################################################################
 
 'office_hub_adi_toggle_view':
   alias: RME Adi Toggle View - 1
@@ -992,165 +854,7 @@
         device: 62948951
         num_repeats: 9
         #delay_secs: 0.01        
-        
-'office_hub_project_volume_down1':
-  alias: Project S2 Volume Down1
-  sequence:
-    - service: remote.send_command
-      data:
-        entity_id: remote.office_hub
-        command:
-          - VolumeDown
-        device: 63030098
-        #delay_secs: 0.01
-        #num_repeats: 3
 
-
-
-
-'office_hub_rega_mute':
-  alias: Rega Mute
-  sequence:
-    - service: remote.send_command
-      data:
-        entity_id: remote.office_hub
-        command:
-          - Mute
-        device: 62948968
-        #delay_secs: 0.01
-        
-'office_hub_rega_volume_up1':
-  alias: Rega Volume Up1
-  sequence:
-    - service: remote.send_command
-      data:
-        entity_id: remote.office_hub
-        command:
-          - VolumeUp
-        device: 62948968
-        #delay_secs: 0.01
-
-        
-
-'office_hub_nuprime_volume_up3':
-  alias: Nuprime Volume Up3
-  sequence:
-    - service: remote.send_command
-      data:
-        entity_id: remote.office_hub
-        command:
-          - VolumeUp
-        device: 61744639
-        num_repeats: 3
-        #delay_secs: 0.01
-
-#    - service: script.office_hub_nuprime_volume_up1
-#    - service: script.office_hub_nuprime_volume_up1
-#    - service: script.office_hub_nuprime_volume_up1
-
-        
-'office_hub_nuprime_volume_up5':
-  alias: Nuprime Volume Up5
-  sequence:
-    - service: remote.send_command
-      data:
-        entity_id: remote.office_hub
-        command:
-          - VolumeUp
-        device: 61744639
-        num_repeats: 5
-        #delay_secs: 0.01              
-
-
-'office_hub_nuprime_volume_up10':
-  alias: Nuprime Volume Up10
-  sequence:
-    - service: remote.send_command
-      data:
-        entity_id: remote.office_hub
-        command:
-          - VolumeUp
-        device: 61744639
-        num_repeats: 10
-        #delay_secs: 0.01
-
-'office_hub_nuprime_volume_up1':
-  alias: Nuprime Volume Up1
-  sequence:
-    - service: remote.send_command
-      data:
-        entity_id: remote.office_hub
-        command:
-          - VolumeUp
-        device: 61744639
-        num_repeats: 1
-        #delay_secs: 0.01
-
-
-'office_hub_nuprime_volume_down1':
-  alias: Nuprime Volume Down1
-  sequence:
-    - service: remote.send_command
-      data:
-        entity_id: remote.office_hub
-        command:
-          - VolumeDown
-        device: 61744639
-        num_repeats: 1
-        #delay_secs: 0.01
-
-'office_hub_nuprime_input_next':
-  alias: Nuprime Input Next
-  sequence:
-    - service: remote.send_command
-      data:
-        entity_id: remote.office_hub
-        command:
-          - InputNext
-        device: 61744639
-        delay_secs: 0.1
-
-'office_hub_music_box_input_next':
-  alias: Music Box Input Next
-  sequence:
-    - service: input_number.increment
-      data:
-        entity_id: input_number.rme_adi_input_select
-    - service: input_number.set_value
-      data_template:
-        entity_id: input_number.rme_adi_input_select
-        value: '{{ states.input_number.rme_adi_input_select.state | int % 3}}'        
-    - service: script.turn_on 
-      data_template:
-        entity_id: >-       
-          {% if (is_state('input_number.rme_adi_input_select', '1.0') ) %}
-          script.office_hub_adi_input_optical          
-          {% elif (is_state('input_number.rme_adi_input_select', '2.0') ) %}
-          script.office_hub_adi_input_usb
-          {% else %}
-          script.office_hub_adi_input_coaxial
-          {% endif %}
-    
-'office_hub_music_box_input_prev':
-  alias: Music Box Input Prev
-  sequence:
-    - service: input_number.decrement
-      data:
-        entity_id: input_number.rme_adi_input_select
-    - service: input_number.set_value
-      data_template:
-        entity_id: input_number.rme_adi_input_select
-        value: '{{ states.input_number.rme_adi_input_select.state | int % 3}}'        
-    - service: script.turn_on 
-      data_template:
-        entity_id: >-       
-          {% if (is_state('input_number.rme_adi_input_select', '1.0') ) %}
-          script.office_hub_adi_input_optical          
-          {% elif (is_state('input_number.rme_adi_input_select', '2.0') ) %}
-          script.office_hub_adi_input_usb
-          {% else %}
-          script.office_hub_adi_input_coaxial
-          {% endif %}
 
 'office_hub_adi_input_coaxial':
   alias: RME adi input Coaxial
@@ -1198,8 +902,6 @@
         value: 2
         
 
-
-
 'office_hub_music_box_dark_mode':
   alias: Music Box - Dark Mode 
   sequence:
@@ -1209,45 +911,12 @@
         command:
           - 3 # 3 is dark mode 
         device: 62948951
-
-    
-    #irme_adi_input_select
-    #- service: remote.send_command
-    #  data:
-    #    entity_id: remote.office_hub
-    #    command:
-    #      - InputNext
-    #    device: 63030098
-    #    #delay_secs: 0.1
+  
 
 
-
-#'office_hub_music_box_input_prev':
-#  alias: Music Box Input Prev
-#  sequence:
-#    - service: remote.send_command
-#      data:
-#        entity_id: remote.office_hub
-#        command:
-#          - InputPrev
-#        device: 63030098
-#        #delay_secs: 0.1
-
-
-
-'office_hub_nuprime_input_prev':
-  alias: Nuprime Input Prev
-  sequence:
-    - service: remote.send_command
-      data:
-        entity_id: remote.office_hub
-        command:
-          - InputPrev
-        device: 61744639
-        delay_secs: 0.1
-
-
-
+################################################################################################
+############ Rega
+################################################################################################
 
 
 'office_hub_rega_volume_down1':
@@ -1262,49 +931,27 @@
         #delay_secs: 0.1
 
 
-'office_hub_nuprime_volume_down3':
-  alias: Nuprime Volume Down3
+'office_hub_rega_mute':
+  alias: Rega Mute
   sequence:
     - service: remote.send_command
       data:
         entity_id: remote.office_hub
         command:
-          - VolumeDown
-        device: 61744639
-        num_repeats: 3
+          - Mute
+        device: 62948968
         #delay_secs: 0.01
-
-
-#    - service: script.office_hub_nuprime_volume_down1
-#    - service: script.office_hub_nuprime_volume_down1
-#    - service: script.office_hub_nuprime_volume_down1
-
-
-'office_hub_nuprime_volume_down5':
-  alias: Nuprime Volume Down5
+        
+'office_hub_rega_volume_up1':
+  alias: Rega Volume Up1
   sequence:
     - service: remote.send_command
       data:
         entity_id: remote.office_hub
         command:
-          - VolumeDown
-        device: 61744639
-        num_repeats: 5
+          - VolumeUp
+        device: 62948968
         #delay_secs: 0.01
-
-
-'office_hub_nuprime_volume_down10':
-  alias: Nuprime Volume Down10
-  sequence:
-    - service: remote.send_command
-      data:
-        entity_id: remote.office_hub
-        command:
-          - VolumeDown
-        device: 61744639
-        num_repeats: 10
-        #delay_secs: 0.01
-
 
         
 ################################################################################################
@@ -1312,30 +959,80 @@
 ################################################################################################
 
 
-'bastian_heizung_aus':
-  alias: Bastian Heizung Aus
-  sequence:
-    - service: climate.set_temperature
-      data:
-        entity_id: climate.bastian_comet_dect
-        temperature: 5
-        operation_mode: "off"
+#'bastian_heizung_aus':
+#  alias: Bastian Heizung Aus
+#  sequence:
+#    - service: climate.set_temperature
+#      data:
+#        entity_id: climate.bastian_comet_dect
+#        temperature: 5
+#        operation_mode: "off"
 
-'bastian_heizung_hoch':
-  alias: Bastian Heizung Hoch
-  sequence:
-    - service: climate.set_temperature
-      data:
-        entity_id: climate.bastian_comet_dect
-        temperature: 25
-        operation_mode: "heat"
+#'bastian_heizung_hoch':
+#  alias: Bastian Heizung Hoch
+#  sequence:
+#    - service: climate.set_temperature
+#      data:
+#        entity_id: climate.bastian_comet_dect
+#        temperature: 25
+#       operation_mode: "heat"
 
-'bastian_heizung_mittel':
-  alias: Bastian Heizung Mittel
-  sequence:
-    - service: climate.set_temperature
-      data:
-        entity_id: climate.bastian_comet_dect
-        temperature: 22
-        operation_mode: "heat"        
+#'bastian_heizung_mittel':
+#  alias: Bastian Heizung Mittel
+#  sequence:
+#    - service: climate.set_temperature
+#      data:
+#        entity_id: climate.bastian_comet_dect
+#        temperature: 22
+#        operation_mode: "heat"        
+
+
+
+#################################################################
+############ Legacy Code
+#################################################################
+
+
+#'office_hub_music_box_input_next':
+#  alias: Music Box Input Next
+# sequence:
+#    - service: input_number.increment
+#      data:
+#        entity_id: input_number.rme_adi_input_select
+#    - service: input_number.set_value
+#      data_template:
+#        entity_id: input_number.rme_adi_input_select
+#        value: '{{ states.input_number.rme_adi_input_select.state | int % 3}}'        
+#    - service: script.turn_on 
+#      data_template:
+#        entity_id: >-       
+#          {% if (is_state('input_number.rme_adi_input_select', '1.0') ) %}
+#          script.office_hub_adi_input_optical          
+#          {% elif (is_state('input_number.rme_adi_input_select', '2.0') ) %}
+#          script.office_hub_adi_input_usb
+#          {% else %}
+#          script.office_hub_adi_input_coaxial
+#          {% endif %}
+    
+#'office_hub_music_box_input_prev':
+#  alias: Music Box Input Prev
+#  sequence:
+#    - service: input_number.decrement
+#      data:
+#        entity_id: input_number.rme_adi_input_select
+#    - service: input_number.set_value
+#      data_template:
+#        entity_id: input_number.rme_adi_input_select
+#        value: '{{ states.input_number.rme_adi_input_select.state | int % 3}}'        
+#    - service: script.turn_on 
+#      data_template:
+#        entity_id: >-       
+#          {% if (is_state('input_number.rme_adi_input_select', '1.0') ) %}
+#          script.office_hub_adi_input_optical          
+#          {% elif (is_state('input_number.rme_adi_input_select', '2.0') ) %}
+#          script.office_hub_adi_input_usb
+#          {% else %}
+#          script.office_hub_adi_input_coaxial
+#          {% endif %}
+
 

@@ -1,4 +1,8 @@
-############# Housekeeping
+
+#################################################################
+############ Housekeeping
+#################################################################
+
 
 - alias: Database Purge
   trigger:
@@ -11,29 +15,13 @@
 #        repack: true
 
 
+   
 
 
-############# Gaeste Zimmer
+#################################################################
+############ Basti Lampe
+#################################################################
 
-#- alias: "Gaestezimmer Luftfeuchtigkeit"
-#  trigger:
-#    platform: numeric_state
-#    entity_id: sensor.humidity_158d0002c8cfcb
-#    above: 60
-#    for:
-#       hours: 0
-#       minutes: 10
-#  action:
-#    - service: tts.google_translate_say
-#      entity_id: media_player.living_room_speaker
-#      data:
-#        message: 'Luefsten im Gaestezimmer'  
-#        language: 'de'
-
-    
-
-
-############Basti Lampe
 - alias: Wandschalter zu Lampe An
   trigger:
      platform: state
@@ -58,7 +46,11 @@
         entity_id: switch.basti_lampe_internal      
 
 
-############Basti Switch
+#################################################################
+############ Basti Switch Eingang
+#################################################################
+
+
 - alias: Single Press - Basti Switch
   trigger:
     platform: event
@@ -99,7 +91,11 @@
         entity_id: switch.basti_decke
 
 
-############Basti Bed Switch
+#################################################################
+############ Basti Switch Bett
+#################################################################
+
+
 - alias: Single Press - Basti Bed Switch
   trigger:
     platform: event
@@ -142,7 +138,10 @@
 
 
 
-############Kueche
+#################################################################
+############ Küche
+#################################################################
+
 
 - alias : Küche an um 06:45
   initial_state: false
@@ -181,6 +180,12 @@
     data:
       message: 'Tagesschau in 2 Minuten'  
       language: 'de'
+
+
+
+#################################################################
+############ Küchen Switch 
+#################################################################
 
 
 - alias: Double Press - Wohnzimmer Decke
@@ -258,12 +263,8 @@
       entity_id: binary_sensor.wohnzimmer_switch
       click_type: long_click_press
   action:
-    - service: script.kueche_off
-    - service: switch.turn_off
-      entity_id: switch.couch    
-    - service: script.tisch_off    
-    - service: light.turn_off
-      entity_id: light.gateway_light_7811dcded114
+    - service: switch.toggle
+      entity_id: switch.couch
     
 
 
@@ -424,10 +425,9 @@
       entity_id: binary_sensor.bcube
       action_type: flip90
   action:
-    - service: script.bastian_arbeitsplatz_an
-#    - service: switch.turn_on
-#      data:
-#        entity_id: switch.carbon_x1
+    - service: switch.turn_on
+      entity_id: switch.thinkpad_dock     
+
 
 
 - alias: B-Cube to free_fall
@@ -438,8 +438,8 @@
       entity_id: binary_sensor.bcube
       action_type: free_fall
   action:
-    - service: switch.turn_on
-      entity_id: switch.thinkpad_dock     
+    - service: script.bastian_arbeitsplatz_an
+
 
 - alias: B-Cube to flip180
   trigger:
@@ -523,7 +523,7 @@
 
 
 ################################################################################################
-############ RF Remote
+############ RF Remote - OSMC
 ################################################################################################
 
 - alias: RF Ok-> Decke Basti
@@ -598,7 +598,7 @@
       
 
 
-- alias: RF Menu-> Preamp Input next 
+- alias: RF Menu-> Musik Box input LAN
   trigger:
     platform: event
     event_type: keyboard_remote2_command_received
@@ -606,11 +606,11 @@
       device_descriptor: "/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd"
       key_code: 46 # menu 
   action:
-    service: script.office_hub_adi_input_coaxial
+    service: script.music_box_set_input_lan
 
 
 
-- alias: RF Menu long press-> Nuprime Input prev
+- alias: RF Menu long press-> Musik Box input Toslink
   trigger:
     platform: event
     event_type: keyboard_remote2_command_received
@@ -618,7 +618,7 @@
       device_descriptor: "/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd"
       key_code: 1046 # menu 
   action:
-    service: script.office_hub_adi_input_optical
+    service: script.music_box_set_input_toslink
 
 
 - alias: RF Right-> Next song
@@ -664,10 +664,7 @@
       key_code: 103 # up 
   action:
     service: script.music_box_seek_forward
-#    service: media_player.media_seek
-#    entity_id: media_player.digione_3
-#    data:
-#      seek_position: 30
+
 
 - alias: RF Down-> Seek -10sec
   trigger:
@@ -677,10 +674,7 @@
       device_descriptor: "/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd"
       key_code: 108 # down
   action:
-    service: media_player.media_seek
-    entity_id: media_player.digione_3
-    data:
-      seek_position: -10
+    service: script.music_box_seek_backward
 
 
 
@@ -692,10 +686,7 @@
       device_descriptor: "/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd"
       key_code: 12 # vol down
   action:
-    service: script.music_box_preamp_volume_down1
-    #service: script.music_box_volume_down1
-    
-    #service: script.office_hub_nuprime_volume_down3
+    service: script.music_box_volume_down1
     
 
 - alias: RF Vol-Down long press-> Amp Vol down
@@ -717,8 +708,7 @@
       device_descriptor: "/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd"
       key_code: 13 # vol up
   action:
-    service: script.music_box_preamp_volume_up1
-    #service: script.music_box_volume_up1
+    service: script.music_box_volume_up1
     
 - alias: RF Vol-Up long press-> Amp Vol up
   trigger:
@@ -728,12 +718,11 @@
       device_descriptor: "/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd"
       key_code: 1013 # vol up
   action:
-    #service: script.music_box_preamp_volume_up1
     service: script.office_hub_amp_vol_up
 
 
 #################################################################
-#### DESK Switch 
+############ DESK Switch 
 #################################################################
 
 - alias: Single Press - Desk
@@ -744,7 +733,7 @@
       entity_id: binary_sensor.desk_switch
       click_type: single
   action:
-    - service: script.desk_switch_to_coaxial_or_workstation_on
+    service: script.desk_switch_to_coaxial_or_workstation_on
 
 
 - alias: Double Press - Desk
@@ -754,8 +743,8 @@
     event_data:
       entity_id: binary_sensor.desk_switch
       click_type: double
-  action:
-    - service: script.office_hub_adi_input_optical
+  action:  
+     service: script.music_box_set_input_toslink
       
 
     
@@ -768,7 +757,7 @@
       entity_id: binary_sensor.desk_switch
       click_type: long_click_press
   action:
-    - service: script.office_hub_adi_input_usb
+     service: script.music_box_set_input_usb
     
 
 
