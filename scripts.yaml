@@ -211,6 +211,8 @@
 'bastian_arbeitsplatz_an':
   alias: Arbeitsplatz Einschalten
   sequence:   
+    - service: switch.turn_on
+      entity_id: switch.thinkpad_dock
     - service: script.music_box_set_input_lan    
     - service: switch.turn_on 
       entity_id: switch.boxen_internal
@@ -968,14 +970,31 @@
 #        temperature: 5
 #        operation_mode: "off"
 
-#'bastian_heizung_hoch':
-#  alias: Bastian Heizung Hoch
-#  sequence:
-#    - service: climate.set_temperature
-#      data:
-#        entity_id: climate.bastian_comet_dect
-#        temperature: 25
-#       operation_mode: "heat"
+'bastian_heizung_hoch':
+  alias: Bastian Heizung Hoch
+  sequence:
+    - service: climate.turn_on
+      data:
+        entity_id: climate.bastian_heizung
+    - service: climate.set_temperature
+      data:
+        entity_id: climate.bastian_heizung
+        temperature: 22
+        #operation_mode: "heat"
+
+
+'wohnzimmer_heizung_hoch':
+  alias: Wohnzimmer Heizung Hoch
+  sequence:
+    - service: climate.turn_on
+      data:
+        entity_id: climate.wohnzimmer_heizung
+    - service: climate.set_temperature
+      data:
+        entity_id: climate.wohnzimmer_heizung
+        temperature: 21
+        #operation_mode: "heat"
+
 
 #'bastian_heizung_mittel':
 #  alias: Bastian Heizung Mittel

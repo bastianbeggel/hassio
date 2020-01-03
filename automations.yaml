@@ -413,9 +413,10 @@
       entity_id: binary_sensor.bcube
       action_type: shake_air
   action:
-    - service: switch.turn_on
+    - service: script.turn_on
       data:
-        entity_id: switch.media_pc
+        entity_id: script.bastian_arbeitsplatz_an
+
 
 - alias: B-Cube to flip90
   trigger:
@@ -438,7 +439,8 @@
       entity_id: binary_sensor.bcube
       action_type: free_fall
   action:
-    - service: script.bastian_arbeitsplatz_an
+    - service: switch.turn_on
+      entity_id: switch.thinkpad_dock     
 
 
 - alias: B-Cube to flip180

@@ -233,9 +233,40 @@ light:
     name: Wohnzimmer_Virt1
     entity_id: switch.wohnzimmer_virt_couch_tisch
 
-   
-    
+#climate.turn_off   
+#climate.bastian_heizung
+#bastian_heizung_hoch
+
 switch:
+  - platform: template
+    switches:
+      virt_bastian_heizung:
+        friendly_name: "Virtuell Bastian Heizung"
+        value_template: "{{ is_state('climate.bastian_heizung', 'heat') }}"
+        turn_on:
+          service: script.turn_on
+          data:
+            entity_id: script.bastian_heizung_hoch
+        turn_off:
+          service: climate.turn_off  
+          data:
+            entity_id: climate.bastian_heizung
+
+  - platform: template
+    switches:
+      virt_wohnzimmer_heizung:
+        friendly_name: "Virtuell Wohnzimmer Heizung"
+        value_template: "{{ is_state('climate.wohnzimmer_heizung', 'heat') }}"
+        turn_on:
+          service: script.turn_on
+          data:
+            entity_id: script.wohnzimmer_heizung_hoch
+        turn_off:
+          service: climate.turn_off  
+          data:
+            entity_id: climate.wohnzimmer_heizung
+
+
   - platform: template
     switches:
       basti_virt_decke_decke:
@@ -378,6 +409,7 @@ switch:
   - platform: wake_on_lan
     name: "Media PC"
     mac_address: "00:23:24:f9:d3:79"
+    #wird ab 1.03 zu mac: "00:23:24:f9:d3:79"
     host: "192.168.178.53"
     turn_off:
       service: shell_command.thinkcentre_shutdown_h
@@ -504,6 +536,10 @@ remote:
 #    max_update_wait:
 #      minutes: 45
 
+
+## Breaking change in 1.03
+#Emulated Hue - As previous entityid were not Hue compliant, emulated_hue_ids.json will need to be cleared out and devices re-discovered and configured in Alexa / Google Home. This is a necessary growing pain to move the integration forward in a Hue-compliant fashion. - (@NobleKangaroo - #28317) (emulated_hue docs)
+#https://www.home-assistant.io/integrations/emulated_hue/
 emulated_hue:
   host_ip: 192.168.178.22
   listen_port: 8300
