@@ -117,6 +117,36 @@ sensor:
 #     - home-assistant_v2.db    
 
 
+binary_sensor:
+#  - platform: ping
+#    name: Harmony-Hub-Ping
+#    host: 192.168.178.61
+#    count: 5
+#    scan_interval: 30
+#  - platform: ping
+#    name: Office-Hub-Ping
+#    host: 192.168.178.63
+#    count: 5
+#    scan_interval: 30
+  - platform: ping
+    name: SHD-Studio-Ping
+    host: 192.168.178.101
+    count: 5
+    scan_interval: 60
+  - platform: ping
+    name: Roon-Service-Ping
+    host: 192.168.178.53
+    count: 5
+    scan_interval: 60
+  - platform: ping
+    name: Home-Assistant2-Ping
+    host: 192.168.178.90
+    count: 5
+    scan_interval: 60
+    
+
+
+
 # Text to speech
 tts:
   - platform: google_translate
@@ -449,8 +479,6 @@ shell_command:
 #  thinkcentre_shutdown_h: /home/homeassistant/.homeassistant/scripts/tc_shutdown_h.sh
   thinkcentre_shutdown_r: /home/homeassistant/.homeassistant/scripts/tc_shutdown_r.sh
   thinkcentre_shutdown_h: /home/homeassistant/.homeassistant/scripts/tc_shutdown_s.sh
-  thinkcentre_wakeup_wol: /home/homeassistant/.homeassistant/scripts/tc_wakeup.sh
-
   
 xiaomi_aqara:
   discovery_retry: 5
@@ -522,7 +550,7 @@ remote:
     host: 192.168.178.61
   - platform: harmony
     name: Office-Hub
-    host: 192.168.178.63
+    host: 192.168.178.106
 
     
 #device_tracker:

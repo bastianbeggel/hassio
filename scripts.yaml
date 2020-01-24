@@ -235,7 +235,7 @@
 'musik_station_aus':
   alias: Musik Station Aus
   sequence:
-    - service: shell_command.volumio_shutdown_h
+    #- service: shell_command.volumio_shutdown_h
     - service: shell_command.thinkcentre_shutdown_h
     - service: script.office_hub_amp_aus
     - delay: '00:00:15'
@@ -274,15 +274,15 @@
 ################################################################################################
 
 
-'volumio_runterfahren':
-  alias: Volumio Pi Runterfahren
-  sequence:
-    - service: shell_command.volumio_shutdown_h
+#'volumio_runterfahren':
+#  alias: Volumio Pi Runterfahren
+#  sequence:
+#    - service: shell_command.volumio_shutdown_h
 
-'volumio_neustarten':
-  alias: Volumio Pi Neustarten
-  sequence:
-    - service: shell_command.volumio_shutdown_r
+#'volumio_neustarten':
+#  alias: Volumio Pi Neustarten
+#  sequence:
+#    - service: shell_command.volumio_shutdown_r
 
 'thinkcentre_runterfahren':
   alias: ThinkCentre Runterfahren
@@ -294,10 +294,10 @@
   sequence:
     - service: shell_command.thinkcentre_shutdown_r
 
-'thinkcentre_wakeup':
-  alias: ThinkCentre Wakeup WOL
-  sequence:
-    - service: shell_command.thinkcentre_wakeup_wol
+#'thinkcentre_wakeup':
+#  alias: ThinkCentre Wakeup WOL
+#  sequence:
+#    - service: shell_command.thinkcentre_wakeup_wol
 
 
 
