@@ -17,6 +17,8 @@ homeassistant:
 
 python_script:
 
+mobile_app:
+
 logger:
   default: error
   logs: 

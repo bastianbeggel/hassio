@@ -486,6 +486,30 @@
           {% endif %}
   
 
+'music_box_play':
+  alias: Musik Box Play
+  sequence:
+    - service: media_player.media_play
+      data_template:
+        entity_id: >-       
+          {% if (is_state('input_select.preamp_select', 'LAN')) %}
+          media_player.shd_studio_roon
+          {% else %}
+          media_player.boxen_bastian
+          {% endif %}
+
+
+'music_box_pause':
+  alias: Musik Box Pause
+  sequence:
+    - service: media_player.media_pause
+      data_template:
+        entity_id: >-       
+          {% if (is_state('input_select.preamp_select', 'LAN')) %}
+          media_player.shd_studio_roon
+          {% else %}
+          media_player.boxen_bastian
+          {% endif %}
 
 
 'music_box_play_pause':
@@ -501,8 +525,8 @@
           {% endif %}
 
 
-'music_box_seek_backward':
-  alias: Musik Box Seek Backward
+'music_box_seek_backward_10':
+  alias: Musik Box Seek Backward 10
   sequence:
 #     - service: shell_command.volumio_seek_minus_10
     - service: media_player.media_seek
@@ -516,10 +540,24 @@
       data:
         seek_position: -10
 
+'music_box_seek_backward_30':
+  alias: Musik Box Seek Backward 30
+  sequence:
+#     - service: shell_command.volumio_seek_minus_10
+    - service: media_player.media_seek
+      data_template:
+        entity_id: >-       
+          {% if (is_state('input_select.preamp_select', 'LAN')) %}
+          media_player.shd_studio_roon
+          {% else %}
+          media_player.boxen_bastian
+          {% endif %}
+      data:
+        seek_position: -30
 
 
-'music_box_seek_forward':
-  alias: Musik Box seek Forward
+'music_box_seek_forward_30':
+  alias: Musik Box seek Forward 30
   sequence:
 #     - service: shell_command.volumio_seek_plus_30
     - service: media_player.media_seek
@@ -532,6 +570,21 @@
           {% endif %}
       data:
         seek_position: 30
+
+'music_box_seek_forward_10':
+  alias: Musik Box seek Forward 10
+  sequence:
+#     - service: shell_command.volumio_seek_plus_30
+    - service: media_player.media_seek
+      data_template:
+        entity_id: >-       
+          {% if (is_state('input_select.preamp_select', 'LAN')) %}
+          media_player.shd_studio_roon
+          {% else %}
+          media_player.boxen_bastian
+          {% endif %}
+      data:
+        seek_position: 10
 
 
 ################################################################################################
@@ -961,15 +1014,6 @@
 ################################################################################################
 
 
-#'bastian_heizung_aus':
-#  alias: Bastian Heizung Aus
-#  sequence:
-#    - service: climate.set_temperature
-#      data:
-#        entity_id: climate.bastian_comet_dect
-#        temperature: 5
-#        operation_mode: "off"
-
 'bastian_heizung_hoch':
   alias: Bastian Heizung Hoch
   sequence:
@@ -979,7 +1023,7 @@
     - service: climate.set_temperature
       data:
         entity_id: climate.bastian_heizung
-        temperature: 22
+        temperature: 20
         #operation_mode: "heat"
 
 
@@ -992,18 +1036,8 @@
     - service: climate.set_temperature
       data:
         entity_id: climate.wohnzimmer_heizung
-        temperature: 21
+        temperature: 20
         #operation_mode: "heat"
-
-
-#'bastian_heizung_mittel':
-#  alias: Bastian Heizung Mittel
-#  sequence:
-#    - service: climate.set_temperature
-#      data:
-#        entity_id: climate.bastian_comet_dect
-#        temperature: 22
-#        operation_mode: "heat"        
 
 
 
