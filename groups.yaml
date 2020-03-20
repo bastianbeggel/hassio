@@ -9,7 +9,7 @@ roon_actions:
       #- group.roon_players
 
 'switches_view':
-  view: yes  
+  #view: yes  
   name: Schalter
   entities:
     - light.couchlicht
@@ -27,7 +27,7 @@ roon_actions:
     - switch.carbon_x1
 
 'nele_view':
-  view: yes  
+  #view: yes  
   name: Nele 
   entities:
     - light.couchlicht
@@ -55,7 +55,7 @@ roon_actions:
 
 
 'bastian_playstation-view':
-  view: yes  
+  #view: yes  
   name: Bastian
   entities:       
      - script.gute_nacht
@@ -78,7 +78,7 @@ roon_actions:
      
 
 'Media_Room':
-  view: yes  
+ # view: yes  
   name: Media-Room
   entities:       
     - group.media
@@ -96,14 +96,14 @@ roon_actions:
     
           
 'scripts-view-all':
-  view: yes  
+ # view: yes  
   name: Alle Skripte
   entities:       
      - group.all_scripts     
 
 
 'automations-view':
-  view: yes  
+ # view: yes  
   name: Automations
   entities:       
     - group.all_automations 

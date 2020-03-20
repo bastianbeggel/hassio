@@ -89,6 +89,11 @@
     - service: switch.turn_off
       data:
         entity_id: switch.basti_decke
+    - service: light.turn_off
+      data:
+        entity_id: light.schreibtischlampe
+
+
 
 
 #################################################################
@@ -187,6 +192,18 @@
 ############ Küchen Switch 
 #################################################################
 
+- alias: Küchenlicht - Thekenschalter 
+  trigger:
+    platform: event
+    event_type: xiaomi_aqara.click
+    event_data:
+      entity_id: binary_sensor.kitchen_switch
+      click_type: single
+  action:
+    - service: script.kueche_toggle
+
+
+
 
 - alias: Double Press - Wohnzimmer Decke
   trigger:
@@ -196,8 +213,8 @@
       entity_id: binary_sensor.kitchen_switch
       click_type: double
   action:
-    - service: switch.toggle
-      entity_id: switch.wohnzimmer_decke
+    - service: script.wohnzimmer_decke_an_aus
+    
 
     
 
@@ -216,16 +233,6 @@
     - service: light.turn_off
       entity_id: light.gateway_light_7811dcded114
     
-
-- alias: Küchenlicht - Thekenschalter 
-  trigger:
-    platform: event
-    event_type: xiaomi_aqara.click
-    event_data:
-      entity_id: binary_sensor.kitchen_switch
-      click_type: single
-  action:
-    - service: script.kueche_toggle
 
 
 ################################################################################################
@@ -251,8 +258,8 @@
       entity_id: binary_sensor.wohnzimmer_switch
       click_type: double
   action:
-    - service: switch.toggle
-      entity_id: switch.wohnzimmer_decke
+    - service: script.wohnzimmer_decke_an_aus
+      
     
 
 - alias: Wohnzimmer Switch - Long press
@@ -283,8 +290,7 @@
       entity_id: binary_sensor.kitchen_cube
       action_type: flip90
   action:
-    - service: switch.toggle
-      entity_id: switch.04200102dc4f222a335a
+    - service: script.tisch_toggle
 
 - alias: Cube to tab-twice
   trigger:
@@ -306,7 +312,9 @@
       entity_id: binary_sensor.kitchen_cube
       action_type: move
   action:
-    - service: script.kueche_toggle      
+    - service: light.toggle
+      entity_id: light.wohnzimmer_lampe
+
 
 - alias: Cube to shake_air
   trigger:
@@ -356,21 +364,17 @@
   action:
       service_template: >
          {% if trigger.event.data.action_value | float > 20 %}
-           script.marshall_volume_up3
+           script.tisch_bright_plus_100
          {% elif trigger.event.data.action_value | float > 15 %}
-           script.marshall_volume_up3
-         {% elif trigger.event.data.action_value | float > 10 %}
-           script.marshall_volume_up2
+           script.tisch_bright_plus_50
          {% elif trigger.event.data.action_value | float > 0 %}
-           script.marshall_volume_up1
+           script.tisch_bright_plus_25
          {% elif trigger.event.data.action_value | float < -20 %}
-           script.marshall_volume_down3
+           script.tisch_bright_minus_100
          {% elif trigger.event.data.action_value | float < -15 %}
-           script.marshall_volume_down3
-         {% elif trigger.event.data.action_value | float < -10 %}
-           script.marshall_volume_down2
+           script.tisch_bright_minus_50
          {% elif trigger.event.data.action_value | float < 0 %}
-           script.marshall_volume_down1
+           script.tisch_bright_minus_25
          {% endif %}
 
 
@@ -426,8 +430,8 @@
       entity_id: binary_sensor.bcube
       action_type: flip90
   action:
-    - service: switch.turn_on
-      entity_id: switch.thinkpad_dock     
+    - service: light.toggle
+      entity_id: light.schreibtischlampe
 
 
 
@@ -469,21 +473,17 @@
   action:
       service_template: >
          {% if trigger.event.data.action_value | float > 20 %}
-           script.office_hub_adi_volume_up3
+           script.schreibtisch_bright_plus_100
          {% elif trigger.event.data.action_value | float > 15 %}
-           script.office_hub_adi_volume_up3
-         {% elif trigger.event.data.action_value | float > 10 %}
-           script.office_hub_adi_volume_up2
+           script.schreibtisch_bright_plus_50
          {% elif trigger.event.data.action_value | float > 0 %}
-           script.office_hub_adi_volume_up1
+           script.schreibtisch_bright_plus_25
          {% elif trigger.event.data.action_value | float < -20 %}
-           script.office_hub_adi_volume_down3
+           script.schreibtisch_bright_minus_100
          {% elif trigger.event.data.action_value | float < -15 %}
-           script.office_hub_adi_volume_down3
-         {% elif trigger.event.data.action_value | float < -10 %}
-           script.office_hub_adi_volume_down2
+           script.schreibtisch_bright_minus_50
          {% elif trigger.event.data.action_value | float < 0 %}
-           script.office_hub_adi_volume_down1
+            script.schreibtisch_bright_minus_25
          {% endif %}
 
 
@@ -762,6 +762,48 @@
      service: script.music_box_set_input_usb
     
 
+#################################################################
+############  Gäste Zimmer Switch 
+#################################################################
+
+- alias: Single Press - Gäste Zimmer Switch 
+  trigger:
+    platform: event
+    event_type: xiaomi_aqara.click
+    event_data:
+      entity_id: binary_sensor.gaeste_zimmer_switch
+      click_type: single
+  action:
+    - service: media_player.media_next_track
+      entity_id: media_player.gastezimmer_boxen_2
+
+
+- alias: Double Press - Gäste Zimmer Switch 
+  trigger:
+    platform: event
+    event_type: xiaomi_aqara.click
+    event_data:
+      entity_id: binary_sensor.gaeste_zimmer_switch
+      click_type: double
+  action:  
+    - service: media_player.media_previous_track
+      entity_id: media_player.gastezimmer_boxen_2
+      
+
+    
+
+- alias: Long press - Gäste Zimmer Switch 
+  trigger:
+    platform: event
+    event_type: xiaomi_aqara.click
+    event_data:
+      entity_id: binary_sensor.gaeste_zimmer_switch
+      click_type: long_click_press
+  action:
+    - service: media_player.media_play_pause
+      entity_id: media_player.gastezimmer_boxen_2
+
+    
 
 
 

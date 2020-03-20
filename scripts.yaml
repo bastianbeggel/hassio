@@ -93,24 +93,170 @@
 
 
 ################################################################################################
-############ Tisch
+############ Tischlampe
 ################################################################################################
+
+
+'tisch_bright_plus_100':
+  alias: Tisch Bright plus 100
+  sequence:
+    - service: light.turn_on
+      data:
+        entity_id: light.tischlampe
+        brightness_step: 100
+
+'tisch_bright_plus_50':
+  alias: Tisch Bright plus 50
+  sequence:
+    - service: light.turn_on
+      data:
+        entity_id: light.tischlampe
+        brightness_step: 50
+
+'tisch_bright_plus_25':
+  alias: Tisch Bright plus 25
+  sequence:
+    - service: light.turn_on
+      data:
+        entity_id: light.tischlampe
+        brightness_step: 25
+
+
+'tisch_bright_minus_100':
+  alias: Tisch Bright minus 100
+  sequence:
+    - service: light.turn_on
+      data:    
+        entity_id: light.tischlampe
+        brightness_step: -100
+
+'tisch_bright_minus_50':
+  alias: Tisch Bright minus 50
+  sequence:
+    - service: light.turn_on
+      data:    
+        entity_id: light.tischlampe
+        brightness_step: -50
+
+'tisch_bright_minus_25':
+  alias: Tisch Bright minus 25
+  sequence:
+    - service: light.turn_on
+      data:    
+        entity_id: light.tischlampe
+        brightness_step: -25
+
+
 
 
 'tisch_on':
   alias: tisch_on
   sequence:
-  - data:
-      event: tisch_on
-    service: ifttt.trigger
+    - service: light.turn_on
+      entity_id: light.tischlampe
 
 'tisch_off':
   alias: tisch_off
   sequence:
-  - data:
-      event: tisch_off
-    service: ifttt.trigger
+    - service: light.turn_off
+      entity_id: light.tischlampe
 
+
+'tisch_toggle':
+  alias: tisch_toggle
+  sequence:
+    - service: light.toggle
+      entity_id: light.tischlampe
+
+
+
+################################################################################################
+############ Schreibtischlamp (Bastian) 
+################################################################################################
+
+
+'schreibtisch_bright_plus_100':
+  alias: Schreibtisch Bright plus 100
+  sequence:
+    - service: light.turn_on
+      data:
+        entity_id: light.schreibtischlampe
+        brightness_step: 100
+
+'schreibtisch_bright_plus_50':
+  alias: Schreibtisch Bright plus 50
+  sequence:
+    - service: light.turn_on
+      data:
+        entity_id: light.schreibtischlampe
+        brightness_step: 50
+
+'schreibtisch_bright_plus_25':
+  alias: Schreibtisch Bright plus 25
+  sequence:
+    - service: light.turn_on
+      data:
+        entity_id: light.schreibtischlampe
+        brightness_step: 25
+
+
+'schreibtisch_bright_minus_100':
+  alias: Schreibtisch Bright minus 100
+  sequence:
+    - service: light.turn_on
+      data:    
+        entity_id: light.schreibtischlampe
+        brightness_step: -100
+
+'schreibtisch_bright_minus_50':
+  alias: Schreibtisch Bright minus 50
+  sequence:
+    - service: light.turn_on
+      data:    
+        entity_id: light.schreibtischlampe
+        brightness_step: -50
+
+'schreibtisch_bright_minus_25':
+  alias: Schreibtisch Bright minus 25
+  sequence:
+    - service: light.turn_on
+      data:    
+        entity_id: light.schreibtischlampe
+        brightness_step: -25
+
+
+'schreibtisch_red':
+  alias: Schreibtisch Auf Rot
+  sequence:
+    - service: light.turn_on
+      data:    
+        entity_id: light.schreibtischlampe
+        color_name: "red"
+
+'schreibtisch_white':
+  alias: Schtisch auf Weiß 
+  sequence:
+    - service: light.turn_on
+      data:    
+        entity_id: light.schreibtischlampe
+        color_name: "white"
+
+'schreibtisch_green':
+  alias: Schreibtisch auf Grün
+  sequence:
+    - service: light.turn_on
+      data:    
+        entity_id: light.schreibtischlampe
+        color_name: "green"
+
+
+'schreibtisch_yellow':
+  alias: Schreibtisch auf Grün
+  sequence:
+    - service: light.turn_on
+      data:    
+        entity_id: light.schreibtischlampe
+        color_name: "yellow"
 
 ################################################################################################
 ############ Marshall 
@@ -164,6 +310,8 @@
   sequence:
     - service: switch.turn_off
       entity_id: switch.couch
+    - service: light.turn_off
+      entity_id: light.wohnzimmer_lampe
     - service: script.kueche_off
     - service: script.tisch_off    
 #    - service: shell_command.tv_power_off
@@ -298,6 +446,9 @@
 #  alias: ThinkCentre Wakeup WOL
 #  sequence:
 #    - service: shell_command.thinkcentre_wakeup_wol
+
+
+
 
 
 

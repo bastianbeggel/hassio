@@ -49,7 +49,7 @@ frontend:
 config:
 
 http:
-  api_password: !secret http_password
+  #api_password: !secret http_password
   # Uncomment this if you are using SSL/TLS, running in Docker container, etc.
   # base_url: example.duckdns.org:8123
 
@@ -167,11 +167,11 @@ cloud:
         - light.bastian_decke
         - light.bastian_lampe
         - light.couchlicht
-        - light.tischlicht
         - light.wohnzimmerlicht        
         - light.kuechenlicht
         - light.thekenlicht   
-        - light.kammerlicht     
+        - light.kammerlicht 
+        - light.tischlampe    
         - switch.media_center
         - switch.carbon_x1
         - switch.lenovo_t480
@@ -252,9 +252,9 @@ light:
   - platform: switch
     name: Couchlicht
     entity_id: switch.couch
-  - platform: switch
-    name: Tischlicht
-    entity_id: switch.04200102dc4f222a335a
+#  - platform: switch
+#    name: Tischlicht
+#    entity_id: switch.04200102dc4f222a335a
   - platform: switch
     name: Wohnzimmerlicht
     entity_id: switch.wohnzimmer_decke
@@ -264,6 +264,41 @@ light:
   - platform: switch
     name: Wohnzimmer_Virt1
     entity_id: switch.wohnzimmer_virt_couch_tisch
+#  - platform: template
+#    lights:
+#      basti_virt_decke_schreibtischlampe_bright:
+#        friendly_name: "Basti Virt Decke SchtLampe Bright"
+#        level_template: "{{ state_attr('sensor.theater_brightness', 'lux')|int }}"
+#        value_template: "{{ state_attr('sensor.theater_brightness', 'lux')|int > 0 }}"
+#        temperature_template: "{{states('input_number.temperature_input') | int}}"
+#        color_template: "({{states('input_number.h_input') | int}}, {{states('input_number.s_input') | int}})"
+#        turn_on:
+#          service: script.theater_lights_on
+#        turn_off:
+#          service: script.theater_lights_off
+#        set_level:
+#          service: script.theater_lights_level
+#          data_template:
+#            brightness: "{{ brightness }}"
+#        set_temperature:
+#          service: input_number.set_value
+#         data_template:
+#            value: "{{ color_temp }}"
+#            entity_id: input_number.temperature_input
+#        set_color:
+#          - service: input_number.set_value
+#            data_template:
+#              value: "{{ h }}"
+#              entity_id: input_number.h_input
+#          - service: input_number.set_value
+#            data_template:
+#              value: "{{ s }}"
+#              entity_id: input_number.s_input
+
+## code example:
+ #data_template:
+ #   brightness: '{{states.light.light_name.attributes.brightness + 10}}'
+
 
 #climate.turn_off   
 #climate.bastian_heizung
@@ -301,6 +336,21 @@ switch:
 
   - platform: template
     switches:
+      basti_virt_decke_schreibtischlampe:
+        friendly_name: "Basti Virtuell Decke Schreibtischlampe"
+        value_template: "off"
+        turn_on:
+          service: switch.toggle
+          data:
+            entity_id: switch.basti_decke 
+        turn_off:
+          service: light.toggle
+          data:
+            entity_id: ligth.schreibtischlampe
+
+
+  - platform: template
+    switches:
       basti_virt_decke_decke:
         friendly_name: "Basti Virtuell Decke Decke"
         value_template: "off"
@@ -327,7 +377,22 @@ switch:
           data:
             entity_id: switch.basti_lampe 
 
-            
+
+  - platform: template
+    switches:
+      basti_virt_decke_lampe:
+        friendly_name: "Basti Virtuell Decke Lampe"
+        value_template: "off"
+        turn_on:
+          service: switch.toggle
+          data:
+            entity_id: switch.basti_decke
+        turn_off:
+          service: switch.toggle
+          data:
+            entity_id: switch.basti_lampe 
+
+
   - platform: template
     switches:
       wohnzimmer_virt_couch_tisch:
@@ -338,20 +403,16 @@ switch:
           data:
             entity_id: switch.couch 
         turn_off:
-          service: switch.toggle
-          data:
-            entity_id: switch.04200102dc4f222a335a ## tisch          
-    
-      wohnzimmer_decke:
-        friendly_name: "Wohnzimmer Decke"
+          service: script.tisch_toggle
+
+
+      wohnzimmer_virt_decke_kueche:
+        friendly_name: "Wohnzimmer Virtuell Decke Kueche"
         value_template: "off"
         turn_on:
           service: script.wohnzimmer_decke_an_aus
         turn_off:
-          #service: script.wohnzimmer_decke_an_aus    
           service: script.kueche_toggle
-#          data:
-#            entity_id: switch.kueche_toggle
       media_center:
         friendly_name: "Media Center"
         value_template: "{{ is_state('switch.media_center_internal', 'on') }}"
@@ -440,22 +501,22 @@ switch:
     retain: false
   - platform: wake_on_lan
     name: "Media PC"
-    mac_address: "00:23:24:f9:d3:79"
+    mac: "00:23:24:f9:d3:79"
     #wird ab 1.03 zu mac: "00:23:24:f9:d3:79"
     host: "192.168.178.53"
     turn_off:
       service: shell_command.thinkcentre_shutdown_h
   - platform: wake_on_lan
     name: "Carbon X1"
-    mac_address: "54:e1:ad:d9:3f:52"
+    mac: "54:e1:ad:d9:3f:52"
     host: "192.168.178.21"
   - platform: wake_on_lan
     name: "Lenovo T480"
-    mac_address: "8c:16:45:d0:1c:36"
+    mac: "8c:16:45:d0:1c:36"
     host: "192.168.178.80"
   - platform: wake_on_lan
     name: "Thinkpad Dock"
-    mac_address: "3c:e1:a1:c0:30:c2"
+    mac: "3c:e1:a1:c0:30:c2"
     host: "192.168.178.98"
 
 
@@ -580,9 +641,7 @@ emulated_hue:
   exposed_domains:
     - light
     - switch
-  entities:
-    light.bastian_decke:
-      name: hue_bastian_decke
+#  entities:
 
 roon:
 
