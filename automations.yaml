@@ -811,3 +811,23 @@
 #webhook payload: 
 #{ "action": "call_service", "service": "light.turn_on", "entity_id": "light.living_room" }      
 #{ "action": "call_service", "service": "script.turn_on", "entity_id": "script.musik_station_aus" }      
+
+
+
+- alias: Harmony Hub monitor
+  trigger:
+    platform: state
+    entity_id: remote.harmony_hub
+    to: 'unavailable'
+  action:
+    - service: remote.harmony_sync
+      entity_id: remote.harmony_hub
+
+- alias: Music Hub monitor
+  trigger:
+    platform: state
+    entity_id: remote.office_hub
+    to: 'unavailable'
+  action:
+    - service: remote.harmony_sync
+      entity_id: remote.office_hub
