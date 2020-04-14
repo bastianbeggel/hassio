@@ -386,16 +386,91 @@
 ############ BASTI CUBE 
 ################################################################################################
 
-- alias: B-Cube to move
-  trigger:
-    platform: event
-    event_type: xiaomi_aqara.cube_action
-    event_data:
-      entity_id: binary_sensor.bcube
-      action_type: move
-  action:
-    - service: script.music_box_next_track
+#remote_flip_180_degrees,
+#remote_moved_any_side
+#remote_double_tap_any_side
+#remote_falling
+#remote_rotate_from_side_1 
+#remote_turned_clockwise
+#remote_turned_counter_clockwise
+#remote_gyro_activated (erschüttert)
+#remote_turned_clockwise
+#remote_turned_counter_clockwise
 
+#type: remote_rotate_from_side_6
+#subtype: side_1
+
+#type: remote_double_tap
+#subtype: side_1
+
+#type: remote_moved
+#subtype: side_1
+
+- alias: B-Cube to flip90
+  description: 'B-Cube to flip90'
+  trigger:
+  - device_id: 66d6cab215e84f2c9809ad12011a5009
+    domain: deconz
+    platform: device
+    subtype: ''
+    type: remote_flip_90_degrees
+  condition: []
+  action:
+  - data: {}
+    entity_id: light.schreibtischlampe
+    service: light.toggle
+
+
+- alias: B-Cube to move
+  description: 'B-Cube to move'
+  trigger:
+  - device_id: 66d6cab215e84f2c9809ad12011a5009
+    domain: deconz
+    platform: device
+    subtype: ''
+    type: remote_moved_any_side
+  condition: []
+  action:
+  - service: script.music_box_next_track
+
+
+#- alias: B-Cube to move
+#  trigger:
+#    platform: event
+#    event_type: xiaomi_aqara.cube_action
+#    event_data:
+#      entity_id: binary_sensor.bcube
+#      action_type: move
+#  action:
+#    - service: script.music_box_next_track
+
+
+- alias: B-Cube to air-shake
+  description: 'B-Cube to air-shake'
+  trigger:
+  - device_id: 66d6cab215e84f2c9809ad12011a5009
+    domain: deconz
+    platform: device
+    subtype: ''
+    type: remote_gyro_activated
+  condition: []
+  action:
+    - service: script.turn_on
+      data:
+        entity_id: script.bastian_arbeitsplatz_an
+
+
+#- alias: B-Cube to air-shake
+#  trigger:
+#    platform: event
+#    event_type: xiaomi_aqara.cube_action
+#    event_data:
+#      entity_id: binary_sensor.bcube
+#      action_type: shake_air
+#  action:
+#    - service: script.turn_on
+#      data:
+#        entity_id: script.bastian_arbeitsplatz_an
 
 - alias: B-Cube to tab twice
   trigger:
@@ -408,83 +483,110 @@
     - service: script.music_box_play_pause 
       
 
-
-- alias: B-Cube to air-shake
-  trigger:
-    platform: event
-    event_type: xiaomi_aqara.cube_action
-    event_data:
-      entity_id: binary_sensor.bcube
-      action_type: shake_air
-  action:
-    - service: script.turn_on
-      data:
-        entity_id: script.bastian_arbeitsplatz_an
-
-
-- alias: B-Cube to flip90
-  trigger:
-    platform: event
-    event_type: xiaomi_aqara.cube_action
-    event_data:
-      entity_id: binary_sensor.bcube
-      action_type: flip90
-  action:
-    - service: light.toggle
-      entity_id: light.schreibtischlampe
-
-
-
 - alias: B-Cube to free_fall
+  description: 'B-Cube to free_fall'
   trigger:
-    platform: event
-    event_type: xiaomi_aqara.cube_action
-    event_data:
-      entity_id: binary_sensor.bcube
-      action_type: free_fall
+  - device_id: 66d6cab215e84f2c9809ad12011a5009
+    domain: deconz
+    platform: device
+    subtype: ''
+    type: remote_falling
+  condition: []
   action:
     - service: switch.turn_on
       entity_id: switch.thinkpad_dock     
 
 
+#- alias: B-Cube to free_fall
+#  trigger:
+#    platform: event
+#    event_type: xiaomi_aqara.cube_action
+#    event_data:
+#      entity_id: binary_sensor.bcube
+#      action_type: free_fall
+#  action:
+#    - service: switch.turn_on
+#      entity_id: switch.thinkpad_dock     
+
+
+
 - alias: B-Cube to flip180
+  description: 'B-Cube to flip180'
   trigger:
-    platform: event
-    event_type: xiaomi_aqara.cube_action
-    event_data:
-      entity_id: binary_sensor.bcube
-      action_type: flip180
+  - device_id: 66d6cab215e84f2c9809ad12011a5009
+    domain: deconz
+    platform: device
+    subtype: ''
+    type: remote_flip_180_degrees
+  condition: []
   action:
     - service: switch.turn_off
       entity_id: switch.boxen
-#    - service: switch.turn_off 
-#      entity_id: switch.media_center # media_center
-#    - service: switch.turn_off
-#      entity_id: switch.media_pc
-    
 
-- alias: B-Cube to rotate
+
+#- alias: B-Cube to flip180
+#  trigger:
+#    platform: event
+#    event_type: xiaomi_aqara.cube_action
+#    event_data:
+#      entity_id: binary_sensor.bcube
+#      action_type: flip180
+#  action:
+#    - service: switch.turn_off
+#      entity_id: switch.boxen
+
+- alias: B-Cube to rotate clock
+  description: 'B-Cube to rotate clock'
   trigger:
-    platform: event
-    event_type: xiaomi_aqara.cube_action
-    event_data:
-      entity_id: binary_sensor.bcube
-      action_type: rotate
+  - device_id: 66d6cab215e84f2c9809ad12011a5009
+    domain: deconz
+    platform: device
+    subtype: ''
+    type: remote_turned_clockwise
+  condition: []
   action:
-      service_template: >
-         {% if trigger.event.data.action_value | float > 20 %}
-           script.schreibtisch_bright_plus_100
-         {% elif trigger.event.data.action_value | float > 15 %}
-           script.schreibtisch_bright_plus_50
-         {% elif trigger.event.data.action_value | float > 0 %}
-           script.schreibtisch_bright_plus_25
-         {% elif trigger.event.data.action_value | float < -20 %}
-           script.schreibtisch_bright_minus_100
-         {% elif trigger.event.data.action_value | float < -15 %}
-           script.schreibtisch_bright_minus_50
-         {% elif trigger.event.data.action_value | float < 0 %}
-            script.schreibtisch_bright_minus_25
-         {% endif %}
+    - service: script.turn_on
+      data:
+        entity_id: script.schreibtisch_bright_plus_50
+  
+- alias: B-Cube to rotate counter clock
+  description: 'B-Cube to rotate counter clock'
+  trigger:
+  - device_id: 66d6cab215e84f2c9809ad12011a5009
+    domain: deconz
+    platform: device
+    subtype: ''
+    type: remote_turned_counter_clockwise
+  condition: []
+  action:
+    - service: script.turn_on
+      data:
+        entity_id: script.schreibtisch_bright_minus_50
+  
+
+
+#- alias: B-Cube to rotate
+#  trigger:
+#    platform: event
+#    event_type: xiaomi_aqara.cube_action
+#    event_data:
+#      entity_id: binary_sensor.bcube
+#      action_type: rotate
+#  action:
+#      service_template: >
+#         {% if trigger.event.data.action_value | float > 20 %}
+#           script.schreibtisch_bright_plus_100
+#         {% elif trigger.event.data.action_value | float > 15 %}
+#           script.schreibtisch_bright_plus_50
+#         {% elif trigger.event.data.action_value | float > 0 %}
+#           script.schreibtisch_bright_plus_25
+#         {% elif trigger.event.data.action_value | float < -20 %}
+#           script.schreibtisch_bright_minus_100
+#         {% elif trigger.event.data.action_value | float < -15 %}
+#           script.schreibtisch_bright_minus_50
+#         {% elif trigger.event.data.action_value | float < 0 %}
+#            script.schreibtisch_bright_minus_25
+#         {% endif %}
 
 
 ################################################################################################
