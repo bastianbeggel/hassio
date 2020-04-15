@@ -103,11 +103,11 @@
 
 - alias: Single Press - Basti Bed Switch
   trigger:
-    platform: event
-    event_type: xiaomi_aqara.click
-    event_data:
-      entity_id: binary_sensor.basti_bett_switch
-      click_type: single
+  - device_id: b7294f48c20b40c395081429ca461d2f
+    domain: deconz
+    platform: device
+    type: remote_button_short_release
+    subtype: turn_on  
   action:
     - service: switch.toggle
       data:
@@ -115,11 +115,11 @@
 
 - alias: Double Press - Basti Bed Switch
   trigger:
-    platform: event
-    event_type: xiaomi_aqara.click
-    event_data:
-      entity_id: binary_sensor.basti_bett_switch
-      click_type: double
+  - device_id: b7294f48c20b40c395081429ca461d2f
+    domain: deconz
+    platform: device
+    type: remote_button_double_press
+    subtype: turn_on  
   action:
     - service: switch.toggle
       data:
@@ -127,11 +127,11 @@
 
 - alias: Long Press - Basti Bed Switch
   trigger:
-    platform: event
-    event_type: xiaomi_aqara.click
-    event_data:
-      entity_id: binary_sensor.basti_bett_switch
-      click_type: long_click_press
+  - device_id: b7294f48c20b40c395081429ca461d2f
+    domain: deconz
+    platform: device
+    type: remote_button_long_press
+    subtype: turn_on  
   action:
     - service: switch.toggle
       data:
@@ -139,6 +139,18 @@
     - service: switch.toggle
       data:
         entity_id: switch.basti_decke
+
+- alias: Tripple Press - Basti Bed Switch
+  trigger:
+  - device_id: b7294f48c20b40c395081429ca461d2f
+    domain: deconz
+    platform: device
+    type: remote_button_triple_press
+    subtype: turn_on  
+  action:
+    - service: light.toggle
+      data:
+        entity_id: light.schreibtischlampe
 
 
 
