@@ -194,37 +194,34 @@
 
 - alias: Küchenlicht - Thekenschalter 
   trigger:
-    platform: event
-    event_type: xiaomi_aqara.click
-    event_data:
-      entity_id: binary_sensor.kitchen_switch
-      click_type: single
+  - device_id: 5b75a69731a14ff495d9a97119a0ce96
+    domain: deconz
+    platform: device
+    type: remote_button_short_press
+    subtype: turn_on
   action:
     - service: script.kueche_toggle
 
 
-
-
 - alias: Double Press - Wohnzimmer Decke
   trigger:
-    platform: event
-    event_type: xiaomi_aqara.click
-    event_data:
-      entity_id: binary_sensor.kitchen_switch
-      click_type: double
+  - device_id: 5b75a69731a14ff495d9a97119a0ce96
+    domain: deconz
+    platform: device
+    type: remote_button_double_press
+    subtype: turn_on
   action:
     - service: script.wohnzimmer_decke_an_aus
     
-
     
 
 - alias: Long press - Licher im Wohnzimmer und Küche aus
   trigger:
-    platform: event
-    event_type: xiaomi_aqara.click
-    event_data:
-      entity_id: binary_sensor.kitchen_switch
-      click_type: long_click_press
+  - device_id: 5b75a69731a14ff495d9a97119a0ce96
+    domain: deconz
+    platform: device
+    type: remote_button_long_press
+    subtype: turn_on
   action:
     - service: script.kueche_off
     - service: switch.turn_off
@@ -831,22 +828,22 @@
 
 - alias: Single Press - Desk
   trigger:
-    platform: event
-    event_type: xiaomi_aqara.click
-    event_data:
-      entity_id: binary_sensor.desk_switch
-      click_type: single
+  - device_id: df548952f7344a7495cc4a5f020c20cc
+    domain: deconz
+    platform: device
+    type: remote_button_short_release
+    subtype: turn_on
   action:
     service: script.desk_switch_to_coaxial_or_workstation_on
 
 
 - alias: Double Press - Desk
   trigger:
-    platform: event
-    event_type: xiaomi_aqara.click
-    event_data:
-      entity_id: binary_sensor.desk_switch
-      click_type: double
+  - device_id: df548952f7344a7495cc4a5f020c20cc
+    domain: deconz
+    platform: device
+    type: remote_button_double_press
+    subtype: turn_on      
   action:  
      service: script.music_box_set_input_toslink
       
@@ -855,11 +852,11 @@
 
 - alias: Long press - Desk
   trigger:
-    platform: event
-    event_type: xiaomi_aqara.click
-    event_data:
-      entity_id: binary_sensor.desk_switch
-      click_type: long_click_press
+  - device_id: df548952f7344a7495cc4a5f020c20cc
+    domain: deconz
+    platform: device
+    type: remote_button_long_press
+    subtype: turn_on
   action:
      service: script.music_box_set_input_usb
     
