@@ -758,7 +758,7 @@
   alias: Musik Box Set Input TOSLINK
   sequence:
     - service: script.office_hub_shd_input_optical
-    - service: script.office_hub_shd_volume_up ## nessesary to leave the switch inpute menu on the shd
+    #- service: script.office_hub_shd_volume_up ## nessesary to leave the switch inpute menu on the shd
     - service: input_select.select_option
       data_template:
         entity_id: input_select.preamp_select
@@ -768,7 +768,7 @@
   alias: Musik Box Set Input USB
   sequence:
     - service: script.office_hub_shd_input_usb
-    - service: script.office_hub_shd_volume_up ## nessesary to leave the switch inpute menu on the shd
+    #- service: script.office_hub_shd_volume_up ## nessesary to leave the switch inpute menu on the shd
     - service: input_select.select_option
       data_template:
         entity_id: input_select.preamp_select
@@ -779,7 +779,7 @@
   alias: Musik Box Set Input SPDIF
   sequence:
     - service: script.office_hub_shd_input_coaxial
-    - service: script.office_hub_shd_volume_up ## nessesary to leave the switch inpute menu on the shd
+    #- service: script.office_hub_shd_volume_up ## nessesary to leave the switch inpute menu on the shd
     - service: input_select.select_option
       data_template:
         entity_id: input_select.preamp_select

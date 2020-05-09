@@ -395,6 +395,15 @@ switch:
 
   - platform: template
     switches:
+      wohnzimmer_decke:
+        friendly_name: "Wohnzimmer Decke"
+        value_template: "off"
+        turn_on:
+          service: script.wohnzimmer_decke_an_aus
+        turn_off:
+          service: script.wohnzimmer_decke_an_aus
+
+
       wohnzimmer_virt_couch_tisch:
         friendly_name: "Wohnzimmer Virtuell Couch Tisch"
         value_template: "off"
