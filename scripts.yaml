@@ -874,7 +874,7 @@
         
 'office_hub_amp_vol_down':
   alias: Kef vol down
-  sequence:
+  sequence: 
     - service: remote.send_command
       data:
         entity_id: remote.office_hub
@@ -884,6 +884,27 @@
         delay_secs: 0.1     
         num_repeats: 10         
 
+ 
+
+#################################################################
+############ Amplifier über HS100 
+#################################################################
+
+
+'amplifier_an':
+  alias: Amplifier an
+  sequence:
+    - service: switch.turn_on
+      data:
+        entity_id: switch.amplifier
+
+
+'amplifier_aus':
+  alias: Amplifier aus
+  sequence:
+    - service: switch.turn_off
+      data:
+        entity_id: switch.amplifier
 
 
 

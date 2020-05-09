@@ -225,6 +225,7 @@ cloud:
 
 group: !include groups.yaml
 automation: !include automations.yaml
+automation old: !include automations_old.yaml
 script: !include scripts.yaml
 
 
@@ -466,30 +467,6 @@ switch:
     retain: true
   - platform: mqtt
     name: basti_lampe
-    state_topic: "stat/basti_zimmer/POWER1"
-    command_topic: "cmnd/basti_zimmer/POWER1"
-    availability_topic: "tele/basti_zimmer/LWT"
-    payload_on: "ON"
-    payload_off: "OFF"
-    payload_available: "online"
-    payload_not_available: "offline"    
-    optimistic: false
-    qos: 0
-    retain: true
-  - platform: mqtt
-    name: basti_decke
-    state_topic: "stat/basti_zimmer/POWER2"
-    command_topic: "cmnd/basti_zimmer/POWER2"
-    availability_topic: "tele/basti_zimmer/LWT"
-    payload_on: "ON"
-    payload_off: "OFF"
-    payload_available: "online"
-    payload_not_available: "offline"    
-    optimistic: false
-    qos: 0
-    retain: true
-  - platform: mqtt
-    name: basti_lampe_internal
     #friendly_name: Basti Lampe
     state_topic: "stat/basti_lampe/POWER"
     command_topic: "cmnd/basti_lampe/POWER"
@@ -508,6 +485,16 @@ switch:
     payload_on: "on"
     payload_off: "off"
     retain: false
+  - platform: mqtt
+    name: "basti_decke"
+    state_topic: "shellies/shelly1-4FFCFF/relay/0"
+    command_topic: "shellies/shelly1-4FFCFF/relay/0/command"
+    payload_on: "on"
+    payload_off: "off"
+    retain: false
+
+
+    
   - platform: wake_on_lan
     name: "Media PC"
     mac: "00:23:24:f9:d3:79"
@@ -664,6 +651,7 @@ tplink:
     - host: 192.168.178.29 #name: Couch
     - host: 192.168.178.28 #name: boxen_internal
     - host: 192.168.178.58 # name: media_center_internal
+    - host: 192.168.178.110 # name: amplifier
 
 
 input_number:

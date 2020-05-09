@@ -1,0 +1,960 @@
+
+#################################################################
+############ Housekeeping
+#################################################################
+
+
+- alias: Database Purge
+  trigger:
+    platform: time
+    at: '12:00:00'
+  action:
+    - service: recorder.purge
+      data:
+        keep_days: 14
+#        repack: true
+
+
+#################################################################
+############ Amplifier
+#################################################################
+
+- alias: Amplifier automatisch an wenn Strom auf Boxen
+  trigger:
+     platform: state
+     entity_id: switch.amplifier  
+     from: 'unavailable'
+     to: 'off'
+  action:
+    - service: switch.turn_on
+      data:
+        entity_id: switch.amplifier
+           
+
+   
+
+
+#################################################################
+############ Basti Lampe
+#################################################################
+
+- alias: Wandschalter zu Lampe An
+  trigger:
+     platform: state
+     entity_id: switch.basti_lampe  
+     from: 'off'
+     to: 'on'
+  action:
+    - service: switch.turn_on
+      data:
+        entity_id: switch.basti_lampe
+           
+
+- alias: Wandschalter zu Lampe Aus
+  trigger:
+     platform: state
+     entity_id: switch.basti_lampe  
+     from: 'on'
+     to: 'off'
+  action:
+    - service: switch.turn_off
+      data:
+        entity_id: switch.basti_lampe
+
+
+#################################################################
+############ Basti Switch Eingang
+#################################################################
+
+
+- alias: Single Press - Basti Switch
+  trigger:
+    platform: event
+    event_type: xiaomi_aqara.click
+    event_data:
+      entity_id: binary_sensor.basti_eingang_switch
+      click_type: single
+  action:
+    - service: switch.toggle
+      data:
+        entity_id: switch.basti_decke
+
+- alias: Double Press - Basti Switch
+  trigger:
+    platform: event
+    event_type: xiaomi_aqara.click
+    event_data:
+      entity_id: binary_sensor.basti_eingang_switch
+      click_type: double
+  action:
+    - service: switch.toggle
+      data:
+        entity_id: switch.basti_lampe
+
+- alias: Long Press - Basti Switch
+  trigger:
+    platform: event
+    event_type: xiaomi_aqara.click
+    event_data:
+      entity_id: binary_sensor.basti_eingang_switch
+      click_type: long_click_press
+  action:
+    - service: switch.turn_off
+      data:
+        entity_id: switch.basti_lampe
+    - service: switch.turn_off
+      data:
+        entity_id: switch.basti_decke
+    - service: light.turn_off
+      data:
+        entity_id: light.schreibtischlampe
+
+
+
+
+#################################################################
+############ Basti Switch Bett
+#################################################################
+
+
+- alias: Single Press - Basti Bed Switch
+  trigger:
+  - device_id: b7294f48c20b40c395081429ca461d2f
+    domain: deconz
+    platform: device
+    type: remote_button_short_release
+    subtype: turn_on  
+  action:
+    - service: switch.toggle
+      data:
+        entity_id: switch.basti_decke
+
+- alias: Double Press - Basti Bed Switch
+  trigger:
+  - device_id: b7294f48c20b40c395081429ca461d2f
+    domain: deconz
+    platform: device
+    type: remote_button_double_press
+    subtype: turn_on  
+  action:
+    - service: switch.toggle
+      data:
+        entity_id: switch.basti_lampe
+
+- alias: Long Press - Basti Bed Switch
+  trigger:
+  - device_id: b7294f48c20b40c395081429ca461d2f
+    domain: deconz
+    platform: device
+    type: remote_button_long_press
+    subtype: turn_on  
+  action:
+    - service: switch.toggle
+      data:
+        entity_id: switch.basti_lampe
+    - service: switch.toggle
+      data:
+        entity_id: switch.basti_decke
+
+- alias: Tripple Press - Basti Bed Switch
+  trigger:
+  - device_id: b7294f48c20b40c395081429ca461d2f
+    domain: deconz
+    platform: device
+    type: remote_button_triple_press
+    subtype: turn_on  
+  action:
+    - service: light.toggle
+      data:
+        entity_id: light.schreibtischlampe
+
+
+
+
+#################################################################
+############ Küche
+#################################################################
+
+
+- alias : Küche an um 06:45
+  initial_state: false
+  trigger:
+    platform: time
+    at : '06:30:00'
+  condition:
+     - condition: time
+       weekday:
+         - mon
+         - tue
+         - wed
+         - thu
+         - fri    
+  action:
+    service: script.kueche_on
+
+
+- alias : Küche aus um 07:15
+  initial_state: false
+  trigger:
+    platform: time
+    at: '07:15:00'
+  action:
+    service: script.kueche_off
+
+
+- alias: Erinnerung Tagesschau
+  initial_state: true
+  trigger: 
+    platform: time
+    at: '19:58:00'
+  action:
+    service: tts.google_translate_say
+    entity_id: media_player.living_room_speaker
+    data:
+      message: 'Tagesschau in 2 Minuten'  
+      language: 'de'
+
+
+
+#################################################################
+############ Küchen Switch 
+#################################################################
+
+- alias: Küchenlicht - Thekenschalter 
+  trigger:
+  - device_id: 5b75a69731a14ff495d9a97119a0ce96
+    domain: deconz
+    platform: device
+    type: remote_button_short_press
+    subtype: turn_on
+  action:
+    - service: script.kueche_toggle
+
+
+- alias: Double Press - Wohnzimmer Decke
+  trigger:
+  - device_id: 5b75a69731a14ff495d9a97119a0ce96
+    domain: deconz
+    platform: device
+    type: remote_button_double_press
+    subtype: turn_on
+  action:
+    - service: script.wohnzimmer_decke_an_aus
+    
+    
+
+- alias: Long press - Licher im Wohnzimmer und Küche aus
+  trigger:
+  - device_id: 5b75a69731a14ff495d9a97119a0ce96
+    domain: deconz
+    platform: device
+    type: remote_button_long_press
+    subtype: turn_on
+  action:
+    - service: script.kueche_off
+    - service: switch.turn_off
+      entity_id: switch.couch    
+    - service: script.tisch_off    
+    - service: light.turn_off
+      entity_id: light.gateway_light_7811dcded114
+    
+
+
+################################################################################################
+############ Wohnzimmer Switch 
+################################################################################################
+
+- alias: Wohnzimmer Switch - Single Press 
+  trigger:
+    platform: event
+    event_type: xiaomi_aqara.click
+    event_data:
+      entity_id: binary_sensor.wohnzimmer_switch
+      click_type: single
+  action:
+    - service: script.kueche_toggle
+
+
+- alias: Wohnzimmer Switch - Double Press
+  trigger:
+    platform: event
+    event_type: xiaomi_aqara.click
+    event_data:
+      entity_id: binary_sensor.wohnzimmer_switch
+      click_type: double
+  action:
+    - service: script.wohnzimmer_decke_an_aus
+      
+    
+
+- alias: Wohnzimmer Switch - Long press
+  trigger:
+    platform: event
+    event_type: xiaomi_aqara.click
+    event_data:
+      entity_id: binary_sensor.wohnzimmer_switch
+      click_type: long_click_press
+  action:
+    - service: switch.toggle
+      entity_id: switch.couch
+    
+
+
+
+
+################################################################################################
+############ KUECHE CUBE 
+################################################################################################
+
+
+- alias: Cube to flip90
+  trigger:
+    platform: event
+    event_type: xiaomi_aqara.cube_action
+    event_data:
+      entity_id: binary_sensor.kitchen_cube
+      action_type: flip90
+  action:
+    - service: script.tisch_toggle
+
+- alias: Cube to tab-twice
+  trigger:
+    platform: event
+    event_type: xiaomi_aqara.cube_action
+    event_data:
+      entity_id: binary_sensor.kitchen_cube
+      action_type: tap_twice
+  action:
+    - service: switch.toggle
+      entity_id: switch.couch
+
+
+- alias: Cube to move
+  trigger:
+    platform: event
+    event_type: xiaomi_aqara.cube_action
+    event_data:
+      entity_id: binary_sensor.kitchen_cube
+      action_type: move
+  action:
+    - service: light.toggle
+      entity_id: light.wohnzimmer_lampe
+
+
+- alias: Cube to shake_air
+  trigger:
+    platform: event
+    event_type: xiaomi_aqara.cube_action
+    event_data:
+      entity_id: binary_sensor.kitchen_cube
+      action_type: shake_air
+  action:
+    service: script.spiele_sr1_marshall
+
+- alias: Cube to free_fall
+  trigger:
+    platform: event
+    event_type: xiaomi_aqara.cube_action
+    event_data:
+      entity_id: binary_sensor.kitchen_cube
+      action_type: free_fall
+  action:
+    - service: media_player.media_stop
+      entity_id: media_player.stanmoreblackb269_3
+
+
+
+- alias: Cube to flip180
+  trigger:
+    platform: event
+    event_type: xiaomi_aqara.cube_action
+    event_data:
+      entity_id: binary_sensor.kitchen_cube
+      action_type: flip180
+  action:
+    service: script.gute_nacht
+    #- service: xiaomi_aqara.play_ringtone
+    #  data:
+    #    gw_mac: 78:11:DC:DE:D1:14
+    #    ringtone_id: 2
+    #    ringtone_vol: 1
+
+- alias: Cube to rotate
+  trigger:
+    platform: event
+    event_type: xiaomi_aqara.cube_action
+    event_data:
+      entity_id: binary_sensor.kitchen_cube
+      action_type: rotate
+  action:
+      service_template: >
+         {% if trigger.event.data.action_value | float > 20 %}
+           script.tisch_bright_plus_100
+         {% elif trigger.event.data.action_value | float > 15 %}
+           script.tisch_bright_plus_50
+         {% elif trigger.event.data.action_value | float > 0 %}
+           script.tisch_bright_plus_25
+         {% elif trigger.event.data.action_value | float < -20 %}
+           script.tisch_bright_minus_100
+         {% elif trigger.event.data.action_value | float < -15 %}
+           script.tisch_bright_minus_50
+         {% elif trigger.event.data.action_value | float < 0 %}
+           script.tisch_bright_minus_25
+         {% endif %}
+
+
+#flip90, flip180, move, tap_twice, shake_air, swing, alert, free_fall and rotate
+
+
+
+################################################################################################
+############ BASTI CUBE 
+################################################################################################
+
+#remote_flip_180_degrees,
+#remote_moved_any_side
+#remote_double_tap_any_side
+#remote_falling
+#remote_rotate_from_side_1 
+#remote_turned_clockwise
+#remote_turned_counter_clockwise
+#remote_gyro_activated (erschüttert)
+#remote_turned_clockwise
+#remote_turned_counter_clockwise
+
+#type: remote_rotate_from_side_6
+#subtype: side_1
+
+#type: remote_double_tap
+#subtype: side_1
+
+#type: remote_moved
+#subtype: side_1
+
+- alias: B-Cube to flip90
+  description: 'B-Cube to flip90'
+  trigger:
+  - device_id: 66d6cab215e84f2c9809ad12011a5009
+    domain: deconz
+    platform: device
+    subtype: ''
+    type: remote_flip_90_degrees
+  condition: []
+  action:
+  - data: {}
+    entity_id: light.schreibtischlampe
+    service: light.toggle
+
+
+- alias: B-Cube to move
+  description: 'B-Cube to move'
+  trigger:
+  - device_id: 66d6cab215e84f2c9809ad12011a5009
+    domain: deconz
+    platform: device
+    subtype: ''
+    type: remote_moved_any_side
+  condition: []
+  action:
+  - service: script.music_box_next_track
+
+
+#- alias: B-Cube to move
+#  trigger:
+#    platform: event
+#    event_type: xiaomi_aqara.cube_action
+#    event_data:
+#      entity_id: binary_sensor.bcube
+#      action_type: move
+#  action:
+#    - service: script.music_box_next_track
+
+
+- alias: B-Cube to air-shake
+  description: 'B-Cube to air-shake'
+  trigger:
+  - device_id: 66d6cab215e84f2c9809ad12011a5009
+    domain: deconz
+    platform: device
+    subtype: ''
+    type: remote_gyro_activated
+  condition: []
+  action:
+    - service: script.turn_on
+      data:
+        entity_id: script.bastian_arbeitsplatz_an
+
+
+#- alias: B-Cube to air-shake
+#  trigger:
+#    platform: event
+#    event_type: xiaomi_aqara.cube_action
+#    event_data:
+#      entity_id: binary_sensor.bcube
+#      action_type: shake_air
+#  action:
+#    - service: script.turn_on
+#      data:
+#        entity_id: script.bastian_arbeitsplatz_an
+
+- alias: B-Cube to tab twice
+  trigger:
+    platform: event
+    event_type: xiaomi_aqara.cube_action
+    event_data:
+      entity_id: binary_sensor.bcube
+      action_type: tap_twice
+  action:
+    - service: script.music_box_play_pause 
+      
+
+- alias: B-Cube to free_fall
+  description: 'B-Cube to free_fall'
+  trigger:
+  - device_id: 66d6cab215e84f2c9809ad12011a5009
+    domain: deconz
+    platform: device
+    subtype: ''
+    type: remote_falling
+  condition: []
+  action:
+    - service: switch.turn_on
+      entity_id: switch.thinkpad_dock     
+
+
+#- alias: B-Cube to free_fall
+#  trigger:
+#    platform: event
+#    event_type: xiaomi_aqara.cube_action
+#    event_data:
+#      entity_id: binary_sensor.bcube
+#      action_type: free_fall
+#  action:
+#    - service: switch.turn_on
+#      entity_id: switch.thinkpad_dock     
+
+
+
+- alias: B-Cube to flip180
+  description: 'B-Cube to flip180'
+  trigger:
+  - device_id: 66d6cab215e84f2c9809ad12011a5009
+    domain: deconz
+    platform: device
+    subtype: ''
+    type: remote_flip_180_degrees
+  condition: []
+  action:
+    - service: switch.turn_off
+      entity_id: switch.boxen
+
+
+#- alias: B-Cube to flip180
+#  trigger:
+#    platform: event
+#    event_type: xiaomi_aqara.cube_action
+#    event_data:
+#      entity_id: binary_sensor.bcube
+#      action_type: flip180
+#  action:
+#    - service: switch.turn_off
+#      entity_id: switch.boxen
+
+- alias: B-Cube to rotate clock
+  description: 'B-Cube to rotate clock'
+  trigger:
+  - device_id: 66d6cab215e84f2c9809ad12011a5009
+    domain: deconz
+    platform: device
+    subtype: ''
+    type: remote_turned_clockwise
+  condition: []
+  action:
+    - service: script.turn_on
+      data:
+        entity_id: script.schreibtisch_bright_plus_50
+  
+- alias: B-Cube to rotate counter clock
+  description: 'B-Cube to rotate counter clock'
+  trigger:
+  - device_id: 66d6cab215e84f2c9809ad12011a5009
+    domain: deconz
+    platform: device
+    subtype: ''
+    type: remote_turned_counter_clockwise
+  condition: []
+  action:
+    - service: script.turn_on
+      data:
+        entity_id: script.schreibtisch_bright_minus_50
+  
+
+
+#- alias: B-Cube to rotate
+#  trigger:
+#    platform: event
+#    event_type: xiaomi_aqara.cube_action
+#    event_data:
+#      entity_id: binary_sensor.bcube
+#      action_type: rotate
+#  action:
+#      service_template: >
+#         {% if trigger.event.data.action_value | float > 20 %}
+#           script.schreibtisch_bright_plus_100
+#         {% elif trigger.event.data.action_value | float > 15 %}
+#           script.schreibtisch_bright_plus_50
+#         {% elif trigger.event.data.action_value | float > 0 %}
+#           script.schreibtisch_bright_plus_25
+#         {% elif trigger.event.data.action_value | float < -20 %}
+#           script.schreibtisch_bright_minus_100
+#         {% elif trigger.event.data.action_value | float < -15 %}
+#           script.schreibtisch_bright_minus_50
+#         {% elif trigger.event.data.action_value | float < 0 %}
+#            script.schreibtisch_bright_minus_25
+#         {% endif %}
+
+
+################################################################################################
+############ Kammer
+################################################################################################
+
+- alias: Kammer-Licht bei Bewegung
+  trigger:
+    platform: state
+    entity_id: binary_sensor.motion_sensor_158d0002239b1a
+    to: 'on'
+  action:
+    service: homeassistant.turn_on
+    entity_id: switch.kammer
+
+- alias: Lammerlicht Aus nach 2 Minuten 
+  trigger:
+    platform: state
+    entity_id: binary_sensor.motion_sensor_158d0002239b1a
+    to: 'off'
+    for:
+      minutes: 2
+  action:
+    service: homeassistant.turn_off
+    entity_id: switch.kammer
+    
+- alias: Cloud Webhooks 
+  trigger:
+    platform: event
+    event_type: ifttt_webhook_received
+    event_data:
+      action: call_service
+  action:
+    service_template: '{{ trigger.event.data.service }}'
+    data_template:
+      entity_id: '{{ trigger.event.data.entity_id }}'    
+
+
+
+################################################################################################
+############ RF Remote - OSMC
+################################################################################################
+
+- alias: RF Ok-> Decke Basti
+  trigger:
+    platform: event
+    event_type: keyboard_remote2_command_received
+    event_data:
+      device_descriptor: "/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd"
+      key_code: 28 # ok
+  action:
+    service: light.toggle
+    entity_id: light.bastian_decke
+
+- alias: RF OK long press-> Lampe Basti
+  trigger:
+    platform: event
+    event_type: keyboard_remote2_command_received
+    event_data:
+      device_descriptor: "/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd"
+      key_code: 1028 # ok
+  action:
+    service: light.toggle
+    entity_id: light.bastian_lampe
+
+
+
+- alias: RF Info-> ADI Toggle View 
+  trigger:
+    platform: event
+    event_type: keyboard_remote2_command_received
+    event_data:
+      device_descriptor: "/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd"
+      key_code: 23 # info
+  action:
+    #service: script.office_hub_nuprime_toggle_display
+    service: script.office_hub_adi_toggle_view
+    
+    
+- alias: RF Info Long Press-> Auto Dark Mode 
+  trigger:
+    platform: event
+    event_type: keyboard_remote2_command_received
+    event_data:
+      device_descriptor: "/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd"
+      key_code: 1023 # info
+  action:
+    #service: script.office_hub_nuprime_toggle_display
+    service: script.office_hub_adi_toggle_dark_mode    
+    
+- alias: RF Home -> Boxen an/ Media PC an 
+  trigger:
+    platform: event
+    event_type: keyboard_remote2_command_received
+    event_data:
+      device_descriptor: "/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd"
+      key_code: 102 # home
+  action:
+    - service: switch.turn_on
+      entity_id: switch.boxen
+    - service: script.media_pc_an
+      
+
+- alias: RF Home long press-> Boxen aus 
+  trigger:
+    platform: event
+    event_type: keyboard_remote2_command_received
+    event_data:
+      device_descriptor: "/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd"
+      key_code: 1102 # home
+  action:
+    - service: script.musik_station_aus
+      
+
+
+- alias: RF Menu-> Musik Box input LAN
+  trigger:
+    platform: event
+    event_type: keyboard_remote2_command_received
+    event_data:
+      device_descriptor: "/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd"
+      key_code: 46 # menu 
+  action:
+    service: script.music_box_set_input_lan
+
+
+
+- alias: RF Menu long press-> Musik Box input Toslink
+  trigger:
+    platform: event
+    event_type: keyboard_remote2_command_received
+    event_data:
+      device_descriptor: "/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd"
+      key_code: 1046 # menu 
+  action:
+    service: script.music_box_set_input_toslink
+
+
+- alias: RF Right-> Next song
+  trigger:
+    platform: event
+    event_type: keyboard_remote2_command_received
+    event_data:
+      device_descriptor: "/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd"
+      key_code: 106 # Right
+  action:
+    service: script.music_box_next_track
+
+
+- alias: RF Right long press -> Play pause 
+  trigger:
+    platform: event
+    event_type: keyboard_remote2_command_received
+    event_data:
+      device_descriptor: "/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd"
+      key_code: 1106 # Right
+  action:
+    service: script.music_box_play_pause
+
+
+
+- alias: RF Left-> Prev Song
+  trigger:
+    platform: event
+    event_type: keyboard_remote2_command_received
+    event_data:
+      device_descriptor: "/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd"
+      key_code: 105 # left
+  action:
+    service: script.music_box_prev_track
+
+
+- alias: RF Up-> Seek +30sec
+  trigger:
+    platform: event
+    event_type: keyboard_remote2_command_received
+    event_data:
+      device_descriptor: "/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd"
+      key_code: 103 # up 
+  action:
+    service: script.music_box_seek_forward
+
+
+- alias: RF Down-> Seek -10sec
+  trigger:
+    platform: event
+    event_type: keyboard_remote2_command_received
+    event_data:
+      device_descriptor: "/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd"
+      key_code: 108 # down
+  action:
+    service: script.music_box_seek_backward
+
+
+
+- alias: RF Vol-Down-> Vol down
+  trigger:
+    platform: event
+    event_type: keyboard_remote2_command_received
+    event_data:
+      device_descriptor: "/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd"
+      key_code: 12 # vol down
+  action:
+    service: script.music_box_volume_down1
+    
+
+- alias: RF Vol-Down long press-> Amp Vol down
+  trigger:
+    platform: event
+    event_type: keyboard_remote2_command_received
+    event_data:
+      device_descriptor: "/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd"
+      key_code: 1012 # vol down
+  action:
+    #service: script.music_box_preamp_volume_down1
+    service: script.office_hub_amp_vol_down
+
+- alias: RF Vol-Up-> Vol up
+  trigger:
+    platform: event
+    event_type: keyboard_remote2_command_received
+    event_data:
+      device_descriptor: "/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd"
+      key_code: 13 # vol up
+  action:
+    service: script.music_box_volume_up1
+    
+- alias: RF Vol-Up long press-> Amp Vol up
+  trigger:
+    platform: event
+    event_type: keyboard_remote2_command_received
+    event_data:
+      device_descriptor: "/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd"
+      key_code: 1013 # vol up
+  action:
+    service: script.office_hub_amp_vol_up
+
+
+#################################################################
+############ DESK Switch / preamp switch
+#################################################################
+
+- alias: Single Press - Desk
+  trigger:
+  - device_id: df548952f7344a7495cc4a5f020c20cc
+    domain: deconz
+    platform: device
+    type: remote_button_short_release
+    subtype: turn_on
+  action:
+    service: script.desk_switch_to_coaxial_or_workstation_on
+
+
+- alias: Double Press - Desk
+  trigger:
+  - device_id: df548952f7344a7495cc4a5f020c20cc
+    domain: deconz
+    platform: device
+    type: remote_button_double_press
+    subtype: turn_on      
+  action:  
+     service: script.music_box_set_input_toslink
+      
+
+    
+
+- alias: Long press - Desk
+  trigger:
+  - device_id: df548952f7344a7495cc4a5f020c20cc
+    domain: deconz
+    platform: device
+    type: remote_button_long_press
+    subtype: turn_on
+  action:
+     service: script.music_box_set_input_usb
+    
+
+#################################################################
+############  Gäste Zimmer Switch 
+#################################################################
+
+- alias: Single Press - Gäste Zimmer Switch 
+  trigger:
+    platform: event
+    event_type: xiaomi_aqara.click
+    event_data:
+      entity_id: binary_sensor.gaeste_zimmer_switch
+      click_type: single
+  action:
+    - service: media_player.media_next_track
+      entity_id: media_player.gastezimmer_boxen_2
+
+
+- alias: Double Press - Gäste Zimmer Switch 
+  trigger:
+    platform: event
+    event_type: xiaomi_aqara.click
+    event_data:
+      entity_id: binary_sensor.gaeste_zimmer_switch
+      click_type: double
+  action:  
+    - service: media_player.media_previous_track
+      entity_id: media_player.gastezimmer_boxen_2
+      
+
+    
+
+- alias: Long press - Gäste Zimmer Switch 
+  trigger:
+    platform: event
+    event_type: xiaomi_aqara.click
+    event_data:
+      entity_id: binary_sensor.gaeste_zimmer_switch
+      click_type: long_click_press
+  action:
+    - service: media_player.media_play_pause
+      entity_id: media_player.gastezimmer_boxen_2
+
+    
+
+
+
+
+#webhook payload: 
+#{ "action": "call_service", "service": "light.turn_on", "entity_id": "light.living_room" }      
+#{ "action": "call_service", "service": "script.turn_on", "entity_id": "script.musik_station_aus" }      
+
+
+
+- alias: Harmony Hub monitor
+  trigger:
+    platform: state
+    entity_id: remote.harmony_hub
+    to: 'unavailable'
+  action:
+    - service: remote.harmony_sync
+      entity_id: remote.harmony_hub
+
+- alias: Music Hub monitor
+  trigger:
+    platform: state
+    entity_id: remote.office_hub
+    to: 'unavailable'
+  action:
+    - service: remote.harmony_sync
+      entity_id: remote.office_hub
