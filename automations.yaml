@@ -63,7 +63,6 @@
     domain: switch
     entity_id: switch.amplifier
     type: turn_off
-
 - id: '1589030973286'
   alias: 'Amp An wenn Musik auf Boxen Bastian '
   description: ''
@@ -80,6 +79,243 @@
   - condition: state
     entity_id: input_select.preamp_select
     state: TOSLINK
+  action:
+  - device_id: 9d479a0106de4821953e257e55f08d64
+    domain: switch
+    entity_id: switch.amplifier
+    type: turn_on
+- id: '1589352837782'
+  alias: Bett Switch - Single Press
+  description: ''
+  trigger:
+  - device_id: b7294f48c20b40c395081429ca461d2f
+    domain: deconz
+    platform: device
+    subtype: turn_on
+    type: remote_button_short_release
+  condition: []
+  action:
+  - data: {}
+    entity_id: switch.basti_decke
+    service: switch.toggle
+- id: '1590669249801'
+  alias: B-Cube auf "Seite 1" gedreht
+  description: ''
+  trigger:
+  - device_id: 66d6cab215e84f2c9809ad12011a5009
+    domain: deconz
+    platform: device
+    subtype: side_1
+    type: remote_rotate_from_side_3
+  - device_id: 66d6cab215e84f2c9809ad12011a5009
+    domain: deconz
+    platform: device
+    subtype: side_1
+    type: remote_rotate_from_side_2
+  - device_id: 66d6cab215e84f2c9809ad12011a5009
+    domain: deconz
+    platform: device
+    subtype: side_1
+    type: remote_rotate_from_side_4
+  - device_id: 66d6cab215e84f2c9809ad12011a5009
+    domain: deconz
+    platform: device
+    subtype: side_1
+    type: remote_rotate_from_side_5
+  - device_id: 66d6cab215e84f2c9809ad12011a5009
+    domain: deconz
+    platform: device
+    subtype: side_1
+    type: remote_rotate_from_side_6
+  condition: []
+  action:
+  - data:
+      option: Side1
+    entity_id: input_select.bcube_select
+    service: input_select.select_option
+- id: '1590669249802'
+  alias: B-Cube auf "Seite 2" gedreht
+  description: ''
+  trigger:
+  - device_id: 66d6cab215e84f2c9809ad12011a5009
+    domain: deconz
+    platform: device
+    subtype: side_2
+    type: remote_rotate_from_side_1
+  - device_id: 66d6cab215e84f2c9809ad12011a5009
+    domain: deconz
+    platform: device
+    subtype: side_2
+    type: remote_rotate_from_side_3
+  - device_id: 66d6cab215e84f2c9809ad12011a5009
+    domain: deconz
+    platform: device
+    subtype: side_2
+    type: remote_rotate_from_side_4
+  - device_id: 66d6cab215e84f2c9809ad12011a5009
+    domain: deconz
+    platform: device
+    subtype: side_2
+    type: remote_rotate_from_side_5
+  - device_id: 66d6cab215e84f2c9809ad12011a5009
+    domain: deconz
+    platform: device
+    subtype: side_2
+    type: remote_rotate_from_side_6
+  condition: []
+  action:
+  - data:
+      option: Side2
+    entity_id: input_select.bcube_select
+    service: input_select.select_option
+- id: '1590669249803'
+  alias: B-Cube auf "Seite 3" gedreht
+  description: ''
+  trigger:
+  - device_id: 66d6cab215e84f2c9809ad12011a5009
+    domain: deconz
+    platform: device
+    subtype: side_3
+    type: remote_rotate_from_side_1
+  - device_id: 66d6cab215e84f2c9809ad12011a5009
+    domain: deconz
+    platform: device
+    subtype: side_3
+    type: remote_rotate_from_side_2
+  - device_id: 66d6cab215e84f2c9809ad12011a5009
+    domain: deconz
+    platform: device
+    subtype: side_3
+    type: remote_rotate_from_side_4
+  - device_id: 66d6cab215e84f2c9809ad12011a5009
+    domain: deconz
+    platform: device
+    subtype: side_3
+    type: remote_rotate_from_side_5
+  - device_id: 66d6cab215e84f2c9809ad12011a5009
+    domain: deconz
+    platform: device
+    subtype: side_3
+    type: remote_rotate_from_side_6
+  condition: []
+  action:
+  - data:
+      option: Side3
+    entity_id: input_select.bcube_select
+    service: input_select.select_option
+- id: '1590669249804'
+  alias: B-Cube auf "Seite 4" gedreht
+  description: ''
+  trigger:
+  - device_id: 66d6cab215e84f2c9809ad12011a5009
+    domain: deconz
+    platform: device
+    subtype: side_4
+    type: remote_rotate_from_side_1
+  - device_id: 66d6cab215e84f2c9809ad12011a5009
+    domain: deconz
+    platform: device
+    subtype: side_4
+    type: remote_rotate_from_side_2
+  - device_id: 66d6cab215e84f2c9809ad12011a5009
+    domain: deconz
+    platform: device
+    subtype: side_4
+    type: remote_rotate_from_side_3
+  - device_id: 66d6cab215e84f2c9809ad12011a5009
+    domain: deconz
+    platform: device
+    subtype: side_4
+    type: remote_rotate_from_side_5
+  - device_id: 66d6cab215e84f2c9809ad12011a5009
+    domain: deconz
+    platform: device
+    subtype: side_4
+    type: remote_rotate_from_side_6
+  condition: []
+  action:
+  - data:
+      option: Side4
+    entity_id: input_select.bcube_select
+    service: input_select.select_option
+- id: '1590669249805'
+  alias: B-Cube auf "Seite 5" gedreht
+  description: ''
+  trigger:
+  - device_id: 66d6cab215e84f2c9809ad12011a5009
+    domain: deconz
+    platform: device
+    subtype: side_5
+    type: remote_rotate_from_side_1
+  - device_id: 66d6cab215e84f2c9809ad12011a5009
+    domain: deconz
+    platform: device
+    subtype: side_5
+    type: remote_rotate_from_side_2
+  - device_id: 66d6cab215e84f2c9809ad12011a5009
+    domain: deconz
+    platform: device
+    subtype: side_5
+    type: remote_rotate_from_side_4
+  - device_id: 66d6cab215e84f2c9809ad12011a5009
+    domain: deconz
+    platform: device
+    subtype: side_5
+    type: remote_rotate_from_side_3
+  - device_id: 66d6cab215e84f2c9809ad12011a5009
+    domain: deconz
+    platform: device
+    subtype: side_5
+    type: remote_rotate_from_side_6
+  condition: []
+  action:
+  - data:
+      option: Side5
+    entity_id: input_select.bcube_select
+    service: input_select.select_option
+- id: '1590669249806'
+  alias: B-Cube auf "Seite 6" gedreht
+  description: ''
+  trigger:
+  - device_id: 66d6cab215e84f2c9809ad12011a5009
+    domain: deconz
+    platform: device
+    subtype: side_6
+    type: remote_rotate_from_side_1
+  - device_id: 66d6cab215e84f2c9809ad12011a5009
+    domain: deconz
+    platform: device
+    subtype: side_6
+    type: remote_rotate_from_side_2
+  - device_id: 66d6cab215e84f2c9809ad12011a5009
+    domain: deconz
+    platform: device
+    subtype: side_6
+    type: remote_rotate_from_side_4
+  - device_id: 66d6cab215e84f2c9809ad12011a5009
+    domain: deconz
+    platform: device
+    subtype: side_6
+    type: remote_rotate_from_side_5
+  - device_id: 66d6cab215e84f2c9809ad12011a5009
+    domain: deconz
+    platform: device
+    subtype: side_6
+    type: remote_rotate_from_side_3
+  condition: []
+  action:
+  - data:
+      option: Side6
+    entity_id: input_select.bcube_select
+    service: input_select.select_option
+- id: '1591102176546'
+  alias: Amp And Wenn auf USB geschaltet wird
+  description: ''
+  trigger:
+  - entity_id: input_select.preamp_select
+    platform: state
+    to: USB
+  condition: []
   action:
   - device_id: 9d479a0106de4821953e257e55f08d64
     domain: switch

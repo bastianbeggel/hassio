@@ -746,8 +746,9 @@
 'music_box_set_input_lan':
   alias: Musik Box Set Input LAN
   sequence:
-    - service: script.office_hub_shd_input_lan
-    - service: script.office_hub_shd_volume_down ## nessesary to leave the switch inpute menu on the shd
+    #- service: script.office_hub_shd_input_lan
+    - service: rest_command.rest_preamp_lan
+    #- service: script.office_hub_shd_volume_down ## nessesary to leave the switch inpute menu on the shd
     - service: input_select.select_option
       data_template:
         entity_id: input_select.preamp_select
@@ -757,7 +758,8 @@
 'music_box_set_input_toslink':
   alias: Musik Box Set Input TOSLINK
   sequence:
-    - service: script.office_hub_shd_input_optical
+    #- service: script.office_hub_shd_input_optical
+    - service: rest_command.rest_preamp_toslink
     #- service: script.office_hub_shd_volume_up ## nessesary to leave the switch inpute menu on the shd
     - service: input_select.select_option
       data_template:
@@ -767,7 +769,8 @@
 'music_box_set_input_usb':
   alias: Musik Box Set Input USB
   sequence:
-    - service: script.office_hub_shd_input_usb
+    #- service: script.office_hub_shd_input_usb
+    - service: rest_command.rest_preamp_usb
     #- service: script.office_hub_shd_volume_up ## nessesary to leave the switch inpute menu on the shd
     - service: input_select.select_option
       data_template:
@@ -778,7 +781,8 @@
 'music_box_set_input_spdif':
   alias: Musik Box Set Input SPDIF
   sequence:
-    - service: script.office_hub_shd_input_coaxial
+    #- service: script.office_hub_shd_input_coaxial
+    - service: rest_command.rest_preamp_spdif
     #- service: script.office_hub_shd_volume_up ## nessesary to leave the switch inpute menu on the shd
     - service: input_select.select_option
       data_template:
