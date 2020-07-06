@@ -361,11 +361,12 @@
   sequence:   
     - service: switch.turn_on
       entity_id: switch.thinkpad_dock
-    - service: script.music_box_set_input_lan    
-    - service: switch.turn_on 
-      entity_id: switch.boxen_internal
+    #- service: script.music_box_set_input_lan    
     - service: switch.turn_on
       entity_id: switch.media_center 
+    - delay: '00:00:20' # this delay should help the internet to be active once the roon server is up. Hope that helps with the roon not beeing logedin to qubuz problem                 
+    - service: switch.turn_on 
+      entity_id: switch.boxen_internal
     - delay: '00:00:04'            
     - service: script.office_hub_amp_an  
     - service: script.music_box_set_input_lan
@@ -606,6 +607,8 @@
         entity_id: >-       
           {% if (is_state('input_select.preamp_select', 'LAN')) %}
           media_player.shd_studio_roon
+          {% elif (is_state('input_select.preamp_select', 'VOLUMIO')) %}
+          media_player.volumio_shd_studio_local          
           {% else %}
           media_player.boxen_bastian
           {% endif %}
@@ -619,6 +622,8 @@
         entity_id: >-       
           {% if (is_state('input_select.preamp_select', 'LAN')) %}
           media_player.shd_studio_roon
+          {% elif (is_state('input_select.preamp_select', 'VOLUMIO')) %}
+          media_player.volumio_shd_studio_local          
           {% else %}
           media_player.boxen_bastian
           {% endif %}
@@ -632,6 +637,8 @@
         entity_id: >-       
           {% if (is_state('input_select.preamp_select', 'LAN')) %}
           media_player.shd_studio_roon
+          {% elif (is_state('input_select.preamp_select', 'VOLUMIO')) %}
+          media_player.volumio_shd_studio_local          
           {% else %}
           media_player.boxen_bastian
           {% endif %}
@@ -645,6 +652,8 @@
         entity_id: >-       
           {% if (is_state('input_select.preamp_select', 'LAN')) %}
           media_player.shd_studio_roon
+          {% elif (is_state('input_select.preamp_select', 'VOLUMIO')) %}
+          media_player.volumio_shd_studio_local          
           {% else %}
           media_player.boxen_bastian
           {% endif %}
@@ -658,6 +667,8 @@
         entity_id: >-       
           {% if (is_state('input_select.preamp_select', 'LAN')) %}
           media_player.shd_studio_roon
+          {% elif (is_state('input_select.preamp_select', 'VOLUMIO')) %}
+          media_player.volumio_shd_studio_local          
           {% else %}
           media_player.boxen_bastian
           {% endif %}
@@ -671,6 +682,8 @@
         entity_id: >-       
           {% if (is_state('input_select.preamp_select', 'LAN')) %}
           media_player.shd_studio_roon
+          {% elif (is_state('input_select.preamp_select', 'VOLUMIO')) %}
+          media_player.volumio_shd_studio_local          
           {% else %}
           media_player.boxen_bastian
           {% endif %}
@@ -685,6 +698,8 @@
         entity_id: >-       
           {% if (is_state('input_select.preamp_select', 'LAN')) %}
           media_player.shd_studio_roon
+          {% elif (is_state('input_select.preamp_select', 'VOLUMIO')) %}
+          media_player.volumio_shd_studio_local          
           {% else %}
           media_player.boxen_bastian
           {% endif %}
@@ -700,6 +715,8 @@
         entity_id: >-       
           {% if (is_state('input_select.preamp_select', 'LAN')) %}
           media_player.shd_studio_roon
+          {% elif (is_state('input_select.preamp_select', 'VOLUMIO')) %}
+          media_player.volumio_shd_studio_local          
           {% else %}
           media_player.boxen_bastian
           {% endif %}
@@ -716,6 +733,8 @@
         entity_id: >-       
           {% if (is_state('input_select.preamp_select', 'LAN')) %}
           media_player.shd_studio_roon
+          {% elif (is_state('input_select.preamp_select', 'VOLUMIO')) %}
+          media_player.volumio_shd_studio_local          
           {% else %}
           media_player.boxen_bastian
           {% endif %}
@@ -731,6 +750,8 @@
         entity_id: >-       
           {% if (is_state('input_select.preamp_select', 'LAN')) %}
           media_player.shd_studio_roon
+          {% elif (is_state('input_select.preamp_select', 'VOLUMIO')) %}
+          media_player.volumio_shd_studio_local          
           {% else %}
           media_player.boxen_bastian
           {% endif %}
@@ -777,6 +798,16 @@
         entity_id: input_select.preamp_select
         option: USB
 
+'music_box_set_input_volumio':
+  alias: Musik Box Set Input Volumio
+  sequence:
+    - service: rest_command.rest_preamp_lan
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.preamp_select
+        option: VOLUMIO
+
+
 
 'music_box_set_input_spdif':
   alias: Musik Box Set Input SPDIF
@@ -789,6 +820,11 @@
         entity_id: input_select.preamp_select
         option: SPDIF
 
+
+'music_box_mute':
+  alias: Musik Box Mute
+  sequence:    
+    - service: script.office_hub_shd_mute
 
 
 
@@ -984,6 +1020,15 @@
           - VolumeDown
         device: 66182154
 
+'office_hub_shd_mute':
+  alias: SHD Volume Down
+  sequence:
+    - service: remote.send_command
+      data:
+        entity_id: remote.office_hub
+        command:
+          - Mute
+        device: 66182154
 
 
 #################################################################
