@@ -67,37 +67,37 @@
 #################################################################
 
 
-- alias: Single Press - Basti Switch
+- alias: Single Press - Basti Eingang Switch
   trigger:
-    platform: event
-    event_type: xiaomi_aqara.click
-    event_data:
-      entity_id: binary_sensor.basti_eingang_switch
-      click_type: single
+  - device_id: 2eafa758aaab4a59b355205f92810fd3
+    domain: deconz
+    platform: device
+    type: remote_button_short_release
+    subtype: turn_on  
   action:
     - service: switch.toggle
       data:
         entity_id: switch.basti_decke
 
-- alias: Double Press - Basti Switch
+- alias: Double Press - Basti Eingang Switch
   trigger:
-    platform: event
-    event_type: xiaomi_aqara.click
-    event_data:
-      entity_id: binary_sensor.basti_eingang_switch
-      click_type: double
+  - device_id: 2eafa758aaab4a59b355205f92810fd3
+    domain: deconz
+    platform: device
+    type: remote_button_double_press
+    subtype: turn_on  
   action:
     - service: switch.toggle
       data:
         entity_id: switch.basti_lampe
 
-- alias: Long Press - Basti Switch
+- alias: Long Press - Basti Eingang Switch
   trigger:
-    platform: event
-    event_type: xiaomi_aqara.click
-    event_data:
-      entity_id: binary_sensor.basti_eingang_switch
-      click_type: long_click_press
+  - device_id: 2eafa758aaab4a59b355205f92810fd3
+    domain: deconz
+    platform: device
+    type: remote_button_long_press
+    subtype: turn_on  
   action:
     - service: switch.turn_off
       data:
@@ -264,143 +264,44 @@
 ############ Wohnzimmer Switch 
 ################################################################################################
 
-- alias: Wohnzimmer Switch - Single Press 
-  trigger:
-    platform: event
-    event_type: xiaomi_aqara.click
-    event_data:
-      entity_id: binary_sensor.wohnzimmer_switch
-      click_type: single
-  action:
-    - service: script.kueche_toggle
+# Auf natives Zigbee umgestellt. 
+#- alias: Wohnzimmer Switch - Single Press 
+#  trigger:
+#    platform: event
+#    event_type: xiaomi_aqara.click
+#    event_data:
+#      entity_id: binary_sensor.wohnzimmer_switch
+#      click_type: single
+#  action:
+#    - service: script.kueche_toggle#
 
 
-- alias: Wohnzimmer Switch - Double Press
-  trigger:
-    platform: event
-    event_type: xiaomi_aqara.click
-    event_data:
-      entity_id: binary_sensor.wohnzimmer_switch
-      click_type: double
-  action:
-    - service: script.wohnzimmer_decke_an_aus
+#- alias: Wohnzimmer Switch - Double Press
+#  trigger:
+#    platform: event
+#    event_type: xiaomi_aqara.click
+#    event_data:
+#      entity_id: binary_sensor.wohnzimmer_switch
+#      click_type: double
+#  action:
+#    - service: script.wohnzimmer_decke_an_aus
       
     
 
-- alias: Wohnzimmer Switch - Long press
-  trigger:
-    platform: event
-    event_type: xiaomi_aqara.click
-    event_data:
-      entity_id: binary_sensor.wohnzimmer_switch
-      click_type: long_click_press
-  action:
-    - service: switch.toggle
-      entity_id: switch.couch
+#- alias: Wohnzimmer Switch - Long press
+#  trigger:
+#    platform: event
+#    event_type: xiaomi_aqara.click
+#    event_data:
+#      entity_id: binary_sensor.wohnzimmer_switch
+#      click_type: long_click_press
+#  action:
+#    - service: switch.toggle
+#      entity_id: switch.couch
     
 
 
 
-
-################################################################################################
-############ KUECHE CUBE 
-################################################################################################
-
-
-- alias: Cube to flip90
-  trigger:
-    platform: event
-    event_type: xiaomi_aqara.cube_action
-    event_data:
-      entity_id: binary_sensor.kitchen_cube
-      action_type: flip90
-  action:
-    - service: script.tisch_toggle
-
-- alias: Cube to tab-twice
-  trigger:
-    platform: event
-    event_type: xiaomi_aqara.cube_action
-    event_data:
-      entity_id: binary_sensor.kitchen_cube
-      action_type: tap_twice
-  action:
-    - service: switch.toggle
-      entity_id: switch.couch
-
-
-- alias: Cube to move
-  trigger:
-    platform: event
-    event_type: xiaomi_aqara.cube_action
-    event_data:
-      entity_id: binary_sensor.kitchen_cube
-      action_type: move
-  action:
-    - service: light.toggle
-      entity_id: light.wohnzimmer_lampe
-
-
-- alias: Cube to shake_air
-  trigger:
-    platform: event
-    event_type: xiaomi_aqara.cube_action
-    event_data:
-      entity_id: binary_sensor.kitchen_cube
-      action_type: shake_air
-  action:
-    service: script.spiele_sr1_marshall
-
-- alias: Cube to free_fall
-  trigger:
-    platform: event
-    event_type: xiaomi_aqara.cube_action
-    event_data:
-      entity_id: binary_sensor.kitchen_cube
-      action_type: free_fall
-  action:
-    - service: media_player.media_stop
-      entity_id: media_player.stanmoreblackb269_3
-
-
-
-- alias: Cube to flip180
-  trigger:
-    platform: event
-    event_type: xiaomi_aqara.cube_action
-    event_data:
-      entity_id: binary_sensor.kitchen_cube
-      action_type: flip180
-  action:
-    service: script.gute_nacht
-    #- service: xiaomi_aqara.play_ringtone
-    #  data:
-    #    gw_mac: 78:11:DC:DE:D1:14
-    #    ringtone_id: 2
-    #    ringtone_vol: 1
-
-- alias: Cube to rotate
-  trigger:
-    platform: event
-    event_type: xiaomi_aqara.cube_action
-    event_data:
-      entity_id: binary_sensor.kitchen_cube
-      action_type: rotate
-  action:
-      service_template: >
-         {% if trigger.event.data.action_value | float > 20 %}
-           script.tisch_bright_plus_100
-         {% elif trigger.event.data.action_value | float > 15 %}
-           script.tisch_bright_plus_50
-         {% elif trigger.event.data.action_value | float > 0 %}
-           script.tisch_bright_plus_25
-         {% elif trigger.event.data.action_value | float < -20 %}
-           script.tisch_bright_minus_100
-         {% elif trigger.event.data.action_value | float < -15 %}
-           script.tisch_bright_minus_50
-         {% elif trigger.event.data.action_value | float < 0 %}
-           script.tisch_bright_minus_25
-         {% endif %}
 
 
 #flip90, flip180, move, tap_twice, shake_air, swing, alert, free_fall and rotate
@@ -497,15 +398,15 @@
 #      data:
 #        entity_id: script.bastian_arbeitsplatz_an
 
-- alias: B-Cube to tab twice
-  trigger:
-    platform: event
-    event_type: xiaomi_aqara.cube_action
-    event_data:
-      entity_id: binary_sensor.bcube
-      action_type: tap_twice
-  action:
-    - service: script.music_box_play_pause 
+#- alias: B-Cube to tab twice
+#  trigger:
+#    platform: event
+#    event_type: xiaomi_aqara.cube_action
+#    event_data:
+#      entity_id: binary_sensor.bcube
+#      action_type: tap_twice
+#  action:
+#    - service: script.notebook_t480_displays_off 
       
 
 - alias: B-Cube to free_fall
@@ -545,6 +446,9 @@
     type: remote_flip_180_degrees
   condition: []
   action:
+    - service: script.turn_on
+      data:
+        entity_id: script.notebook_t480_hibernate    
     - service: switch.turn_off
       entity_id: switch.boxen
 
@@ -620,20 +524,34 @@
 
 - alias: Kammer-Licht bei Bewegung
   trigger:
-    platform: state
-    entity_id: binary_sensor.motion_sensor_158d0002239b1a
-    to: 'on'
+    type: motion
+    platform: device
+    device_id: cd4ed5acd5df4435b3f6edbb478880f9
+    entity_id: binary_sensor.presence_11
+    domain: binary_sensor
+    #platform: state
+    #entity_id: binary_sensor.motion_sensor_158d0002239b1a
+    #to: 'on'
   action:
     service: homeassistant.turn_on
     entity_id: switch.kammer
 
-- alias: Lammerlicht Aus nach 2 Minuten 
+- alias: Kammerlicht Aus nach 2 Minuten 
   trigger:
-    platform: state
-    entity_id: binary_sensor.motion_sensor_158d0002239b1a
-    to: 'off'
+    type: no_motion
+    platform: device
+    device_id: cd4ed5acd5df4435b3f6edbb478880f9
+    entity_id: binary_sensor.presence_11
+    domain: binary_sensor
     for:
-      minutes: 2
+       hours: 0
+       minutes: 2
+       seconds: 0
+    #platform: state
+    #entity_id: binary_sensor.motion_sensor_158d0002239b1a
+    #to: 'off'
+    #for:
+    #  minutes: 2
   action:
     service: homeassistant.turn_off
     entity_id: switch.kammer
@@ -895,11 +813,11 @@
 
 - alias: Single Press - Gäste Zimmer Switch 
   trigger:
-    platform: event
-    event_type: xiaomi_aqara.click
-    event_data:
-      entity_id: binary_sensor.gaeste_zimmer_switch
-      click_type: single
+  - device_id: 4b28cad7e4d944569f59a933cd31db21
+    domain: deconz
+    platform: device
+    type: remote_button_short_release
+    subtype: turn_on
   action:
     - service: media_player.media_next_track
       entity_id: media_player.gastezimmer_boxen_2
@@ -907,11 +825,11 @@
 
 - alias: Double Press - Gäste Zimmer Switch 
   trigger:
-    platform: event
-    event_type: xiaomi_aqara.click
-    event_data:
-      entity_id: binary_sensor.gaeste_zimmer_switch
-      click_type: double
+  - device_id: 4b28cad7e4d944569f59a933cd31db21
+    domain: deconz
+    platform: device
+    type: remote_button_double_press
+    subtype: turn_on
   action:  
     - service: media_player.media_previous_track
       entity_id: media_player.gastezimmer_boxen_2
@@ -921,11 +839,11 @@
 
 - alias: Long press - Gäste Zimmer Switch 
   trigger:
-    platform: event
-    event_type: xiaomi_aqara.click
-    event_data:
-      entity_id: binary_sensor.gaeste_zimmer_switch
-      click_type: long_click_press
+  - device_id: 4b28cad7e4d944569f59a933cd31db21
+    domain: deconz
+    platform: device
+    type: remote_button_long_press
+    subtype: turn_on
   action:
     - service: media_player.media_play_pause
       entity_id: media_player.gastezimmer_boxen_2

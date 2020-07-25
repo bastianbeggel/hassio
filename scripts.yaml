@@ -1310,3 +1310,48 @@
 #          {% endif %}
 
 
+#######################################################################################
+#### Manage my Notebook
+#######################################################################################
+ 
+'notebook_t480_shutdown':
+    alias: "Notebook T480 - Shutdown"
+    sequence:
+      - service: mqtt.publish
+        data:
+          topic: "iotlink/workgroup/laptop-amm7ngim/commands/shutdown"
+          payload: ""
+
+'notebook_t480_hibernate':
+    alias: "Notebook T480 - hibernate"
+    sequence:
+      - service: mqtt.publish
+        data:
+          topic: "iotlink/workgroup/laptop-amm7ngim/commands/hibernate"
+          payload: ""
+
+
+'notebook_t480_reboot':
+    alias: "Notebook T480 - reboot"
+    sequence:
+      - service: mqtt.publish
+        data:
+          topic: "iotlink/workgroup/laptop-amm7ngim/commands/reboot"
+          payload: ""
+
+
+'notebook_t480_displays_off':
+    alias: "Notebook T480 - Displays OFF"
+    sequence:
+      - service: mqtt.publish
+        data:
+          topic: "iotlink/workgroup/laptop-amm7ngim/commands/displays/off"
+          payload: ""
+
+'notebook_t480_suspend':
+    alias: "Notebook T480 - Suspend"
+    sequence:
+      - service: mqtt.publish
+        data:
+          topic: "iotlink/workgroup/laptop-amm7ngim/commands/suspend"
+          payload: ""

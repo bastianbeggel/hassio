@@ -163,6 +163,8 @@ cloud:
   google_actions:
     filter:
       include_entities:
+        - camera.babycam2_fixedprofilea01
+        - camera.babycam2_axxon0
         - light.bastian_decke
         - light.bastian_lampe
         - light.couchlicht
@@ -211,6 +213,12 @@ cloud:
         room: Zimmer Bastian
       climate.wohnzimmer_heizung:
         name: Wohnzimmer Heizung 
+        room: Wohnzimmer
+      camera.babycam2_fixedprofilea01:
+        name: Baby Kamera 2
+        room: Wohnzimmer
+      camera.babycam2_axxon0:
+        name: Baby Kamera 1
         room: Wohnzimmer
 
 #      script.office_hub_nuprime_toggle_display:
@@ -509,10 +517,15 @@ switch:
     name: "Lenovo T480"
     mac: "8c:16:45:d0:1c:36"
     host: "192.168.178.80"
+    turn_off:
+      service: script.notebook_t480_hibernate
   - platform: wake_on_lan
     name: "Thinkpad Dock"
     mac: "3c:e1:a1:c0:30:c2"
     host: "192.168.178.98"
+    turn_off:
+      service: script.notebook_t480_hibernate
+
 
 
 
