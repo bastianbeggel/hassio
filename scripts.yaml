@@ -369,7 +369,7 @@
       entity_id: switch.boxen_internal
     - delay: '00:00:04'            
     - service: script.office_hub_amp_an  
-    - service: script.music_box_set_input_lan
+    - service: script.music_box_set_input_spdif
     - service: script.office_hub_adi_input_coaxial    
     - delay: '00:00:25'      
 #    - service: script.musik_station_an_normal
@@ -384,7 +384,7 @@
 'musik_station_aus':
   alias: Musik Station Aus
   sequence:
-    #- service: shell_command.volumio_shutdown_h
+    - service: shell_command.volumio_shutdown_h
     - service: shell_command.thinkcentre_shutdown_h
     - service: script.office_hub_amp_aus
     - delay: '00:00:15'
@@ -423,15 +423,15 @@
 ################################################################################################
 
 
-#'volumio_runterfahren':
-#  alias: Volumio Pi Runterfahren
-#  sequence:
-#    - service: shell_command.volumio_shutdown_h
+'ropieee_runterfahren':
+  alias: Ropieee Pi Runterfahren
+  sequence:
+    - service: shell_command.volumio_shutdown_h
 
-#'volumio_neustarten':
-#  alias: Volumio Pi Neustarten
-#  sequence:
-#    - service: shell_command.volumio_shutdown_r
+'ropieee_neustarten':
+  alias: Ropieee Pi Neustarten
+  sequence:
+    - service: shell_command.volumio_shutdown_r
 
 'thinkcentre_runterfahren':
   alias: ThinkCentre Runterfahren
@@ -609,6 +609,8 @@
           media_player.shd_studio_roon
           {% elif (is_state('input_select.preamp_select', 'VOLUMIO')) %}
           media_player.volumio_shd_studio_local          
+          {% elif (is_state('input_select.preamp_select', 'SPDIF')) %}
+          media_player.digione_3
           {% else %}
           media_player.boxen_bastian
           {% endif %}
@@ -624,6 +626,8 @@
           media_player.shd_studio_roon
           {% elif (is_state('input_select.preamp_select', 'VOLUMIO')) %}
           media_player.volumio_shd_studio_local          
+          {% elif (is_state('input_select.preamp_select', 'SPDIF')) %}
+          media_player.digione_3
           {% else %}
           media_player.boxen_bastian
           {% endif %}
@@ -638,7 +642,9 @@
           {% if (is_state('input_select.preamp_select', 'LAN')) %}
           media_player.shd_studio_roon
           {% elif (is_state('input_select.preamp_select', 'VOLUMIO')) %}
-          media_player.volumio_shd_studio_local          
+          media_player.volumio_shd_studio_local     
+          {% elif (is_state('input_select.preamp_select', 'SPDIF')) %}
+          media_player.digione_3
           {% else %}
           media_player.boxen_bastian
           {% endif %}
@@ -654,6 +660,8 @@
           media_player.shd_studio_roon
           {% elif (is_state('input_select.preamp_select', 'VOLUMIO')) %}
           media_player.volumio_shd_studio_local          
+          {% elif (is_state('input_select.preamp_select', 'SPDIF')) %}
+          media_player.digione_3
           {% else %}
           media_player.boxen_bastian
           {% endif %}
@@ -669,6 +677,8 @@
           media_player.shd_studio_roon
           {% elif (is_state('input_select.preamp_select', 'VOLUMIO')) %}
           media_player.volumio_shd_studio_local          
+          {% elif (is_state('input_select.preamp_select', 'SPDIF')) %}
+          media_player.digione_3
           {% else %}
           media_player.boxen_bastian
           {% endif %}
@@ -683,7 +693,9 @@
           {% if (is_state('input_select.preamp_select', 'LAN')) %}
           media_player.shd_studio_roon
           {% elif (is_state('input_select.preamp_select', 'VOLUMIO')) %}
-          media_player.volumio_shd_studio_local          
+          media_player.volumio_shd_studio_local   
+          {% elif (is_state('input_select.preamp_select', 'SPDIF')) %}
+          media_player.digione_3
           {% else %}
           media_player.boxen_bastian
           {% endif %}
@@ -699,7 +711,9 @@
           {% if (is_state('input_select.preamp_select', 'LAN')) %}
           media_player.shd_studio_roon
           {% elif (is_state('input_select.preamp_select', 'VOLUMIO')) %}
-          media_player.volumio_shd_studio_local          
+          media_player.volumio_shd_studio_local    
+          {% elif (is_state('input_select.preamp_select', 'SPDIF')) %}
+          media_player.digione_3
           {% else %}
           media_player.boxen_bastian
           {% endif %}
@@ -716,7 +730,9 @@
           {% if (is_state('input_select.preamp_select', 'LAN')) %}
           media_player.shd_studio_roon
           {% elif (is_state('input_select.preamp_select', 'VOLUMIO')) %}
-          media_player.volumio_shd_studio_local          
+          media_player.volumio_shd_studio_local  
+          {% elif (is_state('input_select.preamp_select', 'SPDIF')) %}
+          media_player.digione_3
           {% else %}
           media_player.boxen_bastian
           {% endif %}
@@ -734,7 +750,9 @@
           {% if (is_state('input_select.preamp_select', 'LAN')) %}
           media_player.shd_studio_roon
           {% elif (is_state('input_select.preamp_select', 'VOLUMIO')) %}
-          media_player.volumio_shd_studio_local          
+          media_player.volumio_shd_studio_local
+          {% elif (is_state('input_select.preamp_select', 'SPDIF')) %}
+          media_player.digione_3
           {% else %}
           media_player.boxen_bastian
           {% endif %}
@@ -751,7 +769,9 @@
           {% if (is_state('input_select.preamp_select', 'LAN')) %}
           media_player.shd_studio_roon
           {% elif (is_state('input_select.preamp_select', 'VOLUMIO')) %}
-          media_player.volumio_shd_studio_local          
+          media_player.volumio_shd_studio_local  
+          {% elif (is_state('input_select.preamp_select', 'SPDIF')) %}
+          media_player.digione_3
           {% else %}
           media_player.boxen_bastian
           {% endif %}
@@ -781,6 +801,8 @@
   sequence:
     #- service: script.office_hub_shd_input_optical
     - service: rest_command.rest_preamp_toslink
+    - delay: '00:00:01'                    
+    - service: rest_command.rest_preamp_toslink    
     #- service: script.office_hub_shd_volume_up ## nessesary to leave the switch inpute menu on the shd
     - service: input_select.select_option
       data_template:
@@ -792,6 +814,8 @@
   sequence:
     #- service: script.office_hub_shd_input_usb
     - service: rest_command.rest_preamp_usb
+    - delay: '00:00:01'                
+    - service: rest_command.rest_preamp_usb    
     #- service: script.office_hub_shd_volume_up ## nessesary to leave the switch inpute menu on the shd
     - service: input_select.select_option
       data_template:
@@ -813,6 +837,8 @@
   alias: Musik Box Set Input SPDIF
   sequence:
     #- service: script.office_hub_shd_input_coaxial
+    - service: rest_command.rest_preamp_spdif
+    - delay: '00:00:01'            
     - service: rest_command.rest_preamp_spdif
     #- service: script.office_hub_shd_volume_up ## nessesary to leave the switch inpute menu on the shd
     - service: input_select.select_option

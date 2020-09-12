@@ -163,8 +163,7 @@ cloud:
   google_actions:
     filter:
       include_entities:
-        - camera.babycam2_fixedprofilea01
-        - camera.babycam2_axxon0
+        - camera.emicam_mainstream
         - light.bastian_decke
         - light.bastian_lampe
         - light.couchlicht
@@ -214,11 +213,8 @@ cloud:
       climate.wohnzimmer_heizung:
         name: Wohnzimmer Heizung 
         room: Wohnzimmer
-      camera.babycam2_fixedprofilea01:
-        name: Baby Kamera 2
-        room: Wohnzimmer
-      camera.babycam2_axxon0:
-        name: Baby Kamera 1
+      camera.emicam_mainstream:
+        name: BabyCam
         room: Wohnzimmer
 
 #      script.office_hub_nuprime_toggle_display:

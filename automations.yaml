@@ -348,8 +348,10 @@
     type: remote_button_double_press
   condition: []
   action:
-  - data: {}
-    service: script.wohnzimmer_decke_an_aus
+  - device_id: eb24add2488b42c2bede106bc2028353
+    domain: light
+    entity_id: light.tischlampe
+    type: toggle
   mode: single
 - id: '1595596182655'
   alias: Wohnzimmer Switch - Long press
@@ -366,20 +368,6 @@
     domain: switch
     entity_id: switch.couch
     type: toggle
-  mode: single
-- id: '1595596703169'
-  alias: Küche Cube to flip90
-  description: ''
-  trigger:
-  - device_id: 13731e3f49364c41b3b86cc7e63e3ed2
-    domain: deconz
-    platform: device
-    subtype: ''
-    type: remote_flip_90_degrees
-  condition: []
-  action:
-  - data: {}
-    service: script.tisch_toggle
   mode: single
 - id: '1595596800780'
   alias: Küche Cube to move
@@ -398,7 +386,7 @@
     type: toggle
   mode: single
 - id: '1595596835338'
-  alias: Neue Automatisierung
+  alias: Küche Cube Schütteln -> SR1
   description: ''
   trigger:
   - device_id: 13731e3f49364c41b3b86cc7e63e3ed2
