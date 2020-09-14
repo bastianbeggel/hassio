@@ -863,7 +863,7 @@
           {% if is_state('switch.boxen', 'off') %}
             script.bastian_arbeitsplatz_an
           {% else %}
-            script.music_box_set_input_lan
+            script.music_box_set_input_spdif
           {% endif %}    
 
 
