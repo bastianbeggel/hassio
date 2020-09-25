@@ -308,101 +308,101 @@
 
 
 
-- alias: Küche Cube to flip90
-  description: ''
-  trigger:
-  - device_id: 13731e3f49364c41b3b86cc7e63e3ed2
-    domain: deconz
-    platform: device
-    subtype: ''
-    type: remote_flip_90_degrees
-  condition: []
-  action:
-  - data: {}
-    service: script.tisch_toggle
-  mode: single
+#- alias: Küche Cube to flip90
+#  description: ''
+#  trigger:
+#  - device_id: 13731e3f49364c41b3b86cc7e63e3ed2
+#    domain: deconz
+#    platform: device
+#    subtype: ''
+#    type: remote_flip_90_degrees
+#  condition: []
+#  action:
+#  - data: {}
+#    service: script.tisch_toggle
+#  mode: single
 
-- alias: Küche Cube to move
-  description: ''
-  trigger:
-  - device_id: 13731e3f49364c41b3b86cc7e63e3ed2
-    domain: deconz
-    platform: device
-    subtype: ''
-    type: remote_moved_any_side
-  condition: []
-  action:
-  - device_id: 6fd6d3edae1f416b85918680f3d1359c
-    domain: light
-    entity_id: light.wohnzimmer_lampe
-    type: toggle
-  mode: single
-- alias: Küche Cube Schütteln -> SR1
-  description: ''
-  trigger:
-  - device_id: 13731e3f49364c41b3b86cc7e63e3ed2
-    domain: deconz
-    platform: device
-    subtype: ''
-    type: remote_gyro_activated
-  condition: []
-  action:
-  - data: {}
-    service: script.spiele_sr1_marshall
-  mode: single
-- alias: Küche Cube to free_fall
-  description: ''
-  trigger:
-  - device_id: 13731e3f49364c41b3b86cc7e63e3ed2
-    domain: deconz
-    platform: device
-    subtype: ''
-    type: remote_falling
-  condition: []
-  action:
-  - data: {}
-    entity_id: media_player.stanmoreblackb269_3
-    service: media_player.media_stop
-  mode: single
-- alias: Küche Cube to flip180
-  description: ''
-  trigger:
-  - device_id: 13731e3f49364c41b3b86cc7e63e3ed2
-    domain: deconz
-    platform: device
-    subtype: ''
-    type: remote_flip_180_degrees
-  condition: []
-  action:
-  - data: {}
-    service: script.gute_nacht
-  mode: single
-- alias: Küche Cube to rotate-right
-  description: ''
-  trigger:
-  - device_id: 13731e3f49364c41b3b86cc7e63e3ed2
-    domain: deconz
-    platform: device
-    subtype: ''
-    type: remote_turned_clockwise
-  condition: []
-  action:
-  - data: {}
-    service: script.tisch_bright_plus_50
-  mode: single
-- alias: Küche Cube to rotate-left
-  description: ''
-  trigger:
-  - device_id: 13731e3f49364c41b3b86cc7e63e3ed2
-    domain: deconz
-    platform: device
-    subtype: ''
-    type: remote_turned_counter_clockwise
-  condition: []
-  action:
-  - data: {}
-    service: script.tisch_bright_minus_50
-  mode: single
+#- alias: Küche Cube to move
+#  description: ''
+#  trigger:
+#  - device_id: 13731e3f49364c41b3b86cc7e63e3ed2
+#    domain: deconz
+#    platform: device
+#    subtype: ''
+#    type: remote_moved_any_side
+#  condition: []
+#  action:
+#  - device_id: 6fd6d3edae1f416b85918680f3d1359c
+#    domain: light
+#    entity_id: light.wohnzimmer_lampe
+#    type: toggle
+#  mode: single
+#- alias: Küche Cube Schütteln -> SR1
+#  description: ''
+#  trigger:
+#  - device_id: 13731e3f49364c41b3b86cc7e63e3ed2
+#    domain: deconz
+#    platform: device
+#    subtype: ''
+#    type: remote_gyro_activated
+#  condition: []
+#  action:
+#  - data: {}
+#    service: script.spiele_sr1_marshall
+#  mode: single
+#- alias: Küche Cube to free_fall
+#  description: ''
+#  trigger:
+#  - device_id: 13731e3f49364c41b3b86cc7e63e3ed2
+#    domain: deconz
+#    platform: device
+#    subtype: ''
+#    type: remote_falling
+#  condition: []
+#  action:
+#  - data: {}
+#    entity_id: media_player.stanmoreblackb269_3
+#    service: media_player.media_stop
+#  mode: single
+#- alias: Küche Cube to flip180
+#  description: ''
+#  trigger:
+#  - device_id: 13731e3f49364c41b3b86cc7e63e3ed2
+#    domain: deconz
+#    platform: device
+#    subtype: ''
+#    type: remote_flip_180_degrees
+#  condition: []
+#  action:
+#  - data: {}
+#    service: script.gute_nacht
+#  mode: single
+#- alias: Küche Cube to rotate-right
+#  description: ''
+ # trigger:
+  #- device_id: 13731e3f49364c41b3b86cc7e63e3ed2
+  #  domain: deconz
+  #  platform: device
+  #  subtype: ''
+  #  type: remote_turned_clockwise
+  #condition: []
+  #action:
+  #- data: {}
+  #  service: script.tisch_bright_plus_50
+  #mode: single
+#- alias: Küche Cube to rotate-left
+#  description: ''
+#  trigger:
+#  - device_id: 13731e3f49364c41b3b86cc7e63e3ed2
+#    domain: deconz
+#    platform: device
+#    subtype: ''
+ #   type: remote_turned_counter_clockwise
+ # condition: []
+ # action:
+ # - data: {}
+ #   service: script.tisch_bright_minus_50
+ # mode: single
 
 
 ################################################################################################
@@ -543,11 +543,11 @@
     type: remote_flip_180_degrees
   condition: []
   action:
+    - service: switch.turn_off
+      entity_id: switch.boxen
     - service: script.turn_on
       data:
         entity_id: script.notebook_t480_hibernate    
-    - service: switch.turn_off
-      entity_id: switch.boxen
 
 
 #- alias: B-Cube to flip180
