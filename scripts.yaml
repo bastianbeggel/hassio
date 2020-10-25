@@ -375,6 +375,7 @@
 #    - service: script.musik_station_an_normal
     - service: switch.turn_on
       entity_id: switch.thinkpad_dock
+    - service: script.music_box_set_input_spdif      
     - delay: '00:00:10'      
     - service: switch.turn_on
       entity_id: switch.thinkpad_dock

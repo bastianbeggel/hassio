@@ -277,3 +277,17 @@
     entity_id: light.wohnzimmer_lampe
     domain: light
   mode: single
+- id: '1601118514589'
+  alias: Wohnzimmer Switch Tripple Press
+  description: ''
+  trigger:
+  - device_id: e4a0722180c34443af0ad65f82431ea4
+    domain: deconz
+    platform: device
+    type: remote_button_triple_press
+    subtype: turn_on
+  condition: []
+  action:
+  - service: script.wohnzimmer_decke_an_aus
+    data: {}
+  mode: single
