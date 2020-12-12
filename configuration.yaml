@@ -98,7 +98,7 @@ sun:
 
 # Weather prediction
 sensor:
-   - platform: yr
+   #- platform: yr
    - platform: systemmonitor
      resources:
        - type: disk_use
@@ -659,9 +659,9 @@ emulated_hue:
 roon:
 
 
-keyboard_remote2:
-  - device_descriptor: '/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd'
-    type: 'key_up'
+#keyboard_remote2:
+  #- device_descriptor: '/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd'
+    #type: 'key_up'
 
 tplink:
   switch:
@@ -688,7 +688,7 @@ input_select:
       - SPDIF
       - USB
       - VOLUMIO
-    initial: LAN
+    initial: SPDIF
     icon: mdi:panda
 
   bcube_select:

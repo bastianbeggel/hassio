@@ -246,7 +246,8 @@
   action:
   - service: script.tisch_bright_plus_50
     data: {}
-  mode: single
+  mode: parallel
+  max: 10
 - id: '1601048865930'
   alias: Küche Cube Rotate Left -> Tisch Dunkler
   description: ''
@@ -254,13 +255,14 @@
   - device_id: 13731e3f49364c41b3b86cc7e63e3ed2
     domain: deconz
     platform: device
-    type: remote_turned_clockwise
+    type: remote_turned_counter_clockwise
     subtype: ''
   condition: []
   action:
   - service: script.tisch_bright_minus_50
     data: {}
-  mode: single
+  mode: parallel
+  max: 10
 - id: '1601048930926'
   alias: Küche Cube Move -> Wohnzimmer Lampe
   description: ''
@@ -290,4 +292,20 @@
   action:
   - service: script.wohnzimmer_decke_an_aus
     data: {}
+  mode: single
+- id: '1604852341988'
+  alias: Wohnzimmer Switch 4 mal -> Wohnzimmerlampe
+  description: ''
+  trigger:
+  - device_id: e4a0722180c34443af0ad65f82431ea4
+    domain: deconz
+    platform: device
+    type: remote_button_quadruple_press
+    subtype: turn_on
+  condition: []
+  action:
+  - type: toggle
+    device_id: 6fd6d3edae1f416b85918680f3d1359c
+    entity_id: light.wohnzimmer_lampe
+    domain: light
   mode: single

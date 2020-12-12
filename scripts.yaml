@@ -368,7 +368,7 @@
     - service: switch.turn_on 
       entity_id: switch.boxen_internal
     - delay: '00:00:04'            
-    - service: script.office_hub_amp_an  
+    #- service: script.office_hub_amp_an  
     - service: script.music_box_set_input_spdif
     - service: script.office_hub_adi_input_coaxial    
     - delay: '00:00:25'      
@@ -920,6 +920,28 @@
 #################################################################
 ############ MiniDSP SHD Studio
 #################################################################
+
+# aus legacy gründen. Wird im Moment nicht benötigt. Ist aber zu nervig aus allen Scripen raus zu nehmen
+'office_hub_amp_an':
+  alias: SHD input Lan
+  sequence:
+    - service: remote.send_command
+      data:
+        entity_id: remote.office_hub
+        command:
+          - InputSpdif
+        device: 66182154
+
+# aus legacy gründen. Wird im Moment nicht benötigt. Ist aber zu nervig aus allen Scripen raus zu nehmen
+'office_hub_amp_aus':
+  alias: SHD input Lan
+  sequence:
+    - service: remote.send_command
+      data:
+        entity_id: remote.office_hub
+        command:
+          - InputSpdif
+        device: 66182154
 
 
 'office_hub_shd_input_lan':
