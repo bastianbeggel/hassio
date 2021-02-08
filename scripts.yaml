@@ -22,6 +22,15 @@
     - service: switch.turn_off
       data:
         entity_id: switch.kueche_theke
+    - service: light.turn_off
+      data:
+        entity_id: light.couch
+    - service: light.turn_off
+      data:
+        entity_id: light.tischlampe
+
+
+
 
 'kueche_toggle':
   alias: Küchenlicht toggle
@@ -292,8 +301,8 @@
            after: sunset
          - condition: sun
            before: sunrise
-     - service: switch.turn_on
-       entity_id: switch.couch
+     - service: light.turn_on
+       entity_id: light.couch
 
 
 
@@ -308,17 +317,12 @@
 'gute_nacht':
   alias: Gute Nacht
   sequence:
-    - service: switch.turn_off
-      entity_id: switch.couch
+    - service: light.turn_off
+      entity_id: light.couch
     - service: light.turn_off
       entity_id: light.wohnzimmer_lampe
     - service: script.kueche_off
     - service: script.tisch_off    
-#    - service: shell_command.tv_power_off
-    - service: light.turn_off
-      entity_id: light.gateway_light_7811dcded114
-#    - service: switch.turn_off
-#      entity_id: switch.boxen
     - service: switch.turn_off
       entity_id: switch.media_pc
     - service: script.musik_station_aus      

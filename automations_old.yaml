@@ -19,16 +19,17 @@
 ############ Amplifier
 #################################################################
 
-- alias: Amplifier automatisch an wenn Strom auf Boxen
-  trigger:
-     platform: state
-     entity_id: switch.amplifier  
-     from: 'unavailable'
-     to: 'off'
-  action:
-    - service: switch.turn_on
-      data:
-        entity_id: switch.amplifier
+#migrated to ui on 23.01.2021
+#- alias: Amplifier automatisch an wenn Strom auf Boxen
+#  trigger:
+#     platform: state
+#     entity_id: switch.amplifier  
+#     from: 'unavailable'
+#     to: 'off'
+#  action:
+#    - service: switch.turn_on
+#      data:
+#        entity_id: switch.amplifier
            
 
    
@@ -67,47 +68,47 @@
 #################################################################
 
 
-- alias: Single Press - Basti Eingang Switch
-  trigger:
-  - device_id: 2eafa758aaab4a59b355205f92810fd3
-    domain: deconz
-    platform: device
-    type: remote_button_short_release
-    subtype: turn_on  
-  action:
-    - service: switch.toggle
-      data:
-        entity_id: switch.basti_decke
+# - alias: Single Press - Basti Eingang Switch
+#   trigger:
+#   - device_id: 2eafa758aaab4a59b355205f92810fd3
+#     domain: deconz
+#     platform: device
+#     type: remote_button_short_release
+#     subtype: turn_on  
+#   action:
+#     - service: switch.toggle
+#       data:
+#         entity_id: switch.basti_decke
 
-- alias: Double Press - Basti Eingang Switch
-  trigger:
-  - device_id: 2eafa758aaab4a59b355205f92810fd3
-    domain: deconz
-    platform: device
-    type: remote_button_double_press
-    subtype: turn_on  
-  action:
-    - service: switch.toggle
-      data:
-        entity_id: switch.basti_lampe
+# - alias: Double Press - Basti Eingang Switch
+#   trigger:
+#   - device_id: 2eafa758aaab4a59b355205f92810fd3
+#     domain: deconz
+#     platform: device
+#     type: remote_button_double_press
+#     subtype: turn_on  
+#   action:
+#     - service: switch.toggle
+#       data:
+#         entity_id: switch.basti_lampe
 
-- alias: Long Press - Basti Eingang Switch
-  trigger:
-  - device_id: 2eafa758aaab4a59b355205f92810fd3
-    domain: deconz
-    platform: device
-    type: remote_button_long_press
-    subtype: turn_on  
-  action:
-    - service: switch.turn_off
-      data:
-        entity_id: switch.basti_lampe
-    - service: switch.turn_off
-      data:
-        entity_id: switch.basti_decke
-    - service: light.turn_off
-      data:
-        entity_id: light.schreibtischlampe
+# - alias: Long Press - Basti Eingang Switch
+#   trigger:
+#   - device_id: 2eafa758aaab4a59b355205f92810fd3
+#     domain: deconz
+#     platform: device
+#     type: remote_button_long_press
+#     subtype: turn_on  
+#   action:
+#     - service: switch.turn_off
+#       data:
+#         entity_id: switch.basti_lampe
+#     - service: switch.turn_off
+#       data:
+#         entity_id: switch.basti_decke
+#     - service: light.turn_off
+#       data:
+#         entity_id: light.schreibtischlampe
 
 
 
@@ -117,56 +118,56 @@
 #################################################################
 
 
-- alias: Single Press - Basti Bed Switch
-  trigger:
-  - device_id: b7294f48c20b40c395081429ca461d2f
-    domain: deconz
-    platform: device
-    type: remote_button_short_release
-    subtype: turn_on  
-  action:
-    - service: switch.toggle
-      data:
-        entity_id: switch.basti_decke
+# - alias: Single Press - Basti Bed Switch
+#   trigger:
+#   - device_id: b7294f48c20b40c395081429ca461d2f
+#     domain: deconz
+#     platform: device
+#     type: remote_button_short_release
+#     subtype: turn_on  
+#   action:
+#     - service: switch.toggle
+#       data:
+#         entity_id: switch.basti_decke
 
-- alias: Double Press - Basti Bed Switch
-  trigger:
-  - device_id: b7294f48c20b40c395081429ca461d2f
-    domain: deconz
-    platform: device
-    type: remote_button_double_press
-    subtype: turn_on  
-  action:
-    - service: switch.toggle
-      data:
-        entity_id: switch.basti_lampe
+# - alias: Double Press - Basti Bed Switch
+#   trigger:
+#   - device_id: b7294f48c20b40c395081429ca461d2f
+#     domain: deconz
+#     platform: device
+#     type: remote_button_double_press
+#     subtype: turn_on  
+#   action:
+#     - service: switch.toggle
+#       data:
+#         entity_id: switch.basti_lampe
 
-- alias: Long Press - Basti Bed Switch
-  trigger:
-  - device_id: b7294f48c20b40c395081429ca461d2f
-    domain: deconz
-    platform: device
-    type: remote_button_long_press
-    subtype: turn_on  
-  action:
-    - service: switch.toggle
-      data:
-        entity_id: switch.basti_lampe
-    - service: switch.toggle
-      data:
-        entity_id: switch.basti_decke
+# - alias: Long Press - Basti Bed Switch
+#   trigger:
+#   - device_id: b7294f48c20b40c395081429ca461d2f
+#     domain: deconz
+#     platform: device
+#     type: remote_button_long_press
+#     subtype: turn_on  
+#   action:
+#     - service: switch.toggle
+#       data:
+#         entity_id: switch.basti_lampe
+#     - service: switch.toggle
+#       data:
+#         entity_id: switch.basti_decke
 
-- alias: Tripple Press - Basti Bed Switch
-  trigger:
-  - device_id: b7294f48c20b40c395081429ca461d2f
-    domain: deconz
-    platform: device
-    type: remote_button_triple_press
-    subtype: turn_on  
-  action:
-    - service: light.toggle
-      data:
-        entity_id: light.schreibtischlampe
+# - alias: Tripple Press - Basti Bed Switch
+#   trigger:
+#   - device_id: b7294f48c20b40c395081429ca461d2f
+#     domain: deconz
+#     platform: device
+#     type: remote_button_triple_press
+#     subtype: turn_on  
+#   action:
+#     - service: light.toggle
+#       data:
+#         entity_id: light.schreibtischlampe
 
 
 
@@ -174,33 +175,6 @@
 #################################################################
 ############ Küche
 #################################################################
-
-
-- alias : Küche an um 06:45
-  initial_state: false
-  trigger:
-    platform: time
-    at : '06:30:00'
-  condition:
-     - condition: time
-       weekday:
-         - mon
-         - tue
-         - wed
-         - thu
-         - fri    
-  action:
-    service: script.kueche_on
-
-
-- alias : Küche aus um 07:15
-  initial_state: false
-  trigger:
-    platform: time
-    at: '07:15:00'
-  action:
-    service: script.kueche_off
-
 
 - alias: Erinnerung Tagesschau
   initial_state: true
@@ -220,43 +194,41 @@
 ############ Küchen Switch 
 #################################################################
 
-- alias: Küchenlicht - Thekenschalter 
-  trigger:
-  - device_id: 5b75a69731a14ff495d9a97119a0ce96
-    domain: deconz
-    platform: device
-    type: remote_button_short_press
-    subtype: turn_on
-  action:
-    - service: script.kueche_toggle
+#- alias: Küchenlicht - Thekenschalter 
+#  trigger:
+#  - device_id: 5b75a69731a14ff495d9a97119a0ce96
+#    domain: deconz
+#    platform: device
+#    type: remote_button_short_press
+#    subtype: turn_on
+#  action:
+#    - service: script.kueche_toggle
 
 
-- alias: Double Press - Wohnzimmer Decke
-  trigger:
-  - device_id: 5b75a69731a14ff495d9a97119a0ce96
-    domain: deconz
-    platform: device
-    type: remote_button_double_press
-    subtype: turn_on
-  action:
-    - service: script.wohnzimmer_decke_an_aus
+#- alias: Double Press - Wohnzimmer Decke
+#  trigger:
+#  - device_id: 5b75a69731a14ff495d9a97119a0ce96
+#    domain: deconz
+#    platform: device
+#    type: remote_button_double_press
+#    subtype: turn_on
+#  action:
+#    - service: script.wohnzimmer_decke_an_aus
     
     
 
-- alias: Long press - Licher im Wohnzimmer und Küche aus
-  trigger:
-  - device_id: 5b75a69731a14ff495d9a97119a0ce96
-    domain: deconz
-    platform: device
-    type: remote_button_long_press
-    subtype: turn_on
-  action:
-    - service: script.kueche_off
-    - service: switch.turn_off
-      entity_id: switch.couch    
-    - service: script.tisch_off    
-    - service: light.turn_off
-      entity_id: light.gateway_light_7811dcded114
+#- alias: Long press - Licher im Wohnzimmer und Küche aus
+#  trigger:
+#  - device_id: 5b75a69731a14ff495d9a97119a0ce96
+#    domain: deconz
+#    platform: device
+#    type: remote_button_long_press
+#    subtype: turn_on
+#  action:
+#    - service: script.kueche_off
+#    - service: light.turn_off
+#      entity_id: light.couch    
+#    - service: script.tisch_off    
     
 
 
@@ -429,32 +401,32 @@
 #type: remote_moved
 #subtype: side_1
 
-- alias: B-Cube to flip90
-  description: 'B-Cube to flip90'
-  trigger:
-  - device_id: 66d6cab215e84f2c9809ad12011a5009
-    domain: deconz
-    platform: device
-    subtype: ''
-    type: remote_flip_90_degrees
-  condition: []
-  action:
-  - data: {}
-    entity_id: light.schreibtischlampe
-    service: light.toggle
+#- alias: B-Cube to flip90
+#  description: 'B-Cube to flip90'
+#  trigger:
+#  - device_id: 66d6cab215e84f2c9809ad12011a5009
+#    domain: deconz
+#    platform: device
+#    subtype: ''
+#    type: remote_flip_90_degrees
+#  condition: []
+#  action:
+#  - data: {}
+#    entity_id: light.schreibtischlampe
+#    service: light.toggle
 
 
-- alias: B-Cube to move
-  description: 'B-Cube to move'
-  trigger:
-  - device_id: 66d6cab215e84f2c9809ad12011a5009
-    domain: deconz
-    platform: device
-    subtype: ''
-    type: remote_moved_any_side
-  condition: []
-  action:
-  - service: script.music_box_next_track
+#- alias: B-Cube to move
+#  description: 'B-Cube to move'
+#  trigger:
+#  - device_id: 66d6cab215e84f2c9809ad12011a5009
+#    domain: deconz
+#    platform: device
+#    subtype: ''
+#    type: remote_moved_any_side
+#  condition: []
+#  action:
+#  - service: script.music_box_next_track
 
 
 #- alias: B-Cube to move
@@ -468,19 +440,19 @@
 #    - service: script.music_box_next_track
 
 
-- alias: B-Cube to air-shake
-  description: 'B-Cube to air-shake'
-  trigger:
-  - device_id: 66d6cab215e84f2c9809ad12011a5009
-    domain: deconz
-    platform: device
-    subtype: ''
-    type: remote_gyro_activated
-  condition: []
-  action:
-    - service: script.turn_on
-      data:
-        entity_id: script.bastian_arbeitsplatz_an
+#- alias: B-Cube to air-shake
+#  description: 'B-Cube to air-shake'
+#  trigger:
+#  - device_id: 66d6cab215e84f2c9809ad12011a5009
+#    domain: deconz
+#    platform: device
+#    subtype: ''
+#    type: remote_gyro_activated
+#  condition: []
+# action:
+#    - service: script.turn_on
+#      data:
+#        entity_id: script.bastian_arbeitsplatz_an
 
 
 #- alias: B-Cube to air-shake
@@ -506,18 +478,18 @@
 #    - service: script.notebook_t480_displays_off 
       
 
-- alias: B-Cube to free_fall
-  description: 'B-Cube to free_fall'
-  trigger:
-  - device_id: 66d6cab215e84f2c9809ad12011a5009
-    domain: deconz
-    platform: device
-    subtype: ''
-    type: remote_falling
-  condition: []
-  action:
-    - service: switch.turn_on
-      entity_id: switch.thinkpad_dock     
+#- alias: B-Cube to free_fall
+#  description: 'B-Cube to free_fall'
+#  trigger:
+#  - device_id: 66d6cab215e84f2c9809ad12011a5009
+#    domain: deconz
+#    platform: device
+#    subtype: ''
+#    type: remote_falling
+#  condition: []
+#  action:
+#    - service: switch.turn_on
+#      entity_id: switch.thinkpad_dock     
 
 
 #- alias: B-Cube to free_fall
@@ -532,22 +504,22 @@
 #      entity_id: switch.thinkpad_dock     
 
 
-
-- alias: B-Cube to flip180
-  description: 'B-Cube to flip180'
-  trigger:
-  - device_id: 66d6cab215e84f2c9809ad12011a5009
-    domain: deconz
-    platform: device
-    subtype: ''
-    type: remote_flip_180_degrees
-  condition: []
-  action:
-    - service: switch.turn_off
-      entity_id: switch.boxen
-    - service: script.turn_on
-      data:
-        entity_id: script.notebook_t480_hibernate    
+#
+#- alias: B-Cube to flip180
+#  description: 'B-Cube to flip180'
+#  trigger:
+#  - device_id: 66d6cab215e84f2c9809ad12011a5009
+#    domain: deconz
+#    platform: device
+#    subtype: ''
+#    type: remote_flip_180_degrees
+#  condition: []
+#  action:
+#    - service: switch.turn_off
+#      entity_id: switch.boxen
+#    - service: script.turn_on
+#      data:
+#        entity_id: script.notebook_t480_hibernate    
 
 
 #- alias: B-Cube to flip180
@@ -561,33 +533,33 @@
 #    - service: switch.turn_off
 #      entity_id: switch.boxen
 
-- alias: B-Cube to rotate clock
-  description: 'B-Cube to rotate clock'
-  trigger:
-  - device_id: 66d6cab215e84f2c9809ad12011a5009
-    domain: deconz
-    platform: device
-    subtype: ''
-    type: remote_turned_clockwise
-  condition: []
-  action:
-    - service: script.turn_on
-      data:
-        entity_id: script.schreibtisch_bright_plus_50
+#- alias: B-Cube to rotate clock
+#  description: 'B-Cube to rotate clock'
+#  trigger:
+#  - device_id: 66d6cab215e84f2c9809ad12011a5009
+#    domain: deconz
+#    platform: device
+#    subtype: ''
+#    type: remote_turned_clockwise
+#  condition: []
+#  action:
+#    - service: script.turn_on
+#      data:
+#        entity_id: script.schreibtisch_bright_plus_50
   
-- alias: B-Cube to rotate counter clock
-  description: 'B-Cube to rotate counter clock'
-  trigger:
-  - device_id: 66d6cab215e84f2c9809ad12011a5009
-    domain: deconz
-    platform: device
-    subtype: ''
-    type: remote_turned_counter_clockwise
-  condition: []
-  action:
-    - service: script.turn_on
-      data:
-        entity_id: script.schreibtisch_bright_minus_50
+#- alias: B-Cube to rotate counter clock
+#  description: 'B-Cube to rotate counter clock'
+#  trigger:
+#  - device_id: 66d6cab215e84f2c9809ad12011a5009
+ #   domain: deconz
+#    platform: device
+#    subtype: ''
+#    type: remote_turned_counter_clockwise
+#  condition: []
+#  action:
+#    - service: script.turn_on
+#      data:
+#        entity_id: script.schreibtisch_bright_minus_50
   
 
 
@@ -619,39 +591,39 @@
 ############ Kammer
 ################################################################################################
 
-- alias: Kammer-Licht bei Bewegung
-  trigger:
-    type: motion
-    platform: device
-    device_id: cd4ed5acd5df4435b3f6edbb478880f9
-    entity_id: binary_sensor.presence_11
-    domain: binary_sensor
-    #platform: state
-    #entity_id: binary_sensor.motion_sensor_158d0002239b1a
-    #to: 'on'
-  action:
-    service: homeassistant.turn_on
-    entity_id: switch.kammer
+# - alias: Kammer-Licht bei Bewegung
+#   trigger:
+#     type: motion
+#     platform: device
+#     device_id: cd4ed5acd5df4435b3f6edbb478880f9
+#     entity_id: binary_sensor.presence_11
+#     domain: binary_sensor
+#     #platform: state
+#     #entity_id: binary_sensor.motion_sensor_158d0002239b1a
+#     #to: 'on'
+#   action:
+#     service: homeassistant.turn_on
+#     entity_id: switch.kammer
 
-- alias: Kammerlicht Aus nach 2 Minuten 
-  trigger:
-    type: no_motion
-    platform: device
-    device_id: cd4ed5acd5df4435b3f6edbb478880f9
-    entity_id: binary_sensor.presence_11
-    domain: binary_sensor
-    for:
-       hours: 0
-       minutes: 2
-       seconds: 0
-    #platform: state
-    #entity_id: binary_sensor.motion_sensor_158d0002239b1a
-    #to: 'off'
-    #for:
-    #  minutes: 2
-  action:
-    service: homeassistant.turn_off
-    entity_id: switch.kammer
+# - alias: Kammerlicht Aus nach 2 Minuten 
+#   trigger:
+#     type: no_motion
+#     platform: device
+#     device_id: cd4ed5acd5df4435b3f6edbb478880f9
+#     entity_id: binary_sensor.presence_11
+#     domain: binary_sensor
+#     for:
+#        hours: 0
+#        minutes: 2
+#        seconds: 0
+#     #platform: state
+#     #entity_id: binary_sensor.motion_sensor_158d0002239b1a
+#     #to: 'off'
+#     #for:
+#     #  minutes: 2
+#   action:
+#     service: homeassistant.turn_off
+#     entity_id: switch.kammer
     
 - alias: Cloud Webhooks 
   trigger:
@@ -670,280 +642,280 @@
 ############ RF Remote - OSMC
 ################################################################################################
 
-- alias: RF Ok-> Decke Basti
-  trigger:
-    platform: event
-    event_type: keyboard_remote2_command_received
-    event_data:
-      device_descriptor: "/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd"
-      key_code: 28 # ok
-  action:
-    service: light.toggle
-    entity_id: light.bastian_decke
+# - alias: RF Ok-> Decke Basti
+#   trigger:
+#     platform: event
+#     event_type: keyboard_remote2_command_received
+#     event_data:
+#       device_descriptor: "/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd"
+#       key_code: 28 # ok
+#   action:
+#     service: light.toggle
+#     entity_id: light.bastian_decke
 
-- alias: RF OK long press-> Lampe Basti
-  trigger:
-    platform: event
-    event_type: keyboard_remote2_command_received
-    event_data:
-      device_descriptor: "/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd"
-      key_code: 1028 # ok
-  action:
-    service: light.toggle
-    entity_id: light.bastian_lampe
+# - alias: RF OK long press-> Lampe Basti
+#   trigger:
+#     platform: event
+#     event_type: keyboard_remote2_command_received
+#     event_data:
+#       device_descriptor: "/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd"
+#       key_code: 1028 # ok
+#   action:
+#     service: light.toggle
+#     entity_id: light.bastian_lampe
 
 
 
-- alias: RF Info-> ADI Toggle View 
-  trigger:
-    platform: event
-    event_type: keyboard_remote2_command_received
-    event_data:
-      device_descriptor: "/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd"
-      key_code: 23 # info
-  action:
-    #service: script.office_hub_nuprime_toggle_display
-    service: script.office_hub_adi_toggle_view
+# - alias: RF Info-> ADI Toggle View 
+#   trigger:
+#     platform: event
+#     event_type: keyboard_remote2_command_received
+#     event_data:
+#       device_descriptor: "/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd"
+#       key_code: 23 # info
+#   action:
+#     #service: script.office_hub_nuprime_toggle_display
+#     service: script.office_hub_adi_toggle_view
     
     
-- alias: RF Info Long Press-> Auto Dark Mode 
-  trigger:
-    platform: event
-    event_type: keyboard_remote2_command_received
-    event_data:
-      device_descriptor: "/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd"
-      key_code: 1023 # info
-  action:
-    #service: script.office_hub_nuprime_toggle_display
-    service: script.office_hub_adi_toggle_dark_mode    
+# - alias: RF Info Long Press-> Auto Dark Mode 
+#   trigger:
+#     platform: event
+#     event_type: keyboard_remote2_command_received
+#     event_data:
+#       device_descriptor: "/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd"
+#       key_code: 1023 # info
+#   action:
+#     #service: script.office_hub_nuprime_toggle_display
+#     service: script.office_hub_adi_toggle_dark_mode    
     
-- alias: RF Home -> Boxen an/ Media PC an 
-  trigger:
-    platform: event
-    event_type: keyboard_remote2_command_received
-    event_data:
-      device_descriptor: "/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd"
-      key_code: 102 # home
-  action:
-    - service: switch.turn_on
-      entity_id: switch.boxen
-    - service: script.media_pc_an
+# - alias: RF Home -> Boxen an/ Media PC an 
+#   trigger:
+#     platform: event
+#     event_type: keyboard_remote2_command_received
+#     event_data:
+#       device_descriptor: "/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd"
+#       key_code: 102 # home
+#   action:
+#     - service: switch.turn_on
+#       entity_id: switch.boxen
+#     - service: script.media_pc_an
       
 
-- alias: RF Home long press-> Boxen aus 
-  trigger:
-    platform: event
-    event_type: keyboard_remote2_command_received
-    event_data:
-      device_descriptor: "/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd"
-      key_code: 1102 # home
-  action:
-    - service: script.musik_station_aus
+# - alias: RF Home long press-> Boxen aus 
+#   trigger:
+#     platform: event
+#     event_type: keyboard_remote2_command_received
+#     event_data:
+#       device_descriptor: "/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd"
+#       key_code: 1102 # home
+#   action:
+#     - service: script.musik_station_aus
       
 
 
-- alias: RF Menu-> Musik Box input LAN
-  trigger:
-    platform: event
-    event_type: keyboard_remote2_command_received
-    event_data:
-      device_descriptor: "/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd"
-      key_code: 46 # menu 
-  action:
-    service: script.music_box_set_input_lan
+# - alias: RF Menu-> Musik Box input LAN
+#   trigger:
+#     platform: event
+#     event_type: keyboard_remote2_command_received
+#     event_data:
+#       device_descriptor: "/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd"
+#       key_code: 46 # menu 
+#   action:
+#     service: script.music_box_set_input_lan
 
 
 
-- alias: RF Menu long press-> Musik Box input Toslink
-  trigger:
-    platform: event
-    event_type: keyboard_remote2_command_received
-    event_data:
-      device_descriptor: "/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd"
-      key_code: 1046 # menu 
-  action:
-    service: script.music_box_set_input_toslink
+# - alias: RF Menu long press-> Musik Box input Toslink
+#   trigger:
+#     platform: event
+#     event_type: keyboard_remote2_command_received
+#     event_data:
+#       device_descriptor: "/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd"
+#       key_code: 1046 # menu 
+#   action:
+#     service: script.music_box_set_input_toslink
 
 
-- alias: RF Right-> Next song
-  trigger:
-    platform: event
-    event_type: keyboard_remote2_command_received
-    event_data:
-      device_descriptor: "/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd"
-      key_code: 106 # Right
-  action:
-    service: script.music_box_next_track
+# - alias: RF Right-> Next song
+#   trigger:
+#     platform: event
+#     event_type: keyboard_remote2_command_received
+#     event_data:
+#       device_descriptor: "/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd"
+#       key_code: 106 # Right
+#   action:
+#     service: script.music_box_next_track
 
 
-- alias: RF Right long press -> Play pause 
-  trigger:
-    platform: event
-    event_type: keyboard_remote2_command_received
-    event_data:
-      device_descriptor: "/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd"
-      key_code: 1106 # Right
-  action:
-    service: script.music_box_play_pause
-
-
-
-- alias: RF Left-> Prev Song
-  trigger:
-    platform: event
-    event_type: keyboard_remote2_command_received
-    event_data:
-      device_descriptor: "/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd"
-      key_code: 105 # left
-  action:
-    service: script.music_box_prev_track
-
-
-- alias: RF Up-> Seek +30sec
-  trigger:
-    platform: event
-    event_type: keyboard_remote2_command_received
-    event_data:
-      device_descriptor: "/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd"
-      key_code: 103 # up 
-  action:
-    service: script.music_box_seek_forward
-
-
-- alias: RF Down-> Seek -10sec
-  trigger:
-    platform: event
-    event_type: keyboard_remote2_command_received
-    event_data:
-      device_descriptor: "/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd"
-      key_code: 108 # down
-  action:
-    service: script.music_box_seek_backward
+# - alias: RF Right long press -> Play pause 
+#   trigger:
+#     platform: event
+#     event_type: keyboard_remote2_command_received
+#     event_data:
+#       device_descriptor: "/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd"
+#       key_code: 1106 # Right
+#   action:
+#     service: script.music_box_play_pause
 
 
 
-- alias: RF Vol-Down-> Vol down
-  trigger:
-    platform: event
-    event_type: keyboard_remote2_command_received
-    event_data:
-      device_descriptor: "/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd"
-      key_code: 12 # vol down
-  action:
-    service: script.music_box_volume_down1
+# - alias: RF Left-> Prev Song
+#   trigger:
+#     platform: event
+#     event_type: keyboard_remote2_command_received
+#     event_data:
+#       device_descriptor: "/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd"
+#       key_code: 105 # left
+#   action:
+#     service: script.music_box_prev_track
+
+
+# - alias: RF Up-> Seek +30sec
+#   trigger:
+#     platform: event
+#     event_type: keyboard_remote2_command_received
+#     event_data:
+#       device_descriptor: "/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd"
+#       key_code: 103 # up 
+#   action:
+#     service: script.music_box_seek_forward
+
+
+# - alias: RF Down-> Seek -10sec
+#   trigger:
+#     platform: event
+#     event_type: keyboard_remote2_command_received
+#     event_data:
+#       device_descriptor: "/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd"
+#       key_code: 108 # down
+#   action:
+#     service: script.music_box_seek_backward
+
+
+
+# - alias: RF Vol-Down-> Vol down
+#   trigger:
+#     platform: event
+#     event_type: keyboard_remote2_command_received
+#     event_data:
+#       device_descriptor: "/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd"
+#       key_code: 12 # vol down
+#   action:
+#     service: script.music_box_volume_down1
     
 
-- alias: RF Vol-Down long press-> Amp Vol down
-  trigger:
-    platform: event
-    event_type: keyboard_remote2_command_received
-    event_data:
-      device_descriptor: "/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd"
-      key_code: 1012 # vol down
-  action:
-    #service: script.music_box_preamp_volume_down1
-    service: script.office_hub_amp_vol_down
+# - alias: RF Vol-Down long press-> Amp Vol down
+#   trigger:
+#     platform: event
+#     event_type: keyboard_remote2_command_received
+#     event_data:
+#       device_descriptor: "/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd"
+#       key_code: 1012 # vol down
+#   action:
+#     #service: script.music_box_preamp_volume_down1
+#     service: script.office_hub_amp_vol_down
 
-- alias: RF Vol-Up-> Vol up
-  trigger:
-    platform: event
-    event_type: keyboard_remote2_command_received
-    event_data:
-      device_descriptor: "/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd"
-      key_code: 13 # vol up
-  action:
-    service: script.music_box_volume_up1
+# - alias: RF Vol-Up-> Vol up
+#   trigger:
+#     platform: event
+#     event_type: keyboard_remote2_command_received
+#     event_data:
+#       device_descriptor: "/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd"
+#       key_code: 13 # vol up
+#   action:
+#     service: script.music_box_volume_up1
     
-- alias: RF Vol-Up long press-> Amp Vol up
-  trigger:
-    platform: event
-    event_type: keyboard_remote2_command_received
-    event_data:
-      device_descriptor: "/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd"
-      key_code: 1013 # vol up
-  action:
-    service: script.office_hub_amp_vol_up
+# - alias: RF Vol-Up long press-> Amp Vol up
+#   trigger:
+#     platform: event
+#     event_type: keyboard_remote2_command_received
+#     event_data:
+#       device_descriptor: "/dev/input/by-id/usb-OSMC_Remote_Controller_USB_Keyboard_Mouse-event-kbd"
+#       key_code: 1013 # vol up
+#   action:
+#     service: script.office_hub_amp_vol_up
 
 
-#################################################################
-############ DESK Switch / preamp switch
-#################################################################
+# #################################################################
+# ############ DESK Switch / preamp switch
+# #################################################################
 
-- alias: Single Press - Desk
-  trigger:
-  - device_id: df548952f7344a7495cc4a5f020c20cc
-    domain: deconz
-    platform: device
-    type: remote_button_short_release
-    subtype: turn_on
-  action:
-    service: script.desk_switch_to_coaxial_or_workstation_on
+# - alias: Single Press - Desk
+#   trigger:
+#   - device_id: df548952f7344a7495cc4a5f020c20cc
+#     domain: deconz
+#     platform: device
+#     type: remote_button_short_release
+#     subtype: turn_on
+#   action:
+#     service: script.desk_switch_to_coaxial_or_workstation_on
 
 
-- alias: Double Press - Desk
-  trigger:
-  - device_id: df548952f7344a7495cc4a5f020c20cc
-    domain: deconz
-    platform: device
-    type: remote_button_double_press
-    subtype: turn_on      
-  action:  
-     service: script.music_box_set_input_toslink
+# - alias: Double Press - Desk
+#   trigger:
+#   - device_id: df548952f7344a7495cc4a5f020c20cc
+#     domain: deconz
+#     platform: device
+#     type: remote_button_double_press
+#     subtype: turn_on      
+#   action:  
+#      service: script.music_box_set_input_toslink
       
 
     
 
-- alias: Long press - Desk
-  trigger:
-  - device_id: df548952f7344a7495cc4a5f020c20cc
-    domain: deconz
-    platform: device
-    type: remote_button_long_press
-    subtype: turn_on
-  action:
-     service: script.music_box_set_input_usb
+# - alias: Long press - Desk
+#   trigger:
+#   - device_id: df548952f7344a7495cc4a5f020c20cc
+#     domain: deconz
+#     platform: device
+#     type: remote_button_long_press
+#     subtype: turn_on
+#   action:
+#      service: script.music_box_set_input_usb
     
 
 #################################################################
 ############  Gäste Zimmer Switch 
 #################################################################
 
-- alias: Single Press - Gäste Zimmer Switch 
-  trigger:
-  - device_id: 4b28cad7e4d944569f59a933cd31db21
-    domain: deconz
-    platform: device
-    type: remote_button_short_release
-    subtype: turn_on
-  action:
-    - service: media_player.media_next_track
-      entity_id: media_player.gastezimmer_boxen_2
+#- alias: Single Press - Gäste Zimmer Switch 
+#   trigger:
+#   - device_id: 4b28cad7e4d944569f59a933cd31db21
+#     domain: deconz
+#     platform: device
+#     type: remote_button_short_release
+#     subtype: turn_on
+#   action:
+#     - service: media_player.media_next_track
+#       entity_id: media_player.gastezimmer_boxen_2
 
 
-- alias: Double Press - Gäste Zimmer Switch 
-  trigger:
-  - device_id: 4b28cad7e4d944569f59a933cd31db21
-    domain: deconz
-    platform: device
-    type: remote_button_double_press
-    subtype: turn_on
-  action:  
-    - service: media_player.media_previous_track
-      entity_id: media_player.gastezimmer_boxen_2
+# - alias: Double Press - Gäste Zimmer Switch 
+#   trigger:
+#   - device_id: 4b28cad7e4d944569f59a933cd31db21
+#     domain: deconz
+#     platform: device
+#     type: remote_button_double_press
+#     subtype: turn_on
+#   action:  
+#     - service: media_player.media_previous_track
+#       entity_id: media_player.gastezimmer_boxen_2
       
 
     
 
-- alias: Long press - Gäste Zimmer Switch 
-  trigger:
-  - device_id: 4b28cad7e4d944569f59a933cd31db21
-    domain: deconz
-    platform: device
-    type: remote_button_long_press
-    subtype: turn_on
-  action:
-    - service: media_player.media_play_pause
-      entity_id: media_player.gastezimmer_boxen_2
+# - alias: Long press - Gäste Zimmer Switch 
+#   trigger:
+#   - device_id: 4b28cad7e4d944569f59a933cd31db21
+#     domain: deconz
+#     platform: device
+#     type: remote_button_long_press
+#     subtype: turn_on
+#   action:
+#     - service: media_player.media_play_pause
+#       entity_id: media_player.gastezimmer_boxen_2
 
     
 

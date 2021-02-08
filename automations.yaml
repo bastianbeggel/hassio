@@ -16,9 +16,9 @@
     entity_id: switch.boxen_internal
     type: is_on
   action:
-  - device_id: 9d479a0106de4821953e257e55f08d64
+  - device_id: 87da8fc04ee6427da2840138619a40b3
     domain: switch
-    entity_id: switch.amplifier
+    entity_id: switch.amp
     type: turn_off
 - id: '1589029996428'
   alias: Amp an wenn Musik auf SHD
@@ -37,9 +37,9 @@
     entity_id: input_select.preamp_select
     state: LAN
   action:
-  - device_id: 9d479a0106de4821953e257e55f08d64
+  - device_id: 87da8fc04ee6427da2840138619a40b3
     domain: switch
-    entity_id: switch.amplifier
+    entity_id: switch.amp
     type: turn_on
 - id: '1589030773684'
   alias: Amp aus wenn keine Musik auf Digione
@@ -59,9 +59,9 @@
     entity_id: switch.boxen_internal
     type: is_on
   action:
-  - device_id: 9d479a0106de4821953e257e55f08d64
+  - device_id: 87da8fc04ee6427da2840138619a40b3
     domain: switch
-    entity_id: switch.amplifier
+    entity_id: switch.amp
     type: turn_off
 - id: '1589030773685'
   alias: Amp aus wenn keine Musik auf Boxen Bastian
@@ -81,9 +81,9 @@
     entity_id: switch.boxen_internal
     type: is_on
   action:
-  - device_id: 9d479a0106de4821953e257e55f08d64
+  - device_id: 87da8fc04ee6427da2840138619a40b3
     domain: switch
-    entity_id: switch.amplifier
+    entity_id: switch
     type: turn_off
 - id: '1589030973285'
   alias: 'Amp an wenn Musik auf Digione '
@@ -102,9 +102,9 @@
     entity_id: input_select.preamp_select
     state: SPDIF
   action:
-  - device_id: 9d479a0106de4821953e257e55f08d64
+  - device_id: 87da8fc04ee6427da2840138619a40b3
     domain: switch
-    entity_id: switch.amplifier
+    entity_id: switch.amp
     type: turn_on
   mode: single
 - id: '1589030973286'
@@ -124,9 +124,9 @@
     entity_id: input_select.preamp_select
     state: TOSLINK
   action:
-  - device_id: 9d479a0106de4821953e257e55f08d64
+  - device_id: 87da8fc04ee6427da2840138619a40b3
     domain: switch
-    entity_id: switch.amplifier
+    entity_id: switch.amp
     type: turn_on
   mode: single
 - id: '1589352837782'
@@ -140,9 +140,10 @@
     type: remote_button_short_release
   condition: []
   action:
-  - data: {}
+  - service: homeassistant.toggle
+    data: {}
     entity_id: switch.basti_decke
-    service: switch.toggle
+  mode: single
 - id: '1591102176546'
   alias: Amp an Wenn auf USB geschaltet wird
   description: ''
@@ -152,10 +153,10 @@
     to: USB
   condition: []
   action:
-  - device_id: 9d479a0106de4821953e257e55f08d64
+  - type: turn_on
+    device_id: 87da8fc04ee6427da2840138619a40b3
+    entity_id: switch.amp
     domain: switch
-    entity_id: switch.amplifier
-    type: turn_on
   mode: single
 - id: '1595596034819'
   alias: 'Wohnzimmer Switch - Single Press '
@@ -198,10 +199,14 @@
     type: remote_button_long_press
   condition: []
   action:
-  - device_id: 87da8fc04ee6427da2840138619a40b3
-    domain: switch
-    entity_id: switch.couch
-    type: toggle
+  - type: toggle
+    device_id: 36f51697bae645558e641fded1f8adbe
+    entity_id: light.couchbirne1
+    domain: light
+  - type: toggle
+    device_id: 78a1a748dc153421c3fbe4d0cefe33e1
+    entity_id: light.couchbirne2
+    domain: light
   mode: single
 - id: '1601048286276'
   alias: Kücke Cube Flip90 - Tisch
@@ -308,4 +313,306 @@
     device_id: 6fd6d3edae1f416b85918680f3d1359c
     entity_id: light.wohnzimmer_lampe
     domain: light
+  mode: single
+- id: '1611399204202'
+  alias: Kammer-Licht bei Bewegung - Neu
+  description: ''
+  trigger:
+  - type: motion
+    platform: device
+    device_id: cd4ed5acd5df4435b3f6edbb478880f9
+    entity_id: binary_sensor.presence_11
+    domain: binary_sensor
+  condition: []
+  action:
+  - service: light.turn_on
+    data: {}
+    entity_id: light.kammerlicht
+  mode: single
+- id: '1611404496225'
+  alias: Amplifier automatisch an wenn Strom auf Boxen
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: switch.amp
+    from: unavailable
+    to: 'off'
+  condition: []
+  action:
+  - type: turn_on
+    device_id: 87da8fc04ee6427da2840138619a40b3
+    entity_id: switch.amp
+    domain: switch
+  mode: single
+- id: '1611404679111'
+  alias: KüchenSwitch - Single Press
+  description: ''
+  trigger:
+  - device_id: 5b75a69731a14ff495d9a97119a0ce96
+    domain: deconz
+    platform: device
+    type: remote_button_short_release
+    subtype: turn_on
+  condition: []
+  action:
+  - service: script.kueche_toggle
+    data: {}
+  mode: single
+- id: '1611404752064'
+  alias: Küche Switch - Double Press
+  description: ''
+  trigger:
+  - device_id: 5b75a69731a14ff495d9a97119a0ce96
+    domain: deconz
+    platform: device
+    type: remote_button_double_press
+    subtype: turn_on
+  condition: []
+  action:
+  - type: toggle
+    device_id: eb24add2488b42c2bede106bc2028353
+    entity_id: light.tischlampe
+    domain: light
+  mode: single
+- id: '1611404796376'
+  alias: Küche Switch - Tripple Press
+  description: ''
+  trigger:
+  - device_id: 5b75a69731a14ff495d9a97119a0ce96
+    domain: deconz
+    platform: device
+    type: remote_button_triple_press
+    subtype: turn_on
+  condition: []
+  action:
+  - service: script.wohnzimmer_decke_an_aus
+    data: {}
+  mode: single
+- id: '1611404926307'
+  alias: Küchen Switch - Long Press
+  description: ''
+  trigger:
+  - device_id: 5b75a69731a14ff495d9a97119a0ce96
+    domain: deconz
+    platform: device
+    type: remote_button_long_release
+    subtype: turn_on
+  condition: []
+  action:
+  - service: script.kueche_off
+    data: {}
+  - service: light.turn_off
+    data: {}
+    entity_id: light.couch
+  - service: light.turn_off
+    data: {}
+    entity_id: light.tischlampe
+  - service: light.turn_off
+    data: {}
+    entity_id: light.wohnzimmer_lampe
+  mode: single
+- id: '1611406614124'
+  alias: ' Single Press - Gäste Zimmer Switch '
+  description: ''
+  trigger:
+  - device_id: 4b28cad7e4d944569f59a933cd31db21
+    domain: deconz
+    platform: device
+    type: remote_button_short_release
+    subtype: turn_on
+  condition: []
+  action:
+  - service: media_player.media_next_track
+    data: {}
+    entity_id: media_player.gastezimmer_boxen_2
+  mode: single
+- id: '1611406649389'
+  alias: 'Double Press - Gäste Zimmer Switch '
+  description: ''
+  trigger:
+  - device_id: 4b28cad7e4d944569f59a933cd31db21
+    domain: deconz
+    platform: device
+    type: remote_button_double_press
+    subtype: turn_on
+  condition: []
+  action:
+  - service: media_player.media_previous_track
+    data: {}
+    entity_id: media_player.gastezimmer_boxen_2
+  mode: single
+- id: '1611406685958'
+  alias: 'Long press - Gäste Zimmer Switch '
+  description: ''
+  trigger:
+  - device_id: 4b28cad7e4d944569f59a933cd31db21
+    domain: deconz
+    platform: device
+    type: remote_button_long_release
+    subtype: turn_on
+  condition: []
+  action:
+  - service: media_player.media_play_pause
+    data: {}
+    entity_id: media_player.gastezimmer_boxen_2
+  mode: single
+- id: '1611417810639'
+  alias: Single Press - Basti Eingang Switch
+  description: ''
+  trigger:
+  - device_id: 2eafa758aaab4a59b355205f92810fd3
+    domain: deconz
+    platform: device
+    type: remote_button_short_release
+    subtype: turn_on
+  condition: []
+  action:
+  - service: switch.toggle
+    data: {}
+    entity_id: switch.basti_decke
+  mode: single
+- id: '1611417843030'
+  alias: Double Press - Basti Eingang Switch
+  description: ''
+  trigger:
+  - device_id: 2eafa758aaab4a59b355205f92810fd3
+    domain: deconz
+    platform: device
+    type: remote_button_double_press
+    subtype: turn_on
+  condition: []
+  action:
+  - service: switch.toggle
+    data: {}
+    entity_id: switch.basti_lampe
+  mode: single
+- id: '1611417939005'
+  alias: Long Press - Basti Eingang Switch
+  description: ''
+  trigger:
+  - device_id: 2eafa758aaab4a59b355205f92810fd3
+    domain: deconz
+    platform: device
+    type: remote_button_long_press
+    subtype: turn_on
+  condition: []
+  action:
+  - service: switch.turn_off
+    data: {}
+    entity_id: switch.basti_decke
+  - service: switch.turn_off
+    data: {}
+    entity_id: switch.basti_lampe
+  - service: light.turn_off
+    data: {}
+    entity_id: light.schreibtischlampe
+  mode: single
+- id: '1611418251207'
+  alias: Kammer Licht aus nach 2 Minuten
+  description: ''
+  trigger:
+  - type: no_motion
+    platform: device
+    device_id: cd4ed5acd5df4435b3f6edbb478880f9
+    entity_id: binary_sensor.presence_11
+    domain: binary_sensor
+    for:
+      hours: 0
+      minutes: 2
+      seconds: 0
+  condition: []
+  action:
+  - service: homeassistant.turn_off
+    data: {}
+    entity_id: switch.kammer
+  mode: single
+- id: '1611418368185'
+  alias: Single Press - Desk
+  description: ''
+  trigger:
+  - device_id: df548952f7344a7495cc4a5f020c20cc
+    domain: deconz
+    platform: device
+    type: remote_button_short_release
+    subtype: turn_on
+  condition: []
+  action:
+  - service: script.desk_switch_to_coaxial_or_workstation_on
+    data: {}
+  mode: single
+- id: '1611418391333'
+  alias: Double Press - Desk
+  description: ''
+  trigger:
+  - device_id: df548952f7344a7495cc4a5f020c20cc
+    domain: deconz
+    platform: device
+    type: remote_button_double_press
+    subtype: turn_on
+  condition: []
+  action:
+  - service: script.music_box_set_input_toslink
+    data: {}
+  mode: single
+- id: '1611418422696'
+  alias: Long press - Desk
+  description: ''
+  trigger:
+  - device_id: df548952f7344a7495cc4a5f020c20cc
+    domain: deconz
+    platform: device
+    type: remote_button_long_press
+    subtype: turn_on
+  condition: []
+  action:
+  - service: script.music_box_set_input_usb
+    data: {}
+  mode: single
+- id: '1611418590092'
+  alias: Double Press - Basti Bed Switch
+  description: ''
+  trigger:
+  - device_id: b7294f48c20b40c395081429ca461d2f
+    domain: deconz
+    platform: device
+    type: remote_button_double_press
+    subtype: turn_on
+  condition: []
+  action:
+  - service: homeassistant.toggle
+    data: {}
+    entity_id: switch.basti_lampe
+  mode: single
+- id: '1611418648191'
+  alias: Long Press - Basti Bed Switch
+  description: ''
+  trigger:
+  - device_id: b7294f48c20b40c395081429ca461d2f
+    domain: deconz
+    platform: device
+    type: remote_button_long_press
+    subtype: turn_on
+  condition: []
+  action:
+  - service: homeassistant.toggle
+    data: {}
+    entity_id: switch.basti_lampe
+  - service: homeassistant.toggle
+    data: {}
+    entity_id: switch.basti_decke
+  mode: single
+- id: '1611418682543'
+  alias: Tripple Press - Basti Bed Switch
+  description: ''
+  trigger:
+  - device_id: b7294f48c20b40c395081429ca461d2f
+    domain: deconz
+    platform: device
+    type: remote_button_triple_press
+    subtype: turn_on
+  condition: []
+  action:
+  - service: homeassistant.toggle
+    data: {}
+    entity_id: light.schreibtischlampe
   mode: single

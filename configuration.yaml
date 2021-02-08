@@ -144,7 +144,19 @@ binary_sensor:
     host: 192.168.178.90
     count: 5
     scan_interval: 60
-    
+  - platform: ping
+    name: PS4-Ping
+    host: 192.168.178.25
+    count: 5
+    scan_interval: 60
+  - platform: ping
+    name: RoPieee-Ping
+    host: 192.168.178.67
+    count: 5
+    scan_interval: 60
+
+
+
 
 
 
@@ -166,7 +178,7 @@ cloud:
         - camera.emicam_mainstream
         - light.bastian_decke
         - light.bastian_lampe
-        - light.couchlicht
+        - light.couch
         - light.wohnzimmerlicht        
         - light.kuechenlicht
         - light.thekenlicht   
@@ -226,7 +238,7 @@ cloud:
         
         
 
-group: !include groups.yaml
+#group: !include groups.yaml
 automation: !include automations.yaml
 automation old: !include automations_old.yaml
 script: !include scripts.yaml
@@ -241,6 +253,11 @@ panel_iframe:
     
 
 light:
+  - platform: group
+    name: couch
+    entities:
+      - light.couchbirne2
+      - light.couchbirne1
   - platform: switch
     name: Bastian Decke
     entity_id: switch.basti_decke
@@ -253,9 +270,9 @@ light:
   - platform: switch
     name: Thekenlicht
     entity_id: switch.kueche_theke
-  - platform: switch
-    name: Couchlicht
-    entity_id: switch.couch
+#  - platform: switch
+#    name: Couchlicht
+#    entity_id: switch.couch
 #  - platform: switch
 #    name: Tischlicht
 #    entity_id: switch.04200102dc4f222a335a
@@ -412,9 +429,9 @@ switch:
         friendly_name: "Wohnzimmer Virtuell Couch Tisch"
         value_template: "off"
         turn_on:
-          service: switch.toggle
+          service: light.toggle
           data:
-            entity_id: switch.couch 
+            entity_id: light.couch 
         turn_off:
           service: script.tisch_toggle
 
@@ -620,13 +637,13 @@ fritzbox:
 #  platform: fritzbox      
 
 
-remote:
-  - platform: harmony
-    name: Harmony Hub
-    host: 192.168.178.61
-  - platform: harmony
-    name: Office-Hub
-    host: 192.168.178.106
+#remote:
+#  - platform: harmony
+#    name: Harmony Hub
+#    host: 192.168.178.61
+#  - platform: harmony
+#    name: Office-Hub
+#    host: 192.168.178.106
 
     
 #device_tracker:
@@ -665,7 +682,7 @@ roon:
 
 tplink:
   switch:
-    - host: 192.168.178.29 #name: Couch
+    - host: 192.168.178.29 #name: amp
     - host: 192.168.178.28 #name: boxen_internal
     - host: 192.168.178.58 # name: media_center_internal
     - host: 192.168.178.110 # name: amplifier
