@@ -1,0 +1,335 @@
+title: Home Assistant
+views:
+  - path: default_view
+    title: Home
+    badges:
+      - entity: sensor.processor_use
+      - entity: sensor.cpu_temperature
+      - entity: sensor.memory_use_percent
+      - entity: sensor.last_boot
+      - entity: sun.sun
+    cards:
+      - entity: climate.bastian_heizung
+        type: thermostat
+      - entity: media_player.stanmoreblackb269_3
+        type: media-control
+      - entity: climate.wohnzimmer_heizung
+        type: thermostat
+      - entities:
+          - entity: light.thekenlicht
+          - entity: light.wohnzimmerlicht
+          - entity: light.kammerlicht
+          - entity: light.bastian_decke
+          - entity: light.kuechenlicht
+          - entity: light.bastian_lampe
+          - entity: light.tischlampe
+          - entity: light.wohnzimmer_lampe
+          - entity: light.schreibtischlampe
+          - entity: light.couchbirne1
+          - entity: light.couchbirne2
+          - entity: light.couch
+        title: Licht
+        type: entities
+      - entity: media_player.boxen_bastian
+        type: media-control
+      - entities:
+          - entity: remote.office_hub
+          - entity: remote.harmony_hub
+        title: Fernbedienung
+        type: entities
+      - entities:
+          - entity: switch.media_center
+          - entity: switch.boxen
+          - entity: switch.media_pc
+        title: Schalter
+        type: entities
+      - entities:
+          - entity: climate.wohnzimmer_heizung
+          - entity: climate.bastian_heizung
+        type: entities
+      - type: history-graph
+        entities:
+          - entity: binary_sensor.ps4_ping
+          - entity: binary_sensor.roon_service_ping
+        hours_to_show: 24
+        refresh_interval: 0
+        title: Computer
+  - badges: []
+    cards:
+      - entities:
+          - entity: light.kuechenlicht
+          - entity: light.thekenlicht
+          - entity: light.wohnzimmerlicht
+          - entity: light.bastian_decke
+          - entity: light.bastian_lampe
+          - entity: light.tischlampe
+          - entity: light.kammerlicht
+          - entity: light.wohnzimmer_lampe
+          - entity: light.schreibtischlampe
+          - entity: light.couch
+        title: Licht
+        type: entities
+      - entities:
+          - entity: switch.media_center
+          - entity: switch.boxen
+          - entity: switch.media_pc
+          - entity: switch.thinkpad_dock
+          - entity: switch.carbon_x1
+          - entity: switch.lenovo_t480
+          - entity: switch.virt_wohnzimmer_heizung
+          - entity: switch.amp
+        title: Schalter
+        type: entities
+      - entities:
+          - entity: switch.basti_virt_decke_decke
+          - entity: switch.wohnzimmer_virt_couch_tisch
+          - entity: switch.wohnzimmer_virt_decke_kueche
+          - entity: switch.basti_virt_decke_lampe
+        title: Viruelle Devices
+        type: entities
+    path: switches_view
+    title: Schalter
+  - badges:
+      - sensor.humidity_158d0002c8cfcb
+      - sensor.temperature_158d0002c8cfcb
+    cards:
+      - entities:
+          - entity: light.couch
+          - entity: light.kuechenlicht
+          - entity: light.thekenlicht
+          - entity: light.wohnzimmerlicht
+          - entity: light.tischlampe
+          - entity: light.kammerlicht
+        title: Licht
+        type: entities
+      - entities:
+          - entity: script.gute_nacht
+          - entity: script.spiele_sr1_marshall
+        title: Skript
+        type: entities
+      - entities:
+          - entity: switch.media_center
+        title: Schalter
+        type: entities
+      - entity: sensor.temperature_16
+        type: sensor
+        name: Wohnzimmer Temeratur
+      - type: sensor
+        entity: sensor.humidity_17
+        name: Wohnzimmer Luftfeuchtigkeit
+      - type: history-graph
+        entities:
+          - entity: sensor.temperature_16
+          - entity: sensor.humidity_17
+        hours_to_show: 24
+        refresh_interval: 0
+        title: Wohnzimmer - 24h
+    path: nele_view
+    title: Wohnzimmer
+  - badges:
+      - sensor.temperature_158d0002b5393a
+      - sensor.humidity_158d0002b5393a
+    cards:
+      - entity: climate.bastian_heizung
+        type: thermostat
+      - entity: media_player.digione_3
+        type: media-control
+      - entities:
+          - entity: script.gute_nacht
+          - entity: script.thinkcentre_runterfahren
+          - entity: script.bastian_arbeitsplatz_an
+          - entity: script.music_box_set_input_lan
+          - entity: script.thinkcentre_neustarten
+        title: Skript
+        type: entities
+      - entity: media_player.shd_studio_roon
+        type: media-control
+      - entities:
+          - climate.bastian__comet_dect
+        hours_to_show: 24
+        refresh_interval: 0
+        type: history-graph
+      - entities:
+          - entity: media_player.boxen_bastian
+        type: entities
+      - entities:
+          - entity: switch.thinkpad_dock
+          - entity: switch.lenovo_t480
+          - entity: switch.boxen_internal
+          - entity: switch.boxen
+          - entity: light.bastian_decke
+          - entity: switch.basti_lampe
+          - entity: switch.virt_bastian_heizung
+          - entity: light.schreibtischlampe
+          - entity: switch.amp
+        title: Schalter
+        type: entities
+      - entities:
+          - entity: input_select.preamp_select
+        type: entities
+      - entities:
+          - entity: sensor.temperature_14
+          - entity: sensor.humidity_15
+        hours_to_show: 2
+        refresh_interval: 0
+        title: Bastian Temeratur 2h
+        type: history-graph
+      - entities:
+          - entity: remote.office_hub
+          - entity: binary_sensor.office_hub_ping
+          - entity: remote.harmony_hub
+          - entity: binary_sensor.harmony_hub_ping
+        hours_to_show: 24
+        refresh_interval: 0
+        title: 24H History
+        type: history-graph
+      - entities:
+          - entity: binary_sensor.roon_service_ping
+          - entity: binary_sensor.shd_studio_ping
+          - entity: automation.harmony_hub_monitor
+          - entity: automation.music_hub_monitor
+        type: entities
+      - entities:
+          - entity: remote.office_hub
+          - entity: binary_sensor.office_hub_ping
+          - entity: remote.harmony_hub
+          - entity: binary_sensor.harmony_hub_ping
+        hours_to_show: 2
+        refresh_interval: 0
+        title: 2H History
+        type: history-graph
+      - entities:
+          - entity: sensor.fritz_box_7490_bytes_received
+          - entity: sensor.fritz_box_7490_bytes_sent
+        hours_to_show: 24
+        refresh_interval: 0
+        title: Fritz Box Usage
+        type: history-graph
+      - entities:
+          - entity: light.configuration_tool_1
+          - entity: light.wohnzimmer
+          - entity: light.wohnzimmer_virt1
+          - entity: binary_sensor.bcube
+        title: My Title
+        type: entities
+      - entities:
+          - device_tracker.oneplus_a6003
+          - sensor.geocoded_location
+          - sensor.wifi_connection
+        type: entities
+      - entity: light.schreibtischlampe
+        type: light
+      - entities:
+          - entity: script.notebook_t480_hibernate
+          - entity: script.notebook_t480_displays_off
+          - entity: script.notebook_t480_suspend
+          - entity: script.notebook_t480_reboot
+          - entity: script.notebook_t480_shutdown
+        title: Notebook t480
+        type: entities
+      - entities:
+          - entity: sensor.temperature_14
+          - entity: sensor.humidity_15
+        hours_to_show: 24
+        refresh_interval: 0
+        title: Bastian Temeratur 24h
+        type: history-graph
+    path: bastian_playstationview
+    title: Bastian
+  - badges: []
+    cards:
+      - type: media-control
+        entity: media_player.digione_3
+      - entity: media_player.gastezimmer_boxen_2
+        type: media-control
+      - entity: media_player.boxen_bastian
+        type: media-control
+      - entities:
+          - entity: media_player.boxen_bastian
+          - entity: media_player.marshall_2
+          - entity: media_player.chromecastaudio3835
+        type: entities
+      - entities:
+          - entity: script.music_box_set_input_lan
+          - entity: script.music_box_set_input_toslink
+          - entity: script.music_box_set_input_usb
+          - entity: script.music_box_next_track
+          - entity: script.music_box_play_pause
+        type: entities
+      - entities:
+          - entity: switch.amp
+          - entity: switch.boxen
+          - entity: switch.boxen_internal
+        title: Schalter
+        type: entities
+      - entity: input_select.preamp_select
+        type: entity
+      - type: media-control
+        entity: media_player.boxen_bastian_2
+    path: media_room
+    title: Media-Room
+  - badges: []
+    cards:
+      - type: entity
+        entity: climate.bastian_heizung
+      - type: history-graph
+        entities:
+          - entity: binary_sensor.ps4_ping
+        hours_to_show: 72
+        refresh_interval: 0
+    path: scriptsviewall
+    title: Alle Skripte
+  - badges: []
+    cards:
+      - entities:
+          - entity: light.zimmer_bastian
+          - entity: sensor.battery_level
+          - entity: sensor.disk_use
+        title: Zimmer Bastian
+        type: entities
+      - entities:
+          - entity: automation.amplifier_automatisch_an_wenn_strom_auf_boxen
+          - entity: automation.amp_aus_wenn_keine_musik_auf_shd
+          - entity: automation.amp_an_wenn_musik_auf_boxen_bastian
+          - entity: automation.amp_an_wenn_musik_auf_shd
+          - entity: automation.amp_and_wenn_auf_usb_geschaltet_wird
+        title: Amplifier
+        type: entities
+      - entities:
+          - entity: light.kammerlicht
+          - entity: switch.kammer
+          - entity: automation.kammer_licht_bei_bewegung
+          - entity: automation.kammer_licht_bei_bewegung_2
+          - entity: binary_sensor.presence_11
+          - entity: automation.kammerlicht_aus_nach_2_minuten
+          - entity: automation.kammer_licht_bei_bewegung_neu
+        title: Kammer
+        type: entities
+      - entities:
+          - entity: automation.kuche_cube_to_flip180
+          - entity: automation.kuche_cube_to_flip90
+          - entity: automation.kuche_cube_rotate_left_tisch_dunkler
+          - entity: automation.kuche_cube_rotate_right_tisch_heller
+        title: Küche
+        type: entities
+      - type: entity
+        entity: light.tischlampe
+      - type: entities
+        entities:
+          - entity: light.tischlampe
+      - type: entities
+        entities:
+          - entity: sensor.switch_9_battery_level
+          - entity: binary_sensor.basti_eingang_switch
+          - entity: binary_sensor.basti_bett_switch
+          - entity: binary_sensor.bcube
+          - entity: binary_sensor.desk_switch
+          - entity: binary_sensor.gaeste_zimmer_switch
+          - entity: binary_sensor.kitchen_cube
+          - entity: binary_sensor.kitchen_switch
+          - entity: binary_sensor.motion_sensor_158d0002239b1a
+          - entity: binary_sensor.wohnzimmer_switch
+          - entity: binary_sensor.presence_11
+    path: automationsview
+    title: Automations
+
