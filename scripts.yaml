@@ -368,7 +368,7 @@
     #- service: script.music_box_set_input_lan    
     - service: switch.turn_on
       entity_id: switch.media_center 
-    - delay: '00:00:20' # this delay should help the internet to be active once the roon server is up. Hope that helps with the roon not beeing logedin to qubuz problem                 
+    - delay: '00:00:30' # this delay should help the internet to be active once the roon server is up. Hope that helps with the roon not beeing logedin to qubuz problem                 
     - service: switch.turn_on 
       entity_id: switch.boxen_internal
     - delay: '00:00:04'            

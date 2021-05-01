@@ -330,7 +330,7 @@
     entity_id: light.kammerlicht
   mode: single
 - id: '1611404496225'
-  alias: Amplifier automatisch an wenn Strom auf Boxen
+  alias: Amplifier automatisch ??? wenn Strom auf Boxen
   description: ''
   trigger:
   - platform: state
@@ -395,7 +395,7 @@
   - device_id: 5b75a69731a14ff495d9a97119a0ce96
     domain: deconz
     platform: device
-    type: remote_button_long_release
+    type: remote_button_long_press
     subtype: turn_on
   condition: []
   action:
@@ -615,4 +615,40 @@
   - service: homeassistant.toggle
     data: {}
     entity_id: light.schreibtischlampe
+  mode: single
+- id: '1618655381783'
+  alias: Amp aus wenn Computer Aus
+  description: ''
+  trigger:
+  - entity_id: switch.thinkstationp340
+    for: '600'
+    platform: state
+    to: 'Off'
+  condition:
+  - condition: state
+    entity_id: input_select.preamp_select
+    state: USB
+  action:
+  - device_id: 87da8fc04ee6427da2840138619a40b3
+    domain: switch
+    entity_id: switch.amp
+    type: turn_off
+  mode: single
+- id: '1618996490717'
+  alias: Amp aus wenn keine Musik auf Boxen Bastian
+  description: ''
+  trigger:
+  - entity_id: media_player.boxen_bastian
+    for: '600'
+    platform: state
+    to: paused
+  condition:
+  - condition: state
+    entity_id: input_select.preamp_select
+    state: TOSLINK
+  action:
+  - device_id: 87da8fc04ee6427da2840138619a40b3
+    domain: switch
+    entity_id: switch.amp
+    type: turn_off
   mode: single

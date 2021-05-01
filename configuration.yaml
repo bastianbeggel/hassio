@@ -154,6 +154,11 @@ binary_sensor:
     host: 192.168.178.67
     count: 5
     scan_interval: 60
+  - platform: ping
+    name: ThinkstationP340-Ping
+    host: 192.168.178.141
+    count: 5
+    scan_interval: 60
 
 
 
@@ -538,6 +543,10 @@ switch:
     host: "192.168.178.98"
     turn_off:
       service: script.notebook_t480_hibernate
+  - platform: wake_on_lan
+    name: "ThinkStationP340"
+    mac: "2c:f0:5d:be:73:12"
+    host: "192.168.178.141"
 
 
 
