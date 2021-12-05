@@ -22,7 +22,7 @@ mobile_app:
 logger:
   default: error
   logs: 
-    pyfritzhome.fritzhome: critical
+#    pyfritzhome.fritzhome: critical
     pychromecast.socket_client: critical
 #    custom_components.media_player.kefwireless: info
 #    custom_components.media_player.general_media_player: info
@@ -73,14 +73,14 @@ recorder:
   exclude:
     entities:
       - sun.sun # Don't record sun data
-      - sensor.internetgatewaydevicev2_fritz_box_7490_bytes_received
-      - sensor.internetgatewaydevicev2_fritz_box_7490_bytes_sent
+#      - sensor.internetgatewaydevicev2_fritz_box_7490_bytes_received
+#      - sensor.internetgatewaydevicev2_fritz_box_7490_bytes_sent
 #      - sensor.internetgatewaydevicev2_fritz_box_7490_kbyte_sec_received
 #      - sensor.internetgatewaydevicev2_fritz_box_7490_kbyte_sec_sent
-      - sensor.internetgatewaydevicev2_fritz_box_7490_packets_received
-      - sensor.internetgatewaydevicev2_fritz_box_7490_packets_sec_received
-      - sensor.internetgatewaydevicev2_fritz_box_7490_packets_sec_sent
-      - sensor.internetgatewaydevicev2_fritz_box_7490_packets_sent
+#      - sensor.internetgatewaydevicev2_fritz_box_7490_packets_received
+      #- sensor.internetgatewaydevicev2_fritz_box_7490_packets_sec_received
+#      - sensor.internetgatewaydevicev2_fritz_box_7490_packets_sec_sent
+#      - sensor.internetgatewaydevicev2_fritz_box_7490_packets_sent
 
 # Enables support for tracking state changes over time
 history:
@@ -636,11 +636,11 @@ media_player:
 #    volume_down_data: '{ "entity_id": "remote.office_hub","command" : "VolumeDown","device": "59192507","delay_secs": "0.1"}'
 
    
-fritzbox:
-  devices:
-    - host: fritz.box
-      username: !secret fritz_login
-      password: !secret fritz_password
+#fritzbox:
+#  devices:
+#    - host: fritz.box
+#      username: !secret fritz_login
+#      password: !secret fritz_password
       
 #climate:
 #  platform: fritzbox      

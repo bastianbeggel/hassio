@@ -620,10 +620,10 @@
   alias: Amp aus wenn Computer Aus
   description: ''
   trigger:
-  - entity_id: switch.thinkstationp340
+  - entity_id: switch.thinkpad_dock
     for: '600'
     platform: state
-    to: 'Off'
+    to: 'off'
   condition:
   - condition: state
     entity_id: input_select.preamp_select
@@ -651,4 +651,109 @@
     domain: switch
     entity_id: switch.amp
     type: turn_off
+  mode: single
+- id: '1621689536161'
+  alias: Stope NewMarshall bei Step 1
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.nnew_marshall_1
+    to: 'on'
+    for: '1'
+  condition: []
+  action:
+  - service: media_player.media_stop
+    target:
+      entity_id: media_player.chromecastaudio3835
+  mode: single
+- id: '1621689728221'
+  alias: New Marshall 2 eingeschaltet
+  description: ''
+  trigger:
+  - type: turned_on
+    platform: device
+    device_id: 05726d189cbe3974aa116be6955fed96
+    entity_id: binary_sensor.nnew_marshall_2
+    domain: binary_sensor
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 1
+      milliseconds: 0
+  condition: []
+  action:
+  - service: script.new_marshall_sr1
+  mode: single
+- id: '1621709883158'
+  alias: New Marshall 3 eingeschaltet
+  description: ''
+  trigger:
+  - type: turned_on
+    platform: device
+    device_id: 05726d189cbe3974aa116be6955fed96
+    entity_id: binary_sensor.nnew_marshall_3
+    domain: binary_sensor
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 1
+      milliseconds: 0
+  condition: []
+  action:
+  - service: script.new_marshall_br3
+  mode: single
+- id: '1621710017364'
+  alias: New Marshall 4 eingeschaltet
+  description: ''
+  trigger:
+  - type: turned_on
+    platform: device
+    device_id: 05726d189cbe3974aa116be6955fed96
+    entity_id: binary_sensor.nnew_marshall_4
+    domain: binary_sensor
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 1
+      milliseconds: 0
+  condition: []
+  action:
+  - service: script.new_marshall_br5
+  mode: single
+- id: '1621772965190'
+  alias: Marshall Switch Aus wenn keine Musik
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: media_player.chromecastaudio3835
+    to: paused
+    for: '300'
+  - platform: state
+    entity_id: media_player.chromecastaudio3835
+    to: idle
+    for: '300'
+  - platform: state
+    entity_id: media_player.chromecastaudio3835
+    to: 'off'
+    for: '300'
+  condition: []
+  action:
+  - type: turn_off
+    device_id: 05726d189cbe3974aa116be6955fed96
+    entity_id: switch.marshall_switch
+    domain: switch
+  mode: single
+- id: '1621773083250'
+  alias: Marshall Switch ein wenn Musik auf Wohnzimmer Boxen
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: media_player.chromecastaudio3835
+    to: playing
+  condition: []
+  action:
+  - type: turn_on
+    device_id: 05726d189cbe3974aa116be6955fed96
+    entity_id: switch.marshall_switch
+    domain: switch
   mode: single

@@ -1351,3 +1351,78 @@
         data:
           topic: "iotlink/workgroup/laptop-amm7ngim/commands/suspend"
           payload: ""
+
+
+#######################################################################################
+#### New Marshall
+#######################################################################################
+
+new_marshall_sr1:
+  alias: new_marshall_sr1
+  mode: single
+  sequence:
+    - service: media_player.play_media
+      entity_id: media_player.chromecastaudio3835
+      data:
+        media_content_id: http://sr1m.akacast.akamaistream.net/7/725/142685/v1/gnl.akacast.akamaistream.net/sr1m
+        media_content_type: audio/mp4    
+
+new_marshall_br3:
+  alias: new_marshall_br3
+  mode: single
+  sequence:
+    - service: media_player.play_media
+      entity_id: media_player.chromecastaudio3835
+      data:
+        media_content_id: https://dispatcher.rndfnk.com/br/br3/live/mp3/mid
+        media_content_type: audio/mp4    
+
+
+new_marshall_br5:
+  alias: new_marshall_br5
+  mode: single
+  sequence:
+    - service: media_player.play_media
+      entity_id: media_player.chromecastaudio3835
+      data:
+        media_content_id: https://dispatcher.rndfnk.com/br/br24/live/mp3/mid
+        media_content_type: audio/mp4    
+
+
+
+new_marshall_ndr_info:
+  alias: new_marshall_ndr_info
+  mode: single
+  sequence:
+    - service: media_player.play_media
+      entity_id: media_player.chromecastaudio3835
+      data:
+        media_content_id: http://www.ndr.de/resources/metadaten/audio/m3u/ndrinfo_hh.m3u
+        media_content_type: audio/mp4    
+
+
+new_marshall_ndr_info:
+  alias: new_marshall_ant_bay_wh
+  mode: single
+  sequence:
+    - service: media_player.play_media
+      entity_id: media_player.chromecastaudio3835
+      data:
+        media_content_id: http://www.antenne.de/webradio/channels/weihnachts-hits.m3u 
+        media_content_type: audio/mp4    
+
+
+
+
+new_marshall_start_stream:
+  alias: new_marshall_start_stream
+  mode: single
+  sequence:
+    - service: script.turn_on
+      data_template:
+           entity_id: >
+            {% if is_state("input_boolean.gpio_1", "on") %} script.new_marshall_sr1
+            {% elif is_state("input_boolean.gpio_2", "on") %} script.new_marshall_br3
+            {% elif is_state("input_boolean.gpio_3", "on") %} script.new_marshall_ant_bay_wh
+            {% elif is_state("input_boolean.gpio_4", "on") %} script.new_marshall_br5
+            {% endif %}
